@@ -1,1 +1,4 @@
 # petopia
+
+## Credits
+Ibrahim Bayang
