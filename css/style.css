@@ -1,1 +1,21 @@
-/*TEST*/
+body{
+    margin: 0;
+}
+header {
+    display: flex;
+    width: 100%;
+    background: grey;
+}
+nav {
+    background-color: blue;
+    height: 50px;
+}
+nav  ul {
+    display: flex;
+    gap: 50px;
+    list-style-type: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+}
