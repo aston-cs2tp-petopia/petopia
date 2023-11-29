@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Petopia</h1>
+        <h1>products</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="pets.html">Pets</a>
@@ -18,19 +18,22 @@
             <a href="login.html">Login</a>
         </nav>
     </header>
-    <main>
-        <section class="hero-banner">
-            <div class="hero-banner-image"><img src="assets/uglydog.png" alt=""></div>
-            <div class="hero-banner-left">
-                <div class="hero-banner-content">
-                    <h2>Best friend with happy time</h2>
-                    <p> the weather is amazing today and the dogs will have fun in that good wesathger</p>
-                    <div class="hero-banner-button"></div>
-                </div>
-            </div>
-        </section>
-    </main>
-   
+    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"
+    method="post">
+  <!-- Identify your business so that you can collect the payments. -->
+  <input type="hidden" name="business" value="test@band.com">
+
+  <!-- Specify a PayPal shopping cart View Cart button. -->
+  <input type="hidden" name="cmd" value="_cart">
+  <input type="hidden" name="display" value="1">
+
+  <!-- Display the View Cart button. -->
+  <input type="image" name="submit"
+         src="https://www.paypalobjects.com/en_US/i/btn/btn_viewcart_LG.gif"
+         alt="Add to Cart">
+  <img alt="" width="1" height="1"
+       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+</form>
     <section class="main-content">
         <h2>Discover a World of Pet Happiness</h2>
         <p>Find the perfect companion and products for your beloved pets at Petopia.</p>
