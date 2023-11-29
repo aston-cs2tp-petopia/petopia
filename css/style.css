@@ -34,6 +34,7 @@ nav a:hover {
 
 section.main-content {
     padding: 20px;
+    text-align: center;
 }
 
 footer {
@@ -44,4 +45,103 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply your existing styles */
+.flex {
+    display: flex;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+/* Additional styling for the login form */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.bg-gray-200 {
+    background-color: #edf2f7;
+}
+
+.max-w-md {
+    max-width: 28rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-gray-700 {
+    color: #4a5568;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.block {
+    display: block;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.text-blue-500 {
+    color: #4299e1;
+}
+
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.border {
+    border-width: 1px;
+}
+
+.border-gray-300 {
+    border-color: #e2e8f0;
+}
+
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.rounded-md {
+    border-radius: 0.375rem;
+}
+
+.bg-blue-500 {
+    background-color: #4299e1;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.hover\:bg-blue-600:hover {
+    background-color: #2c5282;
 }
