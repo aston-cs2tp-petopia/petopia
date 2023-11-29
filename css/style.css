@@ -19,22 +19,3 @@ nav  ul {
 nav ul li a{
     text-decoration: none;
 }
-
-.main-footer {
-    background-color: blue;
-    padding: 1px;
-}
-
-.main-footer-container {
-    display: flex;
-}
-
-.main-footer-container ul {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.footer-nav img {
-    width: 350px;
-    height: 100px;
-}
