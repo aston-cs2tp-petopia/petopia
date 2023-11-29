@@ -18,6 +18,22 @@
                 <li><a href="">Login</a></li>
             </ul>
         </nav>
+        <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"
+          method="post">
+        <!-- Identify your business so that you can collect the payments. -->
+        <input type="hidden" name="business" value="test@band.com">
+
+        <!-- Specify a PayPal shopping cart View Cart button. -->
+        <input type="hidden" name="cmd" value="_cart">
+        <input type="hidden" name="display" value="1">
+
+        <!-- Display the View Cart button. -->
+        <input type="image" name="submit"
+               src="https://www.paypalobjects.com/en_US/i/btn/btn_viewcart_LG.gif"
+               alt="Add to Cart">
+        <img alt="" width="1" height="1"
+             src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+    </form>
     </header>
 </body>
 </html>
