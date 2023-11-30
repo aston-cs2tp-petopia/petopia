@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <title>Petopia</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" href="CSS/style.css" />
-    <title>Petopia - Home</title>
+
+    <!--[Google Fonts]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--Nunito Font-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!--Box Icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
 </head>
+
 <body>
     <header>
-        <h1>Welcome to Petopia</h1>
+        <!--Logo-->
+        <div class="logo-container"><img src="assets/logo.png" alt=""></div>
+
+        <!--Middle Navigation-->
         <nav>
-            <a href="index.html">Home</a>
-            <a href="pets.html">Pets</a>
-            <a href="products.html">Products</a>
-            <a href="about.html">About Us</a>
-            <a href="login.html">Login</a>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Cats</a></li>
+                <li><a href="">Dogs</a></li>
+                <li><a href="">Advice</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
         </nav>
+
+        <!--Right Navigation-->
+        <div class="right-nav">
+            <!--Shoppiung Basket Button-->
+            <div class='basket-button bx bx-basket'></div>
+            <!--Login Button-->
+            <div class="login-button"><a href="">Login</a></div>
+        </div>
+
     </header>
+
     <main>
         <section class="hero-banner">
-            <div class="hero-banner-image"><img src="assets/uglydog.png" alt=""></div> <!--ugly dog (;-;) )-->
+            <div class="hero-banner-image"><img src="assets/uglydog.png" alt=""></div>
             <div class="hero-banner-left">
                 <div class="hero-banner-content">
                     <h2>Best friend with happy time</h2>
-                    <p> the weather is amazing today and the dogs will have fun in that good weather</p> <!--odd-->
+                    <p> The weather is amazing today and the dogs will have fun in that good weathger</p>
                     <div class="hero-banner-button"></div>
                 </div>
             </div>
         </section>
     </main>
-   
-    <section class="main-content">
-        <h2>Discover a World of Pet Happiness</h2>
-        <p>Find the perfect companion and products for your beloved pets at Petopia.</p>
-    </section>
 
     <footer>
         &copy; 2023 Petopia
     </footer>
 </body>
+
 </html>

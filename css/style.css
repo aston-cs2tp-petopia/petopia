@@ -1,54 +1,95 @@
-body {
-    font-family: Arial, sans-serif;
+/*Body*/
+body{
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    font-family: 'Nunito', sans-serif;
 }
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Header
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-}
-
-nav {
-    background-color: #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 5px;
-    background-color: #fff;
-    transition: background-color 0.3s;
-}
-
-nav a:hover {
-    background-color: #ccc;
-}
-
-section.main-content {
-    padding: 20px;
-    text-align: center;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    height: 54px;
+    padding-top: 20px;
+    background: white;
+
+    /*Flex*/
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
 }
 
-/* main */
 
+
+/*[LOGO SECTION]*/
+/*Navigation Image*/
+.logo-container {
+    height: 75%;
+}
+
+.logo-container img {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+/*[CENTER NAVIGATION]*/
+/*Navigation List*/
+nav  ul {
+    display: flex;
+    gap: 50px;
+    list-style-type: none;
+}
+
+/*Navigation Buttons*/
+nav ul li a{
+    text-decoration: none;
+    font-weight: 800;
+    color: #1e4b57;
+}
+
+/*[RIGHT NAVIGATION]*/
+/*Navigation Right*/
+.right-nav {
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+/*Basket Button*/
+.basket-button {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/*Login  Button*/
+.login-button {
+    width: 150px;
+    height: 50px;
+    background-color: #a349a4;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*Login Text*/
+.login-button a{
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 50px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Main
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
 .hero-banner{
     width: 100%;
     height: 500px;
@@ -66,5 +107,4 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
