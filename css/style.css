@@ -1,21 +1,113 @@
+/*Body*/
 body{
     margin: 0;
+    font-family: 'Nunito', sans-serif;
 }
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Header
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
 header {
-    display: flex;
     width: 100%;
-    background: grey;
+    height: 54px;
+    padding-top: 20px;
+    background: white;
+
+    /*Flex*/
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
 }
-nav {
-    background-color: blue;
-    height: 50px;
+
+
+
+/*[LOGO SECTION]*/
+/*Navigation Image*/
+.logo-container {
+    height: 75%;
 }
+
+.logo-container img {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+/*[CENTER NAVIGATION]*/
+/*Navigation List*/
 nav  ul {
     display: flex;
     gap: 50px;
     list-style-type: none;
 }
 
+nav ul li {
+}
+
+/*Navigation Buttons*/
 nav ul li a{
     text-decoration: none;
+    font-weight: 800;
+    color: #1e4b57;
+}
+
+/*[RIGHT NAVIGATION]*/
+/*Navigation Right*/
+.right-nav {
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+/*Basket Button*/
+.basket-button {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/*Login Button*/
+.login-button {
+    width: 150px;
+    height: 50px;
+    background-color: #a349a4;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*Login Text*/
+.login-button a{
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 50px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Main
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    width: 100%;
+    height: 500px;
+    position: relative;
+
+}
+.hero-banner-image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.hero-banner-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
