@@ -198,6 +198,8 @@ header {
     /*Header*/
     header {justify-content: space-between;} /*Changes Spacing between Logo and Hamburger Icon*/
     .logo-container {padding-left: 35px;}
+    .mobile-logo {height: 32px; width: 120px;}
+    .close-menu-button {padding-right: 30px; font-size: 24px;}
     #hamburger-button {display: block; padding-right: 35px;}
     .mobile-nav {display: block;}
 
