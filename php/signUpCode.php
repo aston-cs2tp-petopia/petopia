@@ -40,3 +40,16 @@ if (isset($_POST['submitted'])) {
 	}
 }
 ?>
+
+<div id="">
+			<h2>Register</h2>
+			<form method="post" action="signup.php">
+				Email: <input type="email" name="email" /><br>
+				Username: <input type="text" name="username" /><br>
+				Password: <input type="password" name="password" /><br><br>
+
+				<input type="submit" value="Register" />
+				<input type="reset" value="clear" />
+				<input type="hidden" name="submitted" value="true" />
+			</form>
+		</div>
