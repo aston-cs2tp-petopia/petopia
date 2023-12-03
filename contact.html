@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script>"contact.js/scripts"</script>
 
 </head>
 <body>
@@ -70,22 +71,24 @@
         </section>
 
         <section>
+            <center>
         <div class="box2">
                 <h1> Contact Us </h1> 
-                <p>Let us know your enquiries</p>
+                <p>Give us a message</p>
                 <form>
                     <input type="text" name="name" id="name" placeholder="First Name" required />
                     <p></p>
                     <input type="email" name="email" id="email" placeholder="Email" required />
                     <p></p>
                     <label> Your Message</br> </br>
-                        <textarea name="txtAr" rows="10" cols="40"> </textarea>
+                         <textarea name="txtAr" rows="10" cols="40" id="text"> </textarea>
                     </label>
                     <p></p>
                     <input type="submit" value="Submit" id="submit" required onclick="checkForm()" />
     
                 </form>
         </div>
+            </center>
         </section>
     </main>
 
