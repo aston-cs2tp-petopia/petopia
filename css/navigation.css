@@ -1,0 +1,218 @@
+
+/*Body*/
+body{
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Header
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+header {
+    width: 100%;
+    height: 84px;
+    background: white;
+
+    /*Flex*/
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Logo
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation Image*/
+.logo-container {
+    height: 40px;
+}
+
+.logo-container img {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Center Navigation
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation List*/
+.desktop-nav  ul {
+    display: flex;
+    gap: 50px;
+    list-style-type: none;
+}
+
+/*Navigation Buttons*/
+.desktop-nav ul li a{
+    text-decoration: none;
+    font-weight: 800;
+    color: #1e4b57;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Right Navigation 
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation Right*/
+.right-nav {
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+/*Basket Button*/
+.basket-button {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/*Login  Button*/
+.login-button {
+    width: 150px;
+    height: 50px;
+    background-color: #a349a4;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*Login Text*/
+.login-button a{
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 50px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Navigation
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Show Menu Button*/
+#hamburger-button {
+    font-size: 44px;
+    color:#1e4b57;
+    cursor: pointer;
+    display: none;
+}
+
+/*Mobile Background*/
+.mobile-background {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    top: 0;
+    left: 0;
+}
+
+/*Mobile Navigation Menu*/
+.mobile-nav {
+    position: fixed;
+    display: none;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/*Top Navigation Container*/
+.mobile-nav-top {
+    padding-top: 20px;
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*Menu Logo*/
+.mobile-logo {
+    height: 40px; 
+    width: 150px;
+    padding-left: 20px;
+}
+
+.mobile-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Close Button*/
+.close-menu-button {
+    font-weight: 800;
+    font-size: 26px;
+    margin: 0;
+    color: #1e4b57;
+    padding-right: 40px;
+}
+
+/*Navigation List*/
+.mobile-nav  ul {
+    padding-top: 20px;
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    list-style-type: none;
+    border-left: 3px solid #ffaec9;
+}
+
+.mobile-nav ul li {
+    width: 100%;
+}
+
+/*Navigation Buttons*/
+.mobile-nav ul li a{
+    text-decoration: none;
+    font-weight: 800;
+    color: #1e4b57;
+}
+
+/*Login & Basket Container*/
+.mobile-bottom-nav {
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Media Queries
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 1200px) {
+    /*Header*/
+    header {justify-content: space-between;} /*Changes Spacing between Logo and Hamburger Icon*/
+    .logo-container {padding-left: 35px;}
+    #hamburger-button {display: block; padding-right: 35px;}
+    .mobile-nav {display: block;}
+
+    /*Login*/
+    .login-button {position: relative; height: 45px; width: 130px; bottom: 8px; right: 20px;}
+    .login-button a {line-height: 45px;} /*Fix Line Height of Button*/
+    .basket-button {position: relative; right: 55px;}
+
+    
+    /*Hides Desktop Nav*/
+    .desktop-nav {display: none;}
+    .right-nav {display: none;}
+}
+
+@media (max-width: 450px) {
+    .mobile-nav {width: 250px;}
+    .basket-button {position: relative; right: 35px;}
+}

@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
-    <link href="css/cats.css" rel="stylesheet" type="text/css" href="CSS/cats.css" />
+    <link href="css/items.css" rel="stylesheet" type="text/css">
+    <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <link href="css/footer.css" rel="stylesheet" type="text/css">
 
     <!--[Google Fonts]-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,8 +36,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="cats.html">Cats</a></li>
-                <li><a href="dogs.html">Dogs</a></li>
+                <li><a href="items.html">Cats</a></li>
+                <li><a href="items.html">Dogs</a></li>
                 <li><a href="advice.html">Advice</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -45,35 +47,47 @@
         <!--Right Navigation-->
         <div class="right-nav">
             <!--Shoppiung Basket Button-->
-            <div class='basket-button bx bx-basket'><a href="basket.html"></a></div>
+            <div class='basket-button bx bx-basket'></div>
             <!--Login Button-->
             <div class="login-button"><a href="login.html">Login</a></div>
         </div>
 
     </header>
     
+    <main>
+        <!--Hero Banner-->
+        <section class="hero-banner">
+            <!--Hero Banner Image-->
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+
+            <!--Hero Banner Text Container-->
+            <div class="hero-banner-left">
+
+                <div class="hero-banner-content">
+                    <h2>Pets and Items</h2>
+                    <p> Browse</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="item-template">
+            <div class="item-image">
+                <img src="assets/Homepage/hero-banner2.jpg" alt="">
+            </div>
+        
+            <div class="item-info">
+                <h4>[Category]</h4>
+                <h5>[Item Name]</h5>
+        
+                <div class="item-bottom-container">
+                    <p>£[UPDATE PRICE]</p>
+                    <div class='bx bx-cart-add'></div>
+                </div>
+            </div>
+        </div>
+        </main>
 </body>
     
-    <section class="main-content">
-        <h2>ABout</h2>
-        <p>Petopia is nnnnnn</p> <!--incomplete-->
-    </section>
-    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"
-    method="post">
-  <!-- Identify your business so that you can collect the payments. -->
-  <input type="hidden" name="business" value="test@band.com">
-
-  <!-- Specify a PayPal shopping cart View Cart button. -->
-  <input type="hidden" name="cmd" value="_cart">
-  <input type="hidden" name="display" value="1">
-
-  <!-- Display the View Cart button. -->
-  <input type="image" name="submit"
-         src="https://www.paypalobjects.com/en_US/i/btn/btn_viewcart_LG.gif"
-         alt="Add to Cart">
-  <img alt="" width="1" height="1"
-       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
-</form>
     <footer>
         &copy; 2023 Petopia
     </footer>
