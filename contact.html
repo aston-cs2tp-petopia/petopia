@@ -28,6 +28,7 @@
     <script>"contact.js/scripts"</script>
 
 </head>
+
 <body>
     <header>
         <!--Logo-->
@@ -82,7 +83,7 @@
             </div>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                
+
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu-mobile">
@@ -90,7 +91,7 @@
                         <li class="dropdown-li"><a href="items.html">Dogs</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu-mobile">
@@ -102,7 +103,7 @@
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <div class="mobile-bottom-nav">
-                    
+
                     <a href="login.php" class="login-link">
                         <div class="login-button">Login</div>
                     </a>
@@ -118,12 +119,12 @@
     </header>
 
     <main>
-        
-        <section class = "hero-banner-image">
 
-            <div class = "hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+        <section class="hero-banner">
 
-            <div class = "hero-banner-left">
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+
+            <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
                     <h2>Contact us</h2>
@@ -133,9 +134,8 @@
         </section>
 
         <section>
-            <center>
-        <div class="box2">
-                <h1> Contact Us </h1> 
+            <div class="box2">
+                <h1> Contact Us </h1>
                 <p>Give us a message</p>
                 <form>
                     <input type="text" name="name" id="name" placeholder="First Name" required />
@@ -143,14 +143,13 @@
                     <input type="email" name="email" id="email" placeholder="Email" required />
                     <p></p>
                     <label> Your Message</br> </br>
-                         <textarea name="txtAr" rows="10" cols="40" id="text"> </textarea>
+                        <textarea name="txtAr" rows="10" cols="40" id="text"> </textarea>
                     </label>
                     <p></p>
                     <input type="submit" value="Submit" id="submit" required onclick="checkForm()" />
-    
+
                 </form>
-        </div>
-            </center>
+            </div>
         </section>
     </main>
 
