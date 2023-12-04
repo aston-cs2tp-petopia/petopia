@@ -1,10 +1,5 @@
 <?php
-//if the form has been submitted
-if (isset($_POST['submitted'])) {
-	#prepare the form input
-
-	// connect to the database
-	require_once('connectdb.php');
+	require_once("php/connectdb.php");
 
 	$email = isset($_POST['email']) ? $_POST['email'] : false;
 	$username = isset($_POST['username']) ? $_POST['username'] : false;
@@ -22,16 +17,16 @@ if (isset($_POST['submitted'])) {
 		exit("Password wrong!");
 	}
 	try {
-
 		#register user by inserting the users info 
-		$stat = $db->prepare("insert into users values(default,?,?,?)");
+		$stat = $db->prepare("insert into customers values(default,?,?,?)");
 		$stat->execute(array($username, $password, $email));
+		echo "$username, $password, $email";
 
-		$id = $db->lastInsertId();
-		echo "Congratulations! You are now registered. Your ID is: $id  ";
+		// $id = $db->lastInsertId();
+		// echo "Congratulations! You are now registered. Your ID is: $id  ";
+		require_once("php/loggingIn.php");
 	} catch (PDOexception $ex) {
 		echo "Sorry, a database error occurred! <br>";
 		echo "Error details: <em>" . $ex->getMessage() . "</em>";
 	}
-}
 ?>
