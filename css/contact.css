@@ -139,7 +139,9 @@ nav ul li a{
     margin: auto;
     font-size: 20px;
     font-weight: 700;
-    margin-top: -30px;
+    margin-top: auto;
+    margin-left: 80px;
+    margin-bottom: 50px;
     color: #163741;
 }
 

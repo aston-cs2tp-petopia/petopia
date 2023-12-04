@@ -34,11 +34,26 @@
         <div class="logo-container"><img src="assets/logo.png" alt=""></div>
 
         <!--Middle Navigation-->
-        <nav>
-            <ul>
+        <nav class="desktop-nav">
+            <ul class="desktop-nav-ul">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="items.html">Cats</a></li>
-                <li><a href="items.html">Dogs</a></li>
+                <!--Dropdown-->
+                <li class="dropdown">
+                    <a href="#">Pets v</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
+                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                    </ul>
+                </li>
+                <!--Dropdown-->
+                <li class="dropdown">
+                    <a href="#">Shop v</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-li"><a href="items.html">Toys</a></li>
+                        <li class="dropdown-li"><a href="items.html">Grooming</a></li>
+                        <li><a href="items.html">Treats</a></li>
+                    </ul>
+                </li>
                 <li><a href="advice.html">Advice</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -47,16 +62,63 @@
 
         <!--Right Navigation-->
         <div class="right-nav">
-            <!--Shoppiung Basket Button-->
-            <div class='basket-button bx bx-basket'></div>
+            <!--Shopping Basket Button-->
+            <a href="" class="basket-link">
+                <div class='basket-button bx bx-basket'></div>
+            </a>
             <!--Login Button-->
-            <div class="login-button"><a href="login.html">Login</a></div>
+            <a href="login.php" class="login-link">
+                <div class="login-button">Login</div>
+            </a>
         </div>
 
+        <!--Mobile-Background-->
+        <div class="mobile-background"></div>
+        <!--Mobile Navigation-->
+        <nav class="mobile-nav">
+            <div class="mobile-nav-top">
+                <div class="mobile-logo"><img src="assets/logo.png" alt=""></div>
+                <p class="close-menu-button" draggable="false">X</p>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li class="dropdown">
+                    <a href="#">Pets v</a>
+                    <ul class="dropdown-menu-mobile">
+                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
+                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="#">Shop v</a>
+                    <ul class="dropdown-menu-mobile">
+                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
+                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                    </ul>
+                </li>
+                <li><a href="advice.html">Advice</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <div class="mobile-bottom-nav">
+                    
+                    <a href="login.php" class="login-link">
+                        <div class="login-button">Login</div>
+                    </a>
+
+                    <a href="" class="basket-link">
+                        <div class='basket-button bx bx-basket'></div>
+                    </a>
+                </div>
+            </ul>
+        </nav>
+
+        <div id="hamburger-button" class='bx bx-menu'></div>
     </header>
 
     <main>
-
+        
         <section class = "hero-banner-image">
 
             <div class = "hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
