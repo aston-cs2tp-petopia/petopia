@@ -59,8 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-const menuItemsWithDropdown = document.querySelectorAll('.mobile-nav ul li');
-const mobileNav = document.querySelector('.mobile-nav');
 document.addEventListener('DOMContentLoaded', function () {
     const menuItemsWithDropdown = document.querySelectorAll('.mobile-nav ul li');
     const mobileNav = document.querySelector('.mobile-nav');

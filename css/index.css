@@ -1,3 +1,6 @@
+body, html {
+    overflow-x: hidden;
+}
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Hero Banner
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
@@ -8,6 +11,7 @@
     height: 750px;
     overflow: hidden;
     position: relative;
+    touch-action: auto;
 }
 
 /*Hero Banner Image Container*/
@@ -28,8 +32,9 @@
 /*Hero Banner Left Container*/
 .hero-banner-left {
     height: 100%;
-    width: 500px;
-    padding-left: 200px;
+    max-width: 500px;
+    width: 100%;
+    padding-left: 10%;
     /*Flex*/
     display: flex;
     justify-content: start;
@@ -80,6 +85,7 @@
     height: 170px;
     display: flex;
     justify-content: center;
+    touch-action: auto;
 }
 
 /*Quick Accecs Container*/
@@ -151,6 +157,7 @@
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 .discount-container {
+    overflow: hidden;
     padding-top: 120px;
     padding-bottom: 20px;
     /*Background style*/
@@ -169,6 +176,7 @@
 }
 
 .discount-left-content {
+    overflow: hidden;
     height: 500px;
     padding-top: 0px;
     padding-bottom: 20px;
@@ -393,3 +401,45 @@
     font-weight: 400;
 }
 
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Medium Displays
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+
+@media (max-width: 1700px) {
+    /*
+    •Fix QA
+    •Fix Testimonials
+    */
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 450px) {
+    /*Hero Banner*/
+    .hero-banner {height: 650px;}
+    .hero-banner-image img {object-position: left;}
+    .hero-banner-content {width: 100%;}
+    .hero-banner-content h2 {font-size: 40px; width: 90%}
+    .hero-banner-content p {width: calc(80%);}
+
+    /*Quick Access*/
+    .quick-access-container {height: auto;}
+    .quick-access-content {flex-direction: column; gap: 25px; width: 90%;}
+    .quick-access {justify-content: center; padding:0; align-items: center; padding-bottom: 25px;}
+    .qa-info {max-width: 100vh; padding-bottom: 0px;}
+    .qa-triangle {display: none;}
+    .qa-last {padding-bottom: 25px;}
+    .qa-border {border-right: 0; border-bottom: 2px solid #ffaec9;}
+
+    /*Discount*/
+    .discount-container {padding-top: 280px; gap: 0px; flex-direction: column; overflow: hidden;}
+    .discount-left-content {width: 100%;}
+    .discount-left-content h2 {font-size: 22px;}
+    .discount-left-content h3 {font-size: 26px; width: 100%;}
+    .percentage-container {width: 150px; height: 100px;}
+    .percentage-container h4 {font-size: 26px; margin: 0; top: 30px;}
+    .percentage-container p {font-size: 11px; top: 20px;}
+}
