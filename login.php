@@ -154,24 +154,17 @@
     </header>
     
     <section class="main-content">
-        <h2></h2>
-        <p>login</p>
-    </section>
-    <div class="flex h-screen">
-        <!-- Left Pane -->
-        <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+            <h2></h2>
+        </section>
+        <div class="flex h-screen">
+            <!-- Left Pane -->
+            <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
             <div class="max-w-md text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- ... (SVG code from the original code) ... -->
                 </svg>
-            </div>
-        </div>
-
-        <!-- Right Pane (Login Form) -->
-        <div class="flex-1 flex items-center justify-center bg-gray-200">
-            <div class="max-w-md p-8">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6">Login</h2>
-                <form id="loginForm">
+                <form id="loginForm" name="loginForm" method="post" action="login.php">
                     <div class="mb-4">
                         <label for="username" class="block text-gray-600 text-sm font-medium mb-2">Username</label>
                         <input type="text" id="username" name="username" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
@@ -181,7 +174,31 @@
                         <input type="password" id="password" name="password" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
                     </div>
                     <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Login</button>
+                    <input type="hidden" name="submitLogin" value="TRUE" />
                 </form>
+            </div>
+        </div>
+
+        <!-- Right Pane (Login Form) -->
+        <div class="flex-1 flex items-center justify-center bg-gray-200">
+                <div class="max-w-md p-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-6">Sign Up</h2>
+                    <form id="SignUpForm" name="signUpForm" method="post" action="login.php">
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-600 text-sm font-medium mb-2">Email</label>
+                            <input type="text" id="email" name="email" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="username" class="block text-gray-600 text-sm font-medium mb-2">Username</label>
+                            <input type="text" id="username" name="username" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="password" class="block text-gray-600 text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="password" name="password" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Login</button>
+                        <input type="hidden" name="submitSignUp" value="TRUE" />
+                    </form>
             </div>
         </div>
     </div>
