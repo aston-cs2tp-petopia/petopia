@@ -100,13 +100,13 @@ nav ul li a{
 /*Hero Button Image*/
 .hero-banner-image img{
     width: 100%;
-    height: 100%;
+    height: 80%;
     object-fit: fill ;
 }
 
 /*Hero Banner Left Container*/
 .hero-banner-left {
-    height: 60%;
+    height: 50%;
     width: 500px;
     padding-left: 200px;
     /*Flex*/
@@ -130,6 +130,22 @@ nav ul li a{
     color: #163741;
 }
 
+.box {
+    background-color: white;
+    border: 5px solid #000000;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.contact-container {
+    display: flex;
+    width: 1200px;
+    justify-content: center;
+    align-items: center;
+}
+
 .box2 {
     background-color: rgba(255, 255, 255, 0.993);
     border: 2px solid #000000;
@@ -139,9 +155,8 @@ nav ul li a{
     margin: auto;
     font-size: 20px;
     font-weight: 700;
-    margin-top: auto;
-    margin-left: 80px;
-    margin-bottom: 50px;
+    margin-top: -260px;
+    margin-left: 150px;
     color: #163741;
 }
 
