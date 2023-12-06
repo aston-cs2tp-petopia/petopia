@@ -155,7 +155,7 @@
     
     <section class="main-content">
         <h2></h2>
-        <p>login</p>
+        <p>k</p>
     </section>
     <div class="flex h-screen">
         <!-- Left Pane -->
