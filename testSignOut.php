@@ -52,8 +52,15 @@
         <div class="right-nav">
             <!--Shoppiung Basket Button-->
             <div class='basket-button bx bx-basket'></div>
-            <!--Login Button-->
-            <div class="login-button"><a href="login.html">Login</a></div>
+            <?php
+                if ($b==true) {
+                    //Log out button
+                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                }else{
+                    //Login Button
+                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                }       
+            ?>
         </div>
 
     </header>
