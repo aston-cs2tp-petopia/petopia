@@ -153,22 +153,20 @@
 
     </header>
     
-    <section class="main-content">
-        <h2></h2>
-        <p>k</p>
-    </section>
-    <div class="flex h-screen">
+    <div class="maincontent">
         <!-- Left Pane -->
-        <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+        <div class="image-box">
+        
             <div class="max-w-md text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- ... (SVG code from the original code) ... -->
-                </svg>
+            <img src="assets/Homepage/minimaldogcat.png" alt="">
+                <!--svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    ... (SVG code from the original code) ... 
+                </!--svg-->
             </div>
         </div>
 
         <!-- Right Pane (Login Form) -->
-        <div class="flex-1 flex items-center justify-center bg-gray-200">
+        <div class="Login-box">
             <div class="max-w-md p-8">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6">Login</h2>
                 <form id="loginForm">
@@ -185,6 +183,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="script.js"></script>
     <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"

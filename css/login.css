@@ -2,3 +2,17 @@
     text-align: center;
 
 }
+.Login-box{
+margin-left: 50%;
+text-align: center;
+align-items: center;
+height:200px;
+width: 200px;
+padding:10px;
+background-color: blueviolet;
+border-radius: solid 3 px black;
+
+}
+.image-box{
+ 
+}
