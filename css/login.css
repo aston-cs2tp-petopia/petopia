@@ -8,9 +8,11 @@ text-align: center;
 align-items: center;
 height:200px;
 width: 200px;
-padding:10px;
-background-color: blueviolet;
-border-radius: solid 3 px black;
+background-color: #00A4BD;
+border: 2px solid #00A4BD;
+padding: 10px;
+border-radius: 1rem;
+
 
 }
 .image-box{

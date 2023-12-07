@@ -168,17 +168,17 @@
         <!-- Right Pane (Login Form) -->
         <div class="Login-box">
             <div class="max-w-md p-8">
-                <h2 class="text-2xl font-semibold text-gray-700 mb-6">Login</h2>
+                <h2 class="login-text">Login</h2>
                 <form id="loginForm">
                     <div class="mb-4">
-                        <label for="username" class="block text-gray-600 text-sm font-medium mb-2">Username</label>
-                        <input type="text" id="username" name="username" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
+                        <label for="username" class="username-label">Username</label>
+                        <input type="text" id="username" name="username" class="username-input" required>
                     </div>
                     <div class="mb-6">
-                        <label for="password" class="block text-gray-600 text-sm font-medium mb-2">Password</label>
-                        <input type="password" id="password" name="password" class="w-full border border-gray-300 px-3 py-2 rounded-md" required>
+                        <label for="password" class="password-label">Password</label>
+                        <input type="password" id="password" name="password" class="password-input" required>
                     </div>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Login</button>
+                    <button type="submit" class="login-submit">Login</button>
                 </form>
             </div>
         </div>
