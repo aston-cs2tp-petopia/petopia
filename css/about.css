@@ -39,18 +39,96 @@ body {
   }
   
   .dot {
-    animation: moveDots 2s infinite; /* Adjust animation duration as needed */
+    animation: moveDots 2s infinite; /* change animation duration as needed */
   }
   
   
 p {
     font-weight: bold;
     font-size: 1.3em; /*Adjust value if needed*/
+    color: #A349A4;
   }
 
   h1 {
-    font-size: 2em; /* Adjust the value if needed */
+    font-size: 3em; /* Adjust the value if needed */
+    color: #A349A4;
   }
+
+  h2 {
+    font-size: 2em; /* Adjust the value if needed */
+    color: #A349A4;
+  }
+
+  /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+/*Hero Banner Image Container*/
+.hero-banner-image{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+/*Hero Button Image*/
+.hero-banner-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*Hero Banner Left Container*/
+.hero-banner-left {
+  height: 100%;
+  width: 700px;
+  padding-left: 50px;
+  /*Flex*/
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+/*Hero Banner Catch Phrase*/
+.hero-banner-content h2 {
+  font-size: 60px;
+  font-weight: 900;
+  color: #a349a4;
+}
+
+/*Hero Banner Caption*/
+.hero-banner-content p {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 0px;
+  color: #a349a4;
+}
+
+/*Hero Banner Button*/
+.hero-banner-button {
+  /*Button styles*/
+  width: 160px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #ffffff;
+
+  /*Text styles*/
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+
+  /*Other styles*/
+  cursor: pointer;
+}
 
 
 
