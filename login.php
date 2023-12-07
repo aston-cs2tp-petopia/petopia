@@ -33,7 +33,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Petopia</title>
-        <link href="css/login.css" rel="stylesheet" type="text/css">
+        <link href="css/Loginmk2.css" rel="stylesheet" type="text/css">
         <link href="css/navigation.css" rel="stylesheet" type="text/css">
         <link href="css/footer.css" rel="stylesheet" type="text/css">
     
@@ -166,6 +166,7 @@
         </div>
 
         <!-- Right Pane (Login Form) -->
+    <section class="main-content">
         <div class="Login-box">
             <div class="max-w-md p-8">
                 <h2 class="login-text">Login</h2>
@@ -183,6 +184,7 @@
             </div>
         </div>
     </div>
+</section>
 
 
     <script src="script.js"></script>
