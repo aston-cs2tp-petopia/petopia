@@ -11,8 +11,6 @@
             exit('Please fill both the username and password fields!'); // stop running check, error message (empty fields)
         }
 
-        // connect to DB
-        // require_once("php/connectdb.php");
         require_once("php/loggingIn.php");
         
     }
@@ -22,7 +20,7 @@
             exit('Please fill the email, username, and password fields.'); // stop running check, error message (empty fields)
         }
     
-        // connect to DB
+        // go to the signingUp script
         require_once("php/signingUp.php");
     }
 ?>
@@ -165,47 +163,49 @@
             </div>
         </div>
 
-        <!-- Right Pane (Login Form) -->
+    <!-- Left Pane (Login Form) -->
     <section class="main-content">
         <div class="Login-box">
             <div class="max-w-md p-8">
                 <h2 class="login-text">Login</h2>
-                <form id="loginForm">
+                <form id="loginForm" name="loginForm" method="post" action="login.php">
                     <div class="mb-4">
                         <label for="username" class="username-label">Username</label>
-                        <input type="text" id="username" name="username" class="username-input" required>
+                        <input type="text" id="username" name="username" class="username-input" required/>
                     </div>
                     <div class="mb-6">
                         <label for="password" class="password-label">Password</label>
-                        <input type="password" id="password" name="password" class="password-input" required>
+                        <input type="password" id="password" name="password" class="password-input" required/>
                     </div>
                     <button type="submit" class="login-submit">Login</button>
+                    <input type="hidden" name="submitLogin" value="TRUE" />
                 </form>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Right Pane (Sign Up Form) -->
+    <section class="main-content">
+        <div class="SignUp-box">
+            <div class="max-w-md p-8">
+                <h2 class="login-text">Sign Up</h2>
+                <form id="signUpForm" name="signUpForm" method="post" action="login.php">
+                    <div class="mb-4">
+                        <label for="email" class="email-label">Email</label>
+                        <input type="text" id="username" name="username" class="username-input" required/>
 
-    <script src="script.js"></script>
-    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"
-    method="post">
-  <!-- Identify your business so that you can collect the payments. -->
-  <input type="hidden" name="business" value="test@band.com">
-
-  <!-- Specify a PayPal shopping cart View Cart button. -->
-  <input type="hidden" name="cmd" value="_cart">
-  <input type="hidden" name="display" value="1">
-
-  <!-- Display the View Cart button. -->
-  <input type="image" name="submit"
-         src="https://www.paypalobjects.com/en_US/i/btn/btn_viewcart_LG.gif"
-         alt="Add to Cart">
-  <img alt="" width="1" height="1"
-       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
-</form>
-    <footer>
-        &copy; 2023 Petopia
-    </footer>
+                        <label for="username" class="username-label">Username</label>
+                        <input type="text" id="username" name="username" class="username-input" required/>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="password-label">Password</label>
+                        <input type="password" id="password" name="password" class="password-input" required/>
+                    </div>
+                    <button type="submit" class="login-submit">Sign Up</button>
+                    <input type="hidden" name="submitSignUp" value="TRUE" />
+                </form>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
