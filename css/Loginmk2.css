@@ -10,8 +10,17 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 25%;
-    text-align: center;
-    margin-left: 37.5%;
+    text-align: left;
+    margin-left: 0%;
+    
+}
+.SignUp-box {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 25%;
+    text-align: Right;
+    margin-left: 66%;
     
 }
 
