@@ -110,11 +110,12 @@ body, html {
     height: 100%;
     width: 100%;
     background-color: #a349a4;
-    padding-left: 50px;
+    padding-left: 0px;
     /*Flex*/
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: center;
 }
 
 /*Quick Access Icon*/
@@ -405,12 +406,83 @@ body, html {
     @Medium Displays
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
+/*Small Desktop / Large Tablets*/
+@media (max-width: 1400px) {
+    /*Hero Banner*/
+    .hero-banner {height: 650px;}
+    .hero-banner-content h2 {font-size: 40px;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 10%}
+    .hero-banner-image img {object-position: left;}
 
-@media (max-width: 1700px) {
-    /*
-    •Fix QA
-    •Fix Testimonials
-    */
+    /*Quick Access*/
+    .quick-access-container {height: 130px;}
+    .quick-access div {font-size: 24px;}
+    .quick-access p {font-size: 16px;}
+    .quick-access a {font-size: 16px;}
+
+    /*Discount*/
+    .discount-container {padding-top: 20px; padding-bottom: 0px;}
+    .discount-left-content {padding-bottom: 0px;}
+    .discount-left-content h3 {font-size: 30px;}
+    .percentage-container {height: 120px; width: 200px;}
+    .percentage-container h4 {font-size: 30px; bottom: 10px;}
+    .percentage-container p {font-size: 14px; top: 20px;}
+    .discount-cat-image {width: 280px; height: 280px;}
+
+    /*Testimonials*/
+    .testimonials-container {padding-top: 0px;}
+    .t-heading-container h3 {font-size: 30px; width: 100%;}
+    .t-heading-container p {margin: 0; font-size: 16px; width: 90%; margin-left: auto; margin-right: auto; padding-top: 5px;}
+    /*Flickity*/
+    .main-carousel {width: 50%;}
+    .testimonial-quote {font-size: 14px;}
+    .testimonial-profile {gap: 10px;}
+    .testimonial-profile .bxs-user-circle {font-size: 50px;}
+    .main-carousel .stars div {font-size: 24px;}
+    .testimonial-details h3 {font-size: 15px;}
+    .testimonial-details h4 {font-size: 13px;}
+}
+
+/*Extra Small Device/ Small Tablets*/
+@media (max-width: 990px) {
+    /*Hero Banner*/
+    .hero-banner {height: 650px;}
+    .hero-banner-content h2 {font-size: 40px; width: 100%;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 8%; width: 90%}
+    .hero-banner-image img {object-position: left;}
+
+    /*Quick Access*/
+    .quick-access-container {height: auto;}
+    .quick-access-content {flex-direction: column; gap: 25px; width: 90%;}
+    .quick-access {justify-content: center; padding:0; align-items: center; padding-bottom: 25px;}
+    .qa-info {max-width: 100%; padding-bottom: 0px;}
+    .qa-triangle {display: none;}
+    .qa-last {padding-bottom: 25px;}
+    .qa-border {border-right: 0; border-bottom: 2px solid #ffaec9;}
+
+    /*Discount*/
+    .discount-container {padding-top: 200px; gap: 0px; flex-direction: column; overflow: hidden; padding-bottom: 30px;}
+    .discount-left-content {width: 100%; padding-bottom: 0px; height: 350px; padding-top: 80px;}
+    .discount-left-content h2 {font-size: 22px;}
+    .discount-left-content h3 {font-size: 26px; width: 100%;}
+    .percentage-container {width: 150px; height: 100px;}
+    .percentage-container h4 {font-size: 26px; margin: 0; top: 30px;}
+    .percentage-container p {font-size: 11px; top: 20px;}
+
+    /*Testimonials*/
+    .testimonials-container {padding-top: 0px;}
+    .t-heading-container h3 {font-size: 30px; width: 100%;}
+    .t-heading-container p {margin: 0; font-size: 16px; width: 90%; margin-left: auto; margin-right: auto; padding-top: 5px;}
+    /*Flickity*/
+    .main-carousel {width: 75%;}
+    .testimonial-quote {font-size: 14px;}
+    .testimonial-profile {gap: 10px;}
+    .testimonial-profile .bxs-user-circle {font-size: 50px;}
+    .main-carousel .stars div {font-size: 24px;}
+    .testimonial-details h3 {font-size: 15px;}
+    .testimonial-details h4 {font-size: 13px;}
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
