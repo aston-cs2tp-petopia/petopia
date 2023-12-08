@@ -22,8 +22,6 @@
 		$stat->execute(array($username, $password, $email));
 		echo "$username, $password, $email";
 
-		// $id = $db->lastInsertId();
-		// echo "Congratulations! You are now registered. Your ID is: $id  ";
 		require_once("php/loggingIn.php");
 	} catch (PDOexception $ex) {
 		echo "Sorry, a database error occurred! <br>";

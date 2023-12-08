@@ -11,8 +11,6 @@
             exit('Please fill both the username and password fields!'); // stop running check, error message (empty fields)
         }
 
-        // connect to DB
-        // require_once("php/connectdb.php");
         require_once("php/loggingIn.php");
         
     }
@@ -22,7 +20,7 @@
             exit('Please fill the email, username, and password fields.'); // stop running check, error message (empty fields)
         }
     
-        // connect to DB
+        // go to the signingUp script
         require_once("php/signingUp.php");
     }
 ?>
@@ -33,7 +31,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Petopia</title>
-        <link href="css/Loginmk2.css" rel="stylesheet" type="text/css">
+        <link href="css/loginmkm3.css" rel="stylesheet" type="text/css">
         <link href="css/navigation.css" rel="stylesheet" type="text/css">
         <link href="css/footer.css" rel="stylesheet" type="text/css">
     
@@ -155,57 +153,59 @@
     
     <div class="maincontent">
         <!-- Left Pane -->
-        <div class="image-box">
+        <!--div class="image-box">
         
-            <div class="max-w-md text-center">
             <img src="assets/Homepage/minimaldogcat.png" alt="">
-                <!--svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <-svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
                     ... (SVG code from the original code) ... 
-                </!--svg-->
+                </!--svg>
             </div>
-        </div>
+        </div!-->
+        <div class="discount-cat-image">
+                <img src="assets\minimaldognobackground..png" alt="">
+            </div>
 
-        <!-- Right Pane (Login Form) -->
+    <!-- Left Pane (Login Form) -->
     <section class="main-content">
         <div class="Login-box">
             <div class="max-w-md p-8">
                 <h2 class="login-text">Login</h2>
-                <form id="loginForm">
+                <form id="loginForm" name="loginForm" method="post" action="login.php">
                     <div class="mb-4">
                         <label for="username" class="username-label">Username</label>
-                        <input type="text" id="username" name="username" class="username-input" required>
+                        <input type="text" id="username" name="username" class="username-input" required/>
                     </div>
                     <div class="mb-6">
                         <label for="password" class="password-label">Password</label>
-                        <input type="password" id="password" name="password" class="password-input" required>
+                        <input type="password" id="password" name="password" class="password-input" required/>
                     </div>
                     <button type="submit" class="login-submit">Login</button>
+                    <input type="hidden" name="submitLogin" value="TRUE" />
                 </form>
             </div>
         </div>
-    </div>
-</section>
 
+    <!-- Right Pane (Sign Up Form) -->
+        <div class="SignUp-box">
+            <div class="max-w-md p-8">
+                <h2 class="login-text">Sign Up</h2>
+                <form id="signUpForm" name="signUpForm" method="post" action="login.php">
+                    <div class="mb-4">
+                        <label for="email" class="email-label">Email</label>
+                        <input type="text" id="username" name="username" class="username-input" required/>
 
-    <script src="script.js"></script>
-    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"
-    method="post">
-  <!-- Identify your business so that you can collect the payments. -->
-  <input type="hidden" name="business" value="test@band.com">
-
-  <!-- Specify a PayPal shopping cart View Cart button. -->
-  <input type="hidden" name="cmd" value="_cart">
-  <input type="hidden" name="display" value="1">
-
-  <!-- Display the View Cart button. -->
-  <input type="image" name="submit"
-         src="https://www.paypalobjects.com/en_US/i/btn/btn_viewcart_LG.gif"
-         alt="Add to Cart">
-  <img alt="" width="1" height="1"
-       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
-</form>
-    <footer>
-        &copy; 2023 Petopia
-    </footer>
+                        <label for="username" class="username-label">Username</label>
+                        <input type="text" id="username" name="username" class="username-input" required/>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="password-label">Password</label>
+                        <input type="password" id="password" name="password" class="password-input" required/>
+                    </div>
+                    <button type="submit" class="login-submit">Sign Up</button>
+                    <input type="hidden" name="submitSignUp" value="TRUE" />
+                </form>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
