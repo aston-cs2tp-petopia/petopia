@@ -1,3 +1,7 @@
+<?php
+    require_once("php/mainLogCheck.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <link href="css/about.css" rel="stylesheet" type="text/css">
@@ -39,7 +43,7 @@
         <!--Middle Navigation-->
         <nav class="desktop-nav">
             <ul class="desktop-nav-ul">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
@@ -58,21 +62,27 @@
                     </ul>
                 </li>
                 <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
         </nav>
 
         <!--Right Navigation-->
         <div class="right-nav">
-            <!--Shoppiung Basket Button-->
+            <!--Shopping Basket Button-->
             <a href="" class="basket-link">
                 <div class='basket-button bx bx-basket'></div>
             </a>
             <!--Login Button-->
-            <a href="login.php" class="login-link">
-                <div class="login-button">Login</div>
-            </a>
+            <?php
+                if ($b==true) {
+                    //Log out button
+                    echo '<a href="php/signOut.php""><div class="login-button">Log Out</div></a>';
+                }else{
+                    //Login Button
+                    echo '<a href="login.php"><div class="login-button">Login</div></a>';
+                }       
+            ?>
         </div>
 
         <!--Mobile-Background-->
@@ -84,7 +94,7 @@
                 <p class="close-menu-button" draggable="false">X</p>
             </div>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
@@ -102,14 +112,20 @@
                     </ul>
                 </li>
                 <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
                     <!--Login Button-->
-                    <a href="login.php" class="login-link">
-                        <div class="login-button">Login</div>
-                    </a>
-                    <!--Shoppiung Basket Button-->
+                    <?php
+                        if ($b==true) {
+                            //Log out button
+                            echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                        }else{
+                            //Login Button
+                            echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                        }       
+                    ?>
+                    <!--Shopping Basket Button-->
                     <a href="" class="basket-link">
                         <div class='basket-button bx bx-basket'></div>
                     </a>
@@ -151,25 +167,5 @@
     <section class="main-content">
 
     </section>
-
-    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr"
-    method="post">
-  <!-- Identify your business so that you can collect the payments. -->
-  <input type="hidden" name="business" value="test@band.com">
-
-  <!-- Specify a PayPal shopping cart View Cart button. -->
-  <input type="hidden" name="cmd" value="_cart">
-  <input type="hidden" name="display" value="1">
-
-  <!-- Display the View Cart button. -->
-  <input type="image" name="submit"
-         src="https://www.paypalobjects.com/en_US/i/btn/btn_viewcart_LG.gif"
-         alt="Add to Cart">
-  <img alt="" width="1" height="1"
-       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
-</form>
-    <footer>
-        &copy; 2023 Petopia
-    </footer>
 </body>
 </html>
