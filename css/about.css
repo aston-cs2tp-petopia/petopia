@@ -89,7 +89,7 @@ p {
 /*Hero Banner Left Container*/
 .hero-banner-left {
   height: 100%;
-  width: 700px;
+  width: 600px;
   padding-left: 50px;
   /*Flex*/
   display: flex;
@@ -99,16 +99,24 @@ p {
 
 /*Hero Banner Catch Phrase*/
 .hero-banner-content h2 {
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 900;
   color: #a349a4;
 }
 
+.hero-banner-content h3 {
+  font-size: 23px;
+  font-weight: 900;
+  color: #a349a4;
+}
+
+
+
 /*Hero Banner Caption*/
 .hero-banner-content p {
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 700;
-  margin-top: 0px;
+  margin-top: -10px;
   color: #a349a4;
 }
 
@@ -128,6 +136,13 @@ p {
 
   /*Other styles*/
   cursor: pointer;
+}
+
+.container {
+  border: 2px solid #a14587; 
+
+ 
+  padding: 10px; 
 }
 
 
