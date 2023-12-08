@@ -153,15 +153,17 @@
     
     <div class="maincontent">
         <!-- Left Pane -->
-        <div class="image-box">
+        <!--div class="image-box">
         
-            <div class="max-w-md text-center">
             <img src="assets/Homepage/minimaldogcat.png" alt="">
-                <!--svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <-svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
                     ... (SVG code from the original code) ... 
-                </!--svg-->
+                </!--svg>
             </div>
-        </div>
+        </div!-->
+        <div class="discount-cat-image">
+                <img src="assets\minimaldognobackground..png" alt="">
+            </div>
 
     <!-- Left Pane (Login Form) -->
     <section class="main-content">
@@ -182,10 +184,8 @@
                 </form>
             </div>
         </div>
-    </section>
 
     <!-- Right Pane (Sign Up Form) -->
-    <section class="main-content">
         <div class="SignUp-box">
             <div class="max-w-md p-8">
                 <h2 class="login-text">Sign Up</h2>
