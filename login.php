@@ -194,11 +194,15 @@
                         <label for="email" class="email-label">Email</label>
                         <input type="text" id="email" name="email" class="username-input" required/> <!--class name should be changed to reflect field-->
 
-                        <label for="email" class="fName-label">First Name</label>
+                        <label for="fname" class="fName-label">First Name</label>
                         <input type="text" id="fName" name="fName" class="username-input" required/> <!--class name should be changed to reflect field-->
                         
-                        <label for="email" class="fName-label">Last Name</label>
+                        <label for="lname" class="fName-label">Last Name</label>
                         <input type="text" id="lName" name="lName" class="username-input" required/> <!--class name should be changed to reflect field-->
+
+                        <label for="pNumber" class="pNumber-label">Phone Number</label>
+                        <input type="tel" id="pNumber" name="pNumber" class="username-input" 
+                        placeholder="07599671811" pattern="[0-9]{4}-[0-9]{5}" required/> <!--class name should be changed to reflect field-->
 
                         <label for="username" class="username-label">Username</label>
                         <input type="text" id="username" name="username" class="username-input" required/>
