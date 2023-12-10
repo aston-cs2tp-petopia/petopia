@@ -152,15 +152,6 @@
     </header>
     
     <div class="maincontent">
-        <!-- Left Pane -->
-        <!--div class="image-box">
-        
-            <img src="assets/Homepage/minimaldogcat.png" alt="">
-                <-svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    ... (SVG code from the original code) ... 
-                </!--svg>
-            </div>
-        </div!-->
         <div class="discount-cat-image">
                 <img src="assets\minimaldognobackground..png" alt="">
             </div>
@@ -173,11 +164,11 @@
                 <form id="loginForm" name="loginForm" method="post" action="login.php">
                     <div class="mb-4">
                         <label for="username" class="username-label">Username</label>
-                        <input type="text" id="username" name="username" class="username-input" placeholder="username" required/>
+                        <input type="text" id="username" name="username" class="username-input" placeholder="username" required/> <!--username-->
                     </div>
                     <div class="mb-6">
                         <label for="password" class="password-label">Password</label>
-                        <input type="password" id="password" name="password" class="password-input" placeholder="**********" required/>
+                        <input type="password" id="password" name="password" class="password-input" placeholder="**********" required/> <!--password-->
                     </div>
                     <button type="submit" class="login-submit">Login</button>
                     <input type="hidden" name="submitLogin" value="TRUE" />
@@ -205,11 +196,11 @@
                         placeholder="07599671811" pattern="[0-9]{5}-[0-9]{6}" required/> <!--phone number-->
 
                         <label for="username" class="username-label">Username</label>
-                        <input type="text" id="username" name="username" class="username-input" placeholder="username" required/>
+                        <input type="text" id="username" name="username" class="username-input" placeholder="username" required/> <!--username-->
                     </div>
                     <div class="mb-6">
                         <label for="password" class="password-label">Password</label>
-                        <input type="password" id="password" name="password" class="password-input" placeholder="**********" required/>
+                        <input type="password" id="password" name="password" class="password-input" placeholder="**********" required/> <!--password-->
                     </div>
                     <button type="submit" class="login-submit">Sign Up</button>
                     <input type="hidden" name="submitSignUp" value="TRUE" />
