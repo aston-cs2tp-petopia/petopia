@@ -53,17 +53,17 @@
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Dogs</a></li>
                     </ul>
                 </li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Toys</a></li>
-                        <li class="dropdown-li"><a href="items.html">Grooming</a></li>
-                        <li><a href="items.html">Treats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Toys</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Grooming</a></li>
+                        <li><a href="itemTable.php">Treats</a></li>
                     </ul>
                 </li>
                 <li><a href="testSignOut.php">Advice</a></li>
@@ -104,16 +104,16 @@
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Dogs</a></li>
                     </ul>
                 </li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Dogs</a></li>
                     </ul>
                 </li>
                 <li><a href="advice.html">Advice</a></li>

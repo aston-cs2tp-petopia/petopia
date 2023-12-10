@@ -191,14 +191,14 @@
                 <h2 class="login-text">Sign Up</h2>
                 <form id="signUpForm" name="signUpForm" method="post" action="login.php">
                     <div class="mb-4">
-                        <label for="email" class="email-label">Email</label>
-                        <input type="text" id="email" name="email" class="username-input" required/> <!--class name should be changed to reflect field-->
-
                         <label for="fname" class="fName-label">First Name</label>
                         <input type="text" id="fName" name="fName" class="username-input" required/> <!--class name should be changed to reflect field-->
                         
                         <label for="lname" class="fName-label">Last Name</label>
                         <input type="text" id="lName" name="lName" class="username-input" required/> <!--class name should be changed to reflect field-->
+
+                        <label for="email" class="email-label">Email</label>
+                        <input type="text" id="email" name="email" class="username-input" required/> <!--class name should be changed to reflect field-->
 
                         <label for="pNumber" class="pNumber-label">Phone Number</label>
                         <input type="tel" id="pNumber" name="pNumber" class="username-input" 
