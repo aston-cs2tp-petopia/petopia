@@ -161,8 +161,11 @@ body, html {
 }
 
 /*Shopping Cart*/
-.bx-card-add {
-    font-size: 20px; /*Changes height of add to cart icon*/
+.bx-cart-add {
+    font-size: 25px; /*Changes height of add to cart icon*/
+    cursor: pointer;
+    color:#163741;
+    margin-top: -1px;
 }
 
 #textholder1{
@@ -172,4 +175,35 @@ body, html {
       width: 980px;
     text-align:center;
     background-color: #eee;
-  }
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 1400px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-content h2 {font-size: 40px;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 10%}
+    .hero-banner-image img {object-position: left;}
+}
+
+@media (max-width: 990px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-content h2 {font-size: 40px; width: 100%;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 8%; width: 90%}
+    .hero-banner-image img {object-position: left;}
+}
+
+@media (max-width: 450px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-image img {object-position: left;}
+    .hero-banner-content {width: 100%;}
+    .hero-banner-content h2 {font-size: 40px; width: 90%}
+    .hero-banner-content p {width: calc(80%);}
+}
