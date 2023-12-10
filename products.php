@@ -27,6 +27,7 @@
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 </head>
+
 <body>
     <header>
         <!--
@@ -140,63 +141,44 @@
             </div>
         </section>
 
+        <?php
+            require_once('php/connectdb.php');
+            try {
+                $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
 
-        <section id="textholder1">
-            <?php
-                require_once('php/connectdb.php');
-                try {
-                    $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
+                //run  the query
+                // $db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password);
+                $rows =  $db->query($productQuery);
 
-                    //run  the query
-                    // $db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password);
-                    $rows =  $db->query($productQuery);
-
-                    //display the query edited table	
-                    if ($rows && $rows->rowCount() > 0) {
-            ?>
-                        <table cellspacing="10" cellpadding="15" id="productTable">
-                            <tr>
-                                <th align='left'><b>Name</b></th> <!--Product name-->
-                                <th align='left'><b>£</b></th> <!--Price of Product-->
-                                <th align='left'><b>Available</b></th> <!--Stock-->
-                            </tr>
-            <?php
-                            foreach ($rows as $row) {
-                                echo  "<td align='left'>" . $row['Name'] . "</td>";
-                                echo "<td align='left'>" . $row['Price'] . "</td>";
-                                echo "<td align='left'>" . $row['Num_In_Stock'] . "</td>";
-                                // $titleTemp='title';
-                                $pidTemp=$row['Product_ID'];
-                                //echo '<td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"><Button type="button">Further Details</Button></a></td></tr>';
-                            }
-                            echo  '</table>';
-                    } else {
-                        echo  "<p>No matching Product.</p>\n"; //no match found
+                //display the query edited table	
+                if ($rows && $rows->rowCount() > 0) {
+                    foreach ($rows as $row) {
+        ?>
+                        <div class="item-template">
+                            <div class="item-image">
+                                <img src="assets/Homepage/hero-banner2.jpg" alt="">
+                            </div>
+                        
+                            <div class="item-info">
+                                <h4><?php echo $row['Name']; ?></h4>
+                                <h5>£<?php echo $row['Price'];?></h5>
+                        
+                                <div class="item-bottom-container">
+                                    <p><?php echo $row['Num_In_Stock'];?></p>
+                                    <div class='bx bx-cart-add'></div>
+                                </div>
+                            </div>
+                        </div>
+        <?php
                     }
-                } catch (PDOexception $ex) {
-                    echo "Sorry, a database error occurred! <br>";
-                    echo "Error details: <em>" . $ex->getMessage() . "</em>";
+                } else {
+                    echo  "<p>No matching Product.</p>\n"; //no match found
                 }
-            ?>
-        </section>
-
-
-
-        <div class="item-template">
-            <div class="item-image">
-                <img src="assets/Homepage/hero-banner2.jpg" alt="">
-            </div>
-        
-            <div class="item-info">
-                <h4>[Category]</h4>
-                <h5>[Item Name]</h5>
-        
-                <div class="item-bottom-container">
-                    <p>£[UPDATE PRICE]</p>
-                    <div class='bx bx-cart-add'></div>
-                </div>
-            </div>
-        </div>
+            } catch (PDOexception $ex) {
+                echo "Sorry, a database error occurred! <br>";
+                echo "Error details: <em>" . $ex->getMessage() . "</em>";
+            }
+        ?>
         </main>
 </body>
     
