@@ -2,12 +2,32 @@ h1 {
     font-weight: bold;
     font-size: 1.5em; /*Adjust value if needed*/
     color: #A349A4;
+
   }
 h2 {
     font-weight: bold;
     font-size: 4em; /*Adjust value if needed*/
     color: #A349A4;
+    padding-left: 50px;
   }
+
+
+  .boxes {
+    background-color: pink;
+    border: 2px solid #A349A4;
+    border-radius: 5px;
+    padding-left: 50px;
+
+
+
+  }
+
+
+
+
+
+
+
   
 /*
   .banner{
