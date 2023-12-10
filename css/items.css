@@ -120,12 +120,3 @@
 .bx-card-add {
     font-size: 20px; /*Changes height of add to cart icon*/
 }
-
-#textholder1{
-    margin-left:auto;
-      margin-right:auto;
-      padding:10px;
-      width: 980px;
-    text-align:center;
-    background-color: #eee;
-  }
