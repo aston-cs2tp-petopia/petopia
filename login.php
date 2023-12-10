@@ -16,7 +16,7 @@
     }
 
     if (isset($_POST['submitSignUp'])) { // if user submitted details
-        if (!isset($_POST['email'], $_POST['username'], $_POST['password'])) { // check if fields are empty
+        if (!isset($_POST['email'], $_POST['fName'], $_POST['lName'], $_POST['username'], $_POST['password'])) { // check if fields are empty
             exit('Please fill the email, username, and password fields.'); // stop running check, error message (empty fields)
         }
     
@@ -65,7 +65,7 @@
         <!--Middle Navigation-->
         <nav class="desktop-nav">
             <ul class="desktop-nav-ul">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
@@ -84,8 +84,8 @@
                     </ul>
                 </li>
                 <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
         </nav>
 
@@ -110,7 +110,7 @@
                 <p class="close-menu-button" draggable="false">X</p>
             </div>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
@@ -128,8 +128,8 @@
                     </ul>
                 </li>
                 <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
                     <!--Login Button-->
                     <a href="login.php" class="login-link">
@@ -191,8 +191,18 @@
                 <h2 class="login-text">Sign Up</h2>
                 <form id="signUpForm" name="signUpForm" method="post" action="login.php">
                     <div class="mb-4">
+                        <label for="fname" class="fName-label">First Name</label>
+                        <input type="text" id="fName" name="fName" class="username-input" required/> <!--class name should be changed to reflect field-->
+                        
+                        <label for="lname" class="fName-label">Last Name</label>
+                        <input type="text" id="lName" name="lName" class="username-input" required/> <!--class name should be changed to reflect field-->
+
                         <label for="email" class="email-label">Email</label>
-                        <input type="text" id="username" name="username" class="username-input" required/>
+                        <input type="text" id="email" name="email" class="username-input" required/> <!--class name should be changed to reflect field-->
+
+                        <label for="pNumber" class="pNumber-label">Phone Number</label>
+                        <input type="tel" id="pNumber" name="pNumber" class="username-input" 
+                        placeholder="07599671811" pattern="[0-9]{4}-[0-9]{5}" required/> <!--class name should be changed to reflect field-->
 
                         <label for="username" class="username-label">Username</label>
                         <input type="text" id="username" name="username" class="username-input" required/>

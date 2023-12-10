@@ -1,3 +1,7 @@
+<?php
+ require_once('php/mainLogCheck.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,27 +48,27 @@
         <!--Middle Navigation-->
         <nav class="desktop-nav">
             <ul class="desktop-nav-ul">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Dogs</a></li>
                     </ul>
                 </li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Toys</a></li>
-                        <li class="dropdown-li"><a href="items.html">Grooming</a></li>
-                        <li><a href="items.html">Treats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Toys</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Grooming</a></li>
+                        <li><a href="itemTable.php">Treats</a></li>
                     </ul>
                 </li>
                 <li><a href="testSignOut.php">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
         </nav>
 
@@ -75,9 +79,15 @@
                 <div class='basket-button bx bx-basket'></div>
             </a>
             <!--Login Button-->
-            <a href="login.php" class="login-link">
-                <div class="login-button">Login</div>
-            </a>
+            <?php
+                if ($b==true) {
+                    //Log out button
+                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                }else{
+                    //Login Button
+                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                }       
+            ?>
         </div>
 
         <!--Mobile-Background-->
@@ -89,31 +99,37 @@
                 <p class="close-menu-button" draggable="false">X</p>
             </div>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Dogs</a></li>
                     </ul>
                 </li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="itemTable.php">Dogs</a></li>
                     </ul>
                 </li>
                 <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
                     <!--Login Button-->
-                    <a href="login.php" class="login-link">
-                        <div class="login-button">Login</div>
-                    </a>
+                    <?php
+                        if ($b==true) {
+                            //Log out button
+                            echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                        }else{
+                            //Login Button
+                            echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                        }       
+                    ?>
                     <!--Shoppiung Basket Button-->
                     <a href="" class="basket-link">
                         <div class='basket-button bx bx-basket'></div>

@@ -15,7 +15,7 @@
                 //record the user session variable and go to the home page for now
                 session_start();
                 $_SESSION["username"] = $_POST['username']; //declares the sessions user
-                header("Location:index.html"); // sends user to the home page
+                header("Location:index.php"); // sends user to the home page
                 exit();
             } else {
                 // else display an error (password)

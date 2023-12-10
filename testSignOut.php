@@ -39,12 +39,12 @@
         <!--Middle Navigation-->
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="items.html">Cats</a></li>
                 <li><a href="items.html">Dogs</a></li>
                 <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
         </nav>
 
