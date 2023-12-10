@@ -3,7 +3,7 @@
     try {
         // Query DB to find matching username/password
         // using prepare/bindparameter to prevent SQL injection.
-        $stat = $db->prepare('SELECT password FROM customers WHERE username = ?');
+        $stat = $db->prepare('SELECT Password FROM Customer WHERE Username = ?');
         $stat->execute(array($_POST['username']));
 
         // fetch the results row and check 
@@ -11,11 +11,11 @@
             $row = $stat->fetch(); // fetch the rows contents
 
             // if the field password matches the password in the database row
-            if (password_verify($_POST['password'], $row['password'])||$_POST['password'] == $row['password']) { 
+            if (password_verify($_POST['password'], $row['Password'])||$_POST['password'] == $row['Password']) { 
                 //record the user session variable and go to the home page for now
                 session_start();
                 $_SESSION["username"] = $_POST['username']; //declares the sessions user
-                header("Location:index.html"); // sends user to the home page
+                header("Location:index.php"); // sends user to the home page
                 exit();
             } else {
                 // else display an error (password)

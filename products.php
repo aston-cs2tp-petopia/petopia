@@ -146,40 +146,44 @@
                 try {
                     $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
 
-                    //run  the query
-                    // $db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password);
-                    $rows =  $db->query($productQuery);
+        <?php
+            require_once('php/connectdb.php');
+            try {
+                $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
 
-                    //display the query edited table	
-                    if ($rows && $rows->rowCount() > 0) {
-                        foreach ($rows as $row) {
-            ?>
-                            <div class="item-template">
-                                <div class="item-image">
-                                    <img src="assets/Homepage/hero-banner2.jpg" alt="">
-                                </div>
-                            
-                                <div class="item-info">
-                                    <h4><?php echo $row['Name']; ?></h4>
-                                    <h5>Â£<?php echo $row['Price'];?></h5>
-                            
-                                    <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
-                                        <a href=""><div class='bx bx-cart-add'></div></a>
-                                    </div>
+                //run  the query
+                // $db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password);
+                $rows =  $db->query($productQuery);
+
+                //display the query edited table	
+                if ($rows && $rows->rowCount() > 0) {
+                    foreach ($rows as $row) {
+        ?>
+                        <div class="item-template">
+                            <div class="item-image">
+                                <img src="assets/Homepage/hero-banner2.jpg" alt="">
+                            </div>
+                        
+                            <div class="item-info">
+                                <h4><?php echo $row['Name']; ?></h4>
+                                <h5>£<?php echo $row['Price'];?></h5>
+                        
+                                <div class="item-bottom-container">
+                                    <p><?php echo $row['Num_In_Stock'];?></p>
+                                    <div class='bx bx-cart-add'></div>
                                 </div>
                             </div>
-            <?php
-                        }
-                    } else {
-                        echo  "<p>No matching Product.</p>\n"; //no match found
+                        </div>
+        <?php
                     }
-                } catch (PDOexception $ex) {
-                    echo "Sorry, a database error occurred! <br>";
-                    echo "Error details: <em>" . $ex->getMessage() . "</em>";
+                } else {
+                    echo  "<p>No matching Product.</p>\n"; //no match found
                 }
-            ?>
-        </section>
+            } catch (PDOexception $ex) {
+                echo "Sorry, a database error occurred! <br>";
+                echo "Error details: <em>" . $ex->getMessage() . "</em>";
+            }
+        ?>
         </main>
 </body>
     
