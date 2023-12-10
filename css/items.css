@@ -1,3 +1,6 @@
+body, html {
+    overflow-x: hidden;
+}
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Hero Banner
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
@@ -6,7 +9,9 @@
 .hero-banner{
     width: 100%;
     height: 400px;
+    overflow: hidden;
     position: relative;
+    touch-action: auto;
 }
 
 /*Hero Banner Image Container*/
@@ -27,8 +32,9 @@
 /*Hero Banner Left Container*/
 .hero-banner-left {
     height: 100%;
-    width: 500px;
-    padding-left: 200px;
+    max-width: 500px;
+    width: 100%;
+    padding-left: 10%;
     /*Flex*/
     display: flex;
     justify-content: start;
@@ -68,16 +74,41 @@
     cursor: pointer;
 }
 
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Items Container
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.items-container {
+    width: 100%;
+    padding-top: 30px;
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Items Template
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
 .item-template {
     /*Flex*/
     display: flex;
     flex-direction: column;
+
+    /*Styles*/
+
+
+    /*Others*/
 }
 
 /*Item Image Container*/
 .item-image {
     width: 250px;
     height: 250px;
+    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.3);
 }
 
 .item-image img {
@@ -91,16 +122,25 @@
     /*Flex*/
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /*Category Text*/
 .item-info h4 {
-
+    font-size: 24px;
+    padding-top: 10px;
+    margin: 0;
+    color: #41494b;
 }
 
 /*Item Name Text*/
 .item-info h5 {
-    
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin: 0;
+    color:#163741
 }
 
 /*Item Bottom Container*/
@@ -113,10 +153,57 @@
 
 /*Price Text*/
 .item-bottom-container p {
-
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    padding-bottom: 10px;
+    color:#163741
 }
 
 /*Shopping Cart*/
-.bx-card-add {
-    font-size: 20px; /*Changes height of add to cart icon*/
+.bx-cart-add {
+    font-size: 25px; /*Changes height of add to cart icon*/
+    cursor: pointer;
+    color:#163741;
+    margin-top: -1px;
+}
+
+#textholder1{
+    margin-left:auto;
+      margin-right:auto;
+      padding:10px;
+      width: 980px;
+    text-align:center;
+    background-color: #eee;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 1400px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-content h2 {font-size: 40px;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 10%}
+    .hero-banner-image img {object-position: left;}
+}
+
+@media (max-width: 990px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-content h2 {font-size: 40px; width: 100%;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 8%; width: 90%}
+    .hero-banner-image img {object-position: left;}
+}
+
+@media (max-width: 450px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-image img {object-position: left;}
+    .hero-banner-content {width: 100%;}
+    .hero-banner-content h2 {font-size: 40px; width: 90%}
+    .hero-banner-content p {width: calc(80%);}
 }
