@@ -191,9 +191,6 @@
                 require_once('php/connectdb.php');
                 try {
                     $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
-
-                    //run  the query
-                    // $db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password);
                     $rows =  $db->query($productQuery);
 
                     //display the query edited table	
@@ -206,7 +203,9 @@
                                 </div>
                             
                                 <div class="item-info">
-                                    <h4><?php echo $row['Name']; ?></h4>
+                                    <?php $tempPID=$row['Product_ID']  ?>
+                                    <h4><a href="item.php?Product_ID='. $tempPID . '"><?php echo $row['Name']; ?></a></h4>
+                                    <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
                                     <h5>£<?php echo $row['Price'];?></h5>
                             
                                     <div class="item-bottom-container">
