@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
-    <link href="css/items.css" rel="stylesheet" type="text/css">
+    <link href="css/basket.css" rel="stylesheet" type="text/css">
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
     <link href="css/footer.css" rel="stylesheet" type="text/css">
 
@@ -152,41 +152,91 @@
                 </div>
             </div>
         </section>
-
-        <section id="textholder1">
+        <!--Basket Container-->
+        <section class="basket-container">
+            <!--Basket Container-->
+                <div class="top-container">
+                    <h3>Your basket</h3>
+                </div>
+            <!--Basket Table-->
             <?php
                 require_once('php/connectdb.php');
+
                 try {
-                    $query = 'SELECT product.Name, Quantity, Subtotal FROM basket Join product ON product.Product_ID = basket.Product_ID JOIN customer ON basket.Customer_ID = customer.Customer_ID';
-                    //run  the query
-                    $rows =  $db->query($query);
+                    $query = 'SELECT product.Product_ID, product.Name, SUM(Quantity) as TotalQuantity, Subtotal 
+                            FROM basket 
+                            JOIN product ON product.Product_ID = basket.Product_ID 
+                            JOIN customer ON basket.Customer_ID = customer.Customer_ID
+                            GROUP BY product.Product_ID';
 
-                    //step 3: display the course list in a table 	
+                    //run the query
+                    $rows = $db->query($query);
+
+                    //step 3: display the basket items in a table
                     if ($rows && $rows->rowCount() > 0) {
+                ?>
+                        <table cellspacing="10" cellpadding="15" class="productTable">
+                            <tr class="basket-top">
+                                <th align='center'><b>Image</b></th>
+                                <th align='center'><b>Product Name</b></th>
+                                <th align='center'><b>Quantity</b></th>
+                                <th align='center'><b>Subtotal</b></th>
+                                <th align='center'><b>Action</b></th>
+                            </tr>
+                            <?php
+                            foreach ($rows as $row) {
+                                echo  "<tr class='basket-row' data-product-id='" . $row['Product_ID'] . "'>
+                                            <td align='center'><img src='assets/Homepage/hero-banner2.jpg' alt='Product Image' width='50' height='50'></td>
+                                            <td align='center'>" . $row['Name'] . "</td>
+                                            <td align='center'>" . $row['TotalQuantity'] . "</td>
+                                            <td align='center'>" . $row['Subtotal'] . "</td>
+                                            <td align='center'><button class='remove-basket'>Remove</button></td>
+                                        </tr>";
+                            }
+                            ?>
+                        </table>
 
-            ?>
-            <table cellspacing="10" cellpadding="15" id="projectTable">
-                <tr>
-                    <th align='left'><b>Product Name</b></th>
-                    <th align='left'><b>Quantity</b></th>
-                    <th align='left'><b>Subtotal</b></th>
-                </tr>
-            <?php
-                foreach ($rows as $row) {
-                    echo  "<td align='left'>" . $row['Name'] . "</td><br>
-                            <td align='left'>" . $row['Quantity'] . "</td><br>
-                            <td align='left'>" . $row['Subtotal'] . "</td>";
-                }
-                echo  '</table>';
-                } else {
-                    echo  "<p>No  course in the list.</p>\n"; //no match found
-                }
-                } catch (PDOexception $ex) {
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                var removeButtons = document.querySelectorAll('.remove-basket');
+
+                                removeButtons.forEach(function (button) {
+                                    button.addEventListener('click', function () {
+                                        var productId = this.closest('.basket-row').dataset.productId;
+
+                                        // Make an AJAX request to remove the item
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open('POST', 'remove_from_basket.php', true);
+                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                                // Refresh the page or update the UI as needed
+                                                location.reload();
+                                            } else if (xhr.readyState == 4 && xhr.status != 200) {
+                                                alert('Error removing item from the basket.');
+                                            }
+                                        };
+
+                                        xhr.send('productId=' + encodeURIComponent(productId));
+                                    });
+                                });
+                            });
+                        </script>
+
+                    <?php
+                    } else {
+                        echo  "<p>No items in the basket.</p>\n"; //no match found
+                    }
+                } catch (PDOException $ex) {
                     echo "Sorry, a database error occurred! <br>";
                     echo "Error details: <em>" . $ex->getMessage() . "</em>";
                 }
-            ?>
-            <button></button>
+
+                ?>
+
+
+
         </section>
             
         
@@ -196,5 +246,34 @@
     <footer>
         &copy; 2023 Petopia
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var removeButtons = document.querySelectorAll('.remove-basket');
+
+            removeButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var productId = this.closest('.basket-row').dataset.productId;
+
+                    // Make an AJAX request to remove the item
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'remove_from_basket.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            // Refresh the page or update the UI as needed
+                            location.reload();
+                        } else if (xhr.readyState == 4 && xhr.status != 200) {
+                            alert('Error removing item from the basket.');
+                        }
+                    };
+
+                    xhr.send('productId=' + encodeURIComponent(productId));
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

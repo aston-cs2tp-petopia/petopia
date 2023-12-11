@@ -35,7 +35,10 @@
     
     </head>
 
-     
+ <body>    
+    <!--
+        [NAVIGATION/HEADER]
+    -->
     <header>
         <!--Logo-->
         <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
@@ -69,21 +72,21 @@
 
         <!--Right Navigation-->
         <div class="right-nav">
-            <!--Shopping Basket Button-->
-            <a href="" class="basket-link">
-                <div class='basket-button bx bx-basket'></div>
-            </a>
-            <!--Login Button-->
+            <!--Shoppiung Basket Button-->
             <?php
+                //Login Button
                 if ($b==true) {
                     //Log out button
+
                     //Shopping Basket Button
+
                     echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                     echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                 }else{
                     //Login Button
                     echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }    
+                }       
+
             ?>
         </div>
 
@@ -113,24 +116,22 @@
                         <li class="dropdown-li"><a href="products.php">Dogs</a></li>
                     </ul>
                 </li>
-                <li><a href="advice.html">Advice</a></li>
+                <li><a href="advice.php">Advice</a></li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
-                    <!--Login Button-->
                     <?php
-                        if ($b==true) {
-                            //Log out button
-                            echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
-                        }else{
-                            //Login Button
-                            echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                        }       
-                    ?>
-                    <!--Shopping Basket Button-->
-                    <a href="" class="basket-link">
-                        <div class='basket-button bx bx-basket'></div>
-                    </a>
+                //Login Button
+                if ($b==true) {
+                    //Log out button
+                    //Shoppiung Basket Button
+                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
+                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                }else{
+                    //Login Button
+                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                }       
+            ?>
                 </div>
             </ul>
         </nav>
