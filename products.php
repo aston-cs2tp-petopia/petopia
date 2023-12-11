@@ -111,7 +111,7 @@
                 if ($b==true) {
                     //Log out button
                     //Shoppiung Basket Button
-                    echo '<a href="" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
+                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                     echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                 }else{
                     //Login Button
