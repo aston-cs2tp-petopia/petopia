@@ -1,7 +1,7 @@
 <?php
     require_once('php/mainLogCheck.php');
+    $tempPID = $_GET["Product_ID"];
 
-    $name = $_GET["Name"];
 
     if (isset($_POST['add'])) {
 

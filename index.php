@@ -119,18 +119,18 @@
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
-                    <?php
-                //Login Button
-                if ($b==true) {
-                    //Log out button
-                    //Shoppiung Basket Button
-                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
-                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
-                }else{
+                <?php
                     //Login Button
-                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }       
-            ?>
+                    if ($b==true) {
+                        //Log out button
+                        //Shoppiung Basket Button
+                        echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
+                        echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                    }else{
+                        //Login Button
+                        echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                    }       
+                ?>
                 </div>
             </ul>
         </nav>
