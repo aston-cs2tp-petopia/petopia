@@ -66,7 +66,7 @@
                         <li><a href="products.php">Treats</a></li>
                     </ul>
                 </li>
-                <li><a href="testSignOut.php">Advice</a></li>
+                <li><a href="advice.php">Advice</a></li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact</a></li>
             </ul>

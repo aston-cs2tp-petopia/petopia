@@ -193,7 +193,9 @@
 
                         <label for="pNumber" class="pnumber-label">Phone Number</label>
                         <input type="tel" id="pNumber" name="pNumber" class="username-input" 
-                        placeholder="07599671811" pattern="[0-9]{5}-[0-9]{6}" required/> <!--phone number-->
+
+                        placeholder="07599671811" pattern="[0-9]{11}" required/> <!--class name should be changed to reflect field-->
+
 
                         <label for="username" class="username-label">Username</label>
                         <input type="text" id="username" name="username" class="username-input" placeholder="username" required/> <!--username-->
