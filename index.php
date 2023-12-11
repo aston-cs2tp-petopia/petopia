@@ -155,7 +155,7 @@
 
                 <div class="hero-banner-content">
                     <h2>Best friend with happy time</h2>
-                    <p> The weather is amazing today and the dogs will have fun in that good weathger</p>
+                    <p> The weather is amazing today and the dogs will have fun in that good weather</p>
                     <!--Hero Banner Button-->
                     <div class="hero-banner-button">Learn more</div>
                 </div>

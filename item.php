@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
-    <link href="css/items.css" rel="stylesheet" type="text/css">
+    <link href="css/item.css" rel="stylesheet" type="text/css">
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <script src="scripts/navigation.js"></script>
     <link href="css/footer.css" rel="stylesheet" type="text/css">
 
     <!--[Google Fonts]-->
@@ -33,98 +34,98 @@
         <!--
         [NAVIGATION/HEADER]
     -->
-    <header>
-        <!--Logo-->
-        <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
+        <header>
+            <!--Logo-->
+            <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
 
-        <!--Middle Navigation-->
-        <nav class="desktop-nav">
-            <ul class="desktop-nav-ul">
-                <li><a href="index.html">Home</a></li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Pets v</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
-                    </ul>
-                </li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Shop v</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Toys</a></li>
-                        <li class="dropdown-li"><a href="items.html">Grooming</a></li>
-                        <li><a href="items.html">Treats</a></li>
-                    </ul>
-                </li>
-                <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+            <!--Middle Navigation-->
+            <nav class="desktop-nav">
+                <ul class="desktop-nav-ul">
+                    <li><a href="index.html">Home</a></li>
+                    <!--Dropdown-->
+                    <li class="dropdown">
+                        <a href="#">Pets v</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-li"><a href="items.html">Cats</a></li>
+                            <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        </ul>
+                    </li>
+                    <!--Dropdown-->
+                    <li class="dropdown">
+                        <a href="#">Shop v</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-li"><a href="items.html">Toys</a></li>
+                            <li class="dropdown-li"><a href="items.html">Grooming</a></li>
+                            <li><a href="items.html">Treats</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="advice.html">Advice</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
 
-        <!--Right Navigation-->
-        <div class="right-nav">
-            <!--Shoppiung Basket Button-->
-            <a href="" class="basket-link">
-                <div class='basket-button bx bx-basket'></div>
-            </a>
-            <!--Login Button-->
-            <a href="login.php" class="login-link">
-                <div class="login-button">Login</div>
-            </a>
-        </div>
-
-        <!--Mobile-Background-->
-        <div class="mobile-background"></div>
-        <!--Mobile Navigation-->
-        <nav class="mobile-nav">
-            <div class="mobile-nav-top">
-                <div class="mobile-logo"><img src="assets/logo.png" alt=""></div>
-                <p class="close-menu-button" draggable="false">X</p>
+            <!--Right Navigation-->
+            <div class="right-nav">
+                <!--Shoppiung Basket Button-->
+                <a href="" class="basket-link">
+                    <div class='basket-button bx bx-basket'></div>
+                </a>
+                <!--Login Button-->
+                <a href="login.php" class="login-link">
+                    <div class="login-button">Login</div>
+                </a>
             </div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Pets v</a>
-                    <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
-                    </ul>
-                </li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Shop v</a>
-                    <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
-                    </ul>
-                </li>
-                <li><a href="advice.html">Advice</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <div class="mobile-bottom-nav">
-                    <!--Login Button-->
-                    <a href="login.php" class="login-link">
-                        <div class="login-button">Login</div>
-                    </a>
-                    <!--Shoppiung Basket Button-->
-                    <a href="" class="basket-link">
-                        <div class='basket-button bx bx-basket'></div>
-                    </a>
+
+            <!--Mobile-Background-->
+            <div class="mobile-background"></div>
+            <!--Mobile Navigation-->
+            <nav class="mobile-nav">
+                <div class="mobile-nav-top">
+                    <div class="mobile-logo"><img src="assets/logo.png" alt=""></div>
+                    <p class="close-menu-button" draggable="false">X</p>
                 </div>
-            </ul>
-        </nav>
-        <!--Mobile Hamburger-->
-        <div id="hamburger-button" class='bx bx-menu'></div>
-    </header>
-    <!--
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <!--Dropdown-->
+                    <li class="dropdown">
+                        <a href="#">Pets v</a>
+                        <ul class="dropdown-menu-mobile">
+                            <li class="dropdown-li"><a href="items.html">Cats</a></li>
+                            <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        </ul>
+                    </li>
+                    <!--Dropdown-->
+                    <li class="dropdown">
+                        <a href="#">Shop v</a>
+                        <ul class="dropdown-menu-mobile">
+                            <li class="dropdown-li"><a href="items.html">Cats</a></li>
+                            <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="advice.html">Advice</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <div class="mobile-bottom-nav">
+                        <!--Login Button-->
+                        <a href="login.php" class="login-link">
+                            <div class="login-button">Login</div>
+                        </a>
+                        <!--Shoppiung Basket Button-->
+                        <a href="" class="basket-link">
+                            <div class='basket-button bx bx-basket'></div>
+                        </a>
+                    </div>
+                </ul>
+            </nav>
+            <!--Mobile Hamburger-->
+            <div id="hamburger-button" class='bx bx-menu'></div>
+        </header>
+        <!--
         [HEADER/NAVIGATION END]
     -->
     </header>
-    
+
     <main>
         <!--Hero Banner-->
         <section class="hero-banner">
@@ -135,17 +136,43 @@
             <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
-                    <h2>Pets and Items</h2>
+                    <h2>Shop</h2>
                     <p> Browse</p>
                 </div>
             </div>
         </section>
-        
-        </main>
+
+        <section class="item-section">
+            <div class="item-image">
+                <img src="assets/Homepage/hero-banner2.jpg" alt="">
+            </div>
+
+            <div class="right-container">
+                <h4 class="category-text">Category</h4>
+                <h3 class="title-text">Title</h3>
+                <div class="stars-container">
+                    <div class='bx bxs-star'></div>
+                    <div class='bx bxs-star'></div>
+                    <div class='bx bxs-star'></div>
+                    <div class='bx bxs-star'></div>
+                    <div class='bx bxs-star'></div>
+                    <p>(0 Review)</p>
+                </div>
+                <h5 class="price-text">£34.99</h5>
+                <p class="desc-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, quibusdam ab
+                    quod illum dolore dolor maxime velit suscipit accusantium, facere quis perspiciatis earum commodi ad
+                    aliquid hic harum nesciunt! Architecto.</p>
+                <button class="add-cart-button">Add to Cart</button>
+            </div>
+
+        </section>
+
+    </main>
 </body>
-    
-    <footer>
-        &copy; 2023 Petopia
-    </footer>
+
+<footer>
+    &copy; 2023 Petopia
+</footer>
 </body>
+
 </html>
