@@ -82,13 +82,11 @@
             <?php
                 if ($b==true) {
                     //Log out button
-                    //Shoppiung Basket Button
-                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                     echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                 }else{
                     //Login Button
                     echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }        
+                }       
             ?>
         </div>
 
@@ -126,8 +124,6 @@
                     <?php
                         if ($b==true) {
                             //Log out button
-                            //Shoppiung Basket Button
-                            echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                             echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                         }else{
                             //Login Button
@@ -178,22 +174,22 @@
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-dog'></div>
-                    <a href="products.php">Browse Dogs</a>
+                    <a href="">Browse Dogs</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-cat'></div>
-                    <a href="products.php">Browse Cats</a>
+                    <a href="">Browse Cats</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-help-circle'></div>
-                    <a href="advice.php">Visit Advice</a>
+                    <a href="">Visit Advice</a>
                 </div>
 
                 <div class="quick-access">
                     <div class='bx bxs-group'></div>
-                    <a href="about.php">Visit About Us</a>
+                    <a href="">Visit About Us</a>
                 </div>
             </div>
         </section>

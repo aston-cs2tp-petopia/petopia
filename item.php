@@ -148,21 +148,33 @@
             </div>
 
             <div class="right-container">
-                <h4 class="category-text">Category</h4>
-                <h3 class="title-text">Title</h3>
-                <div class="stars-container">
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <p>(0 Review)</p>
-                </div>
-                <h5 class="price-text">£34.99</h5>
-                <p class="desc-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, quibusdam ab
-                    quod illum dolore dolor maxime velit suscipit accusantium, facere quis perspiciatis earum commodi ad
-                    aliquid hic harum nesciunt! Architecto.</p>
-                <button class="add-cart-button">Add to Cart</button>
+                <!-- <h4 class="category-text"></h4> -->
+                <?php
+                    
+                    require_once('php/connectdb.php');
+                    try {
+                        $productQuery = "select * from  product where Name ="; //need to add 'where' query once i have a category variable
+    
+                        //run  the query
+                        // $db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password);
+                        $rows =  $db->query($productQuery);
+    
+                        //display the query edited table	
+                        if ($rows && $rows->rowCount() > 0) {
+                            foreach ($rows as $row) {
+                ?>
+                                <h3 class="title-text"></h3>
+                                <div class="stars-container">
+                                    <div class='bx bxs-star'></div>
+                                    <div class='bx bxs-star'></div>
+                                    <div class='bx bxs-star'></div>
+                                    <div class='bx bxs-star'></div>
+                                    <div class='bx bxs-star'></div>
+                                    <p>(0 Review)</p>
+                                </div>
+                                <h5 class="price-text"></h5>
+                                <p class="desc-text"></p>
+                                <button type="submit" name="add">Add to Cart<div class="bx bx-cart-add"></div></button>
             </div>
 
         </section>

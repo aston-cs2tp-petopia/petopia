@@ -3,7 +3,6 @@
     
     //when the basket button is pressed, send the product id and customer id to order details
     if (isset($_POST['add'])) {
-        echo "HELLO WORLD";
 
         require_once('php/connectdb.php');
 
@@ -26,7 +25,6 @@
         try {
             $basketQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
             $basketQuery->execute(array($custID, $productID, $quantity, $subtotal));
-            echo "added to basket";
 
         } catch (PDOexception $ex) {
             echo "Sorry, a database error occurred! <br>";
