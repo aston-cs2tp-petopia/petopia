@@ -66,10 +66,6 @@
 
         <!--Right Navigation-->
         <div class="right-nav">
-            <!--Shoppiung Basket Button-->
-            <a href="" class="basket-link">
-                <div class='basket-button bx bx-basket'></div>
-            </a>
             <!--Login Button-->
             <?php
                 if ($b==true) {
@@ -116,8 +112,11 @@
                 <div class="mobile-bottom-nav">
                     <!--Login Button-->
                     <?php
+                        //Login Button
                         if ($b==true) {
                             //Log out button
+                            //Shoppiung Basket Button
+                            echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                             echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                         }else{
                             //Login Button

@@ -204,7 +204,7 @@
                             
                                 <div class="item-info">
                                     <?php $tempPID=$row['Product_ID']  ?>
-                                    <h4><a href="item.php?Product_ID='. $tempPID . '"><?php echo $row['Name']; ?></a></h4>
+                                    <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row['Name']; ?></a></h4>
                                     <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
                                     <h5>£<?php echo $row['Price'];?></h5>
                             
