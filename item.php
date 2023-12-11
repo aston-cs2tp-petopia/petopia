@@ -1,3 +1,39 @@
+<?php
+    require_once('php/mainLogCheck.php');
+
+    $name = $_GET["Name"];
+
+    if (isset($_POST['add'])) {
+
+        require_once('php/connectdb.php');
+
+        $username = $_SESSION["username"];
+        $custIDQuery = $db->prepare('SELECT Customer_ID FROM customer WHERE username = ?');
+        $custIDQuery->execute([$username]);
+        $custID = $custIDQuery->fetchColumn();
+
+        $productID = $_POST['productID'];
+        $quantity = $_POST['quantity'];
+
+        // Get product price
+        $priceQuery = $db->prepare('SELECT Price FROM product WHERE Product_ID = ?');
+        $priceQuery->execute([$productID]);
+        $price = $priceQuery->fetchColumn();
+
+        // Calculate subtotal
+        $subtotal = $quantity * $price;
+
+        try {
+            $basketQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
+            $basketQuery->execute(array($custID, $productID, $quantity, $subtotal));
+
+        } catch (PDOexception $ex) {
+            echo "Sorry, a database error occurred! <br>";
+            echo "Error details: <em>" . $ex->getMessage() . "</em>";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,21 +184,46 @@
             </div>
 
             <div class="right-container">
-                <h4 class="category-text">Category</h4>
-                <h3 class="title-text">Title</h3>
-                <div class="stars-container">
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <div class='bx bxs-star'></div>
-                    <p>(0 Review)</p>
-                </div>
-                <h5 class="price-text">£34.99</h5>
-                <p class="desc-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, quibusdam ab
-                    quod illum dolore dolor maxime velit suscipit accusantium, facere quis perspiciatis earum commodi ad
-                    aliquid hic harum nesciunt! Architecto.</p>
-                <button class="add-cart-button">Add to Cart</button>
+                <!-- <h4 class="category-text"></h4> -->
+                <?php
+                    
+                    require_once('php/connectdb.php');
+                    try {
+                        // $query = "select * from projects where pid like " . "'" . $pid . "'";
+                        $productQuery = "SELECT * from  product WHERE Product_ID LIKE " . " '" . $tempPID . "'"; //need to add 'where' query once i have a category variable
+                        $rows =  $db->query($productQuery);
+    
+                        //display the query edited table	
+                        if ($rows && $rows->rowCount() > 0) {
+                            foreach ($rows as $row) {
+                ?>
+                                <h4><?php echo $row['Name']; ?></h4>
+                                <h5>£<?php echo $row['Price'];?></h5>
+                                <h5><?php echo $row['Description']?></h5>
+                            
+                                <div class="item-bottom-container">
+                                    <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
+                                    <?php
+                                        if ($b==true && $row['Num_In_Stock']>0) {
+                                            echo "<form method='post' action='products.php'>";
+                                            echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
+                                            echo '<input type="hidden" name="quantity" value="1">';
+                                            echo '<button type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
+                                            echo '</form>';
+                                        }   
+                                    ?>
+                <?php
+                
+                            }
+                        } else {
+                            echo  "<p>No matching Product.</p>\n"; //no match found
+                        }
+                    } catch (PDOexception $ex) {
+                        echo "Sorry, a database error occurred! <br>";
+                        echo "Error details: <em>" . $ex->getMessage() . "</em>";
+                    }
+                
+                ?>
             </div>
 
         </section>

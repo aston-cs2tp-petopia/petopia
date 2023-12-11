@@ -38,7 +38,7 @@
     -->
     <header>
         <!--Logo-->
-        <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
+        <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
 
         <!--Middle Navigation-->
         <nav class="desktop-nav">
@@ -69,7 +69,7 @@
 
         <!--Right Navigation-->
         <div class="right-nav">
-            <!--Shoppiung Basket Button-->
+
             <?php
                 //Login Button
                 if ($b==true) {
@@ -115,6 +115,7 @@
                 <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
                     <?php
+
                 //Login Button
                 if ($b==true) {
                     //Log out button
@@ -126,6 +127,8 @@
                     echo '<div class="login-button"><a href="login.php">Login</a></div>';
                 }       
             ?>
+
+
                 </div>
             </ul>
         </nav>

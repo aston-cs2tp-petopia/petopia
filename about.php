@@ -41,7 +41,7 @@
     -->
     <header>
         <!--Logo-->
-        <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
+        <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
 
         <!--Middle Navigation-->
         <nav class="desktop-nav">
@@ -77,13 +77,16 @@
                 //Login Button
                 if ($b==true) {
                     //Log out button
-                    //Shoppiung Basket Button
+
+                    //Shopping Basket Button
+
                     echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                     echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                 }else{
                     //Login Button
                     echo '<div class="login-button"><a href="login.php">Login</a></div>';
                 }       
+
             ?>
         </div>
 
