@@ -215,12 +215,6 @@
                                         <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
                                         <?php
                                             if ($b==true && $row['Num_In_Stock']>0) {
-                                                // echo '<form method="post" action="products.php">';
-                                                // //basket icon only appears if logged in
-                                                // echo "<input type='submit'><a name='add'><div class='bx bx-cart-add'></div></a></input>";
-                                                // echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
-                                                // echo '<input type="hidden" name="quantity" value="1">';
-                                                // echo '</form>';
                                                 echo "<form method='post' action='products.php'>";
                                                 echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
                                                 echo '<input type="hidden" name="quantity" value="1">';

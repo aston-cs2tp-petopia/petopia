@@ -39,12 +39,12 @@
     -->
     <header>
         <!--Logo-->
-        <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
+        <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
 
         <!--Middle Navigation-->
         <nav class="desktop-nav">
             <ul class="desktop-nav-ul">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
@@ -93,7 +93,7 @@
                 <p class="close-menu-button" draggable="false">X</p>
             </div>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Pets v</a>
@@ -118,16 +118,14 @@
                     <?php
                         if ($b==true) {
                             //Log out button
+                            //Shoppiung Basket Button
+                            echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                             echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                         }else{
                             //Login Button
                             echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                        }       
+                        } 
                     ?>
-                    <!--Shopping Basket Button-->
-                    <a href="basket.php" class="basket-link">
-                        <div class='basket-button bx bx-basket'></div>
-                    </a>
                 </div>
             </ul>
         </nav>
@@ -188,6 +186,7 @@
                     echo "Error details: <em>" . $ex->getMessage() . "</em>";
                 }
             ?>
+            <button></button>
         </section>
             
         

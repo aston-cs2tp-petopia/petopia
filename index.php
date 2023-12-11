@@ -82,11 +82,13 @@
             <?php
                 if ($b==true) {
                     //Log out button
+                    //Shoppiung Basket Button
+                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                     echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                 }else{
                     //Login Button
                     echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }       
+                }        
             ?>
         </div>
 
@@ -124,6 +126,8 @@
                     <?php
                         if ($b==true) {
                             //Log out button
+                            //Shoppiung Basket Button
+                            echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
                             echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
                         }else{
                             //Login Button
@@ -155,7 +159,7 @@
 
                 <div class="hero-banner-content">
                     <h2>Best friend with happy time</h2>
-                    <p> The weather is amazing today and the dogs will have fun in that good weathger</p>
+                    <p> The weather is amazing today and the dogs will have fun in that good weather</p>
                     <!--Hero Banner Button-->
                     <div class="hero-banner-button">Learn more</div>
                 </div>
@@ -174,22 +178,22 @@
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-dog'></div>
-                    <a href="">Browse Dogs</a>
+                    <a href="products.php">Browse Dogs</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-cat'></div>
-                    <a href="">Browse Cats</a>
+                    <a href="products.php">Browse Cats</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-help-circle'></div>
-                    <a href="">Visit Advice</a>
+                    <a href="advice.php">Visit Advice</a>
                 </div>
 
                 <div class="quick-access">
                     <div class='bx bxs-group'></div>
-                    <a href="">Visit About Us</a>
+                    <a href="about.php">Visit About Us</a>
                 </div>
             </div>
         </section>
