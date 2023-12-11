@@ -3,12 +3,36 @@
     
     //when the basket button is pressed, send the product id and customer id to order details
     if (isset($_POST['add'])) {
+        echo "HELLO WORLD";
 
-        // Get the product ID from the form submission
+        require_once('php/connectdb.php');
+
+        $username = $_SESSION["username"];
+        $custIDQuery = $db->prepare('SELECT Customer_ID FROM customer WHERE username = ?');
+        $custIDQuery->execute([$username]);
+        $custID = $custIDQuery->fetchColumn();
+
         $productID = $_POST['productID'];
+        $quantity = $_POST['quantity'];
 
+        // Get product price
+        $priceQuery = $db->prepare('SELECT Price FROM product WHERE Product_ID = ?');
+        $priceQuery->execute([$productID]);
+        $price = $priceQuery->fetchColumn();
 
-        
+        // Calculate subtotal
+        $subtotal = $quantity * $price;
+
+        try {
+            $basketQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
+            $basketQuery->execute(array($custID, $productID, $quantity, $subtotal));
+            echo "added to basket";
+
+        } catch (PDOexception $ex) {
+            echo "Sorry, a database error occurred! <br>";
+            echo "Error details: <em>" . $ex->getMessage() . "</em>";
+        }
+
     }
 
 ?>
@@ -190,11 +214,17 @@
                                     <div class="item-bottom-container">
                                         <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
                                         <?php
-                                            if ($b==true) {
-                                                //basket icon only appears if logged in
-                                                echo '<form method="post" action="products.php">';
+                                            if ($b==true && $row['Num_In_Stock']>0) {
+                                                // echo '<form method="post" action="products.php">';
+                                                // //basket icon only appears if logged in
+                                                // echo "<input type='submit'><a name='add'><div class='bx bx-cart-add'></div></a></input>";
+                                                // echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
+                                                // echo '<input type="hidden" name="quantity" value="1">';
+                                                // echo '</form>';
+                                                echo "<form method='post' action='products.php'>";
                                                 echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
-                                                echo "<a name='add'><div class='bx bx-cart-add'></div></a>";
+                                                echo '<input type="hidden" name="quantity" value="1">';
+                                                echo '<button type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
                                                 echo '</form>';
                                             }   
                                         ?>
