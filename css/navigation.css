@@ -1,0 +1,395 @@
+
+/*Body*/
+body{
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    padding-top: 84px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Header
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+header {
+    width: 100%;
+    height: 84px;
+    background: white;
+
+    /*Flex*/
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Logo
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation Image*/
+.logo-container {
+    height: 40px;
+}
+
+.logo-container img {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Center Navigation
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation List*/
+.desktop-nav-ul {
+    display: flex;
+    gap: 50px;
+    position: relative;
+}
+
+.desktop-nav ul {
+    list-style-type: none;
+}
+
+/*Navigation Buttons*/
+.desktop-nav ul li a{
+    text-decoration: none;
+    font-weight: 800;
+    color: #1e4b57;
+    height: 100%;
+    transition: color 0.3s ease-in-out;
+}
+
+/*Line Style*/
+.desktop-nav ul li.dropdown .dropdown-menu li a::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    bottom: 25px;
+    width: 0;
+    height: 2px;
+    background-color: #a349a4;
+    transition: width 0.3s ease-in-out;
+}
+
+/*Width of the Line when hovered*/
+.desktop-nav li.dropdown ul li:hover a::before {
+    width: 10px;
+}
+
+/* Dropdown styles */
+.desktop-nav ul li.dropdown:hover .dropdown-menu {
+    display: block;
+    max-height: 200px; /* Adjust the maximum height as needed */
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/*Drop Menu List*/
+.desktop-nav ul li.dropdown .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/*Drop Menu Nav Button*/
+.desktop-nav ul li.dropdown .dropdown-menu li {
+    position: relative;
+    padding-right: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    right: 20px;
+    padding-left: 0px;
+    transition: 0.3s ease-in-out;
+}
+
+/*Drop Menu Nav Button Hover*/
+.desktop-nav ul li.dropdown .dropdown-menu li:hover {
+    padding-left: 8px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Right Navigation 
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation Right*/
+.right-nav {
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+/*Basket Button*/
+.basket-button {
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/*Basket Link*/
+.basket-link {
+    color: #1e4b57;
+}
+
+/*Login  Button*/
+.login-button {
+    width: 150px;
+    height: 50px;
+    background-color: #a349a4;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+/*Login Text*/
+.login-link {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 50px;
+    
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Navigation
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Show Menu Button*/
+#hamburger-button {
+    font-size: 44px;
+    color:#1e4b57;
+    cursor: pointer;
+    display: none;
+}
+
+/*Mobile Background*/
+.mobile-background {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    top: 0;
+    left: 0;
+}
+
+/*Mobile Navigation Menu*/
+.mobile-nav {
+    position: fixed;
+    display: none;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/*Top Navigation Container*/
+.mobile-nav-top {
+    padding-top: 20px;
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*Menu Logo*/
+.mobile-logo {
+    height: 40px; 
+    width: 150px;
+    padding-left: 20px;
+}
+
+.mobile-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Close Button*/
+.close-menu-button {
+    font-weight: 800;
+    font-size: 0px;
+    margin: 0;
+    color: #1e4b57;
+    padding-right: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+} .close-menu-button:hover {
+    transition: 0.3s;
+    color: #a349a4;
+}
+
+/*Navigation List*/
+.mobile-nav  ul {
+    padding-top: 20px;
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    list-style-type: none;
+    border-left: 3px solid #ffaec9;
+}
+
+.mobile-nav ul li {
+    width: 100%;
+}
+
+/*Navigation Buttons*/
+.mobile-nav ul li a{
+    text-decoration: none;
+    font-weight: 800;
+    color: #1e4b57;
+}
+
+/*Login & Basket Container*/
+.mobile-bottom-nav {
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Media Queries
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 1200px) {
+    /*Header*/
+    body {padding-top: 64px;}
+    header {justify-content: space-between; height: 64px;} /*Changes Spacing between Logo and Hamburger Icon*/
+    .logo-container {padding-left: 35px;}
+    .mobile-logo {height: 32px; width: 120px;}
+    .close-menu-button {padding-right: 30px; font-size: 30px;}
+    #hamburger-button {display: block; padding-right: 35px;}
+    .mobile-nav {display: block;}
+
+    /*Login*/
+    .login-button {position: relative; height: 45px; width: 130px; bottom: 8px; right: 20px;}
+    .login-link {line-height: 45px;} /*Fix Line Height of Button*/
+    .basket-button {position: relative; right: 55px;}
+
+    
+    /*Hides Desktop Nav*/
+    .desktop-nav {display: none;}
+    .right-nav {display: none;}
+}
+
+@media (max-width: 450px) {
+    .mobile-nav {width: 250px;}
+    .basket-button {position: relative; right: 35px;}
+    .close-menu-button {font-size: 28px;}
+    .logo-container {width: 50px; height: 35px;}
+    .logo-container img {width: auto;}
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @JavaScript Classes
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.show-menu {
+    display: block;
+}
+
+.hide-menu {
+    display: none;
+}
+
+/* Initial state - hidden */
+.mobile-nav {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.mobile-background {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/*Show Menu State*/
+.mobile-nav.show-menu {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.mobile-background.show-background {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/*[DROP DOWN MENU]*/
+/* Dropdown styles */
+.mobile-nav ul li.dropdown .dropdown-menu-mobile {
+    display: none;
+}
+
+.mobile-nav ul li.show-dropdown .dropdown-menu-mobile {
+    display: block;
+}
+
+.mobile-nav ul li.show-dropdown .dropdown-menu-mobile .dropdown-li {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+/*Animation*/
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.mobile-nav ul li.dropdown .dropdown-menu-mobile {
+    animation: slideIn 0.3s ease-in-out; /* Adjust the duration and easing as needed */
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Hover Effects 
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.desktop-nav ul li a:hover {
+    color:#a349a4;
+    transition: 0.3s;
+} .desktop-nav-ul li{transition: 0.3s;}
+
+.login-button:hover {
+    transition: 0.3s;
+    transform: scale(1.05);
+}
+
+.basket-button:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
+}
+
+.logo-container img:hover {
+    transition: 0.3s;
+    opacity: 0.9
+}

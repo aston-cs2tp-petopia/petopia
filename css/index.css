@@ -1,0 +1,532 @@
+body, html {
+    overflow-x: hidden;
+}
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    width: 100%;
+    height: 750px;
+    overflow: hidden;
+    position: relative;
+    touch-action: auto;
+}
+
+/*Hero Banner Image Container*/
+.hero-banner-image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+/*Hero Button Image*/
+.hero-banner-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Hero Banner Left Container*/
+.hero-banner-left {
+    height: 100%;
+    max-width: 500px;
+    width: 100%;
+    padding-left: 10%;
+    /*Flex*/
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+/*Hero Banner Catch Phrase*/
+.hero-banner-content h2 {
+    font-size: 60px;
+    font-weight: 900;
+    color: #a349a4;
+}
+
+/*Hero Banner Caption*/
+.hero-banner-content p {
+    font-size: 19px;
+    font-weight: 700;
+    margin-top: -30px;
+    color: #163741;
+}
+
+/*Hero Banner Button*/
+.hero-banner-button {
+    /*Button styles*/
+    width: 160px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #a349a4;
+
+    /*Text styles*/
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+
+    /*Other styles*/
+    cursor: pointer;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Banner Quick Access
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Quick Access Container*/
+.quick-access-container {
+    position: absolute;
+    width: 100%;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    touch-action: auto;
+}
+
+/*Quick Accecs Container*/
+.quick-access-content {
+    position: relative;
+    bottom: 40px;
+    background-color: #a349a4;
+    height: 100%;
+    width: 75%;
+    border-radius: 20px;
+
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+}
+
+/*Quick Access Button*/
+.quick-access {
+    height: 100%;
+    width: 100%;
+    background-color: #a349a4;
+    padding-left: 0px;
+    /*Flex*/
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Quick Access Icon*/
+.quick-access div{
+    font-size: 30px;
+    color: white;
+}
+
+/*Quick Access Link*/
+.quick-access a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+/*Quick Access Text*/
+.quick-access p {
+    font-size: 20px;
+    color: white;
+}
+
+/*Quick Access Info*/
+.qa-info {
+    max-width: 300px; /*The first elemenet on the left is the smallest*/
+}
+
+/*Quick Access Triangle Shape*/
+.qa-triangle {
+    max-width: 50px;
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    background-color: #163741;
+}
+/*Quick Access Border*/
+.qa-border {
+    border-right: 3px solid #ffaec9;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Discount Section
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.discount-container {
+    overflow: hidden;
+    padding-top: 120px;
+    padding-bottom: 20px;
+    /*Background style*/
+    background-color: #ffffff;
+    background-image:  linear-gradient(135deg, rgba(228,228,228,0.4) 25%, transparent 25%), linear-gradient(225deg, rgba(228,228,228,0.4) 25%, transparent 25%), linear-gradient(45deg, rgba(228,228,228,0.4) 25%, transparent 25%), linear-gradient(315deg, rgba(228,228,228,0.4) 25%, #ffffff 25%);
+    background-position:  8px 0, 8px 0, 0 0, 0 0;
+    background-size: 16px 16px;
+    background-repeat: repeat;
+
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.discount-left-content {
+    overflow: hidden;
+    height: 500px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.discount-left-content h2 {
+    color: #a349a4;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.discount-left-content h3 {
+    color: #1e4b57;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    width: 500px;
+    margin-top: -10px;
+}
+
+/*Percentage Containers*/
+.percentage-containers {
+    display: flex;
+    gap: 40px;
+}
+
+.percentage-container {
+    position: relative;
+    width: 230px;
+    height: 150px;
+    background-color: #a349a4;
+    border-radius: 18% 82% 20% 80% / 80% 30% 70% 20% ;
+
+    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.3);
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Percentage Containers Text*/
+.percentage-container h4 {
+    position: absolute;
+    bottom: 0px;
+    color: #fff;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.percentage-container p {
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    top: 30px;
+}
+
+.discount-cat-image {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 81% 19% 84% 16% / 22% 83% 17% 78% ;
+    
+    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.3);
+
+}
+
+.discount-cat-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Testimonials Section
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.testimonials-container {
+    padding-top: 30px;
+    padding-bottom: 100px;
+
+    background-color: #ffffff;
+    opacity: 1;
+    background-image:  repeating-linear-gradient(45deg, rgba(228,228,228,0.4) 25%, transparent 25%, transparent 75%, rgba(228,228,228,0.4) 75%, rgba(228,228,228,0.4)), repeating-linear-gradient(45deg, rgba(228,228,228,0.4) 25%, #ffffff 25%, #ffffff 75%, rgba(228,228,228,0.4) 75%, rgba(228,228,228,0.4));
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*Testimonials Heading Container*/
+.t-heading-container {
+    position: relative;
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+}
+
+/*H2 Text*/
+.t-heading-container h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: #a349a4;
+    margin-bottom: 10px;
+}
+
+/*H3 Text*/
+.t-heading-container h3 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    color: #163741;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/*P Text*/
+.t-heading-container p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #163741;
+    margin-top: 20px;
+    padding-bottom: 40px;
+}
+
+
+.testimonials-container {
+    height: 500px;
+}
+
+.testimonial-container {
+    height: 100%;
+    width: 100%;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Flickity [Testimonials]
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.main-carousel {
+    width: 50%;
+    height: 300px;
+}
+
+.carousel-cell {
+    width: 100%;
+    height: 100%;
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 11% 89% 8% 92% / 86% 7% 93% 14%;
+}
+
+.cell-background {
+    border-radius: 11% 89% 8% 92% / 86% 7% 93% 14%;
+    background-color: #163741;
+    width: 80%;
+    height: 90%;
+
+
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Stars*/
+.stars div {
+    color: white;
+    font-size: 30px;
+}
+
+/*Quote*/
+.testimonial-quote {
+    color: white;
+    font-weight: 600;
+    width: 80%;
+    text-align: center;
+}
+
+/*User Icon*/
+.bxs-user-circle {
+    font-size: 80px;
+    color: white;
+}
+
+.testimonial-profile {
+    /*Flex*/
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/*Testimonial Details*/
+.testimonial-details {
+    color: white;
+
+    /*Flex*/
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-details h3 {
+    margin: 0;
+}
+
+.testimonial-details h4 {
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Medium Displays
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Small Desktop / Large Tablets*/
+@media (max-width: 1400px) {
+    /*Hero Banner*/
+    .hero-banner {height: 650px;}
+    .hero-banner-content h2 {font-size: 40px;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 10%}
+    .hero-banner-image img {object-position: left;}
+
+    /*Quick Access*/
+    .quick-access-container {height: 130px;}
+    .quick-access div {font-size: 24px;}
+    .quick-access p {font-size: 16px;}
+    .quick-access a {font-size: 16px;}
+
+    /*Discount*/
+    .discount-container {padding-top: 20px; padding-bottom: 0px;}
+    .discount-left-content {padding-bottom: 0px;}
+    .discount-left-content h3 {font-size: 30px;}
+    .percentage-container {height: 120px; width: 200px;}
+    .percentage-container h4 {font-size: 30px; bottom: 10px;}
+    .percentage-container p {font-size: 14px; top: 20px;}
+    .discount-cat-image {width: 280px; height: 280px;}
+
+    /*Testimonials*/
+    .testimonials-container {padding-top: 0px;}
+    .t-heading-container h3 {font-size: 30px; width: 100%;}
+    .t-heading-container p {margin: 0; font-size: 16px; width: 90%; margin-left: auto; margin-right: auto; padding-top: 5px;}
+    /*Flickity*/
+    .main-carousel {width: 50%;}
+    .testimonial-quote {font-size: 14px;}
+    .testimonial-profile {gap: 10px;}
+    .testimonial-profile .bxs-user-circle {font-size: 50px;}
+    .main-carousel .stars div {font-size: 24px;}
+    .testimonial-details h3 {font-size: 15px;}
+    .testimonial-details h4 {font-size: 13px;}
+}
+
+/*Extra Small Device/ Small Tablets*/
+@media (max-width: 990px) {
+    /*Hero Banner*/
+    .hero-banner {height: 650px;}
+    .hero-banner-content h2 {font-size: 40px; width: 100%;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 8%; width: 90%}
+    .hero-banner-image img {object-position: left;}
+
+    /*Quick Access*/
+    .quick-access-container {height: auto;}
+    .quick-access-content {flex-direction: column; gap: 25px; width: 90%;}
+    .quick-access {justify-content: center; padding:0; align-items: center; padding-bottom: 25px;}
+    .qa-info {max-width: 100%; padding-bottom: 0px;}
+    .qa-triangle {display: none;}
+    .qa-last {padding-bottom: 25px;}
+    .qa-border {border-right: 0; border-bottom: 2px solid #ffaec9;}
+
+    /*Discount*/
+    .discount-container {padding-top: 200px; gap: 0px; flex-direction: column; overflow: hidden; padding-bottom: 30px;}
+    .discount-left-content {width: 100%; padding-bottom: 0px; height: 350px; padding-top: 80px;}
+    .discount-left-content h2 {font-size: 22px;}
+    .discount-left-content h3 {font-size: 26px; width: 100%;}
+    .percentage-container {width: 150px; height: 100px;}
+    .percentage-container h4 {font-size: 26px; margin: 0; top: 30px;}
+    .percentage-container p {font-size: 11px; top: 20px;}
+
+    /*Testimonials*/
+    .testimonials-container {padding-top: 0px;}
+    .t-heading-container h3 {font-size: 30px; width: 100%;}
+    .t-heading-container p {margin: 0; font-size: 16px; width: 90%; margin-left: auto; margin-right: auto; padding-top: 5px;}
+    /*Flickity*/
+    .main-carousel {width: 75%;}
+    .testimonial-quote {font-size: 14px;}
+    .testimonial-profile {gap: 10px;}
+    .testimonial-profile .bxs-user-circle {font-size: 50px;}
+    .main-carousel .stars div {font-size: 24px;}
+    .testimonial-details h3 {font-size: 15px;}
+    .testimonial-details h4 {font-size: 13px;}
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 450px) {
+    /*Hero Banner*/
+    .hero-banner {height: 650px;}
+    .hero-banner-image img {object-position: left;}
+    .hero-banner-content {width: 100%;}
+    .hero-banner-content h2 {font-size: 40px; width: 90%}
+    .hero-banner-content p {width: calc(80%);}
+
+    /*Quick Access*/
+    .quick-access-container {height: auto;}
+    .quick-access-content {flex-direction: column; gap: 25px; width: 90%;}
+    .quick-access {justify-content: center; padding:0; align-items: center; padding-bottom: 25px;}
+    .qa-info {max-width: 100vh; padding-bottom: 0px;}
+    .qa-triangle {display: none;}
+    .qa-last {padding-bottom: 25px;}
+    .qa-border {border-right: 0; border-bottom: 2px solid #ffaec9;}
+
+    /*Discount*/
+    .discount-container {padding-top: 280px; gap: 0px; flex-direction: column; overflow: hidden;}
+    .discount-left-content {width: 100%; padding-bottom: 0px; height: 350px; padding-top: 80px;}
+    .discount-left-content h2 {font-size: 22px;}
+    .discount-left-content h3 {font-size: 26px; width: 100%;}
+    .percentage-container {width: 150px; height: 100px;}
+    .percentage-container h4 {font-size: 26px; margin: 0; top: 30px;}
+    .percentage-container p {font-size: 11px; top: 20px;}
+    /*Cat Image*/
+    .discount-cat-image {width: 300px; height: 300px;}
+
+    /*Testimonials*/
+    .testimonials-container {padding-top: 0px;}
+    .t-heading-container h3 {font-size: 26px; width: 100%;}
+    .t-heading-container p {margin: 0; font-size: 14px; width: 90%; margin-left: auto; margin-right: auto; padding-top: 5px;}
+    /*Flickity*/
+    .main-carousel {width: 100%;}
+    .testimonial-quote {font-size: 12px;}
+    .testimonial-profile {gap: 10px;}
+    .testimonial-profile .bxs-user-circle {font-size: 45px;}
+    .main-carousel .stars div {font-size: 20px;}
+    .testimonial-details h3 {font-size: 14px;}
+    .testimonial-details h4 {font-size: 12px;}
+}
