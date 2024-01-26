@@ -1,38 +1,5 @@
 <?php
- require_once('php/mainLogCheck.php');
-    
-    //when the basket button is pressed, send the product id and customer id to order details
-    if (isset($_POST['add'])) {
-
-        require_once('php/connectdb.php');
-
-        $username = $_SESSION["username"];
-        $custIDQuery = $db->prepare('SELECT Customer_ID FROM customer WHERE username = ?');
-        $custIDQuery->execute([$username]);
-        $custID = $custIDQuery->fetchColumn();
-
-        $productID = $_POST['productID'];
-        $quantity = $_POST['quantity'];
-
-        // Get product price
-        $priceQuery = $db->prepare('SELECT Price FROM product WHERE Product_ID = ?');
-        $priceQuery->execute([$productID]);
-        $price = $priceQuery->fetchColumn();
-
-        // Calculate subtotal
-        $subtotal = $quantity * $price;
-
-        try {
-            $basketQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
-            $basketQuery->execute(array($custID, $productID, $quantity, $subtotal));
-
-        } catch (PDOexception $ex) {
-            echo "Sorry, a database error occurred! <br>";
-            echo "Error details: <em>" . $ex->getMessage() . "</em>";
-        }
-
-    }
-
+    require_once("php/mainLogCheck.php");
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
-    <link href="css/items.css" rel="stylesheet" type="text/css">
+    <link href="css/advice.css" rel="stylesheet" type="text/css">
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
     <link href="css/footer.css" rel="stylesheet" type="text/css">
 
@@ -64,7 +31,6 @@
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 </head>
-
 <body>
     <header>
         <!--
@@ -72,7 +38,7 @@
     -->
     <header>
         <!--Logo-->
-        <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
+        <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
 
         <!--Middle Navigation-->
         <nav class="desktop-nav">
@@ -103,7 +69,7 @@
 
         <!--Right Navigation-->
         <div class="right-nav">
-            <!--Shoppiung Basket Button-->
+
             <?php
                 //Login Button
                 if ($b==true) {
@@ -149,6 +115,7 @@
                 <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
                     <?php
+
                 //Login Button
                 if ($b==true) {
                     //Log out button
@@ -160,6 +127,8 @@
                     echo '<div class="login-button"><a href="login.php">Login</a></div>';
                 }       
             ?>
+
+
                 </div>
             </ul>
         </nav>
@@ -169,75 +138,129 @@
     <!--
         [HEADER/NAVIGATION END]
     -->
+
     </header>
-    
-    <main>
-        <!--Hero Banner-->
+    <!--Hero Banner-->
         <section class="hero-banner">
             <!--Hero Banner Image-->
-            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+            <div class="hero-banner-image"><img src="assets/AdvicePage/vetwoman.jpg" alt=""></div>
 
             <!--Hero Banner Text Container-->
             <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
-                    <h2>Pets and Items</h2>
-                    <p> Browse</p>
+                    <h2>Advice</h2>
                 </div>
             </div>
         </section>
-        <section class="items-container">
-            <?php
-                require_once('php/connectdb.php');
-                try {
-                    $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
-                    $rows =  $db->query($productQuery);
 
-                    //display the query edited table	
-                    if ($rows && $rows->rowCount() > 0) {
-                        foreach ($rows as $row) {
-            ?>
-                            <div class="item-template">
-                                <div class="item-image">
-                                    <img src="assets/Homepage/hero-banner2.jpg" alt="">
-                                </div>
-                            
-                                <div class="item-info">
-                                    <?php $tempPID=$row['Product_ID']  ?>
-                                    <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row['Name']; ?></a></h4>
-                                    <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
-                                    <h5>£<?php echo $row['Price'];?></h5>
-                            
-                                    <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
-                                        <?php
-                                            if ($b==true && $row['Num_In_Stock']>0) {
-                                                echo "<form method='post' action='products.php'>";
-                                                echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
-                                                echo '<input type="hidden" name="quantity" value="1">';
-                                                echo '<button type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
-                                                echo '</form>';
-                                            }   
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-            <?php
-                        }
-                    } else {
-                        echo  "<p>No matching Product.</p>\n"; //no match found
-                    }
-                } catch (PDOexception $ex) {
-                    echo "Sorry, a database error occurred! <br>";
-                    echo "Error details: <em>" . $ex->getMessage() . "</em>";
-                }
-            ?>
-        </section>
-        </main>
-</body>
+
     
+
+    
+        <ul>
+        
+        <section class="all-text">
+            <p id="intro">Getting a new family member is very exciting and being a responsible owner will surely feel rewarding! It is very important that when you get a new pet 
+                you are aware that it is a commitment to another family member and they will need to be taken care of. 
+                Fortunately, to ensure your pets heath and wellbeing, we have a guide that lists the necessities that pet owners need to provide.</p>
+                
+            <div class="boxes">
+            <div class="box">
+                <h1>Nutrition:</h1> 
+                <li>It is important that pets are provided with a healthy and well balanced diet</li> 
+                <li>Give your pets 24/7 access to clean and fresh drinking water</li><br>
+            </div>
+            
+            
+    
+            <div class="box">
+                <h1>Regular Veterinary Care:</h1> 
+                <li>Pets require doctor visits and healthy habits. To ensure your pet is healthy, schedule regular check-ups with a veterinarian to monitor your 
+                pet's health and address any potential issues early.</li><br>
+            </div>
+            <div class="box">
+                <h1>Vaccinating: </h1>
+                <li>Keeping up with vaccinations, parasite control, and dental care as recommended by your vet is also very important.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Exercise and Mental Stimulation:</h1>
+                <li>Engage your pet in regular physical activities to maintain a healthy weight and prevent boredom.</li>
+                <li>Provide toys, puzzles, and playtime to keep their minds stimulated.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Grooming:</h1>
+                <li>Brush your pet's fur regularly to prevent matting and reduce shedding.</li>
+                <li>Trim nails, clean ears, and maintain dental hygiene as recommended for your specific pet.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Safe Environment:</h1>
+                <li>Pet-proof your home to remove hazards and keep dangerous substances out of reach. Ensure your pet has a comfortable and safe place to rest.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Socialization:</h1> 
+                <li>Introduce your pet to various environments, people, and other animals to promote positive social behavior. Spend quality time with your pet to build 
+                a strong bond.</li><br>
+            </div>
+            <br>
+            
+            <div class="box">
+                <h1>Identification and Microchipping:</h1>
+                <li>Ensure your pet has proper identification, such as a collar with an ID tag. Consider microchipping as a reliable way to reunite with your pet if 
+                they get lost.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Hygiene:</h1>
+                <li>Keep your pet's living area clean and regularly clean their bedding and toys. Bathe your pet as needed, taking care not to overdo it, 
+                as some animals don't require frequent baths.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Training:</h1>
+                <li>Invest time in training your pet using positive reinforcement techniques. Teach basic commands and behaviors to ensure a well-behaved pet.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Monitoring Health Signs:</h1>
+                <li>Be attentive to changes in behavior, appetite, and bathroom habits.</li>
+                <li>Consult a veterinarian promptly if you notice any signs of illness or distress.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Respect Their Needs:</h1>
+                <li>Understand the specific needs of your pet's species and breed.</li>
+                <li>Respect their natural behaviors and instincts.</li><br>
+            </div>
+            <br>
+    
+            <div class="box">
+                <h1>Love and Attention:</h1>
+                <li>Spend quality time with your pet, offering affection and attention.</li>
+                <li>Build a strong emotional connection to create a happy and trusting relationship.</li><br>
+            </div>
+            </div>
+            <br>
+    
+            <p id="end">Remember, each pet is unique, and individual needs may vary. Regular veterinary advice and your personal observations will guide you in providing 
+            the best care for your specific pet.</p><br>
+            </ul>
+    </section>
     <footer>
         &copy; 2023 Petopia
     </footer>
-</body>
+        
+    </body>
 </html>

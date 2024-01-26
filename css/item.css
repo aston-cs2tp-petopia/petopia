@@ -76,106 +76,95 @@ body, html {
 
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-    @Items Container
+    @Item
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
-.items-container {
-    width: 100%;
-    padding-top: 30px;
+/*Item Section*/
+.item-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
     /*Flex*/
     display: flex;
     justify-content: center;
-    gap: 50px;
+    align-items: center;
     flex-wrap: wrap;
-}
-
-/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-    @Items Template
-\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-
-.item-template {
-    /*Flex*/
-    display: flex;
-    flex-direction: column;
-
-    /*Styles*/
-
-
-    /*Others*/
+    gap: 70px;
 }
 
 /*Item Image Container*/
 .item-image {
-    width: 250px;
-    height: 250px;
-    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    height: 500px;
 }
 
+/*Item's Image*/
 .item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/*Item Info Container*/
-.item-info {
-    /*Flex*/
+/*Info Container*/
+.right-container {
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
-    padding-right: 10px;
+
+    width: 400px;
+    
 }
 
 /*Category Text*/
-.item-info h4 {
-    font-size: 24px;
-    padding-top: 10px;
+.category-text {
     margin: 0;
-    color: #41494b;
+    font-size: 14px;
+    color: #676666;
 }
 
-/*Item Name Text*/
-.item-info h5 {
-    font-size: 18px;
-    padding-top: 10px;
-    padding-bottom: 20px;
+/*Title Text*/
+.title-text {
     margin: 0;
-    color:#163741
+    font-size: 34px;
+    color: #163741;
 }
 
-/*Item Bottom Container*/
-.item-bottom-container {
-    /*Flex*/
+/*Reviews Container*/
+.stars-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
-/*Price Text*/
-.item-bottom-container p {
-    font-size: 18px;
-    font-weight: 500;
+/*Star*/
+.stars-container .bxs-star {
+    color: #febd00;
+    line-height: 38px;
+}
+/*Review Counter Text*/
+.stars-container p {font-size: 12px;}
+
+/*Price*/
+.price-text {
     margin: 0;
-    padding-bottom: 10px;
-    color:#163741
+    font-size: 24px;
+    font-weight: 600;
+    color: #163741;
 }
 
-/*Shopping Cart*/
-.bx-cart-add {
-    font-size: 25px; /*Changes height of add to cart icon*/
+/*Description*/
+.desc-text {
+    color: #163741;
+}
+
+.add-cart-button {
+    width: 200px;
+    height: 50px;
+    background-color: #a349a4;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
-    color:#163741;
-    margin-top: -1px;
+    color: white;
+    font-weight: 700;
+    font-family: Nunito, sans-serif;
 }
 
-#textholder1{
-    margin-left:auto;
-      margin-right:auto;
-      padding:10px;
-      width: 980px;
-    text-align:center;
-    background-color: #eee;
-}
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Mobile Support
