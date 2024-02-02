@@ -21,7 +21,7 @@
 	try {
 		#prepare the following sql checking if the email exists
 		$stat = $db->prepare('SELECT Contact_Email FROM Customer WHERE Contact_Email = ?');
-		$stat = $stat->execute(array($_POST['email'])); #execute the previous statement including the email given by the user. store in stat
+		$stat = $stat->execute(array($_POST[$email])); #execute the previous statement including the email given by the user. store in stat
 
 		#if the email exists in the db, then tell the user and exit signingUP
 		if ($stat == $email){
