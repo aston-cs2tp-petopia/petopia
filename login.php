@@ -1,4 +1,5 @@
 <?php
+    $ex=null;
     //if form submitted
     session_start();
     $b=False; // boolean
@@ -191,6 +192,11 @@
                         <label for="lname" class="fname-label">Last Name</label>
                         <input type="text" id="lName" name="lName" class="username-input" placeholder="Smith" required/> <!--lastname-->
 
+                        <?php
+                            if($ex != null){
+                                echo ("ERROR");
+                            }
+                        ?>
                         <label for="email" class="email-label">Email</label>
                         <input type="text" id="email" name="email" class="username-input" placeholder="example@email.com" required/> <!--email-->
 
