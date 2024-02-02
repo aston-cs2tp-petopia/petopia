@@ -1,0 +1,198 @@
+body, html {
+    overflow-x: hidden;
+}
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    touch-action: auto;
+}
+
+/*Hero Banner Image Container*/
+.hero-banner-image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+/*Hero Button Image*/
+.hero-banner-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Hero Banner Left Container*/
+.hero-banner-left {
+    height: 100%;
+    max-width: 500px;
+    width: 100%;
+    padding-left: 10%;
+    /*Flex*/
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+/*Hero Banner Catch Phrase*/
+.hero-banner-content h2 {
+    font-size: 60px;
+    font-weight: 900;
+    color: #a349a4;
+}
+
+/*Hero Banner Caption*/
+.hero-banner-content p {
+    font-size: 19px;
+    font-weight: 700;
+    margin-top: -30px;
+    color: #163741;
+}
+
+/*Hero Banner Button*/
+.hero-banner-button {
+    /*Button styles*/
+    width: 160px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #a349a4;
+
+    /*Text styles*/
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+
+    /*Other styles*/
+    cursor: pointer;
+}
+
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Item
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Item Section*/
+.item-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 70px;
+}
+
+/*Item Image Container*/
+.item-image {
+    width: 500px;
+    height: 500px;
+}
+
+/*Item's Image*/
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Info Container*/
+.right-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    
+}
+
+/*Category Text*/
+.category-text {
+    margin: 0;
+    font-size: 14px;
+    color: #676666;
+}
+
+/*Title Text*/
+.title-text {
+    margin: 0;
+    font-size: 34px;
+    color: #163741;
+}
+
+/*Reviews Container*/
+.stars-container {
+    display: flex;
+}
+
+/*Star*/
+.stars-container .bxs-star {
+    color: #febd00;
+    line-height: 38px;
+}
+/*Review Counter Text*/
+.stars-container p {font-size: 12px;}
+
+/*Price*/
+.price-text {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #163741;
+}
+
+/*Description*/
+.desc-text {
+    color: #163741;
+}
+
+.add-cart-button {
+    width: 200px;
+    height: 50px;
+    background-color: #a349a4;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    font-family: Nunito, sans-serif;
+}
+
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media (max-width: 1400px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-content h2 {font-size: 40px;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 10%}
+    .hero-banner-image img {object-position: left;}
+}
+
+@media (max-width: 990px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-content h2 {font-size: 40px; width: 100%;}
+    .hero-banner-content p {font-size: 16px;}
+    .hero-banner-left {padding-left: 8%; width: 90%}
+    .hero-banner-image img {object-position: left;}
+}
+
+@media (max-width: 450px) {
+    /*Hero Banner*/
+    .hero-banner {height: 400px;}
+    .hero-banner-image img {object-position: left;}
+    .hero-banner-content {width: 100%;}
+    .hero-banner-content h2 {font-size: 40px; width: 90%}
+    .hero-banner-content p {width: calc(80%);}
+}
