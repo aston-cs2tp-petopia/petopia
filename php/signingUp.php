@@ -1,5 +1,5 @@
 <?php
-    require_once("php/connectdb.php");
+    require_once("connectdb.php");
 	require_once("validateSignup.php");
 
     try {
@@ -47,11 +47,11 @@
 
     } catch (PDOException $ex) {
 		$_SESSION['error_message'] = "Failed to connect to the database. Error details: " . $ex->getMessage();
-		header("Location: ..login.php"); // Redirect to the form page
+		header("Location: ../login.php"); // Redirect to the form page
 		exit;
 	} catch (Exception $ex) {
 		$_SESSION['error_message'] = $ex->getMessage();
-		header("Location: ..login.php"); // Redirect to the form page
+		header("Location: ../login.php"); // Redirect to the form page
 		exit;
 	}
 ?>

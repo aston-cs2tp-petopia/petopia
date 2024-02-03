@@ -1,6 +1,6 @@
 <?php
     // Include the database connection file
-    require_once("php/connectdb.php");
+    require_once("connectdb.php");
 
     try {
         // Check if both username and password are provided
@@ -11,7 +11,7 @@
 
         // Prepare a statement to select the hashed password for the given username
         // This prevents SQL injection attacks
-        $stat = $db->prepare('SELECT Password FROM Customer WHERE Username = ?');
+        $stat = $db->prepare('SELECT Password FROM customer WHERE Username = ?');
 
         // Execute the prepared statement with the provided username
         $stat->execute(array($_POST['login-username']));
@@ -27,7 +27,7 @@
                 $_SESSION["username"] = $_POST['login-username'];
 
                 // Redirect to the home page after successful login
-                header("Location:index.php");
+                header("Location: ../index.php");
                 exit();
             } else {
                 // Display an error message if the password does not match
