@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 04:22 PM
+-- Generation Time: Feb 02, 2024 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `petopia`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `Admin_ID` int(10) NOT NULL,
+  `First_Name` varchar(30) NOT NULL,
+  `Last_Name` varchar(30) NOT NULL,
+  `Contact_Email` varchar(60) NOT NULL,
+  `Phone_Number` varchar(30) NOT NULL,
+  `Home_Address` varchar(60) NOT NULL,
+  `Postcode` varchar(10) NOT NULL,
+  `Username` varchar(30) NOT NULL,
+  `Password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -148,7 +166,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Product_ID`, `Name`, `Price`, `Num_In_Stock`, `Description`) VALUES
-(1, 'Larry', 300, 1, 'An intelligent 11 year old rescue male race dog called Larry. He has a good temperament, and is very good with kids as well as other pets. He has a short gray coat that requires minimal grooming, and lovely brown eyes. He enjoys short bursts of energy, so a short walk every day will suffice. Larry will thrive in any environment where theres enough space for him! '),
+(1, 'Larry', 300, 1, 'An intelligent 11 year old rescue male race dog called Larry. He has a good temperament, and is very good with kids as well as other pets. He has a short gray coat that requires minimal grooming, and lovely brown eyes. He enjoys short bursts of energy, so a short walk every day will suffice. Larry will thrive in any environment where there is enough space for him! '),
 (2, 'Max', 680, 1, 'Introducing Max, a 2-year-old Golden Retriever! He is the embodiment of playful energy and unwavering loyalty. With a shimmering golden coat and a heart full of love, Max is the perfect companion for anyone seeking a devoted four-legged friend. Ready to bring endless joy into your life, he is waiting to become a cherished member of your family.'),
 (3, 'Luna', 450, 1, 'Meet Luna, a 3-year-old Maine Coon! With her regal grace and captivating green eyes, she brings elegance to any home. Playful and affectionate, Luna is ready to be the sophisticated companion that you have been dreaming of. She is not just a cat; she is a charming addition waiting to grace your life with love and beauty.'),
 (4, 'Cooper', 650, 1, 'Meet Cooper, a 6-month-old playful and adorable Beagle puppy! With his floppy ears and soulful eyes, Cooper is the definition of cuteness. Full of energy and curiosity, he is eager to explore the world by your side. Cooper is an affectionate companion ready to bring laughter and warmth into your home. Do not miss the chance to welcome this charming Beagle pup into your family!'),
@@ -243,6 +261,14 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`Admin_ID`),
+  ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
+  ADD UNIQUE KEY `Username` (`Username`);
+
+--
 -- Indexes for table `basket`
 --
 ALTER TABLE `basket`
@@ -261,7 +287,8 @@ ALTER TABLE `category`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`Customer_ID`),
-  ADD UNIQUE KEY `Contact_Email` (`Contact_Email`);
+  ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
+  ADD UNIQUE KEY `Username` (`Username`);
 
 --
 -- Indexes for table `orders`
@@ -295,6 +322,12 @@ ALTER TABLE `productcategory`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `Admin_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
