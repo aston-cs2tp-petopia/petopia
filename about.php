@@ -170,7 +170,7 @@
                                 our business works with neighbourhood foster families and shelters. We help families locate the perfect match by streamlining the adoption process.
                                </p>
                         <div class="hero-banner-button">
-                            <a href="index.html">Back to home</a>
+                            <a href="index.php">Back to home</a>
                         </div>
 
                 </div>

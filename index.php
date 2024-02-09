@@ -151,8 +151,8 @@
             <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
-                    <h2>Best friend with happy time</h2>
-                    <p> The weather is amazing today and the dogs will have fun in that good weather</p>
+                    <h2>Have the best life with your best friend</h2>
+                    <p>Find the greatest of companions here at Petopia</p>
                     <!--Hero Banner Button-->
                     <div class="hero-banner-button">Learn more</div>
                 </div>
@@ -171,22 +171,22 @@
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-dog'></div>
-                    <a href="">Browse Dogs</a>
+                    <a href="products.php">Browse Dogs</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-cat'></div>
-                    <a href="">Browse Cats</a>
+                    <a href="products.php">Browse Cats</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-help-circle'></div>
-                    <a href="">Visit Advice</a>
+                    <a href="advice.php">Visit Advice</a>
                 </div>
 
                 <div class="quick-access">
                     <div class='bx bxs-group'></div>
-                    <a href="">Visit About Us</a>
+                    <a href="about.php">Visit About Us</a>
                 </div>
             </div>
         </section>
