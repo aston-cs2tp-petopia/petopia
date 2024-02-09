@@ -32,7 +32,7 @@
 		$checkEmail->execute(array($email));
 		if ($checkEmail->rowCount() > 0) {
 			$_SESSION['error_message'] = "Email already exists. Please choose another one.";
-			header("Location: ../login.php"); // Redirect to the form page
+			header("Location: login.php"); // Redirect to the form page
 			exit;
 		}
 
@@ -43,16 +43,16 @@
 
         // Log the user in and redirect
         $_SESSION["username"] = $username;
-        header("Location:index.php");
+        header("Location: ./index.php"); //without the ./ on localhost, it redirects you to localhost/dashboard
         exit();
 
     } catch (PDOException $ex) {
 		$_SESSION['error_message'] = "Failed to connect to the database. Error details: " . $ex->getMessage();
-		header("Location: ../login.php"); // Redirect to the form page
+		header("Location: login.php"); // Redirect to the form page
 		exit;
 	} catch (Exception $ex) {
 		$_SESSION['error_message'] = $ex->getMessage();
-		header("Location: ../login.php"); // Redirect to the form page
+		header("Location: login.php"); // Redirect to the form page
 		exit;
 	}
 ?>
