@@ -76,56 +76,56 @@ body, html {
 }
 
 h1 {
-  font-weight: bold;
-  font-size: 1.5em; /*Adjust value if needed*/
-  color: #A349A4;
-
-}
+    font-weight: bold;
+    font-size: 1.5em; /*Adjust value if needed*/
+    color: #A349A4;
+  }
 h2 {
-  font-weight: bold;
-  font-size: 4em; /*Adjust value if needed*/
-  color: white ;
-  padding-left: 50px;
-}
+    font-weight: bold;
+    font-size: 4em; /*Adjust value if needed*/
+    color: white ;
+    padding-left: 50px;
+  }
 
 
-.box {
-  background-color: pink;
-  border: 2px solid #A349A4;
-  border-radius: 5px;
-  padding-left: 50px;
-  padding-right: 50px;
+  .box {
+    background-color: pink;
+    border: 2px solid #A349A4;
+    border-radius: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
 
 
-  box-sizing: border-box;
-  width: 300px;
-  height: 300px;
-  box-shadow: 0 14px 28px rgb(0, 0, 0,0.25),0 10px 10px rgb(0, 0, 0,0.22);
-}
-.boxes{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-#vet-image{
-  opacity: 0.9;
-}
-.main-image{
-  position: relative;
-
-}
-.banner-text{
-  position: absolute;
-bottom: 70px;
-left: 90px;
-}
-#intro{
-  color:black;
-  font-size: 17px;
-  padding: 10px;
-}
-#end{
-  text-align: left;
-}
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 14px 28px rgb(0, 0, 0,0.25),0 10px 10px rgb(0, 0, 0,0.22);
+  }
+  .boxes{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+  #vet-image{
+    opacity: 0.9;
+  }
+  .main-image{
+    position: relative;
+ 
+  }
+  .banner-text{
+    position: absolute;
+  bottom: 70px;
+  left: 90px;
+  }
+  #intro{
+    color:black;
+    font-size: 17px;
+    padding: 10px;
+  }
+  #end{
+    text-align: left;
+  }
