@@ -32,6 +32,7 @@
     <script>"contact.js/scripts"</script>
 
 </head>
+
 <body>
     <header>
         <!--Logo-->
@@ -135,12 +136,12 @@
     </header>
 
     <main>
-        
-        <section class = "hero-banner">
 
-            <div class = "hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+        <section class="hero-banner">
 
-            <div class = "hero-banner-left">
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+
+            <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
                     <h2>Contact us</h2>
@@ -148,40 +149,44 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="contact-container">
-        <div class="box2">
-                <h1> Contact Us </h1> 
-                <p>Give us a message</p>
+            <div class="contact-bottom">
+                <!--Left Box-->
                 <form>
+                    <h1> Contact Us </h1>
+                    <p>Give us a message</p>
                     <p>Name*</p>
                     <input type="text" name="name" id="name" placeholder="Mark Dee..." required />
                     <p>Email*</p>
                     <input type="email" name="email" id="email" placeholder="info.exmaple@.com" required />
                     <p></p>
                     <label> Your Message*</br> </br>
-                         <textarea name="txtAr" rows="10" cols="40" id="text" placeholder="Message..."> </textarea>
+                        <textarea name="txtAr" rows="10" cols="40" id="text" placeholder="Message..."> </textarea>
                     </label>
                     <p></p>
                     <input type="submit" value="Send Now" id="submit" required onclick="checkForm()" />
-
                 </form>
-        </div>
 
-            <div class="box">
-                <center>
-                <img src="assets/Contactpage/phone.png" width="200" height="200">
-                <p></p>
+                <!--Right Box-->
+                <div class="box">
+                    <img src="assets/Contactpage/phone.png" width="200" height="200">
+                    <p></p>
 
-                <div class="image-container"><img src="assets/Contactpage/phone2.png" width="40" height="40"></div>
-                <div class="image-container"><img src="assets/Contactpage/mail.png" width="40" height="40"></div>
-                <div class="image-container"><img src="assets/Contactpage/location.png" width="40" height="40"></div>
-                <p></p>
-                    <a href="https://uk.linkedin.com/"><img src="assets/Contactpage/linkedin.jpg" width="40" height="40"></a>
-                    <a href="https://www.facebook.com/login/"><img src="assets/Contactpage/facebook.png" width="40" height="40"></a>
-                    <a href="https://twitter.com/login"><img src="assets/Contactpage/twitter.jpg" width="40" height="40"></a>
-                </center>
+                    <div class="image-container"><img src="assets/Contactpage/phone2.png" width="40" height="40"></div>
+                    <div class="image-container"><img src="assets/Contactpage/mail.png" width="40" height="40"></div>
+                    <div class="image-container"><img src="assets/Contactpage/location.png" width="40" height="40">
+                    </div>
+                    <p></p>
+                    <a href="https://uk.linkedin.com/"><img src="assets/Contactpage/linkedin.jpg" width="40"
+                            height="40"></a>
+                    <a href="https://www.facebook.com/login/"><img src="assets/Contactpage/facebook.png" width="40"
+                            height="40"></a>
+                    <a href="https://twitter.com/login"><img src="assets/Contactpage/twitter.jpg" width="40"
+                            height="40"></a>
+                </div>
             </div>
+
         </section>
     </main>
 
