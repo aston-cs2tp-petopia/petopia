@@ -27,19 +27,19 @@
                 $_SESSION["username"] = $_POST['login-username'];
 
                 // Redirect to the home page after successful login
-                header("Location: ../index.php");
+                header("Location: ./index.php");
                 exit();
             } else {
                 // Display an error message if the password does not match
                 $_SESSION['error_message'] = "Incorrect Password.";
-                header("Location: ../login.php"); // Redirect to the form page
+                header("Location: login.php"); // Redirect to the form page
                 exit;
             }
         } else {
             // Display an error message if the username is not found
             // Display an error message if the password does not match
             $_SESSION['error_message'] = "Username does not exist.";
-            header("Location: ../login.php"); // Redirect to the form page
+            header("Location: login.php"); // Redirect to the form page
             exit;
         }
     } catch (PDOException $ex) {
