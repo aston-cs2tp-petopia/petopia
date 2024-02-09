@@ -1,5 +1,8 @@
 <?php
  require_once('php/mainLogCheck.php');
+
+    $productType=$_GET["productType"];
+    echo($productType);
     
     //when the basket button is pressed, send the product id and customer id to order details
     if (isset($_POST['add'])) {
@@ -190,7 +193,7 @@
             <?php
                 require_once('php/connectdb.php');
                 try {
-                    $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
+                    $productQuery = "select * from  product where "; //need to add 'where' query once i have a category variable
                     $rows =  $db->query($productQuery);
 
                     //display the query edited table	

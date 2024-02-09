@@ -212,12 +212,12 @@
                         placeholder="Last Name" required />
                     <i class='bx bx-user'></i>
                 </div>
+
                 <?php
                     if($ex != null){
                         echo ("ERROR");
                     }
                 ?>
-
                 <!--Email Input Container-->
                 <div class="input-container">
                     <!--Email Input-->
