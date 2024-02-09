@@ -12,6 +12,7 @@
 		
 		// Call the validation function
 		$validationErrors = validateSignupData($fName, $lName, $email, $pNumber, $username, $password);
+		echo ($validationErrors);
 
 		// Check for validation errors
 		if (!empty($validationErrors)) {
@@ -22,7 +23,7 @@
 		$checkUser->execute(array($username));
 		if ($checkUser->rowCount() > 0) {
 			$_SESSION['error_message'] = "Username already exists. Please choose another one.";
-			header("Location: ../login.php"); // Redirect to the form page
+			header("Location: login.php"); // Redirect to the form page
 			exit;
 		}
 
