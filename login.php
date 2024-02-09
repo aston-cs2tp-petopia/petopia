@@ -31,7 +31,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Petopia</title>
-        <link href="css/loginmkm3.css" rel="stylesheet" type="text/css">
+        <link href="css/loginmk4.css" rel="stylesheet" type="text/css">
         <link href="css/navigation.css" rel="stylesheet" type="text/css">
         <link href="css/footer.css" rel="stylesheet" type="text/css">
     
@@ -70,20 +70,20 @@
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
                     </ul>
                 </li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="items.html">Toys</a></li>
-                        <li class="dropdown-li"><a href="items.html">Grooming</a></li>
-                        <li><a href="items.html">Treats</a></li>
+                        <li class="dropdown-li"><a href="products.php">Toys</a></li>
+                        <li class="dropdown-li"><a href="products.php">Grooming</a></li>
+                        <li><a href="products.php">Treats</a></li>
                     </ul>
                 </li>
-                <li><a href="advice.html">Advice</a></li>
+                <li><a href="advice.php">Advice</a></li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact</a></li>
             </ul>
@@ -115,30 +115,33 @@
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
                     </ul>
                 </li>
                 <!--Dropdown-->
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="items.html">Cats</a></li>
-                        <li class="dropdown-li"><a href="items.html">Dogs</a></li>
+                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
                     </ul>
                 </li>
-                <li><a href="advice.html">Advice</a></li>
+                <li><a href="advice.php">Advice</a></li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <div class="mobile-bottom-nav">
-                    <!--Login Button-->
-                    <a href="login.php" class="login-link">
-                        <div class="login-button">Login</div>
-                    </a>
-                    <!--Shoppiung Basket Button-->
-                    <a href="" class="basket-link">
-                        <div class='basket-button bx bx-basket'></div>
-                    </a>
+                    <?php
+                        if ($b==true) {
+                            //Log out button
+                            //Shopping Basket Button
+                            echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
+                            echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
+                        }else{
+                            //Login Button
+                            echo '<div class="login-button"><a href="login.php">Login</a></div>';
+                        } 
+                    ?>
                 </div>
             </ul>
         </nav>
@@ -152,15 +155,6 @@
     </header>
     
     <div class="maincontent">
-        <!-- Left Pane -->
-        <!--div class="image-box">
-        
-            <img src="assets/Homepage/minimaldogcat.png" alt="">
-                <-svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="w-full" alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    ... (SVG code from the original code) ... 
-                </!--svg>
-            </div>
-        </div!-->
         <div class="discount-cat-image">
                 <img src="assets\minimaldognobackground..png" alt="">
             </div>
@@ -173,11 +167,11 @@
                 <form id="loginForm" name="loginForm" method="post" action="login.php">
                     <div class="mb-4">
                         <label for="username" class="username-label">Username</label>
-                        <input type="text" id="username" name="username" class="username-input" required/>
+                        <input type="text" id="username" name="username" class="username-input" placeholder="username" required/> <!--username-->
                     </div>
                     <div class="mb-6">
                         <label for="password" class="password-label">Password</label>
-                        <input type="password" id="password" name="password" class="password-input" required/>
+                        <input type="password" id="password" name="password" class="password-input" placeholder="**********" required/> <!--password-->
                     </div>
                     <button type="submit" class="login-submit">Login</button>
                     <input type="hidden" name="submitLogin" value="TRUE" />
@@ -191,25 +185,27 @@
                 <h2 class="login-text">Sign Up</h2>
                 <form id="signUpForm" name="signUpForm" method="post" action="login.php">
                     <div class="mb-4">
-                        <label for="fname" class="fName-label">First Name</label>
-                        <input type="text" id="fName" name="fName" class="username-input" required/> <!--class name should be changed to reflect field-->
+                        <label for="fname" class="fname-label">First Name</label>
+                        <input type="text" id="fName" name="fName" class="username-input" placeholder="John" required/> <!--firstname-->
                         
-                        <label for="lname" class="fName-label">Last Name</label>
-                        <input type="text" id="lName" name="lName" class="username-input" required/> <!--class name should be changed to reflect field-->
+                        <label for="lname" class="fname-label">Last Name</label>
+                        <input type="text" id="lName" name="lName" class="username-input" placeholder="Smith" required/> <!--lastname-->
 
                         <label for="email" class="email-label">Email</label>
-                        <input type="text" id="email" name="email" class="username-input" required/> <!--class name should be changed to reflect field-->
+                        <input type="text" id="email" name="email" class="username-input" placeholder="example@email.com" required/> <!--email-->
 
-                        <label for="pNumber" class="pNumber-label">Phone Number</label>
+                        <label for="pNumber" class="pnumber-label">Phone Number</label>
                         <input type="tel" id="pNumber" name="pNumber" class="username-input" 
-                        placeholder="07599671811" pattern="[0-9]{5}-[0-9]{6}" required/> <!--class name should be changed to reflect field-->
+
+                        placeholder="07599671811" pattern="[0-9]{11}" required/> <!--class name should be changed to reflect field-->
+
 
                         <label for="username" class="username-label">Username</label>
-                        <input type="text" id="username" name="username" class="username-input" required/>
+                        <input type="text" id="username" name="username" class="username-input" placeholder="username" required/> <!--username-->
                     </div>
                     <div class="mb-6">
                         <label for="password" class="password-label">Password</label>
-                        <input type="password" id="password" name="password" class="password-input" required/>
+                        <input type="password" id="password" name="password" class="password-input" placeholder="**********" required/> <!--password-->
                     </div>
                     <button type="submit" class="login-submit">Sign Up</button>
                     <input type="hidden" name="submitSignUp" value="TRUE" />

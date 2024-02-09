@@ -22,7 +22,7 @@ if (isset($_POST['submitted'])) {
     try {
         //Query DB to find matching username/password
         //using prepare/bindparameter to prevent SQL injection.
-        $stat = $db->prepare('SELECT password FROM users WHERE username = ?');
+        $stat = $db->prepare('SELECT password FROM customer WHERE username = ?');
         $stat->execute(array($_POST['username']));
 
         // fetch the results row and check 
