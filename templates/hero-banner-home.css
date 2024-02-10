@@ -80,7 +80,7 @@ body, html {
 
 @media (max-width: 1400px) {
     /*Hero Banner*/
-    .hero-banner {height: 400px;}
+    .hero-banner {height: 650px;}
     .hero-banner-content h2 {font-size: 40px;}
     .hero-banner-content p {font-size: 16px;}
     .hero-banner-left {padding-left: 10%}
@@ -89,7 +89,7 @@ body, html {
 
 @media (max-width: 990px) {
     /*Hero Banner*/
-    .hero-banner {height: 400px;}
+    .hero-banner {height: 650px;}
     .hero-banner-content h2 {font-size: 40px; width: 100%;}
     .hero-banner-content p {font-size: 16px;}
     .hero-banner-left {padding-left: 8%; width: 90%}
@@ -98,7 +98,7 @@ body, html {
 
 @media (max-width: 450px) {
     /*Hero Banner*/
-    .hero-banner {height: 400px;}
+    .hero-banner {height: 650px;}
     .hero-banner-image img {object-position: left;}
     .hero-banner-content {width: 100%;}
     .hero-banner-content h2 {font-size: 40px; width: 90%}

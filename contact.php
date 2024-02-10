@@ -25,8 +25,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!--Flickity-->
-    <!--CSS-->
+    <!--CSS Templates-->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="templates/hero-banner.css">
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script>"contact.js/scripts"</script>
@@ -137,18 +138,17 @@
 
     <main>
 
-        <section class="hero-banner">
+    <section class="hero-banner">
+        <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
-            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+        <div class="hero-banner-left">
 
-            <div class="hero-banner-left">
-
-                <div class="hero-banner-content">
-                    <h2>Contact us</h2>
-                    <p>Get in touch with our team</p>
-                </div>
+            <div class="hero-banner-content">
+                <h2>Contact us</h2>
+                <p>Get in touch with our team</p>
             </div>
-        </section>
+        </div>
+    </section>
 
         <section class="contact-container">
             <div class="contact-bottom">
