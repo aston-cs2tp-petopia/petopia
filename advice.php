@@ -140,7 +140,6 @@
         [HEADER/NAVIGATION END]
     -->
 
-    </header>
     <!--Hero Banner-->
         <section class="hero-banner">
             <!--Hero Banner Image-->
@@ -255,8 +254,8 @@
             </div>
 
     
-            <p id="end">Remember, each pet is unique, and individual needs may vary. Regular veterinary advice and your personal observations will guide you in providing 
-            the best care for your specific pet.</p><br>
+            <p id="end">The most important responsibility is to give your pet the the love and attention that it deserves. Spend quality time with them and make sure to offer them affection and attention and to keep them entertained so that they feel loved and feel happy.
+Build a strong emotional connection to create a happy and trusting relationship Remember, each pet is unique, and individual needs may vary. Regular veterinary advice and your personal observations will guide you in providing the best care for your specific pet.</p><br>
             </ul>
     </section>
     <footer>

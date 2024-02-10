@@ -1,79 +1,11 @@
-body, html {
-    overflow-x: hidden;
-}
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-    @Hero Banner
+  @Hero Banner
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 /*Hero Banner Container*/
 .hero-banner{
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    position: relative;
-    touch-action: auto;
+    height: 500px !important; /*Set Height Here*/
 }
-
-/*Hero Banner Image Container*/
-.hero-banner-image{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-}
-
-/*Hero Button Image*/
-.hero-banner-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/*Hero Banner Left Container*/
-.hero-banner-left {
-    height: 100%;
-    max-width: 500px;
-    width: 100%;
-    padding-left: 10%;
-    /*Flex*/
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-
-/*Hero Banner Catch Phrase*/
-.hero-banner-content h2 {
-    font-size: 60px;
-    font-weight: 900;
-    color: #a349a4;
-}
-
-/*Hero Banner Caption*/
-.hero-banner-content p {
-    font-size: 19px;
-    font-weight: 700;
-    margin-top: -30px;
-    color: #163741;
-}
-
-/*Hero Banner Button*/
-.hero-banner-button {
-    /*Button styles*/
-    width: 160px;
-    height: 50px;
-    border-radius: 10px;
-    background-color: #a349a4;
-
-    /*Text styles*/
-    line-height: 50px;
-    text-align: center;
-    color: white;
-    font-weight: 700;
-
-    /*Other styles*/
-    cursor: pointer;
-}
-
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Item
@@ -166,33 +98,3 @@ body, html {
 }
 
 
-/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-    @Mobile Support
-\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
-
-@media (max-width: 1400px) {
-    /*Hero Banner*/
-    .hero-banner {height: 400px;}
-    .hero-banner-content h2 {font-size: 40px;}
-    .hero-banner-content p {font-size: 16px;}
-    .hero-banner-left {padding-left: 10%}
-    .hero-banner-image img {object-position: left;}
-}
-
-@media (max-width: 990px) {
-    /*Hero Banner*/
-    .hero-banner {height: 400px;}
-    .hero-banner-content h2 {font-size: 40px; width: 100%;}
-    .hero-banner-content p {font-size: 16px;}
-    .hero-banner-left {padding-left: 8%; width: 90%}
-    .hero-banner-image img {object-position: left;}
-}
-
-@media (max-width: 450px) {
-    /*Hero Banner*/
-    .hero-banner {height: 400px;}
-    .hero-banner-image img {object-position: left;}
-    .hero-banner-content {width: 100%;}
-    .hero-banner-content h2 {font-size: 40px; width: 90%}
-    .hero-banner-content p {width: calc(80%);}
-}
