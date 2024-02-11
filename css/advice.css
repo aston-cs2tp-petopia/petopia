@@ -64,3 +64,9 @@
   #end{
     text-align: left;
   }
+
+  .all-text ul {
+    padding: 0;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
