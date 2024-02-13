@@ -1,9 +1,10 @@
 <?php
  require_once('php/mainLogCheck.php');
-
-    $productType=$_GET["productType"];
-    echo($productType);
     
+    $productType = isset($_GET["productType"]) ? $_GET["productType"] : '';
+    echo($productType);
+    echo('7');
+
     //when the basket button is pressed, send the product id and customer id to order details
     if (isset($_POST['add'])) {
 
@@ -193,8 +194,16 @@
             <?php
                 require_once('php/connectdb.php');
                 try {
-                    $productQuery = "select * from  product where "; //need to add 'where' query once i have a category variable
-                    $rows =  $db->query($productQuery);
+                    $categoryIDQuery = "select Category_ID from  category where name = '$productType'"; //need to add 'where' query once i have a category variable
+                    $categoryID =  $db->query($categoryIDQuery);
+                    echo($categoryID);
+
+                    $productIDQuery = "select Product_ID from  productCategory where Category_ID = '$categoryID'"; //need to add 'where' query once i have a category variable
+                    $productID =  $db->query($productIDQuery);
+                    echo($productID);
+
+                    $productsQuery = "select * from  product where Product_ID like '$productID'"; //need to add 'where' query once i have a category variable
+                    $rows =  $db->query($productsQuery);
 
                     //display the query edited table	
                     if ($rows && $rows->rowCount() > 0) {

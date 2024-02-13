@@ -103,7 +103,7 @@
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php" productType="cats">Cats</a></li>
+                        <li class="dropdown-li"><a href="products.php" productType="Cat">Cats</a></li>
                         <li class="dropdown-li"><a href="products.php">Dogs</a></li>
                     </ul>
                 </li>
