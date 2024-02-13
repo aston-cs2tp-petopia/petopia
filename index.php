@@ -32,8 +32,9 @@
     <link rel="stylesheet" href="css/footer.css">
 
 
-    <!--CSS-->
+    <!--CSS Template-->
     <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="templates/hero-banner-home.css">
 
 </head>
 
