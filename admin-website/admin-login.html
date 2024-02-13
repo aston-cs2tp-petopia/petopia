@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--[Google Fonts]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--Nunito Font-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!--Box Icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/admin-login.css">
+</head>
+
+<body>
+    <!--Login Section-->
+    <section class="admin-login-section">
+        <!--Login Container-->
+        <div class="admin-login-container">
+            <!--Petopia Logo-->
+            <div class="admin-login-logo-image">
+                <img src="../assets/logo.png" alt="">
+            </div>
+            <h2 class="admin-login-title">Admin Login</h2>
+            <!--Login Form-->
+            <form id="admin-login-form" action="admin-login.php" method="post" name="admin-login-form">
+                <!--Username Input Container-->
+                <div class="input-container">
+                    <!--Username Input-->
+                    <input type="text" id="admin-login-username" name="admin-login-username" class="username-input"
+                        placeholder="username" required />
+                    <i class='bx bxs-user'></i>
+                </div>
+                <!--Password Input Container-->
+                <div class="input-container">
+                    <!--Password Input-->
+                    <input type="password" id="admin-login-password" name="admin-login-password" class="password-input"
+                        placeholder="password" required />
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <!--Login Button-->
+                <button type="submit" class="admin-login-btn">Login</button>
+                <input type="hidden" name="admin-login-login" value="TRUE" />
+
+            </form>
+            <p class="register-bottom">Forgot password? Please contact the IT department at <strong
+                    class="register-button">IT@aston.ac.uk</strong></p>
+            <a href="" class="go-back-btn">
+                <div>Go Back</div>
+            </a>
+        </div>
+
+
+    </section>
+</body>
+
+</html>
