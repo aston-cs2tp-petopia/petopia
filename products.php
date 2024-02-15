@@ -1,5 +1,8 @@
 <?php
  require_once('php/mainLogCheck.php');
+
+    $productType=$_GET["productType"];
+    echo($productType);
     
     //when the basket button is pressed, send the product id and customer id to order details
     if (isset($_POST['add'])) {
@@ -58,8 +61,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!--Flickity-->
-    <!--CSS-->
+    <!--CSS Templates-->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="templates/hero-banner.css">
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
@@ -190,7 +194,7 @@
             <?php
                 require_once('php/connectdb.php');
                 try {
-                    $productQuery = "select * from  product "; //need to add 'where' query once i have a category variable
+                    $productQuery = "select * from  product where "; //need to add 'where' query once i have a category variable
                     $rows =  $db->query($productQuery);
 
                     //display the query edited table	

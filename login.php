@@ -45,8 +45,9 @@
     <script src="scripts/navigation.js"></script>
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/footer.css">
-    <!--CSS-->
+    <!--CSS Templates-->
     <link href="css/login.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="templates/hero-banner.css">
     <!--JS-->
     <script src="scripts/login.js"></script>
 
@@ -212,12 +213,12 @@
                         placeholder="Last Name" required />
                     <i class='bx bx-user'></i>
                 </div>
+
                 <?php
                     if($ex != null){
                         echo ("ERROR");
                     }
                 ?>
-
                 <!--Email Input Container-->
                 <div class="input-container">
                     <!--Email Input-->

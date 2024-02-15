@@ -1,131 +1,72 @@
-body, html {
-  overflow-x: hidden;
-}
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
   @Hero Banner
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 /*Hero Banner Container*/
 .hero-banner{
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  position: relative;
-  touch-action: auto;
+  height: 500px !important; /*Set Height Here*/
 }
 
-/*Hero Banner Image Container*/
-.hero-banner-image{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
-}
-
-/*Hero Button Image*/
-.hero-banner-image img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position:left;
-}
-
-/*Hero Banner Left Container*/
-.hero-banner-left {
-  height: 100%;
-  max-width: 500px;
-  width: 100%;
-  padding-left: 10%;
-  /*Flex*/
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-/*Hero Banner Catch Phrase*/
-.hero-banner-content h2 {
-  font-size: 60px;
-  font-weight: 900;
-  color: #a349a4;
-}
-
-/*Hero Banner Caption*/
-.hero-banner-content p {
-  font-size: 19px;
-  font-weight: 700;
-  margin-top: -30px;
-  color: #163741;
-}
-
-/*Hero Banner Button*/
-.hero-banner-button {
-  /*Button styles*/
-  width: 160px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #a349a4;
-
-  /*Text styles*/
-  line-height: 50px;
-  text-align: center;
-  color: white;
-  font-weight: 700;
-
-  /*Other styles*/
-  cursor: pointer;
-}
-
-h1 {
-  font-weight: bold;
-  font-size: 1.5em; /*Adjust value if needed*/
-  color: #A349A4;
-
-}
-h2 {
-  font-weight: bold;
-  font-size: 4em; /*Adjust value if needed*/
-  color: white ;
-  padding-left: 50px;
-}
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Advice Page
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+.box h1 {
+    font-weight: bold;
+    font-size: 1.5em; /*Adjust value if needed*/
+    color: #A349A4;
+  }
+.box h2 {
+    font-weight: bold;
+    font-size: 4em; /*Adjust value if needed*/
+    color: white ;
+    padding-left: 50px;
+  }
 
 
-.box {
-  background-color: pink;
-  border: 2px solid #A349A4;
-  border-radius: 5px;
-  padding-left: 50px;
-  padding-right: 50px;
+  .box {
+    background-color: pink;
+    border: 2px solid #A349A4;
+    border-radius: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
 
 
-  box-sizing: border-box;
-  width: 300px;
-  height: 300px;
-  box-shadow: 0 14px 28px rgb(0, 0, 0,0.25),0 10px 10px rgb(0, 0, 0,0.22);
-}
-.boxes{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-#vet-image{
-  opacity: 0.9;
-}
-.main-image{
-  position: relative;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 14px 28px rgb(0, 0, 0,0.25),0 10px 10px rgb(0, 0, 0,0.22);
+  }
+  .boxes{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+  #vet-image{
+    opacity: 0.9;
+  }
+  .main-image{
+    position: relative;
+ 
+  }
+  .banner-text{
+    position: absolute;
+  bottom: 70px;
+  left: 90px;
+  }
+  #intro{
+    color:black;
+    font-size: 17px;
+    padding: 10px;
+  }
+  #end{
+    text-align: left;
+  }
 
-}
-.banner-text{
-  position: absolute;
-bottom: 70px;
-left: 90px;
-}
-#intro{
-  color:black;
-  font-size: 17px;
-  padding: 10px;
-}
-#end{
-  text-align: left;
-}
+  .all-text ul {
+    padding: 0;
+    padding-left: 50px;
+    padding-right: 50px;
+  }

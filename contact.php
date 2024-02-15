@@ -25,13 +25,15 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!--Flickity-->
-    <!--CSS-->
+    <!--CSS Templates-->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="templates/hero-banner.css">
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script>"contact.js/scripts"</script>
 
 </head>
+
 <body>
     <header>
         <!--Logo-->
@@ -135,12 +137,11 @@
     </header>
 
     <main>
-        
-        <section class = "hero-banner">
 
-            <div class = "hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+        <section class="hero-banner">
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
-            <div class = "hero-banner-left">
+            <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
                     <h2>Contact us</h2>
@@ -148,40 +149,116 @@
                 </div>
             </div>
         </section>
-        
-        <section class="contact-container">
-        <div class="box2">
-                <h1> Contact Us </h1> 
-                <p>Give us a message</p>
-                <form>
-                    <p>Name*</p>
-                    <input type="text" name="name" id="name" placeholder="Mark Dee..." required />
-                    <p>Email*</p>
-                    <input type="email" name="email" id="email" placeholder="info.exmaple@.com" required />
-                    <p></p>
-                    <label> Your Message*</br> </br>
-                         <textarea name="txtAr" rows="10" cols="40" id="text" placeholder="Message..."> </textarea>
-                    </label>
-                    <p></p>
-                    <input type="submit" value="Send Now" id="submit" required onclick="checkForm()" />
 
-                </form>
-        </div>
+        <section class="contact-section">
+            <div class="contact-bottom">
+                <!--Left Box-->
+                <div class="left-contact">
 
-            <div class="box">
-                <center>
-                <img src="assets/Contactpage/phone.png" width="200" height="200">
-                <p></p>
+                    <!--Title Etc...-->
+                    <h2 class="contact-h2">Contact Us</h2>
+                    <h3 class="contact-h3">Ask anything you wish!</h3>
+                    <h4 class="contact-h4">Have questions, comments, or just want to say hello? Drop us a message below
+                        and let's start the conversation!
+                    </h4>
 
-                <div class="image-container"><img src="assets/Contactpage/phone2.png" width="40" height="40"></div>
-                <div class="image-container"><img src="assets/Contactpage/mail.png" width="40" height="40"></div>
-                <div class="image-container"><img src="assets/Contactpage/location.png" width="40" height="40"></div>
-                <p></p>
-                    <a href="https://uk.linkedin.com/"><img src="assets/Contactpage/linkedin.jpg" width="40" height="40"></a>
-                    <a href="https://www.facebook.com/login/"><img src="assets/Contactpage/facebook.png" width="40" height="40"></a>
-                    <a href="https://twitter.com/login"><img src="assets/Contactpage/twitter.jpg" width="40" height="40"></a>
-                </center>
+                    <!--Contact Form-->
+                    <form id="contact-form" action="form.php" method="post" name="contact-form">
+                        <!--Name Input Container-->
+                        <div class="input-container">
+                            <label for="contact-name">Your Name<span style="color: red;">*</span></label>
+                            <input type="text" id="contact-name" name="contact-name" class="name-input"
+                                placeholder="Name" required />
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <!--Email Input Container-->
+                        <div class="input-container">
+                            <label for="contact-email">Your Email<span style="color: red;">*</span></label>
+                            <input type="email" id="contact-email" name="contact-email" class="email-input"
+                                placeholder="Email" required />
+                            <i class='bx bxs-envelope'></i>
+                        </div>
+
+                        <!--Message Input Container-->
+                        <div class="input-container-textarea">
+                            <label for="contact-message">Your Message<span style="color: red;">*</span></label>
+                            <textarea id="contact-message" name="contact-message" class="message-input"
+                                placeholder="Enter message here..." required></textarea>
+                        </div>
+
+                        <!--Checkbox Input Container-->
+                        <div class="input-container-checkbox">
+                            <input type="checkbox" id="contact-agree" name="contact-agree" required>
+                            <label for="contact-agree">Don't show your email address</label>
+                        </div>
+
+                        <!--Contact Button-->
+                        <button type="submit" class="contact-btn">Send Now</button>
+                        <input type="hidden" name="submit-contact" value="TRUE" />
+                    </form>
+
+                </div>
+
+                <!--Right Box-->
+                <div class="right-contact">
+                    <div class="contact-image-container">
+                        <img src="assets/Contactpage/Envelopes.png" alt="">
+                    </div>
+                    <div class="contact-information-container">
+                        <!--Contact Information Row (Location)-->
+                        <div class="contact-row">
+                            <!--Contact Icon-->
+                            <div class="circle-contact">
+                                <i class='bx bx-current-location'></i>
+                            </div>
+                            <!--Contact Text-->
+                            <p class="contact-text">Aston St, Birmingham B4 7ET</p>
+                        </div>
+
+                        <!--Contact Information Row (Phone Number)-->
+                        <div class="contact-row">
+                            <!--Contact Icon-->
+                            <div class="circle-contact">
+                                <i class='bx bxs-phone'></i>
+                            </div>
+                            <!--Contact Text-->
+                            <p class="contact-text">+44 71 2345 6789 </p>
+                        </div>
+
+                        <!--Contact Information Row (Email)-->
+                        <div class="contact-row">
+                            <!--Contact Icon-->
+                            <div class="circle-contact">
+                                <i class='bx bxs-envelope'></i>
+                            </div>
+                            <!--Contact Text-->
+                            <p class="contact-text">contact-us@petopia.co.uk</p>
+                        </div>
+                    </div>
+
+                    <!--Social Media-->
+                    <div class="contact-social-media-container">
+                        <!--Social Media (LinkedIn)-->
+                        <div class="contact-social-background linkedin-color">
+                            <a href="#" class='bx bxl-linkedin'></a>
+                        </div>
+
+                        <!--Social Media (twitter)-->
+                        <div class="contact-social-background twitter-color">
+                            <a href="#" class='bx bxl-twitter'></a>
+                        </div>
+
+                        <!--Social Media (facebook)-->
+                        <div class="contact-social-background facebook-color">
+                            <a href="#" class='bx bxl-facebook'></a>
+                        </div>
+
+                    </div>
+
+
+                </div>
             </div>
+
         </section>
     </main>
 

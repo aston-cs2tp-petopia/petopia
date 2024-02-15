@@ -32,8 +32,9 @@
     <link rel="stylesheet" href="css/footer.css">
 
 
-    <!--CSS-->
+    <!--CSS Template-->
     <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="templates/hero-banner-home.css">
 
 </head>
 
@@ -103,7 +104,7 @@
                 <li class="dropdown">
                     <a href="#">Pets v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
+                        <li class="dropdown-li"><a href="products.php" productType="cats">Cats</a></li>
                         <li class="dropdown-li"><a href="products.php">Dogs</a></li>
                     </ul>
                 </li>
@@ -111,8 +112,8 @@
                 <li class="dropdown">
                     <a href="#">Shop v</a>
                     <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
+                        <li class="dropdown-li"><a href="products.php">Food</a></li>
+                        <li class="dropdown-li"><a href="products.php">Toys</a></li>
                     </ul>
                 </li>
                 <li><a href="advice.php">Advice</a></li>
