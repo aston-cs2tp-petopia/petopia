@@ -143,7 +143,7 @@
     <!--Hero Banner-->
         <section class="hero-banner">
             <!--Hero Banner Image-->
-            <div class="hero-banner-image"><img src="assets/AdvicePage/vetwoman.jpg" alt=""></div>
+            <div class="hero-banner-image"><img src="assets/AdvicePage/advice-image.jpg" alt="advice-image"style="width:100%" id="vet-image"></div>
 
             <!--Hero Banner Text Container-->
             <div class="hero-banner-left">
