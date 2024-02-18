@@ -28,8 +28,9 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
         <!--Flickity-->
-        <!--CSS-->
+        <!--CSS Templates-->
         <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <link rel="stylesheet" href="templates/hero-banner.css">
         <!--JS-->
         <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     
@@ -142,18 +143,26 @@
         [HEADER/NAVIGATION END]
     -->
 
+        <!--Hero Banner-->
         <section class="hero-banner">
-                <!--Hero Banner Image-->
-                <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
+            <!--Hero Banner Image-->
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
-                <!--Hero Banner Text Container-->
-                <div class="hero-banner-left">
+            <!--Hero Banner Text Container-->
+            <div class="hero-banner-left">
 
-                    <div class="hero-banner-content">
-                        <h2>About Us!</h2>
-                    
-                    
-                        <p> Petopia is a place where dreams of owning a pet come true. Our goal is to unite families and animals, in a relationship full of love and care.
+                <div class="hero-banner-content">
+                    <h2>About Us</h2>
+                    <p>Learn a little about us</p>
+                </div>
+            </div>
+        </section>
+
+
+    
+    
+    <section class="main-content">
+    <p> Petopia is a place where dreams of owning a pet come true. Our goal is to unite families and animals, in a relationship full of love and care.
                             <br> Looking back on our adventure, we are ecstatic to have shared innumerable stories of delight and excitement for families.</p>
                             <p>Petopia welcomes you to join in the fun. Discover our virtual shop, establish a connection with our community,
                             and allow Petopia to serve as the starting point for your quest to find a new, four-legged family member. </p>
@@ -169,19 +178,6 @@
                                 Through our adoption drives and foster programmes, we actively encourage pet adoption. In order to showcase pets in need of loving homes, 
                                 our business works with neighbourhood foster families and shelters. We help families locate the perfect match by streamlining the adoption process.
                                </p>
-                        <div class="hero-banner-button">
-                            <a href="index.php">Back to home</a>
-                        </div>
-
-                </div>
-            </div>
-        </section>
-
-
-    
-    
-    <section class="main-content">
-
     </section>
 </body>
 </html>
