@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 02:53 PM
+-- Generation Time: Feb 02, 2024 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 --
 -- Database: `petopia`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `Admin_ID` int(10) NOT NULL,
+  `First_Name` varchar(30) NOT NULL,
+  `Last_Name` varchar(30) NOT NULL,
+  `Contact_Email` varchar(60) NOT NULL,
+  `Phone_Number` varchar(30) NOT NULL,
+  `Home_Address` varchar(60) NOT NULL,
+  `Postcode` varchar(10) NOT NULL,
+  `Username` varchar(30) NOT NULL,
+  `Password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `basket`
+--
+
+CREATE TABLE `basket` (
+  `Customer_ID` int(11) NOT NULL,
+  `Product_ID` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Subtotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `basket`
+--
+
+INSERT INTO `basket` (`Customer_ID`, `Product_ID`, `Quantity`, `Subtotal`) VALUES
+(2, 18, 1, 700);
 
 -- --------------------------------------------------------
 
@@ -223,16 +261,34 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`Admin_ID`),
+  ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
+  ADD UNIQUE KEY `Username` (`Username`);
+
+--
+-- Indexes for table `basket`
+--
+ALTER TABLE `basket`
+  ADD KEY `Customer_ID` (`Customer_ID`),
+  ADD KEY `Products_ID` (`Product_ID`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`Category_ID`);
+  ADD PRIMARY KEY (`Category_ID`),
+  ADD UNIQUE KEY `Name` (`Name`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`Customer_ID`);
+  ADD PRIMARY KEY (`Customer_ID`),
+  ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
+  ADD UNIQUE KEY `Username` (`Username`);
 
 --
 -- Indexes for table `orders`
@@ -266,6 +322,12 @@ ALTER TABLE `productcategory`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `Admin_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
