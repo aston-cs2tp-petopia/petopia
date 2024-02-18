@@ -376,3 +376,13 @@
     font-size: 24px;
     color: #a349a4;
 }
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media screen and (max-width:600px) {
+    /*allign content mobile*/
+    .contact-bottom{width: 100%;padding-left: 25px;}
+    .right-contact{margin-right: 25px;width: 100%;}
+}
