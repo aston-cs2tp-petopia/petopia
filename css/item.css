@@ -1,0 +1,100 @@
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Item
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Item Section*/
+.item-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 70px;
+}
+
+/*Item Image Container*/
+.item-image {
+    width: 500px;
+    height: 500px;
+}
+
+/*Item's Image*/
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Info Container*/
+.right-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    
+}
+
+/*Category Text*/
+.category-text {
+    margin: 0;
+    font-size: 14px;
+    color: #676666;
+}
+
+/*Title Text*/
+.title-text {
+    margin: 0;
+    font-size: 34px;
+    color: #163741;
+}
+
+/*Reviews Container*/
+.stars-container {
+    display: flex;
+}
+
+/*Star*/
+.stars-container .bxs-star {
+    color: #febd00;
+    line-height: 38px;
+}
+/*Review Counter Text*/
+.stars-container p {font-size: 12px;}
+
+/*Price*/
+.price-text {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #163741;
+}
+
+/*Description*/
+.desc-text {
+    color: #163741;
+}
+
+.add-cart-button {
+    width: 200px;
+    height: 50px;
+    background-color: #a349a4;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    font-family: Nunito, sans-serif;
+}
+
+

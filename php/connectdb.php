@@ -1,7 +1,8 @@
 <?php
 
+
 $db_host = 'localhost';
-$db_name = '';
+$db_name = 'petopia2';
 $username = 'root';
 $password = '';
 

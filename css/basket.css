@@ -1,0 +1,59 @@
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Basket
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.basket-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/*Title*/
+.top-container h3{
+    font-weight: 600;
+    font-size: 30px;
+    color:#163741;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Table
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.productTable {
+    display: flex;
+    flex-direction: column;
+}
+
+.basket-top b{
+    color:#163741;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.basket-row {
+    width: 100%;
+}
+
+.remove-basket {
+    color: red;
+    cursor: pointer;
+    font-weight: 700;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+
+}
