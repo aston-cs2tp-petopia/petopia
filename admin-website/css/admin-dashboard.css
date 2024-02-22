@@ -1,0 +1,24 @@
+body, html {
+    overflow: hidden; /*Prevents horizontal scrolling*/
+    background-color: var(--background);
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Variables
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+:root {
+    --background: rgba(241, 241, 241, 1);
+    --text: rgba(48, 48, 48, 1);
+    --icons: #5c5f62;
+    --button: #5c5c5c;
+    --button2: #5c5c5c; 
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Navigation
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.admin-nav {
+    
+}
