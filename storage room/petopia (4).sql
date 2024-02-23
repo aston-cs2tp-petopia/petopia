@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 04:45 PM
+-- Generation Time: Feb 23, 2024 at 03:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,9 +34,9 @@ CREATE TABLE `admin` (
   `Contact_Email` varchar(60) NOT NULL,
   `Phone_Number` varchar(30) NOT NULL,
   `Home_Address` varchar(60) NOT NULL,
-  `Postcode` varchar(10) NOT NULL,
+  `Postcode` varchar(10) DEFAULT NULL,
   `Username` varchar(30) NOT NULL,
-  `Password` varchar(60) NOT NULL
+  `Userpass` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -48,8 +48,8 @@ CREATE TABLE `admin` (
 CREATE TABLE `basket` (
   `Customer_ID` int(11) NOT NULL,
   `Product_ID` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL,
-  `Subtotal` int(11) NOT NULL
+  `Quantity` int(11) UNSIGNED NOT NULL,
+  `Subtotal` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -110,14 +110,14 @@ CREATE TABLE `customer` (
   `Home_Address` varchar(60) NOT NULL,
   `Postcode` varchar(10) NOT NULL,
   `Username` varchar(30) NOT NULL,
-  `Password` varchar(60) NOT NULL
+  `Userpass` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`Customer_ID`, `First_Name`, `Last_Name`, `Contact_Email`, `Phone_Number`, `Home_Address`, `Postcode`, `Username`, `Password`) VALUES
+INSERT INTO `customer` (`Customer_ID`, `First_Name`, `Last_Name`, `Contact_Email`, `Phone_Number`, `Home_Address`, `Postcode`, `Username`, `Userpass`) VALUES
 (1, 'Beckie', 'Jones', 'Mcflurryorfruitbag@gmail.com', '07768527200', '14 Caughall road', 'CH12 1LE', 'BeckieJ30', 'Higuys300!');
 
 -- --------------------------------------------------------
@@ -130,7 +130,7 @@ CREATE TABLE `orders` (
   `Orders_ID` int(10) NOT NULL,
   `Customer_ID` int(10) NOT NULL,
   `Order_Date` date NOT NULL,
-  `Total_Amount` int(20) NOT NULL
+  `Total_Amount` int(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -156,8 +156,8 @@ CREATE TABLE `ordersdetails` (
 CREATE TABLE `product` (
   `Product_ID` int(10) NOT NULL,
   `Name` varchar(20) NOT NULL,
-  `Price` int(20) NOT NULL,
-  `Num_In_Stock` int(10) NOT NULL,
+  `Price` int(20) UNSIGNED NOT NULL,
+  `Num_In_Stock` int(10) UNSIGNED NOT NULL,
   `Description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -203,58 +203,58 @@ CREATE TABLE `productcategory` (
 --
 
 INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
-(4, 1, 1),
-(2, 1, 2),
-(5, 1, 3),
-(7, 1, 4),
-(2, 2, 5),
-(5, 2, 6),
-(7, 2, 7),
-(9, 2, 8),
-(2, 3, 9),
-(6, 3, 10),
-(10, 3, 11),
-(8, 3, 12),
-(3, 4, 13),
-(5, 4, 14),
-(7, 4, 15),
-(11, 4, 16),
 (1, 5, 17),
-(6, 5, 18),
-(8, 5, 19),
-(12, 5, 20),
-(3, 6, 21),
-(6, 6, 22),
-(8, 6, 23),
-(13, 6, 24),
-(3, 7, 25),
-(6, 7, 26),
-(7, 7, 27),
-(13, 7, 28),
+(2, 1, 2),
+(2, 2, 5),
+(2, 3, 9),
 (2, 8, 29),
-(5, 8, 30),
-(7, 8, 31),
-(14, 8, 32),
-(3, 9, 33),
-(6, 9, 34),
-(8, 9, 35),
-(12, 9, 36),
-(3, 10, 37),
-(5, 10, 38),
-(8, 10, 39),
-(15, 10, 40),
 (2, 11, 41),
-(5, 11, 42),
-(7, 11, 43),
-(16, 11, 44),
-(3, 12, 45),
-(5, 12, 46),
-(7, 12, 47),
-(16, 12, 48),
 (2, 13, 49),
+(3, 4, 13),
+(3, 6, 21),
+(3, 7, 25),
+(3, 9, 33),
+(3, 10, 37),
+(3, 12, 45),
+(4, 1, 1),
+(5, 1, 3),
+(5, 2, 6),
+(5, 4, 14),
+(5, 8, 30),
+(5, 10, 38),
+(5, 11, 42),
+(5, 12, 46),
 (5, 13, 50),
+(6, 3, 10),
+(6, 5, 18),
+(6, 6, 22),
+(6, 7, 26),
+(6, 9, 34),
+(7, 1, 4),
+(7, 2, 7),
+(7, 4, 15),
+(7, 7, 27),
+(7, 8, 31),
+(7, 11, 43),
+(7, 12, 47),
 (7, 13, 51),
-(11, 13, 53);
+(8, 3, 12),
+(8, 5, 19),
+(8, 6, 23),
+(8, 9, 35),
+(8, 10, 39),
+(9, 2, 8),
+(10, 3, 11),
+(11, 4, 16),
+(11, 13, 53),
+(12, 5, 20),
+(12, 9, 36),
+(13, 6, 24),
+(13, 7, 28),
+(14, 8, 32),
+(15, 10, 40),
+(16, 11, 44),
+(16, 12, 48);
 
 --
 -- Indexes for dumped tables
@@ -266,12 +266,15 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`Admin_ID`),
   ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
-  ADD UNIQUE KEY `Username` (`Username`);
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Admin_ID` (`Admin_ID`);
 
 --
 -- Indexes for table `basket`
 --
 ALTER TABLE `basket`
+  ADD UNIQUE KEY `Customer_ID_2` (`Customer_ID`,`Product_ID`),
+  ADD UNIQUE KEY `Customer_ID_3` (`Customer_ID`,`Product_ID`),
   ADD KEY `Customer_ID` (`Customer_ID`),
   ADD KEY `Products_ID` (`Product_ID`);
 
@@ -280,7 +283,8 @@ ALTER TABLE `basket`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`Category_ID`),
-  ADD UNIQUE KEY `Name` (`Name`);
+  ADD UNIQUE KEY `Name` (`Name`),
+  ADD UNIQUE KEY `Category_ID` (`Category_ID`,`Name`);
 
 --
 -- Indexes for table `customer`
@@ -288,13 +292,18 @@ ALTER TABLE `category`
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`Customer_ID`),
   ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
-  ADD UNIQUE KEY `Username` (`Username`);
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Username_2` (`Username`),
+  ADD UNIQUE KEY `Username_3` (`Username`),
+  ADD UNIQUE KEY `Customer_ID` (`Customer_ID`),
+  ADD UNIQUE KEY `Customer_ID_2` (`Customer_ID`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`Orders_ID`),
+  ADD UNIQUE KEY `Orders_ID` (`Orders_ID`,`Customer_ID`),
   ADD KEY `Customer_ID` (`Customer_ID`);
 
 --
@@ -302,6 +311,7 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `ordersdetails`
   ADD PRIMARY KEY (`OrdersDetails_ID`),
+  ADD UNIQUE KEY `OrdersDetails_ID` (`OrdersDetails_ID`,`Orders_ID`,`Product_ID`),
   ADD KEY `Orders_ID` (`Orders_ID`),
   ADD KEY `Product_ID` (`Product_ID`);
 
@@ -309,13 +319,15 @@ ALTER TABLE `ordersdetails`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`Product_ID`);
+  ADD PRIMARY KEY (`Product_ID`),
+  ADD UNIQUE KEY `Product_ID` (`Product_ID`);
 
 --
 -- Indexes for table `productcategory`
 --
 ALTER TABLE `productcategory`
   ADD PRIMARY KEY (`prodcat_ID`),
+  ADD UNIQUE KEY `Category_ID_2` (`Category_ID`,`Product_ID`,`prodcat_ID`),
   ADD KEY `Category_ID` (`Category_ID`),
   ADD KEY `Product_ID` (`Product_ID`);
 
