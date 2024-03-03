@@ -27,7 +27,7 @@
     <!--
         [Navigation & Footer]
     -->
-    <script src="scripts/navigation.js"></script>
+    <script src="templates/navigationTemplate.js"></script>
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/footer.css">
 
