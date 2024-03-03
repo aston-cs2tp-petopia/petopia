@@ -1,7 +1,7 @@
 <?php
  require_once('php/mainLogCheck.php');
     
-    $productType = isset($_GET["productType"]) ? $_GET["productType"] : '';
+    $productType = $_GET["productType"];
     echo($productType);
     echo('7');
 
@@ -195,16 +195,32 @@
             <?php
                 require_once('php/connectdb.php');
                 try {
-                    $categoryIDQuery = "select Category_ID from  category where name = '$productType'"; //need to add 'where' query once i have a category variable
+                    $categoryIDQuery = "select Category_ID from  category where name = $productType"; //need to add 'where' query once i have a category variable
+                    
+                    echo ($categoryIDQuery);
                     $categoryID =  $db->query($categoryIDQuery);
                     echo($categoryID);
 
-                    $productIDQuery = "select Product_ID from  productCategory where Category_ID = '$categoryID'"; //need to add 'where' query once i have a category variable
+                    $productIDQuery = "select Product_ID from  productCategory where Category_ID = $categoryID"; //need to add 'where' query once i have a category variable
                     $productID =  $db->query($productIDQuery);
                     echo($productID);
 
                     $productsQuery = "select * from  product where Product_ID like '$productID'"; //need to add 'where' query once i have a category variable
                     $rows =  $db->query($productsQuery);
+
+                    // $categoryIDQuery = $db->prepare("select Category_ID from  category where name = ?");
+                    // $categoryIDQuery->execute([$productType]);
+                    // $categoryID = $categoryIDQuery->fetchColumn();
+                    // echo($categoryID);
+
+                    // $productIDQuery = $db->prepare("select Product_ID from  productCategory where Category_ID = ?");
+                    // $productIDQuery->execute([$categoryID]);
+                    // $productID = $productIDQuery->fetchColumn();
+
+                    // $productsQuery = $db->prepare("select * from  product where Product_ID like ?");
+                    // $productsQuery->execute();
+
+                    // $rows = $productsQuery->fetchAll(PDO::FETCH_ASSOC);
 
                     //display the query edited table	
                     if ($rows && $rows->rowCount() > 0) {
