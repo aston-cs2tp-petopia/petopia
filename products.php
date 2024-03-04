@@ -153,40 +153,40 @@ if (isset($_POST["add"])) {
                     <?php
                     require_once "php/connectdb.php";
 
-                    // Capture Category_ID from URL query parameters
-                    $category_id = isset($_GET['category_id']) ? (int)$_GET['category_id'] : null;
+                    // Capture search term and category IDs from URL query parameters
+                    $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+                    $category_ids = isset($_GET['category_id']) && is_array($_GET['category_id']) ? array_map('intval', $_GET['category_id']) : [];
 
                     try {
-                        // Modify the SQL query to filter products based on Category_ID, if provided
-                        if (isset($_GET['category_id']) && is_array($_GET['category_id'])) {
-                            // Handling multiple categories
-                            $category_ids = array_map('intval', $_GET['category_id']);
+                        $queryParams = [];
+                        $queryParts = [
+                            "SELECT DISTINCT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames",
+                            "FROM product p",
+                            "LEFT JOIN productcategory pc ON p.Product_ID = pc.Product_ID",
+                            "LEFT JOIN category c ON pc.Category_ID = c.Category_ID"
+                        ];
+
+                        // Building WHERE conditions based on search term and categories
+                        $conditions = [];
+                        if (!empty($searchTerm)) {
+                            $conditions[] = "p.Name LIKE ?";
+                            $queryParams[] = "%{$searchTerm}%";
+                        }
+                        if (!empty($category_ids)) {
                             $placeholders = implode(',', array_fill(0, count($category_ids), '?'));
-                    
-                            $productQuery = "SELECT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames 
-                                             FROM product p
-                                             INNER JOIN productcategory pc ON p.Product_ID = pc.Product_ID
-                                             INNER JOIN category c ON pc.Category_ID = c.Category_ID
-                                             WHERE pc.Category_ID IN ($placeholders)
-                                             GROUP BY p.Product_ID";
-                        } else {
-                            // Handling no specific category - fetch all products
-                            $productQuery = "SELECT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames 
-                                             FROM product p
-                                             LEFT JOIN productcategory pc ON p.Product_ID = pc.Product_ID
-                                             LEFT JOIN category c ON pc.Category_ID = c.Category_ID
-                                             GROUP BY p.Product_ID";
+                            $conditions[] = "pc.Category_ID IN ($placeholders)";
+                            $queryParams = array_merge($queryParams, $category_ids);
                         }
 
-                        $stmt = $db->prepare($productQuery);
-
-                        if (isset($category_ids)) {
-                            // Execute with the array of category IDs if set
-                            $stmt->execute($category_ids);
-                        } else {
-                            $stmt->execute();
+                        if (!empty($conditions)) {
+                            $queryParts[] = "WHERE " . implode(" AND ", $conditions);
                         }
+                        $queryParts[] = "GROUP BY p.Product_ID";
 
+                        // Finalizing and executing the query
+                        $finalQuery = implode(" ", $queryParts);
+                        $stmt = $db->prepare($finalQuery);
+                        $stmt->execute($queryParams);
                         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         //display the query edited table
