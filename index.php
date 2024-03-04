@@ -79,12 +79,12 @@
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-dog'></div>
-                    <a href="products.php">Browse Dogs</a>
+                    <a href="products.php?category_id[]=5">Browse Dogs</a>
                 </div>
 
                 <div class="quick-access qa-border">
                     <div class='bx bxs-cat'></div>
-                    <a href="products.php">Browse Cats</a>
+                    <a href="products.php?category_id[]=6">Browse Cats</a>
                 </div>
 
                 <div class="quick-access qa-border">

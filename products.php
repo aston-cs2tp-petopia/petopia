@@ -1,41 +1,43 @@
 <?php
- require_once('php/mainLogCheck.php');
+require_once "php/mainLogCheck.php";
 
-    //$productType=$_GET["productType"];
-    //echo($productType);
-    
-    //when the basket button is pressed, send the product id and customer id to order details
-    if (isset($_POST['add'])) {
+//$productType=$_GET["productType"];
+//echo($productType);
 
-        require_once('php/connectdb.php');
+//when the basket button is pressed, send the product id and customer id to order details
+if (isset($_POST["add"])) {
+    require_once "php/connectdb.php";
 
-        $username = $_SESSION["username"];
-        $custIDQuery = $db->prepare('SELECT Customer_ID FROM customer WHERE username = ?');
-        $custIDQuery->execute([$username]);
-        $custID = $custIDQuery->fetchColumn();
+    $username = $_SESSION["username"];
+    $custIDQuery = $db->prepare(
+        "SELECT Customer_ID FROM customer WHERE username = ?"
+    );
+    $custIDQuery->execute([$username]);
+    $custID = $custIDQuery->fetchColumn();
 
-        $productID = $_POST['productID'];
-        $quantity = $_POST['quantity'];
+    $productID = $_POST["productID"];
+    $quantity = $_POST["quantity"];
 
-        // Get product price
-        $priceQuery = $db->prepare('SELECT Price FROM product WHERE Product_ID = ?');
-        $priceQuery->execute([$productID]);
-        $price = $priceQuery->fetchColumn();
+    // Get product price
+    $priceQuery = $db->prepare(
+        "SELECT Price FROM product WHERE Product_ID = ?"
+    );
+    $priceQuery->execute([$productID]);
+    $price = $priceQuery->fetchColumn();
 
-        // Calculate subtotal
-        $subtotal = $quantity * $price;
+    // Calculate subtotal
+    $subtotal = $quantity * $price;
 
-        try {
-            $basketQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
-            $basketQuery->execute(array($custID, $productID, $quantity, $subtotal));
-
-        } catch (PDOexception $ex) {
-            echo "Sorry, a database error occurred! <br>";
-            echo "Error details: <em>" . $ex->getMessage() . "</em>";
-        }
-
+    try {
+        $basketQuery = $db->prepare(
+            "INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)"
+        );
+        $basketQuery->execute([$custID, $productID, $quantity, $subtotal]);
+    } catch (PDOexception $ex) {
+        echo "Sorry, a database error occurred! <br>";
+        echo "Error details: <em>" . $ex->getMessage() . "</em>";
     }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -149,51 +151,91 @@
 
                     <div class="results-container">
                     <?php
-                require_once('php/connectdb.php');
-                try {
-                    $productQuery = "select * from  product"; //WHERE //need to add 'where' query once i have a category variable
-                    $rows =  $db->query($productQuery);
+                    require_once "php/connectdb.php";
 
-                    //display the query edited table	
-                    if ($rows && $rows->rowCount() > 0) {
-                        foreach ($rows as $row) {
-                    ?>
+                    // Capture Category_ID from URL query parameters
+                    $category_id = isset($_GET['category_id']) ? (int)$_GET['category_id'] : null;
+
+                    try {
+                        // Modify the SQL query to filter products based on Category_ID, if provided
+                        if (isset($_GET['category_id']) && is_array($_GET['category_id'])) {
+                            // Handling multiple categories
+                            $category_ids = array_map('intval', $_GET['category_id']);
+                            $placeholders = implode(',', array_fill(0, count($category_ids), '?'));
+                    
+                            $productQuery = "SELECT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames 
+                                             FROM product p
+                                             INNER JOIN productcategory pc ON p.Product_ID = pc.Product_ID
+                                             INNER JOIN category c ON pc.Category_ID = c.Category_ID
+                                             WHERE pc.Category_ID IN ($placeholders)
+                                             GROUP BY p.Product_ID";
+                        } else {
+                            // Handling no specific category - fetch all products
+                            $productQuery = "SELECT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames 
+                                             FROM product p
+                                             LEFT JOIN productcategory pc ON p.Product_ID = pc.Product_ID
+                                             LEFT JOIN category c ON pc.Category_ID = c.Category_ID
+                                             GROUP BY p.Product_ID";
+                        }
+
+                        $stmt = $db->prepare($productQuery);
+
+                        if (isset($category_ids)) {
+                            // Execute with the array of category IDs if set
+                            $stmt->execute($category_ids);
+                        } else {
+                            $stmt->execute();
+                        }
+
+                        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        //display the query edited table
+                        if ($rows) {
+                            foreach ($rows as $row) { ?>
                             <div class="item-template">
                                 <div class="item-image">
-                                    <?php $tempPID=$row['Product_ID']  ?>
+                                    <?php $tempPID = $row["Product_ID"]; ?>
                                     <a href="item.php?Product_ID=<?php echo $tempPID; ?>"><img src="assets/Homepage/hero-banner2.jpg" alt=""></a>
                                 </div>
                             
                                 <div class="item-info">
-                                    <h6>Category</h6>
-                                    <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row['Name']; ?></a></h4>
+                                    <h6><?php echo $row["CategoryNames"]?></h6>
+                                    <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row[
+                                        "Name"
+                                        ]; ?></a></h4>
                                     <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
-                                    <h5>£<?php echo $row['Price'];?></h5>
+                                    <h5>£<?php echo $row["Price"]; ?></h5>
                             
                                     <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
-                                        <?php
-                                            if ($b==true && $row['Num_In_Stock']>0) {
-                                                echo "<form method='post' action='products.php'>";
-                                                echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
-                                                echo '<input type="hidden" name="quantity" value="1">';
-                                                echo '<button class="add-cart-btn" type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
-                                                echo '</form>';
-                                            }   
-                                        ?>
+                                        <p>Stock: <?php echo $row[
+                                            "Num_In_Stock"
+                                        ]; ?></p>
+                                        <?php if (
+                                            $b == true &&
+                                            $row["Num_In_Stock"] > 0
+                                        ) {
+                                            echo "<form method='post' action='products.php'>";
+                                            echo '<input type="hidden" name="productID" value="' .
+                                                $row["Product_ID"] .
+                                                '">';
+                                            echo '<input type="hidden" name="quantity" value="1">';
+                                            echo '<button class="add-cart-btn" type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
+                                            echo "</form>";
+                                        } ?>
                                     </div>
                                 </div>
                             </div>
-                        <?php
-                                    }
-                                } else {
-                                    echo  "<p>No matching Product.</p>\n"; //no match found
-                                }
-                            } catch (PDOexception $ex) {
-                                echo "Sorry, a database error occurred! <br>";
-                                echo "Error details: <em>" . $ex->getMessage() . "</em>";
-                            }
-                        ?>
+                        <?php }
+                        } else {
+                            echo "<p>No matching Product.</p>\n"; //no match found
+                        }
+                    } catch (PDOexception $ex) {
+                        echo "Sorry, a database error occurred! <br>";
+                        echo "Error details: <em>" .
+                            $ex->getMessage() .
+                            "</em>";
+                    }
+                    ?>
 
                 </div>
             </div>
