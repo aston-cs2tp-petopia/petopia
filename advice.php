@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
     <link href="css/advice.css" rel="stylesheet" type="text/css">
-    <link href="css/navigation.css" rel="stylesheet" type="text/css">
-    <link href="css/footer.css" rel="stylesheet" type="text/css">
 
     <!--[Google Fonts]-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +22,16 @@
     <!--Box Icons-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!--Flickity-->
+    <!--
+        [Navigation & Footer]
+    -->
+    <script src="templates/navigationTemplate.js"></script>
+    <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/footer.css">
+
     <!--CSS-->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="templates/hero-banner.css">
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
@@ -36,116 +41,19 @@
         <!--
         [NAVIGATION/HEADER]
     -->
-    <header>
-        <!--Logo-->
-        <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
 
-        <!--Middle Navigation-->
-        <nav class="desktop-nav">
-            <ul class="desktop-nav-ul">
-                <li><a href="index.php">Home</a></li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Pets v</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
-                    </ul>
-                </li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Shop v</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="products.php">Toys</a></li>
-                        <li class="dropdown-li"><a href="products.php">Grooming</a></li>
-                        <li><a href="products.php">Treats</a></li>
-                    </ul>
-                </li>
-                <li><a href="advice.php">Advice</a></li>
-                <li><a href="about.php">About Us</a></li>
-                <li><a href="contact.php">Contact</a></li>
-            </ul>
-        </nav>
-
-        <!--Right Navigation-->
-        <div class="right-nav">
-
-            <?php
-                //Login Button
-                if ($b==true) {
-                    //Log out button
-                    //Shoppiung Basket Button
-                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
-                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
-                }else{
-                    //Login Button
-                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }       
-            ?>
-        </div>
-
-        <!--Mobile-Background-->
-        <div class="mobile-background"></div>
-        <!--Mobile Navigation-->
-        <nav class="mobile-nav">
-            <div class="mobile-nav-top">
-                <div class="mobile-logo"><img src="assets/logo.png" alt=""></div>
-                <p class="close-menu-button" draggable="false">X</p>
-            </div>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Pets v</a>
-                    <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
-                    </ul>
-                </li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Shop v</a>
-                    <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
-                    </ul>
-                </li>
-                <li><a href="advice.php">Advice</a></li>
-                <li><a href="about.php">About Us</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <div class="mobile-bottom-nav">
-                    <?php
-
-                //Login Button
-                if ($b==true) {
-                    //Log out button
-                    //Shoppiung Basket Button
-                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
-                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
-                }else{
-                    //Login Button
-                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }       
-            ?>
-
-
-                </div>
-            </ul>
-        </nav>
-        <!--Mobile Hamburger-->
-        <div id="hamburger-button" class='bx bx-menu'></div>
-    </header>
     <!--
         [HEADER/NAVIGATION END]
     -->
 
     </header>
+
+    <main>
+
     <!--Hero Banner-->
         <section class="hero-banner">
-            <!--Hero Banner Image-->
-            <div class="hero-banner-image"><img src="assets/AdvicePage/advice-image.jpg" alt="advice-image"style="width:100%" id="vet-image"></div>
+            <div class="hero-banner-image"><img src="assets/AdvicePage/advice-image.jpg" alt=""></div>
 
-            <!--Hero Banner Text Container-->
             <div class="hero-banner-left">
 
                 <div class="hero-banner-content">
@@ -155,12 +63,9 @@
         </section>
 
 
-    
-
-    
-        <ul>
         
         <section class="all-text">
+        <ul>
             <p id="intro">Getting a new family member is very exciting and being a responsible owner will surely feel rewarding! It is very important that when you get a new pet 
                 you are aware that it is a commitment to another family member and they will need to be taken care of. 
                 Fortunately, to ensure your pets heath and wellbeing, we have a guide that lists the necessities that pet owners need to provide.</p>
@@ -183,14 +88,13 @@
                 <h1>Vaccinating: </h1>
                 <li>Keeping up with vaccinations, parasite control, and dental care as recommended by your vet is also very important.</li><br>
             </div>
-            <br>
     
             <div class="box">
                 <h1>Exercise and Mental Stimulation:</h1>
                 <li>Engage your pet in regular physical activities to maintain a healthy weight and prevent boredom.</li>
                 <li>Provide toys, puzzles, and playtime to keep their minds stimulated.</li><br>
             </div>
-            <br>
+
     
             <div class="box">
                 <h1>Grooming:</h1>
