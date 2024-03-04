@@ -160,12 +160,12 @@
                     ?>
                             <div class="item-template">
                                 <div class="item-image">
-                                    <img src="assets/Homepage/hero-banner2.jpg" alt="">
+                                    <?php $tempPID=$row['Product_ID']  ?>
+                                    <a href="item.php?Product_ID=<?php echo $tempPID; ?>"><img src="assets/Homepage/hero-banner2.jpg" alt=""></a>
                                 </div>
                             
                                 <div class="item-info">
                                     <h6>Category</h6>
-                                    <?php $tempPID=$row['Product_ID']  ?>
                                     <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row['Name']; ?></a></h4>
                                     <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
                                     <h5>£<?php echo $row['Price'];?></h5>
