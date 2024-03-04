@@ -7,7 +7,7 @@
     <!--Logo-->
     <div class="logo-container"><a href="index.php"><img src="assets/logo.png" alt=""></a></div>
 
-    <form id="search-form" action="products.php" method="post" name="search-form">
+    <form id="search-form" action="products.php" method="get" name="search-form">
         <div class="nav-input-container">
             <!--Search Input-->
             <input type="text" id="search" name="search" class="search-input" placeholder="Search..."
