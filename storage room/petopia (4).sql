@@ -48,8 +48,8 @@ CREATE TABLE `admin` (
 CREATE TABLE `basket` (
   `Customer_ID` int(11) NOT NULL,
   `Product_ID` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL,
-  `Subtotal` int(11) NOT NULL
+  `Quantity` int(11) UNSIGNED NOT NULL,
+  `Subtotal` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -93,7 +93,10 @@ INSERT INTO `category` (`Category_ID`, `Name`, `Description`) VALUES
 (15, 'Chihuahua', 'Chihuahuas: Small, sassy, and full of love! These pint-sized pups are big on personality, offering bundles of affection in a tiny package. Known for their spunky nature and unwavering loyalty, Chihuahuas make adorable companions for anyone seeking a playful and devoted furry friend. Do not miss out on the chance to add a dash of sass and love to your life with a Chihuahua!'),
 (16, 'Great Dane', 'Great Danes: Majestic, gentle giants! These magnificent dogs combine grace and size effortlessly. Known for their calm demeanor and affectionate nature, Great Danes make impressive yet loving companions for families or individuals seeking a loyal and regal furry friend. Do not miss the opportunity to bring the grandeur of a Great Dane into your home!'),
 (17, 'Tabby', 'Tabby Cats: Classic, charming, and full of character! These iconic felines boast beautiful coats and winning personalities. Known for their playful antics and loving nature, tabby cats make delightful companions for anyone seeking a loving and adaptable pet. Do not miss the chance to add the timeless charm of a tabby cat to your life!'),
-(18, 'Mixed Breed', 'Mixed Breeds: Unique, versatile, and full of surprises! These one-of-a-kind companions offer the best of various breeds in one delightful package. Known for their individuality and diverse traits, mixed-breed pets make fantastic, adaptable additions to any home. Do not miss out on the opportunity to welcome a wonderfully unique and loving mixed-breed pet into your life!');
+(18, 'Mixed Breed', 'Mixed Breeds: Unique, versatile, and full of surprises! These one-of-a-kind companions offer the best of various breeds in one delightful package. Known for their individuality and diverse traits, mixed-breed pets make fantastic, adaptable additions to any home. Do not miss out on the opportunity to welcome a wonderfully unique and loving mixed-breed pet into your life!'),
+(19, 'Accessories', 'Bits and bobs to help your pet look their best!'),
+(20, 'Pet Care', 'Essentials for your pet, to ensure that they look and feel their best!'),
+(21, 'Toys', 'Toys for your pet, for fun play at any time of day!');
 
 -- --------------------------------------------------------
 
@@ -157,34 +160,46 @@ CREATE TABLE `product` (
   `Product_ID` int(10) NOT NULL,
   `Name` varchar(20) NOT NULL,
   `Price` int(20) NOT NULL,
-  `Num_In_Stock` int(10) NOT NULL,
-  `Description` varchar(500) NOT NULL
+  `Num_In_Stock` int(10) UNSIGNED NOT NULL,
+  `Description` varchar(500) NOT NULL,
+  `Image` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`Product_ID`, `Name`, `Price`, `Num_In_Stock`, `Description`) VALUES
-(1, 'Larry', 300, 1, 'An intelligent 11 year old rescue male race dog called Larry. He has a good temperament, and is very good with kids as well as other pets. He has a short gray coat that requires minimal grooming, and lovely brown eyes. He enjoys short bursts of energy, so a short walk every day will suffice. Larry will thrive in any environment where there is enough space for him! '),
-(2, 'Max', 680, 1, 'Introducing Max, a 2-year-old Golden Retriever! He is the embodiment of playful energy and unwavering loyalty. With a shimmering golden coat and a heart full of love, Max is the perfect companion for anyone seeking a devoted four-legged friend. Ready to bring endless joy into your life, he is waiting to become a cherished member of your family.'),
-(3, 'Luna', 450, 1, 'Meet Luna, a 3-year-old Maine Coon! With her regal grace and captivating green eyes, she brings elegance to any home. Playful and affectionate, Luna is ready to be the sophisticated companion that you have been dreaming of. She is not just a cat; she is a charming addition waiting to grace your life with love and beauty.'),
-(4, 'Cooper', 650, 1, 'Meet Cooper, a 6-month-old playful and adorable Beagle puppy! With his floppy ears and soulful eyes, Cooper is the definition of cuteness. Full of energy and curiosity, he is eager to explore the world by your side. Cooper is an affectionate companion ready to bring laughter and warmth into your home. Do not miss the chance to welcome this charming Beagle pup into your family!'),
-(5, 'Sophie', 450, 1, '\r\nPresenting Sophie, a 9-year-old serene and loving Siamese cat! With her striking blue eyes and elegant demeanor, Sophie exudes grace and wisdom. This mature beauty enjoys peaceful moments by the window and gentle affection on her terms. Her calming presence and gentle nature make her an ideal companion for a quiet, loving home. Sophie is not just a cat; she is a sophisticated feline ready to bring tranquility and companionship into your life.'),
-(6, 'Polo', 580, 1, '\r\nMeet Polo, a 4-month-old playful and enchanting Bengal kitten! With her striking leopard-like spots and lively demeanor, Polo is a bundle of feline energy. She is ready to pounce and play, bringing excitement and endless entertainment to your home. Polo is an affectionate companion waiting to become the heart-stealer of your household. Do not miss the chance to welcome this spirited Bengal kitten into your life!\r\n'),
-(7, 'Marco', 580, 1, '\r\nSay hello to Marco, a 5-month-old male Bengal kitten! With his mesmerizing rosettes and playful charm, Marco is the epitome of feline grace and energy. He is an adventurous spirit, always ready to explore and engage in playful antics. Marco is an affectionate little guy, eager to bring joy and liveliness into your home. Do not miss out on the chance to make Marco the newest and most beloved member of your family!\r\n\r\n'),
-(8, 'Rocky', 400, 1, 'Meet Rocky, a 2-year-old Border Collie! With his striking black and white coat and intelligent gaze, Rocky is a bundle of energy and smarts. Eager to learn and play, he is a quick learner and loves agility games. Rocky is not just a dog; he is a devoted companion waiting to bring enthusiasm and loyalty into your life. Do not miss out on the chance to make Rocky a cherished member of your family!\r\n\r\n'),
-(9, 'Whiskers', 400, 1, 'Introducing Whiskers, a 4-month-old playful and enchanting Siamese kitten! With stunning blue eyes and a sleek coat, Whiskers embodies elegance and charm. He is full of mischievous energy, ready to explore and cuddle up for warm naps. Whiskers is an affectionate little companion waiting to fill your home with joy and delightful kitten antics. Do not miss the chance to bring this captivating Siamese kitten into your life!\r\n'),
-(10, 'Chloe', 660, 1, 'Introducing Chloe, a 1-year-old charming and petite white Chihuahua! With her adorable button nose and sparkling personality, Chloe is the epitome of cuteness. Despite her small size, she has a big heart filled with love and loyalty. Chloe is an affectionate companion ready to bring bundles of joy and affection into your life. Do not miss the opportunity to welcome this delightful white Chihuahua into your home!\r\n'),
-(11, 'Scooby doo', 800, 1, 'Meet Scooby doo, a 3-year-old magnificent and friendly brown Great Dane! With his towering stature and gentle disposition, Scooby doo embodies both grace and warmth. Despite his impressive size, he is a big softie at heart, loving nothing more than cuddles and companionship. Scooby doo is a loyal companion waiting to fill your home with love and his majestic presence. Do not miss out on the chance to make Scooby doo a cherished member of your family!\r\n'),
-(12, 'Scrappy doo', 890, 1, 'Introducing Scrappy doo, a 1-year-old spirited and handsome brown Great Dane! With his youthful exuberance and striking presence, Scrappy doo is a bundle of energy and affection. Despite his size, he is full of playful antics and endless enthusiasm. Scrappy doo is an affectionate companion ready to bring joy and liveliness into your home. Don not miss the chance to welcome this delightful young Great Dane into your life!\r\n'),
-(13, 'Snoopy', 500, 1, 'Introducing Snoopy, a 4-year-old charming Beagle with a distinctive white coat and adorable black ears! With his classic beagle looks and heart-melting brown eyes, Snoopy is the epitome of cuteness and charm. He is a playful and affectionate companion, always ready for a fun adventure or a cuddle on the couch. Snoopy is the perfect addition to your family, bringing love, loyalty, and endless tail wags into your home. Do not miss out on the opportunity to make Snoopy your beloved furry friend!\r\n'),
-(14, 'Garfield', 450, 1, '\r\nIntroducing Garfield, a 5-year-old lovably chubby tabby cat! With his iconic orange coat and a talent for leisure, Garfield embodies the art of relaxation. His laid-back demeanor and penchant for naps make him the ultimate expert in the fine art of coziness. Garfield is a delightful companion, adding a touch of charm and tranquility to any home. If you are seeking a furry friend who appreciates the joys of a lazy day, Garfield is the purrfect match for you!'),
-(15, 'Sunny', 1050, 1, 'Meet Sunny, an adorable 3-month-old Golden Retriever puppy! With her fluffy golden coat and boundless enthusiasm, Sunny is the epitome of playful charm and friendliness. She is a bundle of joy, always ready to wag her tail and offer unconditional love. Sunny is an intelligent, affectionate companion ready to bring warmth and happiness into your life. Do not miss out on the chance to make Sunny a cherished member of your family!'),
-(16, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Don not miss the opportunity to make Bailey the treasured furry member of your family!'),
-(17, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Do not miss the opportunity to make Bailey the treasured furry member of your family!'),
-(18, 'Herbert', 700, 1, '\r\nIntroducing Herbert, a wise and gentle 8-year-old Golden Retriever! With his distinguished golden coat and soulful eyes, Herbert exudes years of loyalty and companionship. He is a seasoned expert in love and affection, offering a heart full of warmth to those around him. Herbert is not just an older dog; he is a cherished friend ready to fill your days with love, comfort, and unwavering devotion. Do not miss out on the chance to welcome this wise and loving Golden Retriever into your home!'),
-(19, 'Monkey', 350, 1, '\r\nIntroducing Monkey, a friendly and lively 3-year-old mixed-breed dog with a rich brown coat! With his playful nature and adorable antics, Monkey embodies joy and energy. His endearing personality and warm, expressive eyes make him an instant charmer. Monkey is a lovable companion ready to swing into your heart and become your trusted furry friend. Do not miss out on the opportunity to make Monkey a delightful addition to your family!');
+INSERT INTO `product` (`Product_ID`, `Name`, `Price`, `Num_In_Stock`, `Description`, `Image`) VALUES
+(1, 'Larry', 300, 1, 'An intelligent 11 year old rescue male race dog called Larry. He has a good temperament, and is very good with kids as well as other pets. He has a short gray coat that requires minimal grooming, and lovely brown eyes. He enjoys short bursts of energy, so a short walk every day will suffice. Larry will thrive in any environment where there`s enough space for him! ', NULL),
+(2, 'Max', 680, 1, 'Introducing Max, a 2-year-old Golden Retriever! He is the embodiment of playful energy and unwavering loyalty. With a shimmering golden coat and a heart full of love, Max is the perfect companion for anyone seeking a devoted four-legged friend. Ready to bring endless joy into your life, he is waiting to become a cherished member of your family.', NULL),
+(3, 'Luna', 450, 1, 'Meet Luna, a 3-year-old Maine Coon! With her regal grace and captivating green eyes, she brings elegance to any home. Playful and affectionate, Luna is ready to be the sophisticated companion that you have been dreaming of. She is not just a cat; she is a charming addition waiting to grace your life with love and beauty.', NULL),
+(4, 'Cooper', 650, 1, 'Meet Cooper, a 6-month-old playful and adorable Beagle puppy! With his floppy ears and soulful eyes, Cooper is the definition of cuteness. Full of energy and curiosity, he is eager to explore the world by your side. Cooper is an affectionate companion ready to bring laughter and warmth into your home. Do not miss the chance to welcome this charming Beagle pup into your family!', NULL),
+(5, 'Sophie', 450, 1, '\r\nPresenting Sophie, a 9-year-old serene and loving Siamese cat! With her striking blue eyes and elegant demeanor, Sophie exudes grace and wisdom. This mature beauty enjoys peaceful moments by the window and gentle affection on her terms. Her calming presence and gentle nature make her an ideal companion for a quiet, loving home. Sophie is not just a cat; she is a sophisticated feline ready to bring tranquility and companionship into your life.', NULL),
+(6, 'Polo', 580, 1, '\r\nMeet Polo, a 4-month-old playful and enchanting Bengal kitten! With her striking leopard-like spots and lively demeanor, Polo is a bundle of feline energy. She is ready to pounce and play, bringing excitement and endless entertainment to your home. Polo is an affectionate companion waiting to become the heart-stealer of your household. Do not miss the chance to welcome this spirited Bengal kitten into your life!\r\n', NULL),
+(7, 'Marco', 580, 1, '\r\nSay hello to Marco, a 5-month-old male Bengal kitten! With his mesmerizing rosettes and playful charm, Marco is the epitome of feline grace and energy. He is an adventurous spirit, always ready to explore and engage in playful antics. Marco is an affectionate little guy, eager to bring joy and liveliness into your home. Do not miss out on the chance to make Marco the newest and most beloved member of your family!\r\n\r\n', NULL),
+(8, 'Rocky', 400, 1, 'Meet Rocky, a 2-year-old Border Collie! With his striking black and white coat and intelligent gaze, Rocky is a bundle of energy and smarts. Eager to learn and play, he is a quick learner and loves agility games. Rocky is not just a dog; he is a devoted companion waiting to bring enthusiasm and loyalty into your life. Do not miss out on the chance to make Rocky a cherished member of your family!\r\n\r\n', NULL),
+(9, 'Whiskers', 400, 1, 'Introducing Whiskers, a 4-month-old playful and enchanting Siamese kitten! With stunning blue eyes and a sleek coat, Whiskers embodies elegance and charm. He is full of mischievous energy, ready to explore and cuddle up for warm naps. Whiskers is an affectionate little companion waiting to fill your home with joy and delightful kitten antics. Do not miss the chance to bring this captivating Siamese kitten into your life!\r\n', NULL),
+(10, 'Chloe', 660, 1, 'Introducing Chloe, a 1-year-old charming and petite white Chihuahua! With her adorable button nose and sparkling personality, Chloe is the epitome of cuteness. Despite her small size, she has a big heart filled with love and loyalty. Chloe is an affectionate companion ready to bring bundles of joy and affection into your life. Do not miss the opportunity to welcome this delightful white Chihuahua into your home!\r\n', NULL),
+(11, 'Scooby doo', 800, 1, 'Meet Scooby doo, a 3-year-old magnificent and friendly brown Great Dane! With his towering stature and gentle disposition, Scooby doo embodies both grace and warmth. Despite his impressive size, he is a big softie at heart, loving nothing more than cuddles and companionship. Scooby doo is a loyal companion waiting to fill your home with love and his majestic presence. Do not miss out on the chance to make Scooby doo a cherished member of your family!\r\n', NULL),
+(12, 'Scrappy doo', 890, 1, 'Introducing Scrappy doo, a 1-year-old spirited and handsome brown Great Dane! With his youthful exuberance and striking presence, Scrappy doo is a bundle of energy and affection. Despite his size, he is full of playful antics and endless enthusiasm. Scrappy doo is an affectionate companion ready to bring joy and liveliness into your home. Don not miss the chance to welcome this delightful young Great Dane into your life!\r\n', NULL),
+(13, 'Snoopy', 500, 1, 'Introducing Snoopy, a 4-year-old charming Beagle with a distinctive white coat and adorable black ears! With his classic beagle looks and heart-melting brown eyes, Snoopy is the epitome of cuteness and charm. He is a playful and affectionate companion, always ready for a fun adventure or a cuddle on the couch. Snoopy is the perfect addition to your family, bringing love, loyalty, and endless tail wags into your home. Do not miss out on the opportunity to make Snoopy your beloved furry friend!\r\n', NULL),
+(14, 'Garfield', 450, 1, '\r\nIntroducing Garfield, a 5-year-old lovably chubby tabby cat! With his iconic orange coat and a talent for leisure, Garfield embodies the art of relaxation. His laid-back demeanor and penchant for naps make him the ultimate expert in the fine art of coziness. Garfield is a delightful companion, adding a touch of charm and tranquility to any home. If you are seeking a furry friend who appreciates the joys of a lazy day, Garfield is the purrfect match for you!', NULL),
+(15, 'Sunny', 1050, 1, 'Meet Sunny, an adorable 3-month-old Golden Retriever puppy! With her fluffy golden coat and boundless enthusiasm, Sunny is the epitome of playful charm and friendliness. She is a bundle of joy, always ready to wag her tail and offer unconditional love. Sunny is an intelligent, affectionate companion ready to bring warmth and happiness into your life. Do not miss out on the chance to make Sunny a cherished member of your family!', NULL),
+(16, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Don not miss the opportunity to make Bailey the treasured furry member of your family!', NULL),
+(17, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Do not miss the opportunity to make Bailey the treasured furry member of your family!', NULL),
+(18, 'Herbert', 700, 1, '\r\nIntroducing Herbert, a wise and gentle 8-year-old Golden Retriever! With his distinguished golden coat and soulful eyes, Herbert exudes years of loyalty and companionship. He is a seasoned expert in love and affection, offering a heart full of warmth to those around him. Herbert is not just an older dog; he is a cherished friend ready to fill your days with love, comfort, and unwavering devotion. Do not miss out on the chance to welcome this wise and loving Golden Retriever into your home!', NULL),
+(19, 'Monkey', 350, 1, '\r\nIntroducing Monkey, a friendly and lively 3-year-old mixed-breed dog with a rich brown coat! With his playful nature and adorable antics, Monkey embodies joy and energy. His endearing personality and warm, expressive eyes make him an instant charmer. Monkey is a lovable companion ready to swing into your heart and become your trusted furry friend. Do not miss out on the opportunity to make Monkey a delightful addition to your family!', NULL),
+(20, 'Bow', 4, 12, 'A cute little bow, able to fit a pet of any size!', NULL),
+(21, 'Top Hat', 10, 8, 'A smart top hat perfect for a formal occasion, able to fit a pet of any size!', NULL),
+(22, 'Small coat', 32, 20, 'A cute waterproof coat to keep small pets warm in winter months.', NULL),
+(23, 'Flea Shampoo', 9, 41, 'Shampoo to keep pesky fleas at bay! available for any pet.', NULL),
+(24, 'Dog Shampoo', 6, 35, 'Shampoo to keep your dog`s coat in best condition! Suitable for dogs of any size and breed.', NULL),
+(25, 'Cat Shampoo', 6, 35, 'Shampoo to keep your cat`s coat in best condition! Suitable for cats of any size and breed.', NULL),
+(26, 'Dog conditioner', 6, 35, 'Conditioner to keep your dog`s coat soft! Suitable for dogs of any size and breed.', NULL),
+(27, 'Cat conditioner', 6, 35, 'Conditioner to keep your cat`s coat soft! Suitable for cats of any size and breed.', NULL),
+(28, 'Monkey teddy', 7, 7, 'A soft toy monkey to be your pet`s best friend! Suitable for any pet, though may not be durable when playing with large dogs.', NULL),
+(29, 'rope toy', 5, 16, 'A durable rope toy designed for rough play. Can withstand tugs from even the largest dogs! Suitable for any pet, though ideal for dogs.', NULL),
+(30, 'Toy mouse', 4, 19, ' A small toy mouse for your pet to play with! Suitable for any pet, though ideal for cats.', NULL);
 
 -- --------------------------------------------------------
 
@@ -254,7 +269,18 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 (2, 13, 49),
 (5, 13, 50),
 (7, 13, 51),
-(11, 13, 53);
+(11, 13, 53),
+(19, 20, 54),
+(19, 21, 55),
+(19, 22, 56),
+(20, 23, 57),
+(20, 24, 58),
+(20, 25, 59),
+(20, 26, 60),
+(20, 27, 61),
+(20, 28, 62),
+(20, 29, 63),
+(20, 30, 64);
 
 --
 -- Indexes for dumped tables
@@ -272,6 +298,7 @@ ALTER TABLE `admin`
 -- Indexes for table `basket`
 --
 ALTER TABLE `basket`
+  ADD PRIMARY KEY (`Customer_ID`,`Product_ID`),
   ADD KEY `Customer_ID` (`Customer_ID`),
   ADD KEY `Products_ID` (`Product_ID`);
 
@@ -333,7 +360,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Category_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -357,13 +384,13 @@ ALTER TABLE `ordersdetails`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `Product_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `prodcat_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `prodcat_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- Constraints for dumped tables
