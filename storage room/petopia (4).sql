@@ -94,8 +94,8 @@ INSERT INTO `category` (`Category_ID`, `Name`, `Description`) VALUES
 (16, 'Great Dane', 'Great Danes: Majestic, gentle giants! These magnificent dogs combine grace and size effortlessly. Known for their calm demeanor and affectionate nature, Great Danes make impressive yet loving companions for families or individuals seeking a loyal and regal furry friend. Do not miss the opportunity to bring the grandeur of a Great Dane into your home!'),
 (17, 'Tabby', 'Tabby Cats: Classic, charming, and full of character! These iconic felines boast beautiful coats and winning personalities. Known for their playful antics and loving nature, tabby cats make delightful companions for anyone seeking a loving and adaptable pet. Do not miss the chance to add the timeless charm of a tabby cat to your life!'),
 (18, 'Mixed Breed', 'Mixed Breeds: Unique, versatile, and full of surprises! These one-of-a-kind companions offer the best of various breeds in one delightful package. Known for their individuality and diverse traits, mixed-breed pets make fantastic, adaptable additions to any home. Do not miss out on the opportunity to welcome a wonderfully unique and loving mixed-breed pet into your life!'),
-(19, 'Accessories', 'Bits and bobs to help your pet look their best!'),
-(20, 'Pet Care', 'Essentials for your pet, to ensure that they look and feel their best!'),
+(19, 'Treats', 'Bits and bobs to help your pet look and feel their best!'),
+(20, 'Grooming', 'Essentials for your pet, to ensure that they look and feel their best!'),
 (21, 'Toys', 'Toys for your pet, for fun play at any time of day!');
 
 -- --------------------------------------------------------
