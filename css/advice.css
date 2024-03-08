@@ -62,11 +62,27 @@
     padding: 10px;
   }
   #end{
-    text-align: left;
+    text-align: center;
   }
 
+  .all-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
   .all-text ul {
+    width: 80%;
     padding: 0;
     padding-left: 50px;
     padding-right: 50px;
   }
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media screen and (max-width: 1000px){
+  .all-text ul {width: 90%}
+}

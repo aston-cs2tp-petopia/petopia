@@ -1,5 +1,4 @@
 body {
-    background-color: #f0f0f0; /* Set the background color */
     overflow: hidden; /* Hide overflow to prevent scroll bars */
 }
 
@@ -15,3 +14,33 @@ body {
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
   @About Us
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.main-content {
+  width: 100%;
+  padding: 40px 0;
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-content {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-h3 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 900;
+  color: #a349a4;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media screen and (max-width: 600px) {
+  .about-content {width: 85%;}
+}

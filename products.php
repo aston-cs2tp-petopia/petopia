@@ -1,42 +1,43 @@
 <?php
- require_once('php/mainLogCheck.php');
-    
-    $productType = $_GET["productType"];
-    echo($productType);
-    echo('7');
+require_once "php/mainLogCheck.php";
 
-    //when the basket button is pressed, send the product id and customer id to order details
-    if (isset($_POST['add'])) {
+//$productType=$_GET["productType"];
+//echo($productType);
 
-        require_once('php/connectdb.php');
+//when the basket button is pressed, send the product id and customer id to order details
+if (isset($_POST["add"])) {
+    require_once "php/connectdb.php";
 
-        $username = $_SESSION["username"];
-        $custIDQuery = $db->prepare('SELECT Customer_ID FROM customer WHERE username = ?');
-        $custIDQuery->execute([$username]);
-        $custID = $custIDQuery->fetchColumn();
+    $username = $_SESSION["username"];
+    $custIDQuery = $db->prepare(
+        "SELECT Customer_ID FROM customer WHERE username = ?"
+    );
+    $custIDQuery->execute([$username]);
+    $custID = $custIDQuery->fetchColumn();
 
-        $productID = $_POST['productID'];
-        $quantity = $_POST['quantity'];
+    $productID = $_POST["productID"];
+    $quantity = $_POST["quantity"];
 
-        // Get product price
-        $priceQuery = $db->prepare('SELECT Price FROM product WHERE Product_ID = ?');
-        $priceQuery->execute([$productID]);
-        $price = $priceQuery->fetchColumn();
+    // Get product price
+    $priceQuery = $db->prepare(
+        "SELECT Price FROM product WHERE Product_ID = ?"
+    );
+    $priceQuery->execute([$productID]);
+    $price = $priceQuery->fetchColumn();
 
-        // Calculate subtotal
-        $subtotal = $quantity * $price;
+    // Calculate subtotal
+    $subtotal = $quantity * $price;
 
-        try {
-            $basketQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
-            $basketQuery->execute(array($custID, $productID, $quantity, $subtotal));
-
-        } catch (PDOexception $ex) {
-            echo "Sorry, a database error occurred! <br>";
-            echo "Error details: <em>" . $ex->getMessage() . "</em>";
-        }
-
+    try {
+        $basketQuery = $db->prepare(
+            "INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)"
+        );
+        $basketQuery->execute([$custID, $productID, $quantity, $subtotal]);
+    } catch (PDOexception $ex) {
+        echo "Sorry, a database error occurred! <br>";
+        echo "Error details: <em>" . $ex->getMessage() . "</em>";
     }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +48,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
     <link href="css/items.css" rel="stylesheet" type="text/css">
-    <link href="css/navigation.css" rel="stylesheet" type="text/css">
-    <link href="css/footer.css" rel="stylesheet" type="text/css">
 
     <!--[Google Fonts]-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,120 +60,32 @@
     <!--Box Icons-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!--Flickity-->
+    <!--
+        [Navigation & Footer]
+    -->
+    <script src="templates/navigationTemplate.js"></script>
+    <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/footer.css">
+
     <!--CSS Templates-->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="templates/hero-banner.css">
+
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 </head>
 
 <body>
-    <header>
         <!--
         [NAVIGATION/HEADER]
     -->
     <header>
-        <!--Logo-->
-        <div class="logo-container"><a href="#"><img src="assets/logo.png" alt=""></a></div>
 
-        <!--Middle Navigation-->
-        <nav class="desktop-nav">
-            <ul class="desktop-nav-ul">
-                <li><a href="index.php">Home</a></li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Pets v</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
-                    </ul>
-                </li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Shop v</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-li"><a href="products.php">Toys</a></li>
-                        <li class="dropdown-li"><a href="products.php">Grooming</a></li>
-                        <li><a href="products.php">Treats</a></li>
-                    </ul>
-                </li>
-                <li><a href="advice.php">Advice</a></li>
-                <li><a href="about.php">About Us</a></li>
-                <li><a href="contact.php">Contact</a></li>
-            </ul>
-        </nav>
-
-        <!--Right Navigation-->
-        <div class="right-nav">
-            <!--Shoppiung Basket Button-->
-            <?php
-                //Login Button
-                if ($b==true) {
-                    //Log out button
-                    //Shoppiung Basket Button
-                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
-                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
-                }else{
-                    //Login Button
-                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }       
-            ?>
-        </div>
-
-        <!--Mobile-Background-->
-        <div class="mobile-background"></div>
-        <!--Mobile Navigation-->
-        <nav class="mobile-nav">
-            <div class="mobile-nav-top">
-                <div class="mobile-logo"><img src="assets/logo.png" alt=""></div>
-                <p class="close-menu-button" draggable="false">X</p>
-            </div>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Pets v</a>
-                    <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
-                    </ul>
-                </li>
-                <!--Dropdown-->
-                <li class="dropdown">
-                    <a href="#">Shop v</a>
-                    <ul class="dropdown-menu-mobile">
-                        <li class="dropdown-li"><a href="products.php">Cats</a></li>
-                        <li class="dropdown-li"><a href="products.php">Dogs</a></li>
-                    </ul>
-                </li>
-                <li><a href="advice.php">Advice</a></li>
-                <li><a href="about.php">About Us</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <div class="mobile-bottom-nav">
-                    <?php
-                //Login Button
-                if ($b==true) {
-                    //Log out button
-                    //Shoppiung Basket Button
-                    echo '<a href="basket.php" class="basket-link"><div class="basket-button bx bx-basket"></div></a>';
-                    echo '<div class="login-button"><a href="php/signOut.php"">Log Out</a></div>';
-                }else{
-                    //Login Button
-                    echo '<div class="login-button"><a href="login.php">Login</a></div>';
-                }       
-            ?>
-                </div>
-            </ul>
-        </nav>
-        <!--Mobile Hamburger-->
-        <div id="hamburger-button" class='bx bx-menu'></div>
     </header>
     <!--
         [HEADER/NAVIGATION END]
     -->
-    </header>
     
     <main>
         <!--Hero Banner-->
@@ -191,76 +102,143 @@
                 </div>
             </div>
         </section>
+
         <section class="items-container">
-            <?php
-                require_once('php/connectdb.php');
-                try {
-                    $categoryIDQuery = "select Category_ID from  category where name = $productType"; //need to add 'where' query once i have a category variable
-                    
-                    echo ($categoryIDQuery);
-                    $categoryID =  $db->query($categoryIDQuery);
-                    echo($categoryID);
+            <div class="items-left">
 
-                    $productIDQuery = "select Product_ID from  productCategory where Category_ID = $categoryID"; //need to add 'where' query once i have a category variable
-                    $productID =  $db->query($productIDQuery);
-                    echo($productID);
+            </div>
 
-                    $productsQuery = "select * from  product where Product_ID like '$productID'"; //need to add 'where' query once i have a category variable
-                    $rows =  $db->query($productsQuery);
+            <div class="items-right">
 
-                    // $categoryIDQuery = $db->prepare("select Category_ID from  category where name = ?");
-                    // $categoryIDQuery->execute([$productType]);
-                    // $categoryID = $categoryIDQuery->fetchColumn();
-                    // echo($categoryID);
+                <div class="filters-top">
+                    <!--Filters-->
+                    <div class="filters-left">
+                        <!--Show N per page-->
+                        <div class="show-list-container">
+                            <form><label for="show">Show</label>
+                                <select id="show" class="selected">
+                                    <option value="true">06</option>
+                                    <option value="true">12</option>
+                                    <option value="true">18</option>
+                                    <option value="true">24</option>
+                                    <option value="true">30</option>
+                                </select>
+                            </form>
+                        </div>
 
-                    // $productIDQuery = $db->prepare("select Product_ID from  productCategory where Category_ID = ?");
-                    // $productIDQuery->execute([$categoryID]);
-                    // $productID = $productIDQuery->fetchColumn();
+                        <!--Sort By-->
+                        <div class="sort-by-container">
+                            <form><label for="shortBy">Sort By</label>
+                                <select id="shortBy" class="selected">
+                                    <option value="true">Select</option>
+                                    <option value="true">Low to high</option>
+                                    <option value="true">High to low</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
 
-                    // $productsQuery = $db->prepare("select * from  product where Product_ID like ?");
-                    // $productsQuery->execute();
+                    <!--Search-->
+                    <form id="filters-right">
+                        <!--Search Input Container-->
+                        <div class="input-container">
+                            <input type="text" id="contact-name" name="contact-name" class="name-input"
+                                placeholder="Search..." required />
+                            <i class='bx bx-search'></i>
+                        </div>
+                    </form>
+                </div>
 
-                    // $rows = $productsQuery->fetchAll(PDO::FETCH_ASSOC);
+                    <div class="results-container">
+                    <?php
+                    require_once "php/connectdb.php";
 
-                    //display the query edited table	
-                    if ($rows && $rows->rowCount() > 0) {
-                        foreach ($rows as $row) {
-            ?>
+                    // Capture search term and category IDs from URL query parameters
+                    $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+                    $category_ids = isset($_GET['category_id']) && is_array($_GET['category_id']) ? array_map('intval', $_GET['category_id']) : [];
+
+                    try {
+                        $queryParams = [];
+                        $queryParts = [
+                            "SELECT DISTINCT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames",
+                            "FROM product p",
+                            "LEFT JOIN productcategory pc ON p.Product_ID = pc.Product_ID",
+                            "LEFT JOIN category c ON pc.Category_ID = c.Category_ID"
+                        ];
+
+                        // Building WHERE conditions based on search term and categories
+                        $conditions = [];
+                        if (!empty($searchTerm)) {
+                            $conditions[] = "p.Name LIKE ?";
+                            $queryParams[] = "%{$searchTerm}%";
+                        }
+                        if (!empty($category_ids)) {
+                            $placeholders = implode(',', array_fill(0, count($category_ids), '?'));
+                            $conditions[] = "pc.Category_ID IN ($placeholders)";
+                            $queryParams = array_merge($queryParams, $category_ids);
+                        }
+
+                        if (!empty($conditions)) {
+                            $queryParts[] = "WHERE " . implode(" AND ", $conditions);
+                        }
+                        $queryParts[] = "GROUP BY p.Product_ID";
+
+                        // Finalizing and executing the query
+                        $finalQuery = implode(" ", $queryParts);
+                        $stmt = $db->prepare($finalQuery);
+                        $stmt->execute($queryParams);
+                        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        //display the query edited table
+                        if ($rows) {
+                            foreach ($rows as $row) { ?>
                             <div class="item-template">
                                 <div class="item-image">
-                                    <img src="assets/Homepage/hero-banner2.jpg" alt="">
+                                    <?php $tempPID = $row["Product_ID"]; ?>
+                                    <a href="item.php?Product_ID=<?php echo $tempPID; ?>"><img src="assets/Homepage/hero-banner2.jpg" alt=""></a>
                                 </div>
                             
                                 <div class="item-info">
-                                    <?php $tempPID=$row['Product_ID']  ?>
-                                    <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row['Name']; ?></a></h4>
+                                    <h6><?php echo $row["CategoryNames"]?></h6>
+                                    <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row[
+                                        "Name"
+                                        ]; ?></a></h4>
                                     <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
-                                    <h5>£<?php echo $row['Price'];?></h5>
+                                    <h5>£<?php echo $row["Price"]; ?></h5>
                             
                                     <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row['Num_In_Stock'];?></p>
-                                        <?php
-                                            if ($b==true && $row['Num_In_Stock']>0) {
-                                                echo "<form method='post' action='products.php'>";
-                                                echo '<input type="hidden" name="productID" value="' . $row['Product_ID'] . '">';
-                                                echo '<input type="hidden" name="quantity" value="1">';
-                                                echo '<button type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
-                                                echo '</form>';
-                                            }   
-                                        ?>
+                                        <p>Stock: <?php echo $row[
+                                            "Num_In_Stock"
+                                        ]; ?></p>
+                                        <?php if (
+                                            $b == true &&
+                                            $row["Num_In_Stock"] > 0
+                                        ) {
+                                            echo "<form method='post' action='products.php'>";
+                                            echo '<input type="hidden" name="productID" value="' .
+                                                $row["Product_ID"] .
+                                                '">';
+                                            echo '<input type="hidden" name="quantity" value="1">';
+                                            echo '<button class="add-cart-btn" type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
+                                            echo "</form>";
+                                        } ?>
                                     </div>
                                 </div>
                             </div>
-            <?php
+                        <?php }
+                        } else {
+                            echo "<p>No matching Product.</p>\n"; //no match found
                         }
-                    } else {
-                        echo  "<p>No matching Product.</p>\n"; //no match found
+                    } catch (PDOexception $ex) {
+                        echo "Sorry, a database error occurred! <br>";
+                        echo "Error details: <em>" .
+                            $ex->getMessage() .
+                            "</em>";
                     }
-                } catch (PDOexception $ex) {
-                    echo "Sorry, a database error occurred! <br>";
-                    echo "Error details: <em>" . $ex->getMessage() . "</em>";
-                }
-            ?>
+                    ?>
+
+                </div>
+            </div>
         </section>
         </main>
 </body>
