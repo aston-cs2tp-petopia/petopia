@@ -79,9 +79,10 @@ if (isset($_POST['submit-update']) && !empty($_SESSION['username'])) {
     $phone = filter_input(INPUT_POST, 'update-phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $address = filter_input(INPUT_POST, 'update-address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $postcode = filter_input(INPUT_POST, 'update-postcode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $password = isset($_POST['update-password']) ? $_POST['update-password'] : null; // Check if password is set
 
     // Validate the form data using validateSignupData function from validateSignup.php
-    $errors = validateSignupData($firstName, $lastName, $email, $phone, $username, $_POST['update-password']);
+    $errors = validateSignupData($firstName, $lastName, $email, $phone, $username, $password);
 
     // If there are validation errors, display them to the user
     if (!empty($errors)) {
@@ -146,6 +147,7 @@ if (isset($_POST['submit-update']) && !empty($_SESSION['username'])) {
     }
 }
 ?>
+
 
 
 <section class="account-settings-section">
