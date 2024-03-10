@@ -56,8 +56,9 @@
             <li class="dropdown">
                 <a href="#">Shop v</a>
                 <ul class="dropdown-menu-mobile">
-                    <li class="dropdown-li"><a href="products.php">Food</a></li>
-                    <li class="dropdown-li"><a href="products.php">Toys</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=21">Toys</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=20">Grooming</a></li>
+                    <li><a href="products.php?category_id[]=19">Treats</a></li>
                 </ul>
             </li>
             <li><a href="advice.php">Advice</a></li>
@@ -100,9 +101,9 @@
             <li class="dropdown">
                 <a href="#">Shop v</a>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-li"><a href="products.php">Toys</a></li>
-                    <li class="dropdown-li"><a href="products.php">Grooming</a></li>
-                    <li><a href="products.php">Treats</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=21">Toys</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=20">Grooming</a></li>
+                    <li><a href="products.php?category_id[]=19">Treats</a></li>
                 </ul>
             </li>
             <li><a href="advice.php">Advice</a></li>
