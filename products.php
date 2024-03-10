@@ -118,22 +118,22 @@ if (isset($_POST["add"])) {
                         <div class="show-list-container">
                             <form><label for="show">Show</label>
                                 <select id="show" class="selected">
-                                    <option value="true">06</option>
-                                    <option value="true">12</option>
-                                    <option value="true">18</option>
-                                    <option value="true">24</option>
-                                    <option value="true">30</option>
+                                    <option value="6">06</option>
+                                    <option value="12">12</option>
+                                    <option value="18">18</option>
+                                    <option value="24">24</option>
+                                    <option value="30">30</option>
                                 </select>
                             </form>
                         </div>
 
                         <!--Sort By-->
                         <div class="sort-by-container">
-                            <form><label for="shortBy">Sort By</label>
-                                <select id="shortBy" class="selected">
-                                    <option value="true">Select</option>
-                                    <option value="true">Low to high</option>
-                                    <option value="true">High to low</option>
+                            <form><label for="sortBy">Sort By</label>
+                                <select id="sortBy" class="selected">
+                                    <option value="select">Select</option>
+                                    <option value="lowToHigh">Low to high</option>
+                                    <option value="highToLow">High to low</option>
                                 </select>
                             </form>
                         </div>
@@ -238,6 +238,10 @@ if (isset($_POST["add"])) {
                     }
                     ?>
 
+                </div>
+                <div id="pagination-controls">
+                    <button id="prevPage">Previous</button>
+                    <button id="nextPage">Next</button>
                 </div>
             </div>
         </section>
