@@ -1,21 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let itemsArray = []; //This will hold the currently displayable items based on search and sort
-    let originalOrder = []; //Stores the original HTML for reset purposes
+
+    /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+        @Variables
+    \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     const itemsContainer = document.querySelector('.results-container');
     const searchInput = document.getElementById('contact-name');
     const sortBySelect = document.getElementById('sortBy');
     const showSelect = document.getElementById('show');
     let currentPage = 1;
-    
-    //Helper function to refresh the items array based on current DOM
-    function refreshItemsArray() {
-        originalOrder = Array.from(itemsContainer.querySelectorAll('.item-template'));
-        itemsArray = [...originalOrder]; //Clone the original order
-    }
+    let itemsArray = [];
+    let originalOrder = Array.from(itemsContainer.querySelectorAll('.item-template'));
 
-    //Initial refresh
-    refreshItemsArray();
-
+    /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+        @Filters + Sorting
+    \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     function applyFilterAndSort() {
         const searchTerm = searchInput.value.toLowerCase();
         const sortValue = sortBySelect.value;
@@ -35,46 +33,67 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        itemsArray = filteredItems; //Update the global itemsArray to reflect current search and sort
-        currentPage = 1; //Reset to the first page
+        itemsArray = filteredItems;
+        currentPage = 1;
         updateItemsVisibility();
     }
 
+    /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+        @Visability
+    \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     function updateItemsVisibility() {
         const itemsPerPage = parseInt(showSelect.value, 10);
         const totalPages = Math.ceil(itemsArray.length / itemsPerPage);
-        //Clear the container
-        itemsContainer.innerHTML = '';
 
-        //Append only the items that should be visible on the current page
-        itemsArray.forEach((item, index) => {
-            const position = index + 1;
-            const start = (currentPage - 1) * itemsPerPage + 1;
-            const end = currentPage * itemsPerPage;
-            if (position >= start && position <= end) {
-                itemsContainer.appendChild(item);
-            }
+        //Clear the container and manage no items found scenario
+        itemsContainer.innerHTML = itemsArray.length ? '' : '<div>No products found.</div>';
+
+        //Append items for the current page
+        itemsArray.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).forEach(item => {
+            itemsContainer.appendChild(item);
         });
 
-        updateButtonStates(totalPages);
+        //Update paging controls
+        updatePagingControls(totalPages);
     }
 
-    //Search and sort integration
+    /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+        @Paging Controls
+    \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+    function updatePagingControls(totalPages) {
+        const prevPageButton = document.getElementById('prev-page');
+        const nextPageButton = document.getElementById('next-page');
+
+        // Directly set display style based on totalPages; no need to show buttons for a single page
+        const displayStyle = totalPages > 1 ? '' : 'none';
+        prevPageButton.style.display = nextPageButton.style.display = displayStyle;
+
+        // Function to configure button states
+        const configureButton = (button, isDisabled) => {
+            button.disabled = isDisabled;
+            button.style.backgroundColor = isDisabled ? 'rgb(22 55 65 / 50%)' : ''; // Set background color based on disabled state
+        };
+
+        // Configure previous and next buttons based on currentPage and totalPages
+        configureButton(prevPageButton, currentPage === 1);
+        configureButton(nextPageButton, currentPage >= totalPages);
+    }
+
+    /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+        @Event Listeners
+    \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     searchInput.addEventListener('input', applyFilterAndSort);
     sortBySelect.addEventListener('change', applyFilterAndSort);
+    showSelect.addEventListener('change', applyFilterAndSort); // Update for consistency
 
-    //Show selection change
-    showSelect.addEventListener('change', updateItemsVisibility);
-
-    //Pagination controls
-    document.getElementById('prevPage').addEventListener('click', () => {
+    document.getElementById('prev-page').addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
             updateItemsVisibility();
         }
     });
 
-    document.getElementById('nextPage').addEventListener('click', () => {
+    document.getElementById('next-page').addEventListener('click', () => {
         const totalPages = Math.ceil(itemsArray.length / parseInt(showSelect.value, 10));
         if (currentPage < totalPages) {
             currentPage++;
@@ -82,12 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    //Update button states based on the current page and total pages
-    function updateButtonStates(totalPages) {
-        document.getElementById('prevPage').disabled = currentPage === 1;
-        document.getElementById('nextPage').disabled = currentPage === totalPages;
-    }
-
-    //Initial call to set everything up
-    updateItemsVisibility();
+    //Initial setup
+    applyFilterAndSort(); //Also takes care of initial visibility update
 });

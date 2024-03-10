@@ -239,9 +239,9 @@ if (isset($_POST["add"])) {
                     ?>
 
                 </div>
-                <div id="pagination-controls">
-                    <button id="prevPage">Previous</button>
-                    <button id="nextPage">Next</button>
+                <div id="paging-controls">
+                    <button id="prev-page">Previous</button>
+                    <button id="next-page">Next</button>
                 </div>
             </div>
         </section>
