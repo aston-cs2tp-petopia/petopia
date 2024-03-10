@@ -73,6 +73,7 @@ if (isset($_POST["add"])) {
 
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="scripts/searchProducts.js"></script>
 
 </head>
 
