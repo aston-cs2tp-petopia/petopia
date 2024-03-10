@@ -64,6 +64,12 @@
             <li><a href="advice.php">Advice</a></li>
             <li><a href="about.php">About Us</a></li>
             <li><a href="contact.php">Contact</a></li>
+            <?php
+            if ($b==true) {
+                echo '<li><a href="orders.php">Orders</a></li>';
+                echo '<li><a href="account.php">Account</a></li>';
+            }
+            ?>
             <div class="mobile-bottom-nav">
             <?php
                 //Login Button
@@ -109,6 +115,13 @@
             <li><a href="advice.php">Advice</a></li>
             <li><a href="about.php">About Us</a></li>
             <li><a href="contact.php">Contact</a></li>
+            <?php
+            //Account & Orders Button
+            if ($b==true) {
+                echo '<li><a href="orders.php">Orders</a></li>';
+                echo '<li><a href="account.php">Account</a></li>';
+            }       
+            ?>
         </ul>
     </nav>
 </div>
