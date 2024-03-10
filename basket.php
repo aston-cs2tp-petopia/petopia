@@ -68,11 +68,11 @@
                 require_once('php/connectdb.php');
 
                 try {
-                    $query = 'SELECT product.Product_ID, product.Name, SUM(Quantity) as TotalQuantity, Subtotal 
-                            FROM basket 
-                            JOIN product ON product.Product_ID = basket.Product_ID 
-                            JOIN customer ON basket.Customer_ID = customer.Customer_ID
-                            GROUP BY product.Product_ID';
+                    $query = 'SELECT product.Product_ID, product.Name, SUM(basket.Quantity) as TotalQuantity, SUM(basket.Subtotal) as TotalSubtotal
+                        FROM basket 
+                        JOIN product ON product.Product_ID = basket.Product_ID 
+                        JOIN customer ON basket.Customer_ID = customer.Customer_ID
+                        GROUP BY product.Product_ID, product.Name';
 
                     //run the query
                     $rows = $db->query($query);
@@ -94,7 +94,7 @@
                                             <td align='center'><img src='assets/Homepage/hero-banner2.jpg' alt='Product Image' width='50' height='50'></td>
                                             <td align='center'>" . $row['Name'] . "</td>
                                             <td align='center'>" . $row['TotalQuantity'] . "</td>
-                                            <td align='center'>" . $row['Subtotal'] . "</td>
+                                            <td align='center'>£" . $row['TotalSubtotal'] . "</td>
                                             <td align='center'><button class='remove-basket'>Remove</button></td>
                                         </tr>";
                             }

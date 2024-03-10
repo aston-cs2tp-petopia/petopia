@@ -46,7 +46,7 @@
             <li><a href="index.php">Home</a></li>
             <!--Dropdown-->
             <li class="dropdown">
-                <a href="#">Pets v</a>
+                <a href="products.php?category_id[]=5&category_id[]=6">Pets v</a>
                 <ul class="dropdown-menu-mobile">
                     <li class="dropdown-li"><a href="products.php?category_id[]=6">Cats</a></li>
                     <li class="dropdown-li"><a href="products.php?category_id[]=5">Dogs</a></li>
@@ -54,7 +54,7 @@
             </li>
             <!--Dropdown-->
             <li class="dropdown">
-                <a href="#">Shop v</a>
+                <a href="products.php?category_id[]=19&category_id[]=20&category_id[]=21">Shop v</a>
                 <ul class="dropdown-menu-mobile">
                     <li class="dropdown-li"><a href="products.php?category_id[]=21">Toys</a></li>
                     <li class="dropdown-li"><a href="products.php?category_id[]=20">Grooming</a></li>
@@ -99,7 +99,7 @@
             </li>
             <!--Dropdown-->
             <li class="dropdown">
-                <a href="#">Shop v</a>
+                <a href="products.php?category_id[]=19&category_id[]=20&category_id[]=21">Shop v</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-li"><a href="products.php?category_id[]=21">Toys</a></li>
                     <li class="dropdown-li"><a href="products.php?category_id[]=20">Grooming</a></li>
