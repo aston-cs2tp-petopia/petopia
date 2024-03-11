@@ -2,7 +2,7 @@
 
 
 $db_host = 'localhost';
-$db_name = 'petopia2';
+$db_name = 'petopia';
 $username = 'root';
 $password = '';
 
