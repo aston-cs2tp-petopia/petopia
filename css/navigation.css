@@ -290,7 +290,7 @@ header {
     top: 0;
     right: 0;
     z-index: 9999;
-    overflow: hidden;
+    overflow-x: auto;
 }
 
 /*Top Navigation Container*/
@@ -380,9 +380,10 @@ header {
     }
 
     /*Login*/
-    .login-button {position: relative; height: 45px; width: 130px; bottom: 8px; right: 20px;}
+    .login-button {position: relative; height: 45px; width: 130px; bottom: 8px; margin-right: 20px;}
     .login-link {line-height: 45px;} /*Fix Line Height of Button*/
-    .basket-button {position: relative; right: 55px;}
+    .login-button a {line-height: 45px;}
+    .basket-button {position: relative;}
 
     
     /*Hides Desktop Nav*/
@@ -392,10 +393,11 @@ header {
 @media (max-width: 600px) {#search-form {display: none;}}
 @media (max-width: 450px) {
     .mobile-nav {width: 250px;}
-    .basket-button {position: relative; right: 35px;}
+    .basket-button {position: relative;}
     .close-menu-button {font-size: 28px;}
     .logo-container {width: 50px; height: 35px;}
     .logo-container img {width: auto;}
+    .login-button a {line-height: 45px;}
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\

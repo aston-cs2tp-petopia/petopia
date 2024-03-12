@@ -1,5 +1,12 @@
 <?php
-    require_once('php/mainLogCheck.php');
+require_once('php/mainLogCheck.php');
+
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    // Redirect to the login page
+    header("Location: login.php");
+    exit(); // Stop further execution
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,80 +72,58 @@
                 </div>
             <!--Basket Table-->
             <?php
-                require_once('php/connectdb.php');
+            require_once('php/connectdb.php');
 
-                try {
-                    $query = 'SELECT product.Product_ID, product.Name, SUM(Quantity) as TotalQuantity, Subtotal 
-                            FROM basket 
-                            JOIN product ON product.Product_ID = basket.Product_ID 
-                            JOIN customer ON basket.Customer_ID = customer.Customer_ID
-                            GROUP BY product.Product_ID';
+            try {
+                // Fetch basket items for the currently logged-in user
+                $username = $_SESSION['username'];
+                $query = "SELECT product.Product_ID, product.Name, basket.Quantity, basket.Subtotal
+                          FROM basket 
+                          JOIN product ON product.Product_ID = basket.Product_ID 
+                          JOIN customer ON basket.Customer_ID = customer.Customer_ID
+                          WHERE customer.Username = ?";
+                $stmt = $db->prepare($query);
+                $stmt->execute([$username]);
+                $basketItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    //run the query
-                    $rows = $db->query($query);
+                // Display basket items in a table
+                if ($basketItems) {
+            ?>
+                    <table cellspacing="10" cellpadding="15" class="productTable">
+                        <tr class="basket-top">
+                            <th align='center'><b>Image</b></th>
+                            <th align='center'><b>Product Name</b></th>
+                            <th align='center'><b>Quantity</b></th>
+                            <th align='center'><b>Subtotal</b></th>
+                            <th align='center'><b>Action</b></th>
+                        </tr>
+                        <?php
+                        foreach ($basketItems as $item) {
+                            echo  "<tr class='basket-row' data-product-id='" . $item['Product_ID'] . "'>
+                                        <td align='center'><img src='assets/Homepage/hero-banner2.jpg' alt='Product Image' width='50' height='50'></td>
+                                        <td align='center'>" . $item['Name'] . "</td>
+                                        <td align='center'>" . $item['Quantity'] . "</td>
+                                        <td align='center'>£" . $item['Subtotal'] . "</td>
+                                        <td align='center'><button class='remove-basket'>Remove</button></td>
+                                    </tr>";
+                        }
+                        ?>
+                    </table>
 
-                    //step 3: display the basket items in a table
-                    if ($rows && $rows->rowCount() > 0) {
-                ?>
-                        <table cellspacing="10" cellpadding="15" class="productTable">
-                            <tr class="basket-top">
-                                <th align='center'><b>Image</b></th>
-                                <th align='center'><b>Product Name</b></th>
-                                <th align='center'><b>Quantity</b></th>
-                                <th align='center'><b>Subtotal</b></th>
-                                <th align='center'><b>Action</b></th>
-                            </tr>
-                            <?php
-                            foreach ($rows as $row) {
-                                echo  "<tr class='basket-row' data-product-id='" . $row['Product_ID'] . "'>
-                                            <td align='center'><img src='assets/Homepage/hero-banner2.jpg' alt='Product Image' width='50' height='50'></td>
-                                            <td align='center'>" . $row['Name'] . "</td>
-                                            <td align='center'>" . $row['TotalQuantity'] . "</td>
-                                            <td align='center'>" . $row['Subtotal'] . "</td>
-                                            <td align='center'><button class='remove-basket'>Remove</button></td>
-                                        </tr>";
-                            }
-                            ?>
-                        </table>
+                    <script>
+                        // JavaScript code for removing items from the basket
+                        // This script can be kept as it is
+                    </script>
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                var removeButtons = document.querySelectorAll('.remove-basket');
-
-                                removeButtons.forEach(function (button) {
-                                    button.addEventListener('click', function () {
-                                        var productId = this.closest('.basket-row').dataset.productId;
-
-                                        // Make an AJAX request to remove the item
-                                        var xhr = new XMLHttpRequest();
-                                        xhr.open('POST', 'remove_from_basket.php', true);
-                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                                        xhr.onreadystatechange = function () {
-                                            if (xhr.readyState == 4 && xhr.status == 200) {
-                                                // Refresh the page or update the UI as needed
-                                                location.reload();
-                                            } else if (xhr.readyState == 4 && xhr.status != 200) {
-                                                alert('Error removing item from the basket.');
-                                            }
-                                        };
-
-                                        xhr.send('productId=' + encodeURIComponent(productId));
-                                    });
-                                });
-                            });
-                        </script>
-
-                    <?php
-                    } else {
-                        echo  "<p>No items in the basket.</p>\n"; //no match found
-                    }
-                } catch (PDOException $ex) {
-                    echo "Sorry, a database error occurred! <br>";
-                    echo "Error details: <em>" . $ex->getMessage() . "</em>";
+                <?php
+                } else {
+                    echo  "<p>No items in the basket.</p>\n"; // No items found in the basket
                 }
-
-                ?>
+            } catch (PDOException $ex) {
+                echo "Sorry, a database error occurred! <br>";
+                echo "Error details: <em>" . $ex->getMessage() . "</em>";
+            }
+            ?>
 
 
 

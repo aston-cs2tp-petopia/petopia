@@ -334,6 +334,21 @@
     transition: 0.3s;
 }
 
+#stock-message {
+    position: fixed; /* Keeps the message in place even if the page scrolls */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the exact center */
+    background-color: white; /* Background color */
+    padding: 20px; /* Padding around the text */
+    z-index: 1000; /* Ensures it's above other content */
+    border: 1px solid #ddd; /* Optional: adds a light border */
+    border-radius: 5px; /* Optional: rounds corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: adds a shadow for better visibility */
+    text-align: center; /* Center the text inside */
+}
+
+
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Mobile Support
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */

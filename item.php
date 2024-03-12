@@ -6,33 +6,44 @@ if (isset($_POST["add"])) {
     require_once "php/connectdb.php";
 
     $username = $_SESSION["username"];
-    $custIDQuery = $db->prepare(
-        "SELECT Customer_ID FROM customer WHERE username = ?"
-    );
+    $productID = $_POST["productID"];
+    $quantityToAdd = $_POST["quantity"];
+
+    // Get customer ID
+    $custIDQuery = $db->prepare("SELECT Customer_ID FROM customer WHERE username = ?");
     $custIDQuery->execute([$username]);
     $custID = $custIDQuery->fetchColumn();
 
-    $productID = $_POST["productID"];
-    $quantity = $_POST["quantity"];
+    // Check if the item already exists in the basket
+    $checkQuery = $db->prepare("SELECT Quantity FROM basket WHERE Customer_ID = ? AND Product_ID = ?");
+    $checkQuery->execute([$custID, $productID]);
+    $existingQuantity = $checkQuery->fetchColumn();
 
-    // Get product price
-    $priceQuery = $db->prepare(
-        "SELECT Price FROM product WHERE Product_ID = ?"
-    );
-    $priceQuery->execute([$productID]);
-    $price = $priceQuery->fetchColumn();
+    // Get product stock and price
+    $productQuery = $db->prepare("SELECT Num_In_Stock, Price FROM product WHERE Product_ID = ?");
+    $productQuery->execute([$productID]);
+    $product = $productQuery->fetch(PDO::FETCH_ASSOC);
 
-    // Calculate subtotal
-    $subtotal = $quantity * $price;
+    if ($product) {
+        $newQuantity = $existingQuantity + $quantityToAdd;
+        // Check against stock
+        if ($newQuantity <= $product['Num_In_Stock']) {
+            $subtotal = $newQuantity * $product['Price'];
 
-    try {
-        $basketQuery = $db->prepare(
-            "INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)"
-        );
-        $basketQuery->execute([$custID, $productID, $quantity, $subtotal]);
-    } catch (PDOexception $ex) {
-        echo "Sorry, a database error occurred! <br>";
-        echo "Error details: <em>" . $ex->getMessage() . "</em>";
+            if ($existingQuantity) {
+                // Update existing basket item
+                $updateQuery = $db->prepare("UPDATE basket SET Quantity = ?, Subtotal = ? WHERE Customer_ID = ? AND Product_ID = ?");
+                $updateQuery->execute([$newQuantity, $subtotal, $custID, $productID]);
+            } else {
+                // Insert new basket item
+                $insertQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
+                $insertQuery->execute([$custID, $productID, $quantityToAdd, $subtotal]);
+            }
+        } else {
+            echo "Not enough stock available.";
+        }
+    } else {
+        echo "Product not found.";
     }
 }
 ?>

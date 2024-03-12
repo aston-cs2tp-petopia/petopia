@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 04:45 PM
+-- Generation Time: Mar 11, 2024 at 07:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -278,9 +278,22 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 (20, 25, 59),
 (20, 26, 60),
 (20, 27, 61),
-(20, 28, 62),
-(20, 29, 63),
-(20, 30, 64);
+(21, 28, 62),
+(21, 29, 63),
+(21, 30, 64);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `Review_ID` int(10) NOT NULL,
+  `Customer_ID` int(10) NOT NULL,
+  `Review_Date` date NOT NULL,
+  `Rev_Text` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -345,6 +358,13 @@ ALTER TABLE `productcategory`
   ADD PRIMARY KEY (`prodcat_ID`),
   ADD KEY `Category_ID` (`Category_ID`),
   ADD KEY `Product_ID` (`Product_ID`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`Review_ID`),
+  ADD KEY `Customer_ID` (`Customer_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -415,6 +435,12 @@ ALTER TABLE `ordersdetails`
 ALTER TABLE `productcategory`
   ADD CONSTRAINT `productcategory_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`),
   ADD CONSTRAINT `productcategory_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
