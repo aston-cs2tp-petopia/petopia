@@ -1,34 +1,34 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const header = document.querySelector('header'); // Assumes a <header> element
+    const header = document.querySelector('header');
 
-    // Fetch the pre-rendered HTML content from the server
+    //Fetch pre-rendered HTML content from the server
     fetch('../templates/navigation.php')
         .then(response => response.text())
         .then(html => {
                 header.innerHTML = html;
-                /* Elements Variables */
+                /*Variables*/
                 const closeButton = document.querySelector(".close-menu-button");
                 const menuButton = document.querySelector("#hamburger-button");
                 const mobileMenu = document.querySelector(".mobile-nav");
                 const mobileBackground = document.querySelector(".mobile-background");
 
-                /* Prevents Spamming */
+                /*Prevents spamming*/
                 let debounce = false;
 
-                /* Click Event for Menu Button */
+                /*Click event for menu button */
                 menuButton.addEventListener("click", () => {
                     if (!debounce) {
                         debounce = true;
-                        toggleMenu(true); // Show menu
+                        toggleMenu(true); //Show menu
                     }
                     debounce = false;
                 });
 
-                /* Click Event for Close Menu Button */
+                /*Click Event for Close Menu Button*/
                 closeButton.addEventListener("click", () => {
                     if (!debounce) {
                         debounce = true;
-                        toggleMenu(false); // Hide menu
+                        toggleMenu(false); //Hide menu
                     }
                     debounce = false;
                 });
@@ -71,20 +71,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 mobileNav.addEventListener('click', (event) => {
                     const target = event.target;
 
-                    // Check if the clicked element is within a dropdown menu
+                    //Check if the clicked element is within a dropdown menu
                     if (target.matches('.dropdown-menu-mobile a')) {
-                        // It's a link inside a dropdown menu, let the browser follow the link
+                        //lets user access the link
                         return;
                     }
 
-                    // Check if the clicked element is a menu item with a dropdown
+                    //Check if the clicked element is a menu item with a dropdown
                     const menuItemWithDropdown = target.closest('.dropdown');
 
                     if (menuItemWithDropdown) {
-                        // Prevent the default link behavior for dropdown toggle
+                        //Prevent the default link behavior for dropdown toggle
                         event.preventDefault();
 
-                        // Close other dropdowns
+                        //Close other dropdowns
                         menuItemsWithDropdown.forEach(item => {
                             if (item !== menuItemWithDropdown) {
                                 item.classList.remove('show-dropdown');

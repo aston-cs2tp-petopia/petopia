@@ -64,17 +64,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
 
-        // Directly set display style based on totalPages; no need to show buttons for a single page
+        //Directly set display style based on totalPages; no need to show buttons for a single page
         const displayStyle = totalPages > 1 ? '' : 'none';
         prevPageButton.style.display = nextPageButton.style.display = displayStyle;
 
-        // Function to configure button states
+        //Function to configure button states
         const configureButton = (button, isDisabled) => {
             button.disabled = isDisabled;
-            button.style.backgroundColor = isDisabled ? 'rgb(22 55 65 / 50%)' : ''; // Set background color based on disabled state
+            button.style.backgroundColor = isDisabled ? 'rgb(22 55 65 / 50%)' : ''; //Set background color based on disabled state
         };
 
-        // Configure previous and next buttons based on currentPage and totalPages
+        //Configure previous and next buttons based on currentPage and totalPages
         configureButton(prevPageButton, currentPage === 1);
         configureButton(nextPageButton, currentPage >= totalPages);
     }
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
     \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     searchInput.addEventListener('input', applyFilterAndSort);
     sortBySelect.addEventListener('change', applyFilterAndSort);
-    showSelect.addEventListener('change', applyFilterAndSort); // Update for consistency
+    showSelect.addEventListener('change', applyFilterAndSort);
 
     document.getElementById('prev-page').addEventListener('click', () => {
         if (currentPage > 1) {
@@ -102,5 +102,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     //Initial setup
-    applyFilterAndSort(); //Also takes care of initial visibility update
+    applyFilterAndSort(); //For initial visability too
 });
