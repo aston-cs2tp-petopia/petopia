@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 07:40 PM
+-- Generation Time: Mar 14, 2024 at 11:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -97,6 +97,20 @@ INSERT INTO `category` (`Category_ID`, `Name`, `Description`) VALUES
 (19, 'Treats', 'Bits and bobs to help your pet look and feel their best!'),
 (20, 'Grooming', 'Essentials for your pet, to ensure that they look and feel their best!'),
 (21, 'Toys', 'Toys for your pet, for fun play at any time of day!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactforms`
+--
+
+CREATE TABLE `contactforms` (
+  `Contact_ID` int(10) NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Contact_Email` varchar(60) NOT NULL,
+  `Contact_Date` date NOT NULL,
+  `Contact_Text` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -291,8 +305,10 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 CREATE TABLE `reviews` (
   `Review_ID` int(10) NOT NULL,
   `Customer_ID` int(10) NOT NULL,
+  `Product_ID` int(10) NOT NULL,
   `Review_Date` date NOT NULL,
-  `Rev_Text` varchar(500) NOT NULL
+  `rating` int(5) NOT NULL,
+  `Rev_Text` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -364,7 +380,8 @@ ALTER TABLE `productcategory`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`Review_ID`),
-  ADD KEY `Customer_ID` (`Customer_ID`);
+  ADD KEY `Customer_ID` (`Customer_ID`),
+  ADD KEY `Product_ID` (`Product_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -440,7 +457,8 @@ ALTER TABLE `productcategory`
 -- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`);
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
