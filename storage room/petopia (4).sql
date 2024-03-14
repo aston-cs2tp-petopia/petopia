@@ -329,7 +329,7 @@ ALTER TABLE `admin`
 ALTER TABLE `basket`
   ADD PRIMARY KEY (`Customer_ID`,`Product_ID`),
   ADD KEY `Customer_ID` (`Customer_ID`),
-  ADD KEY `Products_ID` (`Product_ID`);
+  ADD KEY `Product_ID` (`Product_ID`);
 
 --
 -- Indexes for table `category`
