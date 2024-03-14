@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2024 at 11:59 AM
+-- Generation Time: Mar 14, 2024 at 12:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -337,6 +337,12 @@ ALTER TABLE `basket`
 ALTER TABLE `category`
   ADD PRIMARY KEY (`Category_ID`),
   ADD UNIQUE KEY `Name` (`Name`);
+
+--
+-- Indexes for table `contactforms`
+--
+ALTER TABLE `contactforms`
+  ADD PRIMARY KEY (`Contact_ID`);
 
 --
 -- Indexes for table `customer`
