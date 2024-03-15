@@ -30,12 +30,12 @@ function validateSignupData() {
 
     // Validate first name (only letters)
     if (!fName || !/^[a-zA-Z ]*$/.test(fName)) {
-        errors.push("First name is required and must contain only letters.");
+        errors.push("Valid first name required.");
     }
 
     // Validate last name (only letters)
     if (!lName || !/^[a-zA-Z ]*$/.test(lName)) {
-        errors.push("Last name is required and must contain only letters.");
+        errors.push("Valid last name required.");
     }
 
     // Validate email
@@ -54,13 +54,13 @@ function validateSignupData() {
     }
 
     // Validate password
-    if (!password) {
-        errors.push("Password is required.");
+    if (!password || password.length < 8 || !/[!@#$%^&*(),.?":{}|<>]/g.test(password)) {
+        errors.push("Password must be at least 8 characters long and include a special character.");
     }
 
     // If there are errors, display them and return false
     if (errors.length > 0) {
-        alert(errors.join("\n"));
+        alert(errors.join("\n• "));
         return false;
     }
 

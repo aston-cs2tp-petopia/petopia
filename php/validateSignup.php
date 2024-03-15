@@ -51,14 +51,9 @@
         // Validate password
         if (empty($password)) {
             $errors[] = "Password is required.";
+        }   else if (!preg_match("/^(?=.*[!@#$%^&*()-_+=])[A-Za-z0-9!@#$%^&*()-_+=]{8,}$/", $password)) {
+            $errors[] = "Password must be at least 8 characters long and include at least one special character.";
         }
-        //ensures that the password must have at least one uppercase letter (first bracket), one digit (second bracket), one special character (third bracket)
-        //As well as ensuring that the password may have letters/digits/characters throughout, with a minimum length of 6 and a maximum length of 50
-        else if(!preg_match("/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_+=])[A-Za-z0-9!@#$%^&*()-_+=]{6,}$/",$password))
-
-        // Add more specific validations as required...
-
-        //Validate postcode
         
 
         return $errors;

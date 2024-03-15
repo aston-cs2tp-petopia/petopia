@@ -126,7 +126,7 @@
                     
                     setTimeout(function() {
                         document.body.removeChild(messageDiv);
-                    }, 2000); // Message will disappear after 5 seconds
+                    }, 2000); // Message will disappear after 2 seconds
                 });
             </script>";
             } else {
@@ -150,7 +150,7 @@
                     
                     setTimeout(function() {
                         document.body.removeChild(messageDiv);
-                    }, 2000); // Message will disappear after 5 seconds
+                    }, 2000); // Message will disappear after 2 seconds
                 });
             </script>";
             }
