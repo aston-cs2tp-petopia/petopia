@@ -1,7 +1,7 @@
 <?php
 
 //This page is responsible for server side validation of data entered on the sign up page. Completed using php.
-    function validateSignupData($fName, $lName, $email, $pNumber, $username, $password) {
+    function validateSignupData($fName, $lName, $email, $pNumber, $username, $password = null) {
         $errors = [];
 
         //Validate first name (only letters)
@@ -49,9 +49,7 @@
         }
         
         // Validate password
-        if (empty($password)) {
-            $errors[] = "• Password is required";
-        }   else if (!preg_match("/^(?=.*[!@#$%^&*()-_+=])[A-Za-z0-9!@#$%^&*()-_+=]{8,}$/", $password)) {
+        if ($password !== null && (empty($password) || !preg_match("/^(?=.*\d)[A-Za-z\d!@#$%^&*()-_+=]{8,}$/", $password))) {
             $errors[] = "• Password must be at least 8 characters long and include at least one special character";
         }
         
