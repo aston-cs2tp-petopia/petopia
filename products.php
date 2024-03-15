@@ -106,13 +106,12 @@
                         $subtotal,
                     ]);
                 }
-                jsAlert('Item successfully added to basket.', true, 2000);
+                jsAlert('Item successfully added to basket.', true, 3000);
             } else {
-                // Echoing a JavaScript block to display the message
-                jsAlert('Not enough stock available.', false, 2000);
+                jsAlert('Not enough stock available.', false, 3000);
             }
         } else {
-            jsAlert('Product not found.', false, 2000);
+            jsAlert('Product not found.', false, 3000);
         }
     }
     ?>

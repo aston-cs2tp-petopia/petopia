@@ -64,7 +64,7 @@ $username = $_SESSION['username'] ?? '';
 $userData = [];
 
 if ($username) {
-    // Replace the field names according to your actual database schema
+    //Replace the field names according to your actual database schema
     $stmt = $db->prepare("SELECT First_Name, Last_Name, Contact_Email AS email, Phone_Number AS phone, Home_Address AS address, Postcode FROM customer WHERE Username = ?");
     $stmt->execute([$username]);
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -73,7 +73,7 @@ if ($username) {
 if (isset($_POST['submit-update']) && !empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
     
-    // Extract and sanitize input data
+    //Extract and sanitize input data
     $firstName = filter_input(INPUT_POST, 'update-first-name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastName = filter_input(INPUT_POST, 'update-last-name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'update-email', FILTER_SANITIZE_EMAIL);
@@ -82,26 +82,25 @@ if (isset($_POST['submit-update']) && !empty($_SESSION['username'])) {
     $postcode = filter_input(INPUT_POST, 'update-postcode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = isset($_POST['update-password']) ? $_POST['update-password'] : null; // Check if password is set
 
-    // Validate the form data using validateSignupData function from validateSignup.php
+    //Validate the form data using validateSignupData function from validateSignup.php
     $errors = validateSignupData($firstName, $lastName, $email, $phone, $username, $password);
 
-    // If there are validation errors, display them to the user
+    //If there are validation errors, display them to the user
     if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo "<script>alert('$error');</script>";
-        }
+        $errorMessage = implode("<br>", $errors);
+        jsAlert($errorMessage, false, 10000);
     } else {
-        // Check for unique email and phone, excluding the current user
+        //Check for unique email and phone, excluding the current user
         $stmt = $db->prepare("SELECT COUNT(*) FROM customer WHERE (Contact_Email = :email OR Phone_Number = :phone) AND Username <> :username");
         $stmt->execute([':email' => $email, ':phone' => $phone, ':username' => $username]);
         if ($stmt->fetchColumn() > 0) {
             //Display message if email or phone number is already in use
-            jsAlert('Email or phone number already in use. Please choose another.', false, 3000);
+            jsAlert('Email or phone number already in use. Please choose another.', false, 4000);
         } else {
             // Update the user's account information in the database
             $updateStmt = $db->prepare("UPDATE customer SET First_Name = ?, Last_Name = ?, Contact_Email = ?, Phone_Number = ?, Home_Address = ?, Postcode = ? WHERE Username = ?");
             $updateStmt->execute([$firstName, $lastName, $email, $phone, $address, $postcode, $username]);
-            jsAlert('Account updated successfully.', true, 3000);
+            jsAlert('Account updated successfully.', true, 4000);
         }
     }
 }

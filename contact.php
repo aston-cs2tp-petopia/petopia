@@ -75,11 +75,11 @@
     
         //Executes the form
         require_once('php/alerts.php');
-        jsAlert('Form successfully sent', true, 3000);
+        jsAlert('Form successfully sent', true, 4000);
         if ($stmt->execute()) {
-            jsAlert('Form successfully sent', true, 3000);
+            jsAlert('Form successfully sent', true, 4000);
         } else {
-            jsAlert('Error: Form was not sent', false, 3000);
+            jsAlert('Error: Form was not sent', false, 4000);
         }
     }
 ?>

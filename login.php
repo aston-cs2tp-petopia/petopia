@@ -1,29 +1,3 @@
-<?php
-    session_start(); // Start the session at the beginning of the script
-    $ex=null;
-    $b=False; // boolean
-    if (isset($_SESSION['username'])) {
-        $b=True; // user is logged in
-    }
-
-    if (isset($_POST['submit-login'])) {
-        // Use the correct form input names: login-username and login-password
-        if (!isset($_POST['login-username'], $_POST['login-password'])) {
-            exit('Please fill both the username and password fields!');
-        }
-        require_once("php/loggingIn.php");
-    }
-
-    if (isset($_POST['submit-signup'])) { // if user submitted details
-        if (!isset($_POST['signup-email'], $_POST['signup-firstname'], $_POST['signup-lastname'], $_POST['signup-username'], $_POST['signup-password'], $_POST['signup-number'])) { // check if fields are empty
-            exit('Please fill the email, username, and password fields.'); // stop running check, error message (empty fields)
-        }
-    
-        // go to the signingUp script
-        require_once("php/signingUp.php");
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +35,40 @@
     <!--
         [HEADER/NAVIGATION END]
     -->
+
+    <?php
+    session_start(); // Start the session at the beginning of the script
+    require_once('php/alerts.php');
+    $ex=null;
+    $b=False; // boolean
+    
+    if (isset($_SESSION['username'])) {
+        $b=True; // user is logged in
+    }
+
+    if (isset($_POST['submit-login'])) {
+        // Use the correct form input names: login-username and login-password
+        if (!isset($_POST['login-username'], $_POST['login-password'])) {
+            exit('Please fill both the username and password fields!');
+        }
+        require_once("php/loggingIn.php");
+    }
+
+    if (isset($_POST['submit-signup'])) { // if user submitted details
+        if (!isset($_POST['signup-email'], $_POST['signup-firstname'], $_POST['signup-lastname'], $_POST['signup-username'], $_POST['signup-password'], $_POST['signup-number'])) { // check if fields are empty
+            exit('Please fill the email, username, and password fields.'); // stop running check, error message (empty fields)
+        }
+    
+        // go to the signingUp script
+        require_once("php/signingUp.php");
+    }
+
+    if (isset($_SESSION['error_message'])) {
+        $errorMessage = $_SESSION['error_message'];
+        jsAlert($errorMessage, false, 10000);
+        unset($_SESSION['error_message']);
+    }
+?>
 
     <!--Login Section-->
     <section class="login-section">
@@ -166,15 +174,5 @@
     <footer>
         <p>Copyright © Petopia 2023</p>
     </footer>
-    <script>
-    window.onload = function() {
-        <?php
-        if (isset($_SESSION['error_message'])) {
-            echo "alert('" . addslashes($_SESSION['error_message']) . "');";
-            unset($_SESSION['error_message']); // Clear the message so it doesn't persist
-        }
-        ?>
-    };
-</script>
 </body>
 </html>

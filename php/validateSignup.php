@@ -6,33 +6,33 @@
 
         //Validate first name (only letters)
         if (empty($fName) || !preg_match("/^[a-zA-Z ]*$/", $fName)) {
-            $errors[] = "First name is required and must contain only letters.";
+            $errors[] = "• Please enter a valid first name";
         }
         //Ensures that the last name isn't too large
         elseif (strlen($fName) > 50) {
-            $errors[] = 'Last name must be less than 50 characters';
+            $errors[] = '• First name must be less than 50 characters';
         }
 
 
         //Validate last name (only letters)
         if (empty($lName) || !preg_match("/^[a-zA-Z ]*$/", $lName)) {
-            $errors[] = "Last name is required and must contain only letters.";
+            $errors[] = "• Please enter a valid last name";
         }
         //Ensures that the last name isn't too large
         elseif (strlen($lName) > 50) {
-            $errors[] = 'Last name must be less than 50 characters';
+            $errors[] = '• Last name must be less than 50 characters';
         }
 
 
         //Validate email
         if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Valid email is required.";
+            $errors[] = "• Valid email is required.";
         }
 
 
         //Validate phone number (numeric check)
         if (empty($pNumber) || !is_numeric($pNumber)) {
-            $errors[] = "Phone number is required and must be numeric.";
+            $errors[] = "• Phone number is required and must be numeric.";
         }
         //Ensures that the phone number starts with 0 , followed by 9-10 digits 
         //(This results in a total of 10-11 digits, which is the length of a typical uk phone number.)
@@ -41,18 +41,18 @@
 
         // Validate username
         if (empty($username)) {
-            $errors[] = "Username is required.";
+            $errors[] = "• Username is required";
         }
         //Ensures that the username isn't too large
         elseif (strlen($username) > 50) {
-            $errors[] = 'Username must be less than 50 characters';
+            $errors[] = '• Username must be less than 50 characters';
         }
         
         // Validate password
         if (empty($password)) {
-            $errors[] = "Password is required.";
+            $errors[] = "• Password is required";
         }   else if (!preg_match("/^(?=.*[!@#$%^&*()-_+=])[A-Za-z0-9!@#$%^&*()-_+=]{8,}$/", $password)) {
-            $errors[] = "Password must be at least 8 characters long and include at least one special character.";
+            $errors[] = "• Password must be at least 8 characters long and include at least one special character";
         }
         
 
