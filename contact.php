@@ -42,6 +42,23 @@
     <?php
     require_once('php/connectdb.php');
     require_once('php/mainLogCheck.php');
+
+    $userFirstName = '';
+    $userEmail = '';
+
+    /*If user is logged in, grab their data*/
+    if ($b) {
+        $username = $_SESSION['username'];
+        $stmt = $db->prepare("SELECT First_Name, Contact_Email FROM customer WHERE Username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user) {
+            $userFirstName = $user['First_Name'];
+            $userEmail = $user['Contact_Email'];
+        }
+    }
+
     if (isset($_POST['submit-contact'])) {
         //Form data
         $name = $_POST['contact-name'];
@@ -138,15 +155,14 @@
                         <!--Name Input Container-->
                         <div class="input-container">
                             <label for="contact-name">Your Name<span style="color: red;">*</span></label>
-                            <input type="text" id="contact-name" name="contact-name" class="name-input"
-                                placeholder="Name" required />
+                            <input type="text" id="contact-name" name="contact-name" class="name-input" placeholder="Name" required value="<?php echo htmlspecialchars($userFirstName); ?>" />
                             <i class='bx bxs-user'></i>
                         </div>
+
                         <!--Email Input Container-->
                         <div class="input-container">
                             <label for="contact-email">Your Email<span style="color: red;">*</span></label>
-                            <input type="email" id="contact-email" name="contact-email" class="email-input"
-                                placeholder="Email" required />
+                            <input type="email" id="contact-email" name="contact-email" class="email-input" placeholder="Email" required value="<?php echo htmlspecialchars($userEmail); ?>" />
                             <i class='bx bxs-envelope'></i>
                         </div>
 
