@@ -74,52 +74,12 @@
         $stmt->bindValue(4, $message);
     
         //Executes the form
+        require_once('php/alerts.php');
+        jsAlert('Form successfully sent', true, 3000);
         if ($stmt->execute()) {
-            echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var messageDiv = document.createElement('div');
-                messageDiv.textContent = 'Form successfully sent.';
-                messageDiv.style.position = 'fixed';
-                messageDiv.style.top = '50%';
-                messageDiv.style.left = '50%';
-                messageDiv.style.transform = 'translate(-50%, -50%)';
-                messageDiv.style.backgroundColor = '#d4edda';
-                messageDiv.style.color = '#155724';
-                messageDiv.style.padding = '20px';
-                messageDiv.style.border = '1px solid #c3e6cb';
-                messageDiv.style.borderRadius = '5px';
-                messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                messageDiv.style.zIndex = '1000';
-                document.body.appendChild(messageDiv);
-                
-                setTimeout(function() {
-                    document.body.removeChild(messageDiv);
-                }, 3000); // Message will disappear after 3 seconds
-            });
-        </script>";
+            jsAlert('Form successfully sent', true, 3000);
         } else {
-            echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var messageDiv = document.createElement('div');
-                messageDiv.textContent = 'Error: Form was not sent.';
-                messageDiv.style.position = 'fixed';
-                messageDiv.style.top = '50%';
-                messageDiv.style.left = '50%';
-                messageDiv.style.transform = 'translate(-50%, -50%)';
-                messageDiv.style.backgroundColor = '#f8d7da';
-                messageDiv.style.color = '#721c24';
-                messageDiv.style.padding = '20px';
-                messageDiv.style.border = '1px solid #f5c6cb';
-                messageDiv.style.borderRadius = '5px';
-                messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                messageDiv.style.zIndex = '1000';
-                document.body.appendChild(messageDiv);
-                
-                setTimeout(function() {
-                    document.body.removeChild(messageDiv);
-                }, 3000); // Message will disappear after 3 seconds
-            });
-        </script>";
+            jsAlert('Error: Form was not sent', false, 3000);
         }
     }
 ?>

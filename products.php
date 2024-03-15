@@ -48,7 +48,7 @@
 
     <?php
     require_once "php/mainLogCheck.php";
-
+    require_once('php/alerts.php');
     if (isset($_POST["add"])) {
         require_once "php/connectdb.php";
 
@@ -106,56 +106,13 @@
                         $subtotal,
                     ]);
                 }
-
-                echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var messageDiv = document.createElement('div');
-                    messageDiv.textContent = 'Item successfully added to basket.';
-                    messageDiv.style.position = 'fixed';
-                    messageDiv.style.top = '50%';
-                    messageDiv.style.left = '50%';
-                    messageDiv.style.transform = 'translate(-50%, -50%)';
-                    messageDiv.style.backgroundColor = '#d4edda';
-                    messageDiv.style.color = '#155724';
-                    messageDiv.style.padding = '20px';
-                    messageDiv.style.border = '1px solid #c3e6cb';
-                    messageDiv.style.borderRadius = '5px';
-                    messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                    messageDiv.style.zIndex = '1000';
-                    document.body.appendChild(messageDiv);
-                    
-                    setTimeout(function() {
-                        document.body.removeChild(messageDiv);
-                    }, 2000); // Message will disappear after 2 seconds
-                });
-            </script>";
+                jsAlert('Item successfully added to basket.', true, 2000);
             } else {
                 // Echoing a JavaScript block to display the message
-                echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var messageDiv = document.createElement('div');
-                    messageDiv.textContent = 'Not enough stock available.';
-                    messageDiv.style.position = 'fixed';
-                    messageDiv.style.top = '50%';
-                    messageDiv.style.left = '50%';
-                    messageDiv.style.transform = 'translate(-50%, -50%)';
-                    messageDiv.style.backgroundColor = '#f8d7da';
-                    messageDiv.style.color = '#721c24';
-                    messageDiv.style.padding = '20px';
-                    messageDiv.style.border = '1px solid #f5c6cb';
-                    messageDiv.style.borderRadius = '5px';
-                    messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                    messageDiv.style.zIndex = '1000';
-                    document.body.appendChild(messageDiv);
-                    
-                    setTimeout(function() {
-                        document.body.removeChild(messageDiv);
-                    }, 2000); // Message will disappear after 2 seconds
-                });
-            </script>";
+                jsAlert('Not enough stock available.', false, 2000);
             }
         } else {
-            echo "Product not found.";
+            jsAlert('Product not found.', false, 2000);
         }
     }
     ?>

@@ -52,14 +52,15 @@
             </div>
         </section>
 
-        <?php
-require_once 'php/connectdb.php'; // Include the file where the database connection is established
-require_once 'php/validateSignup.php'; // Include the validation script
+<?php
+require_once('php/connectdb.php');
+require_once('php/validateSignup.php');
+require_once('php/alerts.php');
 session_start();
 
 $username = $_SESSION['username'] ?? '';
 
-// Initialize an array to hold user data
+//Initialise an array to hold user data
 $userData = [];
 
 if ($username) {
@@ -94,55 +95,13 @@ if (isset($_POST['submit-update']) && !empty($_SESSION['username'])) {
         $stmt = $db->prepare("SELECT COUNT(*) FROM customer WHERE (Contact_Email = :email OR Phone_Number = :phone) AND Username <> :username");
         $stmt->execute([':email' => $email, ':phone' => $phone, ':username' => $username]);
         if ($stmt->fetchColumn() > 0) {
-            // Display message if email or phone number is already in use
-            echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var messageDiv = document.createElement('div');
-                        messageDiv.textContent = 'Email or phone number already in use. Please choose another.';
-                        messageDiv.style.position = 'fixed';
-                        messageDiv.style.top = '50%';
-                        messageDiv.style.left = '50%';
-                        messageDiv.style.transform = 'translate(-50%, -50%)';
-                        messageDiv.style.backgroundColor = '#f8d7da';
-                        messageDiv.style.color = '#721c24';
-                        messageDiv.style.padding = '20px';
-                        messageDiv.style.border = '1px solid #f5c6cb';
-                        messageDiv.style.borderRadius = '5px';
-                        messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                        messageDiv.style.zIndex = '1000';
-                        document.body.appendChild(messageDiv);
-                        
-                        setTimeout(function() {
-                            document.body.removeChild(messageDiv);
-                        }, 3000); // Message will disappear after 3 seconds
-                    });
-                </script>";
+            //Display message if email or phone number is already in use
+            jsAlert('Email or phone number already in use. Please choose another.', false, 3000);
         } else {
             // Update the user's account information in the database
             $updateStmt = $db->prepare("UPDATE customer SET First_Name = ?, Last_Name = ?, Contact_Email = ?, Phone_Number = ?, Home_Address = ?, Postcode = ? WHERE Username = ?");
             $updateStmt->execute([$firstName, $lastName, $email, $phone, $address, $postcode, $username]);
-            echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var messageDiv = document.createElement('div');
-                    messageDiv.textContent = 'Account updated successfully.';
-                    messageDiv.style.position = 'fixed';
-                    messageDiv.style.top = '50%';
-                    messageDiv.style.left = '50%';
-                    messageDiv.style.transform = 'translate(-50%, -50%)';
-                    messageDiv.style.backgroundColor = '#d4edda';
-                    messageDiv.style.color = '#155724';
-                    messageDiv.style.padding = '20px';
-                    messageDiv.style.border = '1px solid #c3e6cb';
-                    messageDiv.style.borderRadius = '5px';
-                    messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                    messageDiv.style.zIndex = '1000';
-                    document.body.appendChild(messageDiv);
-                    
-                    setTimeout(function() {
-                        document.body.removeChild(messageDiv);
-                    }, 3000); // Message will disappear after 3 seconds
-                });
-            </script>";
+            jsAlert('Account updated successfully.', true, 3000);
         }
     }
 }
