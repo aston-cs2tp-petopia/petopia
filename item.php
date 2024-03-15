@@ -77,9 +77,22 @@ $tempPID = $_GET["Product_ID"];
                                     <h5 class="price-text">£<?php echo $row[
                                         "Price"
                                     ]; ?></h5>
-                                    <p class="in-stock-text">Stock: <?php echo $row[
-                                        "Num_In_Stock"
-                                    ]; ?></p>
+                                    <p class="in-stock-text">Stock: <?php
+                                    $adjustedStock = $row["Num_In_Stock"];
+                                    if (isset($b) && $b === true && isset($_SESSION['username'])) {
+                                        $username = $_SESSION['username'];
+
+                                        //Grabs user's basket
+                                        $query = $db->prepare("SELECT SUM(Quantity) AS Quantity FROM basket WHERE Customer_ID = (SELECT Customer_ID FROM customer WHERE Username = ?) AND Product_ID = ?");
+                                        $query->execute([$username, $row["Product_ID"]]);
+                                        $basketQuantity = $query->fetchColumn();
+
+                                        //Adjustes the basket based on what's in the basket
+                                        $adjustedStock -= $basketQuantity;
+                                    }
+
+                                    echo max(0, $adjustedStock);//Ensures positive values
+                                    ?></p>
                                 </div>
                                 <p class="desc-text"><?php echo $row[
                                     "Description"
@@ -87,7 +100,7 @@ $tempPID = $_GET["Product_ID"];
                             
                                 <div class="item-bottom-container">
                                 <?php if ($b == true) {
-                                    if ($row["Num_In_Stock"] > 0) {
+                                    if ($adjustedStock > 0) {
                                         // User is logged in and stock is available
                                         echo "<form method='post' action='products.php'>";
                                         echo '<input type="hidden" name="productID" value="' .

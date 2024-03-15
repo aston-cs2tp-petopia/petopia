@@ -181,7 +181,7 @@
                     <div class="results-container">
                     <?php
                     require_once "php/connectdb.php";
-
+                    
                     // Capture search term and category IDs from URL query parameters
                     $searchTerm = isset($_GET["search"])
                         ? trim($_GET["search"])
@@ -245,18 +245,30 @@
                                         "CategoryNames"
                                     ]; ?></h6>
                                     <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row[
-    "Name"
-]; ?></a></h4>
-                                    <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
+                                        "Name"
+                                    ]; ?></a></h4>
                                     <h5>£<?php echo $row["Price"]; ?></h5>
                             
                                     <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row[
-                                            "Num_In_Stock"
-                                        ]; ?></p>
+                                    <p>Stock: <?php 
+                                    $adjustedStock = $row["Num_In_Stock"];
+                                    if (isset($b) && $b === true && isset($_SESSION['username'])) {
+                                        $username = $_SESSION['username'];
+
+                                        //Grabs user's basket
+                                        $query = $db->prepare("SELECT SUM(Quantity) AS Quantity FROM basket WHERE Customer_ID = (SELECT Customer_ID FROM customer WHERE Username = ?) AND Product_ID = ?");
+                                        $query->execute([$username, $row["Product_ID"]]);
+                                        $basketQuantity = $query->fetchColumn();
+
+                                        //Adjustes the basket based on what's in the basket
+                                        $adjustedStock -= $basketQuantity;
+                                    }
+
+                                    echo max(0, $adjustedStock);//Ensures positive values
+                                    ?></p>
                                         <?php if (
                                             $b == true &&
-                                            $row["Num_In_Stock"] > 0
+                                            $adjustedStock > 0
                                         ) {
                                             echo "<form method='post' class='add-to-basket-form'>";
                                             echo '<input type="hidden" name="productID" value="' . $row["Product_ID"] . '">';
