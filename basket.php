@@ -42,7 +42,6 @@ if (!$b) {
     <link rel="stylesheet" href="templates/hero-banner.css">
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <script src="scripts/basket.js"></script>
 
 </head>
 
