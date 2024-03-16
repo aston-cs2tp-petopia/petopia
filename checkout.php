@@ -1,13 +1,38 @@
 <?php
 require_once('php/mainLogCheck.php');
+require_once('php/connectdb.php');
+require_once('php/alerts.php');
 
-//Check if the user is logged in
 if (!$b) {
     header("Location: login.php");
     exit;
 }
-?>
 
+$username = $_SESSION['username'] ?? '';
+$userData = [];
+
+if ($username) {
+    $stmt = $db->prepare("SELECT First_Name, Last_Name, Home_Address, Postcode, Contact_Email FROM customer WHERE Username = ?");
+    $stmt->execute([$username]);
+    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+$basketItems = [];
+$query = "SELECT product.Product_ID, product.Name, basket.Quantity, basket.Subtotal
+          FROM basket
+          JOIN product ON product.Product_ID = basket.Product_ID
+          JOIN customer ON basket.Customer_ID = customer.Customer_ID
+          WHERE customer.Username = ?";
+$stmt = $db->prepare($query);
+$stmt->execute([$username]);
+$basketItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Check if the basket is empty
+if (empty($basketItems)) {
+    header("Location: basket.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,55 +86,67 @@ if (!$b) {
                 </div>
             </div>
         </section>
-        <!--Basket Container-->
-        <section class="basket-container">
-            <!--Basket Container-->
-            <div class="top-container">
-                <h3>Your basket</h3>
+
+        <!--Checkout Form-->
+        <section class="checkout-flex-container">
+            <div class="checkout-form-container">
+                <form action="php/process_checkout.php" method="post" class="checkout-form">
+                    <h2 class="checkout-heading">Checkout</h2>
+                    <h2 class="checkout-subheading">Shipping Details</h2>
+                    <div class="form-group">
+                        <label for="full-name">Full Name *</label>
+                        <input type="text" id="full-name" name="full_name" required value="<?= htmlspecialchars($userData['First_Name'] ?? '') . ' ' . htmlspecialchars($userData['Last_Name'] ?? '') ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Full Address *</label>
+                        <input type="text" id="address" name="address" required value="<?= htmlspecialchars($userData['Home_Address'] ?? '') ?>">
+                    </div>
+
+                    <h2 class="checkout-subheading">Payment Information</h2>
+                    <div class="form-group">
+                        <label for="card-number">Card Number *</label>
+                        <input type="text" id="card-number" name="card_number" pattern="\d{16}" title="Card number must be 16 digits" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name-on-card">Name on Card *</label>
+                        <input type="text" id="name-on-card" name="name_on_card" pattern="[A-Za-z ]+" required title="Name must contain only letters and spaces">
+                    </div>
+                    <div class="form-group">
+                        <label for="exp-month">Exp Month *</label>
+                        <input type="number" id="exp-month" name="exp_month" min="1" max="12" title="Month must be between 01 and 12" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exp-year">Exp Year *</label>
+                        <input type="number" id="exp-year" name="exp_year" min="2024" pattern="\d{4}" title="Year must be 2024 or later" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="security-code">Security Code *</label>
+                        <input type="number" id="security-code" name="security_code" pattern="\d{3}" title="Security code must be 3 digits" required>
+                    </div>
+
+                    <button type="submit" class="place-order-btn">Place Order</button>
+                </form>
             </div>
-            <!--Basket Table-->
-            <div class="basket-php-container">
+
+
+            <div class="order-summary-container">
+                <h2 class="template-header">Order Summary</h2>
                 <?php
-                    require_once('php/basket_template.php');
+                // Fetch basket items again if needed or use existing variables
+                $totalItems = count($basketItems);
+                $totalPrice = array_sum(array_column($basketItems, "Subtotal"));
+                $itemText = $totalItems === 1 ? "item" : "items";
                 ?>
+                <h4 class="template-text">Subtotal (<?php echo $totalItems . ' ' . $itemText; ?>): £<?php echo $totalPrice; ?></h4>
             </div>
         </section>
-            
-        
+
     </main>
 </body>
     
     <footer>
         &copy; 2023 Petopia
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var removeButtons = document.querySelectorAll('.remove-basket');
-
-            removeButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var productId = this.closest('.basket-row').dataset.productId;
-
-                    // Make an AJAX request to remove the item
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'remove_from_basket.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            // Refresh the page or update the UI as needed
-                            location.reload();
-                        } else if (xhr.readyState == 4 && xhr.status != 200) {
-                            alert('Error removing item from the basket.');
-                        }
-                    };
-
-                    xhr.send('productId=' + encodeURIComponent(productId));
-                });
-            });
-        });
-    </script>
 
 </body>
 </html>
