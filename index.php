@@ -62,7 +62,7 @@
                     <h2>Have the best life with your best friend</h2>
                     <p>Find the greatest of companions here at Petopia</p>
                     <!--Hero Banner Button-->
-                    <div class="hero-banner-button">Learn more</div>
+                    <a href="about.php" style="text-decoration: none;"><div class="hero-banner-button">Learn more</div></a>
                 </div>
             </div>
         </section>
@@ -88,13 +88,13 @@
                 </div>
 
                 <div class="quick-access qa-border">
-                    <div class='bx bxs-help-circle'></div>
-                    <a href="advice.php">Visit Advice</a>
+                    <div class='bx bxs-tennis-ball'></div>
+                    <a href="products.php?category_id[]=21">Browse Toys</a>
                 </div>
 
                 <div class="quick-access">
-                    <div class='bx bxs-group'></div>
-                    <a href="about.php">Visit About Us</a>
+                    <div class='bx bxs-bowl-rice'></div>
+                    <a href="products.php?category_id[]=19">Browse Treats</a>
                 </div>
             </div>
         </section>

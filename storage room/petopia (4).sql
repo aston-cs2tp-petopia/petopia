@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 04:45 PM
+-- Generation Time: Mar 14, 2024 at 12:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -97,6 +97,20 @@ INSERT INTO `category` (`Category_ID`, `Name`, `Description`) VALUES
 (19, 'Treats', 'Bits and bobs to help your pet look and feel their best!'),
 (20, 'Grooming', 'Essentials for your pet, to ensure that they look and feel their best!'),
 (21, 'Toys', 'Toys for your pet, for fun play at any time of day!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactforms`
+--
+
+CREATE TABLE `contactforms` (
+  `Contact_ID` int(10) NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Contact_Email` varchar(60) NOT NULL,
+  `Contact_Date` date NOT NULL,
+  `Contact_Text` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -278,9 +292,24 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 (20, 25, 59),
 (20, 26, 60),
 (20, 27, 61),
-(20, 28, 62),
-(20, 29, 63),
-(20, 30, 64);
+(21, 28, 62),
+(21, 29, 63),
+(21, 30, 64);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `Review_ID` int(10) NOT NULL,
+  `Customer_ID` int(10) NOT NULL,
+  `Product_ID` int(10) NOT NULL,
+  `Review_Date` date NOT NULL,
+  `rating` int(5) NOT NULL,
+  `Rev_Text` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -300,7 +329,7 @@ ALTER TABLE `admin`
 ALTER TABLE `basket`
   ADD PRIMARY KEY (`Customer_ID`,`Product_ID`),
   ADD KEY `Customer_ID` (`Customer_ID`),
-  ADD KEY `Products_ID` (`Product_ID`);
+  ADD KEY `Product_ID` (`Product_ID`);
 
 --
 -- Indexes for table `category`
@@ -308,6 +337,12 @@ ALTER TABLE `basket`
 ALTER TABLE `category`
   ADD PRIMARY KEY (`Category_ID`),
   ADD UNIQUE KEY `Name` (`Name`);
+
+--
+-- Indexes for table `contactforms`
+--
+ALTER TABLE `contactforms`
+  ADD PRIMARY KEY (`Contact_ID`);
 
 --
 -- Indexes for table `customer`
@@ -344,6 +379,14 @@ ALTER TABLE `product`
 ALTER TABLE `productcategory`
   ADD PRIMARY KEY (`prodcat_ID`),
   ADD KEY `Category_ID` (`Category_ID`),
+  ADD KEY `Product_ID` (`Product_ID`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`Review_ID`),
+  ADD KEY `Customer_ID` (`Customer_ID`),
   ADD KEY `Product_ID` (`Product_ID`);
 
 --
@@ -415,6 +458,13 @@ ALTER TABLE `ordersdetails`
 ALTER TABLE `productcategory`
   ADD CONSTRAINT `productcategory_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`),
   ADD CONSTRAINT `productcategory_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

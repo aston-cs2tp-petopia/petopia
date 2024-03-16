@@ -30,12 +30,12 @@ function validateSignupData() {
 
     // Validate first name (only letters)
     if (!fName || !/^[a-zA-Z ]*$/.test(fName)) {
-        errors.push("First name is required and must contain only letters.");
+        errors.push("Valid first name required.");
     }
 
     // Validate last name (only letters)
     if (!lName || !/^[a-zA-Z ]*$/.test(lName)) {
-        errors.push("Last name is required and must contain only letters.");
+        errors.push("Valid last name required.");
     }
 
     // Validate email
@@ -54,16 +54,68 @@ function validateSignupData() {
     }
 
     // Validate password
-    if (!password) {
-        errors.push("Password is required.");
+    if (!password || password.length < 8 || !/[!@#$%^&*(),.?":{}|<>]/g.test(password)) {alert
+        errors.push("Password must be at least 8 characters long and include a special character.");
     }
 
     // If there are errors, display them and return false
     if (errors.length > 0) {
-        alert(errors.join("\n"));
+        jsAlert(errors, false, 5000);
         return false;
     }
 
+    
+
     // If no errors, form is valid
     return true;
+}
+
+/*Alerts Function*/
+function jsAlert(errors, success, duration) {
+    var backgroundColor = success ? '#d4edda' : '#f8d7da';
+    var textColor = success ? '#155724' : '#721c24';
+    var borderColor = success ? '#c3e6cb' : '#f5c6cb';
+
+    var messageDiv = document.createElement('div');
+    var closeBtn = document.createElement('span');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '0';
+    closeBtn.style.right = '10px';
+    closeBtn.style.fontWeight = 'bold';
+    closeBtn.style.fontSize = '20px';
+    closeBtn.style.cursor = 'pointer';
+
+    var messageList = document.createElement('ul');
+    errors.forEach(function(error) {
+        var li = document.createElement('li');
+        li.textContent = error;
+        messageList.appendChild(li);
+    });
+
+    messageDiv.appendChild(messageList);
+    messageDiv.appendChild(closeBtn);
+    messageDiv.style.position = 'fixed';
+    messageDiv.style.top = '50%';
+    messageDiv.style.left = '50%';
+    messageDiv.style.transform = 'translate(-50%, -50%)';
+    messageDiv.style.backgroundColor = backgroundColor;
+    messageDiv.style.color = textColor;
+    messageDiv.style.padding = '20px';
+    messageDiv.style.paddingRight = '35px';
+    messageDiv.style.border = '1px solid ' + borderColor;
+    messageDiv.style.borderRadius = '5px';
+    messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+    messageDiv.style.zIndex = '1000';
+    document.body.appendChild(messageDiv);
+
+    closeBtn.onclick = function() {
+        messageDiv.remove();
+    };
+
+    setTimeout(function() {
+        if (document.body.contains(messageDiv)) {
+            document.body.removeChild(messageDiv);
+        }
+    }, duration);
 }

@@ -31,14 +31,14 @@
                 exit();
             } else {
                 // Display an error message if the password does not match
-                $_SESSION['error_message'] = "Incorrect Password.";
+                $_SESSION['error_message'] = "• Incorrect password";
                 header("Location: login.php"); // Redirect to the form page
                 exit;
             }
         } else {
             // Display an error message if the username is not found
             // Display an error message if the password does not match
-            $_SESSION['error_message'] = "Username does not exist.";
+            $_SESSION['error_message'] = "• Username does not exist";
             header("Location: login.php"); // Redirect to the form page
             exit;
         }

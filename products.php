@@ -1,45 +1,3 @@
-<?php
-require_once "php/mainLogCheck.php";
-
-//$productType=$_GET["productType"];
-//echo($productType);
-
-//when the basket button is pressed, send the product id and customer id to order details
-if (isset($_POST["add"])) {
-    require_once "php/connectdb.php";
-
-    $username = $_SESSION["username"];
-    $custIDQuery = $db->prepare(
-        "SELECT Customer_ID FROM customer WHERE username = ?"
-    );
-    $custIDQuery->execute([$username]);
-    $custID = $custIDQuery->fetchColumn();
-
-    $productID = $_POST["productID"];
-    $quantity = $_POST["quantity"];
-
-    // Get product price
-    $priceQuery = $db->prepare(
-        "SELECT Price FROM product WHERE Product_ID = ?"
-    );
-    $priceQuery->execute([$productID]);
-    $price = $priceQuery->fetchColumn();
-
-    // Calculate subtotal
-    $subtotal = $quantity * $price;
-
-    try {
-        $basketQuery = $db->prepare(
-            "INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)"
-        );
-        $basketQuery->execute([$custID, $productID, $quantity, $subtotal]);
-    } catch (PDOexception $ex) {
-        echo "Sorry, a database error occurred! <br>";
-        echo "Error details: <em>" . $ex->getMessage() . "</em>";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,6 +31,7 @@ if (isset($_POST["add"])) {
 
     <!--JS-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="scripts/searchProducts.js"></script>
 
 </head>
 
@@ -86,7 +45,77 @@ if (isset($_POST["add"])) {
     <!--
         [HEADER/NAVIGATION END]
     -->
-    
+
+    <?php
+    require_once "php/mainLogCheck.php";
+    require_once('php/alerts.php');
+    if (isset($_POST["add"])) {
+        require_once "php/connectdb.php";
+
+        $username = $_SESSION["username"];
+        $productID = $_POST["productID"];
+        $quantityToAdd = $_POST["quantity"];
+
+        // Get customer ID
+        $custIDQuery = $db->prepare(
+            "SELECT Customer_ID FROM customer WHERE username = ?"
+        );
+        $custIDQuery->execute([$username]);
+        $custID = $custIDQuery->fetchColumn();
+
+        // Check if the item already exists in the basket
+        $checkQuery = $db->prepare(
+            "SELECT Quantity FROM basket WHERE Customer_ID = ? AND Product_ID = ?"
+        );
+        $checkQuery->execute([$custID, $productID]);
+        $existingQuantity = $checkQuery->fetchColumn();
+
+        // Get product stock and price
+        $productQuery = $db->prepare(
+            "SELECT Num_In_Stock, Price FROM product WHERE Product_ID = ?"
+        );
+        $productQuery->execute([$productID]);
+        $product = $productQuery->fetch(PDO::FETCH_ASSOC);
+
+        if ($product) {
+            $newQuantity = $existingQuantity + $quantityToAdd;
+            // Check against stock
+            if ($newQuantity <= $product["Num_In_Stock"]) {
+                $subtotal = $newQuantity * $product["Price"];
+
+                if ($existingQuantity) {
+                    // Update existing basket item
+                    $updateQuery = $db->prepare(
+                        "UPDATE basket SET Quantity = ?, Subtotal = ? WHERE Customer_ID = ? AND Product_ID = ?"
+                    );
+                    $updateQuery->execute([
+                        $newQuantity,
+                        $subtotal,
+                        $custID,
+                        $productID,
+                    ]);
+                } else {
+                    // Insert new basket item
+                    $insertQuery = $db->prepare(
+                        "INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)"
+                    );
+                    $insertQuery->execute([
+                        $custID,
+                        $productID,
+                        $quantityToAdd,
+                        $subtotal,
+                    ]);
+                }
+                jsAlert('Item successfully added to basket.', true, 3000);
+            } else {
+                jsAlert('Not enough stock available.', false, 3000);
+            }
+        } else {
+            jsAlert('Product not found.', false, 3000);
+        }
+    }
+    ?>
+
     <main>
         <!--Hero Banner-->
         <section class="hero-banner">
@@ -102,7 +131,7 @@ if (isset($_POST["add"])) {
                 </div>
             </div>
         </section>
-
+        
         <section class="items-container">
             <div class="items-left">
 
@@ -117,22 +146,22 @@ if (isset($_POST["add"])) {
                         <div class="show-list-container">
                             <form><label for="show">Show</label>
                                 <select id="show" class="selected">
-                                    <option value="true">06</option>
-                                    <option value="true">12</option>
-                                    <option value="true">18</option>
-                                    <option value="true">24</option>
-                                    <option value="true">30</option>
+                                    <option value="6">06</option>
+                                    <option value="12">12</option>
+                                    <option value="18">18</option>
+                                    <option value="24">24</option>
+                                    <option value="30">30</option>
                                 </select>
                             </form>
                         </div>
 
                         <!--Sort By-->
                         <div class="sort-by-container">
-                            <form><label for="shortBy">Sort By</label>
-                                <select id="shortBy" class="selected">
-                                    <option value="true">Select</option>
-                                    <option value="true">Low to high</option>
-                                    <option value="true">High to low</option>
+                            <form><label for="sortBy">Sort By</label>
+                                <select id="sortBy" class="selected">
+                                    <option value="select">Select</option>
+                                    <option value="lowToHigh">Low to high</option>
+                                    <option value="highToLow">High to low</option>
                                 </select>
                             </form>
                         </div>
@@ -152,10 +181,16 @@ if (isset($_POST["add"])) {
                     <div class="results-container">
                     <?php
                     require_once "php/connectdb.php";
-
+                    
                     // Capture search term and category IDs from URL query parameters
-                    $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
-                    $category_ids = isset($_GET['category_id']) && is_array($_GET['category_id']) ? array_map('intval', $_GET['category_id']) : [];
+                    $searchTerm = isset($_GET["search"])
+                        ? trim($_GET["search"])
+                        : "";
+                    $category_ids =
+                        isset($_GET["category_id"]) &&
+                        is_array($_GET["category_id"])
+                            ? array_map("intval", $_GET["category_id"])
+                            : [];
 
                     try {
                         $queryParams = [];
@@ -163,7 +198,7 @@ if (isset($_POST["add"])) {
                             "SELECT DISTINCT p.*, GROUP_CONCAT(DISTINCT c.Name ORDER BY FIELD(c.Category_ID, 5, 6) DESC, c.Name ASC SEPARATOR ', ') AS CategoryNames",
                             "FROM product p",
                             "LEFT JOIN productcategory pc ON p.Product_ID = pc.Product_ID",
-                            "LEFT JOIN category c ON pc.Category_ID = c.Category_ID"
+                            "LEFT JOIN category c ON pc.Category_ID = c.Category_ID",
                         ];
 
                         // Building WHERE conditions based on search term and categories
@@ -173,13 +208,20 @@ if (isset($_POST["add"])) {
                             $queryParams[] = "%{$searchTerm}%";
                         }
                         if (!empty($category_ids)) {
-                            $placeholders = implode(',', array_fill(0, count($category_ids), '?'));
+                            $placeholders = implode(
+                                ",",
+                                array_fill(0, count($category_ids), "?")
+                            );
                             $conditions[] = "pc.Category_ID IN ($placeholders)";
-                            $queryParams = array_merge($queryParams, $category_ids);
+                            $queryParams = array_merge(
+                                $queryParams,
+                                $category_ids
+                            );
                         }
 
                         if (!empty($conditions)) {
-                            $queryParts[] = "WHERE " . implode(" AND ", $conditions);
+                            $queryParts[] =
+                                "WHERE " . implode(" AND ", $conditions);
                         }
                         $queryParts[] = "GROUP BY p.Product_ID";
 
@@ -199,28 +241,41 @@ if (isset($_POST["add"])) {
                                 </div>
                             
                                 <div class="item-info">
-                                    <h6><?php echo $row["CategoryNames"]?></h6>
+                                    <h6><?php echo $row[
+                                        "CategoryNames"
+                                    ]; ?></h6>
                                     <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row[
                                         "Name"
-                                        ]; ?></a></h4>
-                                    <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
+                                    ]; ?></a></h4>
                                     <h5>£<?php echo $row["Price"]; ?></h5>
                             
                                     <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row[
-                                            "Num_In_Stock"
-                                        ]; ?></p>
+                                    <p>Stock: <?php 
+                                    $adjustedStock = $row["Num_In_Stock"];
+                                    if (isset($b) && $b === true && isset($_SESSION['username'])) {
+                                        $username = $_SESSION['username'];
+
+                                        //Grabs user's basket
+                                        $query = $db->prepare("SELECT SUM(Quantity) AS Quantity FROM basket WHERE Customer_ID = (SELECT Customer_ID FROM customer WHERE Username = ?) AND Product_ID = ?");
+                                        $query->execute([$username, $row["Product_ID"]]);
+                                        $basketQuantity = $query->fetchColumn();
+
+                                        //Adjustes the basket based on what's in the basket
+                                        $adjustedStock -= $basketQuantity;
+                                    }
+
+                                    echo max(0, $adjustedStock);//Ensures positive values
+                                    ?></p>
                                         <?php if (
                                             $b == true &&
-                                            $row["Num_In_Stock"] > 0
+                                            $adjustedStock > 0
                                         ) {
-                                            echo "<form method='post' action='products.php'>";
-                                            echo '<input type="hidden" name="productID" value="' .
-                                                $row["Product_ID"] .
-                                                '">';
+                                            echo "<form method='post' class='add-to-basket-form'>";
+                                            echo '<input type="hidden" name="productID" value="' . $row["Product_ID"] . '">';
                                             echo '<input type="hidden" name="quantity" value="1">';
                                             echo '<button class="add-cart-btn" type="submit" name="add"><div class="bx bx-cart-add"></div></button>';
                                             echo "</form>";
+
                                         } ?>
                                     </div>
                                 </div>
@@ -238,6 +293,10 @@ if (isset($_POST["add"])) {
                     ?>
 
                 </div>
+                <div id="paging-controls">
+                    <button id="prev-page">Previous</button>
+                    <button id="next-page">Next</button>
+                </div>
             </div>
         </section>
         </main>
@@ -246,5 +305,15 @@ if (isset($_POST["add"])) {
     <footer>
         &copy; 2023 Petopia
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('.add-to-basket-form');
+            forms.forEach(form => {
+                form.action = window.location.href; // Set form action to current URL
+            });
+        });
+    </script>
+
 </body>
 </html>

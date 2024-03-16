@@ -277,6 +277,79 @@
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Paging Buttons
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+#paging-controls {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+
+#paging-controls #prev-page {
+    /*Sizing*/
+    width: 150px;
+    height: 50px;
+
+    /*Styles*/
+    background-color: #a349a4;
+    border:none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /*Text*/
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+
+    /*Other*/
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#paging-controls #next-page {
+    /*Sizing*/
+    width: 150px;
+    height: 50px;
+
+    /*Styles*/
+    background-color: #a349a4;
+    border:none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /*Text*/
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+
+    /*Other*/
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#stock-message {
+    position: fixed; /* Keeps the message in place even if the page scrolls */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the exact center */
+    background-color: white; /* Background color */
+    padding: 20px; /* Padding around the text */
+    z-index: 1000; /* Ensures it's above other content */
+    border: 1px solid #ddd; /* Optional: adds a light border */
+    border-radius: 5px; /* Optional: rounds corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: adds a shadow for better visibility */
+    text-align: center; /* Center the text inside */
+}
+
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Mobile Support
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
@@ -293,4 +366,7 @@
     .show-list-container label {padding-right: 10px;}
     #filters-right {margin-left: 20px;}
     .filters-top select {width: 150px;}
+
+    #paging-controls #next-page {width: 120px; height: 45px;}
+    #paging-controls #prev-page {width: 120px; height: 45px;}
 }

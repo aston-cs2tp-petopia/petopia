@@ -46,7 +46,7 @@
             <li><a href="index.php">Home</a></li>
             <!--Dropdown-->
             <li class="dropdown">
-                <a href="#">Pets v</a>
+                <a href="products.php?category_id[]=5&category_id[]=6">Pets v</a>
                 <ul class="dropdown-menu-mobile">
                     <li class="dropdown-li"><a href="products.php?category_id[]=6">Cats</a></li>
                     <li class="dropdown-li"><a href="products.php?category_id[]=5">Dogs</a></li>
@@ -54,15 +54,22 @@
             </li>
             <!--Dropdown-->
             <li class="dropdown">
-                <a href="#">Shop v</a>
+                <a href="products.php?category_id[]=19&category_id[]=20&category_id[]=21">Shop v</a>
                 <ul class="dropdown-menu-mobile">
-                    <li class="dropdown-li"><a href="products.php">Food</a></li>
-                    <li class="dropdown-li"><a href="products.php">Toys</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=21">Toys</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=20">Grooming</a></li>
+                    <li><a href="products.php?category_id[]=19">Treats</a></li>
                 </ul>
             </li>
             <li><a href="advice.php">Advice</a></li>
             <li><a href="about.php">About Us</a></li>
             <li><a href="contact.php">Contact</a></li>
+            <?php
+            if ($b==true) {
+                echo '<li><a href="orders.php">Orders</a></li>';
+                echo '<li><a href="account.php">Account</a></li>';
+            }
+            ?>
             <div class="mobile-bottom-nav">
             <?php
                 //Login Button
@@ -98,16 +105,23 @@
             </li>
             <!--Dropdown-->
             <li class="dropdown">
-                <a href="#">Shop v</a>
+                <a href="products.php?category_id[]=19&category_id[]=20&category_id[]=21">Shop v</a>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-li"><a href="products.php">Toys</a></li>
-                    <li class="dropdown-li"><a href="products.php">Grooming</a></li>
-                    <li><a href="products.php">Treats</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=21">Toys</a></li>
+                    <li class="dropdown-li"><a href="products.php?category_id[]=20">Grooming</a></li>
+                    <li><a href="products.php?category_id[]=19">Treats</a></li>
                 </ul>
             </li>
             <li><a href="advice.php">Advice</a></li>
             <li><a href="about.php">About Us</a></li>
             <li><a href="contact.php">Contact</a></li>
+            <?php
+            //Account & Orders Button
+            if ($b==true) {
+                echo '<li><a href="orders.php">Orders</a></li>';
+                echo '<li><a href="account.php">Account</a></li>';
+            }       
+            ?>
         </ul>
     </nav>
 </div>

@@ -1,0 +1,238 @@
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Containers
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Checkout Section*/
+.checkout-flex-container {
+  padding: 30px 0;
+  /*Flex*/
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.checkout-form-container {
+  /*Sizing*/
+  width: 500px;
+  /*Styles*/
+  border-radius: 10px;
+  background-color: white;
+  /*Flex*/
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+  flex-direction: column;
+}
+
+/*Checkout Heading*/
+.checkout-heading {
+  color: #a349a4;
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/*Checkout Subheading*/
+.checkout-subheading {
+  color: #163741;
+  font-weight: 800;
+  font-size: 40px;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Order Summary
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.order-summary-container {
+  padding-bottom: 30px;
+}
+
+.template-header {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 900;
+  color: #a349a4;
+}
+
+.template-text {
+  color: #163741;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0;
+}
+
+/*Checkout button*/
+.order-summary-container .checkout-btn {
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+  background-color: #a349a4;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}.order-summary-container .checkout-btn:hover {
+  transition: 0.3s;
+  transform: scale(1.03)
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Form
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.checkout-form {
+  /*Flex*/
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/*Input Container*/
+.checkout-form .form-group {
+  position: relative;
+  width: 90%;
+  height: 40px;
+  margin-bottom: 50px;
+  padding-bottom: 10px;
+}
+
+/*Form Inputs*/
+.checkout-form input[type=text],
+.checkout-form input[type=email],
+.checkout-form input[type=number],
+.checkout-form input[type=tel],
+.checkout-form input[type=password] {
+    width: calc(100% - 20px);
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 10px;
+}
+
+/*Textarea Input*/
+.checkout-form textarea {
+  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
+  min-width: calc(100% - 20px);
+  height: 100px;
+  max-height: 100px;
+  min-height: 100px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid #a249a499;
+  border-radius: 10px;
+  font-size: 16px;
+  padding-left: 20px;
+  padding-top: 10px;
+  color: #a349a4;
+  font-family: 'Nunito', sans-serif;
+  background-color: white;
+  margin-top: 10px;
+}
+
+/*Input Placeholder*/
+.checkout-form input::placeholder {
+  color: #a249a498;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+}
+
+/*All Labels for Update Account Form*/
+.form-group label, .form-group-textarea label {
+  color: #676666;
+  font-weight: 600;
+}
+
+/*Input Icons*/
+.form-group i {
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 26px);
+  transform: translateY(-50%);
+  font-size: 20px;
+  padding-top: 5px;
+  color: #a349a4;
+}
+
+/*Checkbox Input*/
+.form-group-checkbox {
+  padding-bottom: 45px;
+  padding-top: 10px;
+}
+
+.form-group-checkbox label {
+  color: #676666;
+  font-weight: 600;
+}
+
+/*Update Button*/
+.place-order-btn {
+  /*Sizing*/
+  width: 150px;
+  height: 50px;
+  /*Styles*/
+  background-color: #a349a4;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  /*Text*/
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  /*Others*/
+  cursor: pointer;
+  transition: 0.3s;
+}.place-order-btn:hover {
+  transition: 0.3s;
+  transform: scale(1.05);
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+@media screen and (max-width: 766px) {
+  .order-summary-container {padding-bottom: 0px;}
+  .place-order-btn{width: 90%;}
+  .checkout-form {align-items: center;}
+  .checkout-flex-container {gap: 50px; flex-wrap: wrap-reverse;}
+  .template-header {text-align: center;}
+  .template-text {text-align: center;}
+  .checkout-subheading {font-size: 32px}
+  .checkout-heading {font-size: 28px;}
+}
+

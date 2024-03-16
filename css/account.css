@@ -1,0 +1,190 @@
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Account Settings
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+.account-settings-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+/*Update Account Container*/
+.update-account {
+    /*Sizing*/
+    width: 500px;
+    /*Styles*/
+    border-radius: 10px;
+    background-color: white;
+    /*Flex*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+    flex-direction: column;
+}
+
+/*Update Account Title (h2)*/
+.update-account-h2 {
+    color: #a349a4;
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/*Update Account Subheading (h3)*/
+.update-account-h3 {
+    color: #163741;
+    font-weight: 800;
+    font-size: 40px;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/*Update Account Caption (h4)*/
+.update-account-h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #676666;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+/*Update Account Form*/
+#update-form {
+    /*Flex*/
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/*Input Container*/
+#update-form .input-container {
+    position: relative;
+    width: 90%;
+    height: 40px;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+/*Form Inputs*/
+#update-form input[type=text],
+#update-form input[type=email],
+#update-form input[type=tel],
+#update-form input[type=password] {
+    width: calc(100% - 20px);
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 10px;
+}
+
+/*Textarea Input*/
+#update-form textarea {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    height: 100px;
+    max-height: 100px;
+    min-height: 100px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-top: 10px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    background-color: white;
+    margin-top: 10px;
+}
+
+/*Input Placeholder*/
+#update-form input::placeholder {
+    color: #a249a498;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+/*All Labels for Update Account Form*/
+.input-container label, .input-container-textarea label {
+    color: #676666;
+    font-weight: 600;
+}
+
+/*Input Icons*/
+.input-container i {
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 26px);
+    transform: translateY(-50%);
+    font-size: 20px;
+    padding-top: 5px;
+    color: #a349a4;
+}
+
+/*Checkbox Input*/
+.input-container-checkbox {
+    padding-bottom: 45px;
+    padding-top: 10px;
+}
+
+.input-container-checkbox label {
+    color: #676666;
+    font-weight: 600;
+}
+
+/*Update Button*/
+.update-account-btn {
+    /*Sizing*/
+    width: 150px;
+    height: 50px;
+    /*Styles*/
+    background-color: #a349a4;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: none;
+    /*Text*/
+    text-align: center;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    /*Others*/
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.update-account-btn:hover {
+    transition: 0.3s;
+    transform: scale(1.05);
+}
+
+/*Mobile Support*/
+@media screen and (max-width: 600px) {
+    /*align content mobile*/
+    .update-account {
+        width: 100%;
+        padding-left: 25px;
+    }
+}
