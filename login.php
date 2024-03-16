@@ -11,6 +11,7 @@
         if (!isset($_POST['login-username'], $_POST['login-password'])) {
             exit('Please fill both the username and password fields!');
         }
+        $_SESSION["userType"]="admin";
         require_once("php/loggingIn.php");
     }
 
@@ -20,6 +21,7 @@
         }
     
         // go to the signingUp script
+        $_SESSION["userType"]="admin";
         require_once("php/signingUp.php");
     }
 ?>

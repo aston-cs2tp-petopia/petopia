@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
     \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     const itemsContainer = document.querySelector('.results-container');
     const searchInput = document.getElementById('contact-name');
-    const sortBySelect = document.getElementById('sortBy');
+    const sortByPrice = document.getElementById('sortByPrice');
+    const sortByProduct = document.getElementById('sortByProduct');
     const showSelect = document.getElementById('show');
-    let currentPage = 1;
+    let currentPage = 1; 
     let itemsArray = [];
     let originalOrder = Array.from(itemsContainer.querySelectorAll('.item-template'));
 
@@ -16,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
     \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     function applyFilterAndSort() {
         const searchTerm = searchInput.value.toLowerCase();
-        const sortValue = sortBySelect.value;
+        const sortValuePrice = sortByPrice.value;
+        const sortValueProduct = sortByProduct.value;
 
         //Filter
         let filteredItems = originalOrder.filter(item => {
@@ -24,19 +26,40 @@ document.addEventListener("DOMContentLoaded", function() {
             return itemName.includes(searchTerm);
         });
 
-        //Sort
-        if (sortValue === 'lowToHigh' || sortValue === 'highToLow') {
+        if (sortValueProduct === 'cat') {
+            filteredItems = filteredItems.filter(item => {
+                const productCat = item.dataset.category.toLowerCase(); 
+                return productCat === 'cat';
+            });
+        }
+
+        //Sorts price
+        if (sortValuePrice === 'lowToHigh' || sortValuePrice === 'highToLow') {
             filteredItems.sort((a, b) => {
                 const priceA = parseFloat(a.querySelector('.item-info h5').textContent.replace(/[^\d.]/g, ''));
                 const priceB = parseFloat(b.querySelector('.item-info h5').textContent.replace(/[^\d.]/g, ''));
                 return sortValue === 'lowToHigh' ? priceA - priceB : priceB - priceA;
             });
+        
+
+            itemsArray = filteredItems;
+            currentPage = 1;
+            updateItemsVisibility();
         }
 
-        itemsArray = filteredItems;
-        currentPage = 1;
-        updateItemsVisibility();
-    }
+        // if (sortValueProduct === 'cat') {
+        //     filteredItems.filter((a) => {
+        //         // const product = a.querySelector('.item-info h5').textContent.replace(/[^\d.]/g, '');
+        //         // return sortValue === product;
+
+        //         return item.querySelector('h4 a').textContent.toLowerCase();
+        //     });
+        
+
+        //     itemsArray = filteredItems;
+        //     currentPage = 1;
+        //     updateItemsVisibility();
+        // }
 
     /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
         @Visability
@@ -103,4 +126,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Initial setup
     applyFilterAndSort(); //For initial visability too
-});
+    }
+    }
+    );

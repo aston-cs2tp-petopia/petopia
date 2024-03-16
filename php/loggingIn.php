@@ -11,7 +11,11 @@
 
         // Prepare a statement to select the hashed password for the given username
         // This prevents SQL injection attacks
-        $stat = $db->prepare('SELECT Password FROM customer WHERE Username = ?');
+        if ($_POST['userType']=="admin"){
+            $stat = $db->prepare('SELECT Password FROM admin WHERE Username = ?');
+        }else{
+            $stat = $db->prepare('SELECT Password FROM customer WHERE Username = ?');
+        }
 
         // Execute the prepared statement with the provided username
         $stat->execute(array($_POST['login-username']));
@@ -32,15 +36,27 @@
             } else {
                 // Display an error message if the password does not match
                 $_SESSION['error_message'] = "Incorrect Password.";
-                header("Location: login.php"); // Redirect to the form page
-                exit;
+
+                if ($_POST['userType']=="admin"){
+                    header("Location: adminLogin.php"); // Redirect to the admin form page
+                    exit;
+                } else {
+                    header("Location: login.php"); // Redirect to the customer form page
+                    exit;
+                }
             }
         } else {
             // Display an error message if the username is not found
             // Display an error message if the password does not match
             $_SESSION['error_message'] = "Username does not exist.";
-            header("Location: login.php"); // Redirect to the form page
-            exit;
+
+            if ($_POST['userType']=="admin"){
+                header("Location: adminLogin.php"); // Redirect to the form page
+                exit;
+            } else {
+                header("Location: login.php"); // Redirect to the form page
+                exit;
+            }
         }
     } catch (PDOException $ex) {
         // Handle any PDO (database related) errors

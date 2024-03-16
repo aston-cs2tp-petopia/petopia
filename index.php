@@ -317,6 +317,8 @@
     <!--Footer-->
     <footer>
         <p>Copyright © Petopia 2023</p>
+        <br></br>
+        <p><a href="AdminLogin.php">Admin</a></p>
     </footer>
 
     <!--Flickity-->
