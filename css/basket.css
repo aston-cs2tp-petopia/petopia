@@ -20,40 +20,213 @@
 
 /*Title*/
 .top-container h3{
-    font-weight: 600;
-    font-size: 30px;
-    color:#163741;
+    color: #163741;
+    font-weight: 800;
+    font-size: 40px;
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-    @Table
+    @Shopping Basket
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
-.productTable {
+/*PHP content inside this element*/
+.basket-php-container {
+    width: 100%;
+    /*Flex*/
     display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap-reverse;
+    gap: 100px;
+}
+
+/*Template Items Container*/
+.shopping-basket-items {
+    padding-top: 50px;
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Template
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Item Template Container*/
+.basket-item-template {
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/*Image Container*/
+.basket-item-template .item-image {
+    width: 200px;
+    height: 200px;
+}
+
+.basket-item-template .item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/**************************/
+/* @Template - text
+/**************************/
+
+.item-info {
+    height: 100%;
+    /*Flex*/
+    display: flex;
+    justify-content: space-evenly;
+    align-items: space-evenly;
     flex-direction: column;
 }
 
-.basket-top b{
-    color:#163741;
+.template-header {
+    font-size: 30px;
+    margin: 0;
+    font-weight: 900;
+    color: #a349a4;
 }
 
-.product {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.basket-row {
-    width: 100%;
-}
-
-.remove-basket {
-    color: red;
-    cursor: pointer;
-    font-weight: 700;
-    background-color: transparent;
-    border: none;
+.item-stock, .item-quantity {
+    padding-top: 20px;
+    color: #163741;
+    font-weight: 500;
     font-size: 20px;
+    margin: 0;
+}
 
+.item-name {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 900;
+    color: #a349a4;
+}
+
+.item-info form {
+    padding-top: 20px;
+    color: #163741;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0;
+}
+
+/**************************/
+/* @Template - Quantity
+/**************************/
+
+.quantity-selector {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    padding: 8px 25px 8px 11px;
+    min-width: 55px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #111e49;
+    border-radius: 3px;
+}
+
+.quantity-selector option {
+
+}
+
+/**************************/
+/* @Template - Total Price
+/**************************/
+
+.item-price-info .subtotal-heading {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 900;
+    color: #a349a4;
+}
+
+.item-price-info .item-subtotal {
+    color: #163741;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Order Summary
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.order-summary-container {
+    padding-bottom: 30px;
+}
+
+.template-text {
+    color: #163741;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0;
+}
+
+/*Checkout button*/
+.order-summary-container .checkout-btn {
+    width: 100%;
+    height: 50px;
+    margin-top: 40px;
+    background-color: #a349a4;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: none;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}.order-summary-container .checkout-btn:hover {
+    transition: 0.3s;
+    transform: scale(1.03)
+}
+
+/*Clear button*/
+.order-summary-container form {display: flex;justify-content: center;align-items: center;}
+.order-summary-container .clear-basket-btn {
+    width: 90%;
+    height: 50px;
+    margin-top: 10px;
+    background-color: #b63c3c;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: none;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}.order-summary-container .clear-basket-btn:hover {
+    transition: 0.3s;
+    transform: scale(1.03)
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media screen and (max-width: 750px) {
+    .shopping-basket-container .template-header {text-align: center;}
+}
+
+@media screen and (max-width: 466px) {
+    .item-price-info {width: 216px;}
 }

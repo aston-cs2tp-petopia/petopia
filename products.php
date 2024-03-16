@@ -48,7 +48,7 @@
 
     <?php
     require_once "php/mainLogCheck.php";
-
+    require_once('php/alerts.php');
     if (isset($_POST["add"])) {
         require_once "php/connectdb.php";
 
@@ -106,56 +106,12 @@
                         $subtotal,
                     ]);
                 }
-
-                echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var messageDiv = document.createElement('div');
-                    messageDiv.textContent = 'Item successfully added to basket.';
-                    messageDiv.style.position = 'fixed';
-                    messageDiv.style.top = '50%';
-                    messageDiv.style.left = '50%';
-                    messageDiv.style.transform = 'translate(-50%, -50%)';
-                    messageDiv.style.backgroundColor = '#d4edda';
-                    messageDiv.style.color = '#155724';
-                    messageDiv.style.padding = '20px';
-                    messageDiv.style.border = '1px solid #c3e6cb';
-                    messageDiv.style.borderRadius = '5px';
-                    messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                    messageDiv.style.zIndex = '1000';
-                    document.body.appendChild(messageDiv);
-                    
-                    setTimeout(function() {
-                        document.body.removeChild(messageDiv);
-                    }, 2000); // Message will disappear after 5 seconds
-                });
-            </script>";
+                jsAlert('Item successfully added to basket.', true, 3000);
             } else {
-                // Echoing a JavaScript block to display the message
-                echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var messageDiv = document.createElement('div');
-                    messageDiv.textContent = 'Not enough stock available.';
-                    messageDiv.style.position = 'fixed';
-                    messageDiv.style.top = '50%';
-                    messageDiv.style.left = '50%';
-                    messageDiv.style.transform = 'translate(-50%, -50%)';
-                    messageDiv.style.backgroundColor = '#f8d7da';
-                    messageDiv.style.color = '#721c24';
-                    messageDiv.style.padding = '20px';
-                    messageDiv.style.border = '1px solid #f5c6cb';
-                    messageDiv.style.borderRadius = '5px';
-                    messageDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                    messageDiv.style.zIndex = '1000';
-                    document.body.appendChild(messageDiv);
-                    
-                    setTimeout(function() {
-                        document.body.removeChild(messageDiv);
-                    }, 2000); // Message will disappear after 5 seconds
-                });
-            </script>";
+                jsAlert('Not enough stock available.', false, 3000);
             }
         } else {
-            echo "Product not found.";
+            jsAlert('Product not found.', false, 3000);
         }
     }
     ?>
@@ -239,7 +195,7 @@
                     <div class="results-container">
                     <?php
                     require_once "php/connectdb.php";
-
+                    
                     // Capture search term and category IDs from URL query parameters
                     $searchTerm = isset($_GET["search"])
                         ? trim($_GET["search"])
@@ -303,18 +259,30 @@
                                         "CategoryNames"
                                     ]; ?></h6>
                                     <h4><a href="item.php?Product_ID=<?php echo $tempPID; ?>"><?php echo $row[
-    "Name"
-]; ?></a></h4>
-                                    <!-- <td align="left"><a href="projectdetails.php?pid=' . $pidTemp . '"> -->
+                                        "Name"
+                                    ]; ?></a></h4>
                                     <h5>£<?php echo $row["Price"]; ?></h5>
                             
                                     <div class="item-bottom-container">
-                                        <p>Stock: <?php echo $row[
-                                            "Num_In_Stock"
-                                        ]; ?></p>
+                                    <p>Stock: <?php 
+                                    $adjustedStock = $row["Num_In_Stock"];
+                                    if (isset($b) && $b === true && isset($_SESSION['username'])) {
+                                        $username = $_SESSION['username'];
+
+                                        //Grabs user's basket
+                                        $query = $db->prepare("SELECT SUM(Quantity) AS Quantity FROM basket WHERE Customer_ID = (SELECT Customer_ID FROM customer WHERE Username = ?) AND Product_ID = ?");
+                                        $query->execute([$username, $row["Product_ID"]]);
+                                        $basketQuantity = $query->fetchColumn();
+
+                                        //Adjustes the basket based on what's in the basket
+                                        $adjustedStock -= $basketQuantity;
+                                    }
+
+                                    echo max(0, $adjustedStock);//Ensures positive values
+                                    ?></p>
                                         <?php if (
                                             $b == true &&
-                                            $row["Num_In_Stock"] > 0
+                                            $adjustedStock > 0
                                         ) {
                                             echo "<form method='post' class='add-to-basket-form'>";
                                             echo '<input type="hidden" name="productID" value="' . $row["Product_ID"] . '">';

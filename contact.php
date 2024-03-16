@@ -1,7 +1,3 @@
-<?php
-    require_once('php/mainLogCheck.php');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +39,51 @@
     
     <header></header>
 
+    <?php
+    require_once('php/connectdb.php');
+    require_once('php/mainLogCheck.php');
+
+    $userFirstName = '';
+    $userEmail = '';
+
+    /*If user is logged in, grab their data*/
+    if ($b) {
+        $username = $_SESSION['username'];
+        $stmt = $db->prepare("SELECT First_Name, Contact_Email FROM customer WHERE Username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user) {
+            $userFirstName = $user['First_Name'];
+            $userEmail = $user['Contact_Email'];
+        }
+    }
+
+    if (isset($_POST['submit-contact'])) {
+        //Form data
+        $name = $_POST['contact-name'];
+        $email = isset($_POST['contact-hide-email']) ? '' : $_POST['contact-email'];
+        $message = $_POST['contact-message'];
+        $contactDate = date('Y-m-d');
+    
+        //Preparing the SQL statement
+        $stmt = $db->prepare("INSERT INTO contactforms (`Name`, `Contact_Email`, `Contact_Date`, `Contact_Text`) VALUES (?, ?, ?, ?)");
+        $stmt->bindValue(1, $name);
+        $stmt->bindValue(2, $email);
+        $stmt->bindValue(3, $contactDate);
+        $stmt->bindValue(4, $message);
+    
+        //Executes the form
+        require_once('php/alerts.php');
+        jsAlert('Form successfully sent', true, 4000);
+        if ($stmt->execute()) {
+            jsAlert('Form successfully sent', true, 4000);
+        } else {
+            jsAlert('Error: Form was not sent', false, 4000);
+        }
+    }
+?>
+
     <main>
 
         <section class="hero-banner">
@@ -70,19 +111,18 @@
                     </h4>
 
                     <!--Contact Form-->
-                    <form id="contact-form" action="form.php" method="post" name="contact-form">
+                    <form id="contact-form" action="contact.php" method="post" name="contact-form">
                         <!--Name Input Container-->
                         <div class="input-container">
                             <label for="contact-name">Your Name<span style="color: red;">*</span></label>
-                            <input type="text" id="contact-name" name="contact-name" class="name-input"
-                                placeholder="Name" required />
+                            <input type="text" id="contact-name" name="contact-name" class="name-input" placeholder="Name" required value="<?php echo htmlspecialchars($userFirstName); ?>" />
                             <i class='bx bxs-user'></i>
                         </div>
+
                         <!--Email Input Container-->
                         <div class="input-container">
                             <label for="contact-email">Your Email<span style="color: red;">*</span></label>
-                            <input type="email" id="contact-email" name="contact-email" class="email-input"
-                                placeholder="Email" required />
+                            <input type="email" id="contact-email" name="contact-email" class="email-input" placeholder="Email" required value="<?php echo htmlspecialchars($userEmail); ?>" />
                             <i class='bx bxs-envelope'></i>
                         </div>
 
@@ -95,7 +135,7 @@
 
                         <!--Checkbox Input Container-->
                         <div class="input-container-checkbox">
-                            <input type="checkbox" id="contact-agree" name="contact-agree" required>
+                            <input type="checkbox" id="contact-agree" name="contact-hide-email">
                             <label for="contact-agree">Don't show your email address</label>
                         </div>
 

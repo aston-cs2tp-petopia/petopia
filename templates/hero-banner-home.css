@@ -73,6 +73,10 @@ body, html {
 
     /*Other styles*/
     cursor: pointer;
+    transition: 0.25s;
+} .hero-banner-button:hover {
+    transition: 0.25s;
+    transform: scale(1.03);
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\

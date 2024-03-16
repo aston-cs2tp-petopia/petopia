@@ -1,13 +1,13 @@
 <?php
 require_once('php/mainLogCheck.php');
 
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    // Redirect to the login page
+//Check if the user is logged in
+if (!$b) {
     header("Location: login.php");
-    exit(); // Stop further execution
+    exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,66 +67,15 @@ if (!isset($_SESSION['username'])) {
         <!--Basket Container-->
         <section class="basket-container">
             <!--Basket Container-->
-                <div class="top-container">
-                    <h3>Your basket</h3>
-                </div>
+            <div class="top-container">
+                <h3>Your basket</h3>
+            </div>
             <!--Basket Table-->
-            <?php
-            require_once('php/connectdb.php');
-
-            try {
-                // Fetch basket items for the currently logged-in user
-                $username = $_SESSION['username'];
-                $query = "SELECT product.Product_ID, product.Name, basket.Quantity, basket.Subtotal
-                          FROM basket 
-                          JOIN product ON product.Product_ID = basket.Product_ID 
-                          JOIN customer ON basket.Customer_ID = customer.Customer_ID
-                          WHERE customer.Username = ?";
-                $stmt = $db->prepare($query);
-                $stmt->execute([$username]);
-                $basketItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Display basket items in a table
-                if ($basketItems) {
-            ?>
-                    <table cellspacing="10" cellpadding="15" class="productTable">
-                        <tr class="basket-top">
-                            <th align='center'><b>Image</b></th>
-                            <th align='center'><b>Product Name</b></th>
-                            <th align='center'><b>Quantity</b></th>
-                            <th align='center'><b>Subtotal</b></th>
-                            <th align='center'><b>Action</b></th>
-                        </tr>
-                        <?php
-                        foreach ($basketItems as $item) {
-                            echo  "<tr class='basket-row' data-product-id='" . $item['Product_ID'] . "'>
-                                        <td align='center'><img src='assets/Homepage/hero-banner2.jpg' alt='Product Image' width='50' height='50'></td>
-                                        <td align='center'>" . $item['Name'] . "</td>
-                                        <td align='center'>" . $item['Quantity'] . "</td>
-                                        <td align='center'>£" . $item['Subtotal'] . "</td>
-                                        <td align='center'><button class='remove-basket'>Remove</button></td>
-                                    </tr>";
-                        }
-                        ?>
-                    </table>
-
-                    <script>
-                        // JavaScript code for removing items from the basket
-                        // This script can be kept as it is
-                    </script>
-
+            <div class="basket-php-container">
                 <?php
-                } else {
-                    echo  "<p>No items in the basket.</p>\n"; // No items found in the basket
-                }
-            } catch (PDOException $ex) {
-                echo "Sorry, a database error occurred! <br>";
-                echo "Error details: <em>" . $ex->getMessage() . "</em>";
-            }
-            ?>
-
-
-
+                    require_once('php/basket_template.php');
+                ?>
+            </div>
         </section>
             
         

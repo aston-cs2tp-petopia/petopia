@@ -1,51 +1,6 @@
 <?php
 require_once "php/mainLogCheck.php";
 $tempPID = $_GET["Product_ID"];
-
-if (isset($_POST["add"])) {
-    require_once "php/connectdb.php";
-
-    $username = $_SESSION["username"];
-    $productID = $_POST["productID"];
-    $quantityToAdd = $_POST["quantity"];
-
-    // Get customer ID
-    $custIDQuery = $db->prepare("SELECT Customer_ID FROM customer WHERE username = ?");
-    $custIDQuery->execute([$username]);
-    $custID = $custIDQuery->fetchColumn();
-
-    // Check if the item already exists in the basket
-    $checkQuery = $db->prepare("SELECT Quantity FROM basket WHERE Customer_ID = ? AND Product_ID = ?");
-    $checkQuery->execute([$custID, $productID]);
-    $existingQuantity = $checkQuery->fetchColumn();
-
-    // Get product stock and price
-    $productQuery = $db->prepare("SELECT Num_In_Stock, Price FROM product WHERE Product_ID = ?");
-    $productQuery->execute([$productID]);
-    $product = $productQuery->fetch(PDO::FETCH_ASSOC);
-
-    if ($product) {
-        $newQuantity = $existingQuantity + $quantityToAdd;
-        // Check against stock
-        if ($newQuantity <= $product['Num_In_Stock']) {
-            $subtotal = $newQuantity * $product['Price'];
-
-            if ($existingQuantity) {
-                // Update existing basket item
-                $updateQuery = $db->prepare("UPDATE basket SET Quantity = ?, Subtotal = ? WHERE Customer_ID = ? AND Product_ID = ?");
-                $updateQuery->execute([$newQuantity, $subtotal, $custID, $productID]);
-            } else {
-                // Insert new basket item
-                $insertQuery = $db->prepare("INSERT INTO basket (Customer_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
-                $insertQuery->execute([$custID, $productID, $quantityToAdd, $subtotal]);
-            }
-        } else {
-            echo "Not enough stock available.";
-        }
-    } else {
-        echo "Product not found.";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -122,9 +77,22 @@ if (isset($_POST["add"])) {
                                     <h5 class="price-text">£<?php echo $row[
                                         "Price"
                                     ]; ?></h5>
-                                    <p class="in-stock-text">Stock: <?php echo $row[
-                                        "Num_In_Stock"
-                                    ]; ?></p>
+                                    <p class="in-stock-text">Stock: <?php
+                                    $adjustedStock = $row["Num_In_Stock"];
+                                    if (isset($b) && $b === true && isset($_SESSION['username'])) {
+                                        $username = $_SESSION['username'];
+
+                                        //Grabs user's basket
+                                        $query = $db->prepare("SELECT SUM(Quantity) AS Quantity FROM basket WHERE Customer_ID = (SELECT Customer_ID FROM customer WHERE Username = ?) AND Product_ID = ?");
+                                        $query->execute([$username, $row["Product_ID"]]);
+                                        $basketQuantity = $query->fetchColumn();
+
+                                        //Adjustes the basket based on what's in the basket
+                                        $adjustedStock -= $basketQuantity;
+                                    }
+
+                                    echo max(0, $adjustedStock);//Ensures positive values
+                                    ?></p>
                                 </div>
                                 <p class="desc-text"><?php echo $row[
                                     "Description"
@@ -132,7 +100,7 @@ if (isset($_POST["add"])) {
                             
                                 <div class="item-bottom-container">
                                 <?php if ($b == true) {
-                                    if ($row["Num_In_Stock"] > 0) {
+                                    if ($adjustedStock > 0) {
                                         // User is logged in and stock is available
                                         echo "<form method='post' action='products.php'>";
                                         echo '<input type="hidden" name="productID" value="' .
