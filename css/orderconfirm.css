@@ -8,17 +8,17 @@ body {
 
 /*Hero Banner Container*/
 .hero-banner{
-  height: 400px !important; /*Set Height Here*/
+  height: 550px !important; /*Set Height Here*/
   background-color:whitesmoke;
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-  @About Us
+  @Order Confirm
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 .main-content {
   width: 100%;
-  padding: 40px 0;
+  padding: 20px 0;
   /*Flex*/
   display: flex;
   justify-content: center;
@@ -42,15 +42,35 @@ body {
   width: 500px;
   height: 200px;
   background-color:whitesmoke;
-
 }
 
-
-
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
-  @Mobile Support
+  @Text
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
-@media screen and (max-width: 600px) {
-  .about-content {width: 85%;}
+/*Order Number Text*/
+.order-number-text {
+  margin: 0;
+}
+
+/*Order Total Text*/
+.order-total-text {
+  padding-bottom: 10px;
+  color: #163741;
+}
+
+/*Order Progress Text*/
+.order-progress-text {
+  color: #163741;
+  padding-bottom: 20px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Order Content
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.order-summary-heading {
+  color: #163741;
+  font-weight: 800;
+  font-size: 40px;
 }

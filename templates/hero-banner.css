@@ -57,6 +57,13 @@ body, html {
     color: #163741;
 }
 
+/*Button*/
+.hero-banner-content a {
+    text-decoration: none;
+    display: block;
+    width: 160px;
+}
+
 /*Hero Banner Button*/
 .hero-banner-button {
     /*Button styles*/
@@ -73,6 +80,10 @@ body, html {
 
     /*Other styles*/
     cursor: pointer;
+    transition: 0.25s;
+}.hero-banner-button:hover {
+    transition: 0.25s;
+    transform: scale(1.03);
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\

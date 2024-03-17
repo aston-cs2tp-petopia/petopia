@@ -53,36 +53,23 @@ require_once "php/mainLogCheck.php"; ?>
     <!--Hero Banner-->
     <section class="hero-banner">
         <!--Hero Banner Image-->
-        <div class="hero-banner-image"><img src= alt=""></div>
+        <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
         <!--Hero Banner Text Container-->
         <div class="hero-banner-left">
 
             <div class="hero-banner-content">
-                <h2>Order Number :</h2>
-                <h1>Order Total: £</h1>
-                <p> Order Progress: Dispatched</p>
-                
+                <h2 class="order-number-text">Order Number :</h2>
+                <h1 class="order-total-text">Order Total: £540</h1>
+                <p class="order-progress-text"> Order Progress: Processing</p>
+                <a href="orders.php" style="text-decoration: none;"><div class="hero-banner-button">Return to orders</div></a>
             </div>
         </div>
     </section>
 
     <section class="main-content">
-        <div class="item-content">
-            <h3 class="content-h3">Items</h3>
-            <div class ="itembox"> item1.....
-            </div>
-            
+        <h2 class="order-summary-heading">Order Content</h2>
 
-            <h3 class="content-h3">Problems? contact us</h3>
-
-            <p>
-            
-            </p>
-            <p>
-            
-            </p>
-        </div>
     </section>
 
     <footer>
