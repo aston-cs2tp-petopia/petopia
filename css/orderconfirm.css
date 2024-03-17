@@ -17,7 +17,7 @@ body {
 
 .main-content {
   width: 100%;
-  padding: 20px 0;
+  padding-bottom: 20px;
   /*Flex*/
   display: flex;
   justify-content: center;

@@ -17,14 +17,13 @@ if ($orders) {
     echo '<ul class="orders-list">';
     foreach ($orders as $order) {
         echo '<li class="order-item">';
-        echo '<h3>Order ID: ' . htmlspecialchars($order["Orders_ID"]) . '</h3>';
-        echo '<p>Date: ' . htmlspecialchars($order["Order_Date"]) . '</p>';
-        echo '<p>Status: Processing</p>'; // UPDATE THIS IN THE FUTURE WHEN PROCESSING IS ADDED
-        echo '<p>Total: £' . htmlspecialchars($order["Total_Amount"]) . '</p>';
+        echo '<h3 class="template-orderid-text">Order ID: <span>' . htmlspecialchars($order["Orders_ID"]) . '</span></h3>';
+        echo '<p class="template-date-text">Date: <span>' . htmlspecialchars($order["Order_Date"]) . '</span></p>';
+        echo '<p class="template-status-text">Status: <span>Processing</span></p>'; // UPDATE THIS IN THE FUTURE WHEN PROCESSING IS ADDED
+        echo '<p class="tempalte-price-text">Total: <span>£' . htmlspecialchars($order["Total_Amount"]) . '</span></p>';
         //View Receipt button
-        echo '<a href="orderconfirm.php?orderId=' . htmlspecialchars($order["Orders_ID"]) . '" class="view-receipt-btn">View Receipt</a>';
+        echo '<a href="orderconfirm.php?orderId=' . htmlspecialchars($order["Orders_ID"]) . '" class="view-receipt-btn"><div>View Receipt</div></a>';
         //Placeholder for Review button
-        echo '<button class="review-product-btn">Review Product</button>';
         echo '</li>';
     }
     echo '</ul>';
