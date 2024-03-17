@@ -52,7 +52,7 @@
 
     <!--Hero Banner-->
         <section class="hero-banner">
-            <div class="hero-banner-image"><img src="assets/AdvicePage/advice-image.jpg" alt=""></div>
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
             <div class="hero-banner-left">
 

@@ -27,17 +27,14 @@ if (!$orderExists) {
 
 <!DOCTYPE html>
 <html lang="en">
-<link href="css/about.css" rel="stylesheet" type="text/css">
-<link href="css/navigation.css" rel="stylesheet" type="text/css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
     <link href="css/orderconfirm.css" rel="stylesheet" type="text/css">
-
+    <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <link href="css/footer.css" rel="stylesheet" type="text/css">
     <!--[Google Fonts]-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
