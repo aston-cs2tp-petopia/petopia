@@ -168,14 +168,8 @@
                         
 
                         <div class="sort-by-container">
-                            <form><label for="sortByProduct">Sort By Product</label>
+                            <form class="hide-sortby-product"><label for="sortByProduct">Filter By Category</label>
                                 <select id="sortByProduct" class="selected">
-                                    <option value="select">Select</option>
-                                    <option value="cat">Cats</option>
-                                    <option value="dogs">Dogs</option>
-                                    <option value="treats">Treats</option>
-                                    <option value="toys">Toys</option>
-                                    <option value="grooming">Grooming</option>
                                 </select>
                             </form>
                         </div>
