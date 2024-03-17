@@ -13,7 +13,7 @@ $username = $_SESSION['username'];
 try {
     $db->beginTransaction();
 
-    // Fetch customer ID
+    //Grab user data
     $custStmt = $db->prepare("SELECT Customer_ID FROM customer WHERE Username = ?");
     $custStmt->execute([$username]);
     $customerID = $custStmt->fetchColumn();
@@ -22,7 +22,7 @@ try {
         throw new Exception("Customer not found.");
     }
 
-    // Fetch basket items for subtotal calculation
+    //Grab basket items for total
     $basketStmt = $db->prepare("SELECT Product_ID, Quantity, Subtotal FROM basket WHERE Customer_ID = ?");
     $basketStmt->execute([$customerID]);
     $basketItems = $basketStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,12 +33,12 @@ try {
 
     $totalAmount = array_sum(array_column($basketItems, "Subtotal"));
 
-    // Insert into orders
+    //Add to orders
     $ordersStmt = $db->prepare("INSERT INTO orders (Customer_ID, Order_Date, Total_Amount) VALUES (?, NOW(), ?)");
     $ordersStmt->execute([$customerID, $totalAmount]);
     $ordersID = $db->lastInsertId();
 
-    // Insert into ordersdetails and update product stock
+    //Update stock and order details
     foreach ($basketItems as $item) {
         $ordersDetailsStmt = $db->prepare("INSERT INTO ordersdetails (Orders_ID, Product_ID, Quantity, Subtotal) VALUES (?, ?, ?, ?)");
         $ordersDetailsStmt->execute([$ordersID, $item['Product_ID'], $item['Quantity'], $item['Subtotal']]);
@@ -47,19 +47,15 @@ try {
         $updateProductStmt->execute([$item['Quantity'], $item['Product_ID']]);
     }
 
-    // Clear user basket
+    //Clear basket
     $clearBasketStmt = $db->prepare("DELETE FROM basket WHERE Customer_ID = ?");
     $clearBasketStmt->execute([$customerID]);
 
     $db->commit();
-
-    // Success message
-    $_SESSION['alert_message'] = ["message" => "Order placed successfully.", "success" => true];
 } catch (Exception $e) {
     $db->rollBack();
-    $_SESSION['alert_message'] = ["message" => "Error placing order: " . $e->getMessage(), "success" => false];
 }
 
-header("Location: ../orderconfirm.php"); // Redirect to a success page
+header("Location: ../orderconfirm.php?orderId=" . $ordersID); //Redirect
 exit;
 ?>

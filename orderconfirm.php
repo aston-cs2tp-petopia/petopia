@@ -1,5 +1,29 @@
 <?php
-require_once "php/mainLogCheck.php"; ?>
+require_once "php/mainLogCheck.php";
+require_once "php/connectdb.php";
+
+if (!$b) {
+    header("Location: login.php");
+    exit;
+}
+
+$username = $_SESSION['username'] ?? '';
+$stmt = $db->prepare("SELECT Customer_ID FROM customer WHERE Username = ?");
+$stmt->execute([$username]);
+$userData = $stmt->fetch(PDO::FETCH_ASSOC);
+$userId = $userData['Customer_ID'] ?? 0;
+
+$orderId = isset($_GET['orderId']) ? intval($_GET['orderId']) : 0;
+
+$stmt = $db->prepare("SELECT Orders_ID, Total_Amount, 'Processing' AS Order_Status FROM orders WHERE Orders_ID = ? AND Customer_ID = ?");
+$stmt->execute([$orderId, $userId]);
+$orderExists = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$orderExists) {
+    header("Location: index.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,21 +79,23 @@ require_once "php/mainLogCheck.php"; ?>
         <!--Hero Banner Image-->
         <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
-        <!--Hero Banner Text Container-->
         <div class="hero-banner-left">
-
             <div class="hero-banner-content">
-                <h2 class="order-number-text">Order Number :</h2>
-                <h1 class="order-total-text">Order Total: £540</h1>
-                <p class="order-progress-text"> Order Progress: Processing</p>
+                <h2 class="order-number-text">Order Number: <?php echo htmlspecialchars($orderId); ?></h2>
+                <!-- Display dynamic order total and status -->
+                <h1 class="order-total-text">Order Total: £<?php echo htmlspecialchars($orderExists['Total_Amount']); ?></h1>
+                <p class="order-progress-text">Order Progress: <?php echo htmlspecialchars($orderExists['Order_Status']); ?></p>
                 <a href="orders.php" style="text-decoration: none;"><div class="hero-banner-button">Return to orders</div></a>
             </div>
         </div>
     </section>
-
+    
+    <!--Section for order content-->
     <section class="main-content">
-        <h2 class="order-summary-heading">Order Content</h2>
-
+        <h2 class="order-summary-heading">Order Summary</h2>
+        <div class="order-template-container">
+            <?php require_once('php/order_content_template.php');?>
+        </div>
     </section>
 
     <footer>
