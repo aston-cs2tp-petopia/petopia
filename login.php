@@ -149,6 +149,21 @@
                     <i class='bx bxs-phone'></i>
                 </div>
 
+                <!--Home Address Input Container-->
+                <div class="input-container">
+                    <!--Home Address Input-->
+                    <input type="text" id="signup-homeAddress" name="signup-homeAddress" class="homeAddress-input" 
+                    placeholder="Home Address"required />
+                    <i class='bx bxs-home'></i>
+                </div>
+
+                <div class="input-container">
+                    <!--Postcode Input-->
+                    <input type="text" id="signup-postcode" name="signup-postcode" class="postcode-input" 
+                    placeholder="Postcode"required />
+                    <i class='bx bxs-map-pin'></i>
+                </div>
+
                 <!--Username Input Container-->
                 <div class="input-container">
                     <!--Username Input-->
