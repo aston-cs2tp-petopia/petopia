@@ -18,25 +18,23 @@ try {
         echo '<div class="shopping-basket-container">';
         echo '<h2 class="template-header">Order Content</h2>';
         echo '<div class="shopping-basket-items">';
-
         foreach ($orderItems as $item) {
             echo '<div class="basket-item-template">';
-            // Placeholder image path, replace with actual product image path if available
-            echo '<div class="item-image"><img src="../assets/Homepage/hero-banner2.jpg" alt="' . htmlspecialchars($item["Name"]) . '"></div>';
+            echo '<div class="item-image"><img src="assets/ProductImages/ImageID_' . htmlspecialchars($item["Product_ID"]) . '.jpeg" alt="' . htmlspecialchars($item["Name"]) . '"></div>';
             echo '<div class="item-info">';
-            // Hyperlink to the product page, assuming 'item.php?Product_ID=x' is the correct path
+            //Hyperlink to product
             echo '<p class="item-name"><a href="item.php?Product_ID=' . htmlspecialchars($item["Product_ID"]) . '" style="text-decoration: none; color: #a349a4;">' . htmlspecialchars($item["Name"]) . '</a></p>';
             echo '<p class="item-stock">Quantity: ' . htmlspecialchars($item["Quantity"]) . '</p>';
-            echo '</div>'; // Close item-info
+            echo '</div>'; //Close item-info
             echo '<div class="item-price-info">';
             echo '<p class="subtotal-heading">Total Price</p>';
             echo '<p class="item-subtotal">£' . htmlspecialchars($item["Subtotal"]) . '</p>';
-            echo '</div>'; // Close item-price-info
-            echo '</div>'; // Close basket-item-template
+            echo '</div>'; //Close item-price-info
+            echo '</div>'; //Close basket-item-template
         }
 
-        echo '</div>'; // Close shopping-basket-items
-        echo '</div>'; // Close shopping-basket-container
+        echo '</div>'; //Close shopping-basket-items
+        echo '</div>'; //Close shopping-basket-container
     } else {
         echo "<p>No items in this order.</p>";
     }

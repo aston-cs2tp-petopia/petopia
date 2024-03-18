@@ -12,6 +12,8 @@
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 .basket-container {
+    padding-bottom: 30px;
+    /*Flex*/
     display: flex;
     flex-direction: column;
     align-items: center;

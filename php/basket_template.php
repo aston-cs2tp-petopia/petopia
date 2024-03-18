@@ -20,7 +20,7 @@ try {
                 <?php foreach ($basketItems as $item) { ?>
                     <div class="basket-item-template">
                         <div class="item-image">
-                            <img src="../assets/Homepage/hero-banner2.jpg" alt="">
+                        <img src="../assets/ProductImages/ImageID_<?php echo $item["Product_ID"]; ?>.jpeg" alt="">
                         </div>
                         <div class="item-info">
                             <!-- Hyperlink for item name -->

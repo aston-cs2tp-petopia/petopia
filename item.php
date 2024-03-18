@@ -51,7 +51,7 @@ $tempPID = $_GET["Product_ID"];
     <main>
         <section class="item-section">
             <div class="item-image">
-                <img src="assets/Homepage/hero-banner2.jpg" alt="">
+                <img src="assets/ProductImages/ImageID_<?php echo $tempPID; ?>.jpeg" alt="">
             </div>
 
             <div class="right-container">

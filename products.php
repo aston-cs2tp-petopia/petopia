@@ -245,7 +245,7 @@
                             <div class="item-template">
                                 <div class="item-image">
                                     <?php $tempPID = $row["Product_ID"]; ?>
-                                    <a href="item.php?Product_ID=<?php echo $tempPID; ?>"><img src="assets/Homepage/hero-banner2.jpg" alt=""></a>
+                                    <a href="item.php?Product_ID=<?php echo $tempPID; ?>"><img src="assets/ProductImages/ImageID_<?php echo $row["Product_ID"]; ?>.jpeg" alt=""></a>
                                 </div>
                             
                                 <div class="item-info">

@@ -64,7 +64,6 @@ if (!$b) {
 require_once('php/connectdb.php');
 require_once('php/validateSignup.php');
 require_once('php/alerts.php');
-session_start();
 
 $username = $_SESSION['username'] ?? '';
 
