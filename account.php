@@ -1,3 +1,12 @@
+<?php
+require_once "php/mainLogCheck.php";
+
+if (!$b) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
