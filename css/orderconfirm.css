@@ -109,6 +109,17 @@ body {
   object-fit: cover;
 }
 
+/*Right side of the order summary*/
+.item-right-container {
+  max-width: 400px;
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
 /**************************/
 /* @Template - text
 /**************************/
@@ -170,6 +181,7 @@ body {
 /* @Template - Total Price
 /**************************/
 
+/*Item Text container*/
 .item-info {
   display: flex;
   justify-content: center;
@@ -177,6 +189,7 @@ body {
   flex-direction: column;
 }
 
+/*Price Text*/
 .item-price-info {
   display: flex;
   justify-content: center;
@@ -184,6 +197,7 @@ body {
   flex-direction: column;
 }
 
+/*Subtotal Heading*/
 .item-price-info .subtotal-heading {
   font-size: 24px;
   margin: 0;
@@ -191,11 +205,159 @@ body {
   color: #a349a4;
 }
 
+/*Subtotal text*/
 .item-price-info .item-subtotal {
   color: #163741;
   font-weight: 500;
   font-size: 22px;
   margin: 0;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Submit Review
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Submit Review Flashbox*/
+.submit-review-container {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal box */
+.submit-review-content {
+  background-color: #fefefe;
+  padding: 20px;
+  width: 80%;
+  max-width: 300px;
+  position: relative;
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.submit-review-container h2 {
+  color: #163741;
+  font-weight: 800;
+  font-size: 24px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+/*Submit a Review Heading*/
+.submit-review-container textarea {
+  width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    min-height: 50px;
+    max-height: 150px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    background-color: white;
+    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/*Close Button*/
+.submit-review-close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/*Close Button*/
+.submit-review-close:hover,
+.submit-review-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Submit Review button + Review Button*/
+#submit-review-btn, .review-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #a349a4;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+} #submit-review-btn:hover, .review-btn:hover, .delete-review-btn:hover {
+  transition: 0.3s;
+  transform: scale(1.03);
+}
+
+.delete-review-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #b63c3c;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/*Stars Container*/
+.star-rating {
+  padding-bottom: 10px;
+}
+
+/*Empty Stars*/
+.bx-star {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 30px;
+}
+
+/*Selected Star*/
+.bxs-star {
+  cursor: pointer;
+  color: #ffc107;
+  font-size: 30px;
+}
+
+/*Filled Stars*/
+.filled {
+  color: #ffc107;
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\

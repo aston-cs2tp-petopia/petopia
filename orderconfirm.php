@@ -62,7 +62,7 @@ if (!$orderExists) {
 
 </head>
 
-<body>
+<body data-customer-id="<?php echo htmlspecialchars($userId); ?>">
     <!--
         [NAVIGATION/HEADER]
     -->
@@ -94,6 +94,10 @@ if (!$orderExists) {
             <?php require_once('php/order_content_template.php');?>
         </div>
     </section>
+
+
+
+    <script src="scripts/orderconfirm_review.js"></script>
 
     <footer>
         &copy; 2023 Petopia
