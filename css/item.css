@@ -32,7 +32,7 @@ main {
 
 /*Item Section*/
 .item-section {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 50px;
     /*Flex*/
     display: flex;
@@ -149,12 +149,123 @@ main {
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Item - Review
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Ratings Container (Div)*/
+.item-rating-container {
+    padding-top: 10px;
+    /*Flex*/
+    display: flex;
+    align-items: center;
+}
+
+/*Stars*/
+.item-rating-stars i {
+    font-size: 20px;
+    color: #f1c40f;
+    margin-right: 5px;
+}
+
+/*Rating Text*/
+.item-rating-container p {
+    margin: 0;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Reviews
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+.reviews-section {
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.reviews-heading {
+    color: #163741;
+    font-weight: 800;
+    font-size: 36px;
+    margin: 0;
+}
+
+.reviews-template {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Review - Template
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Username + Date container (Div)*/
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*Username Text*/
+.review-username {
+    color: #a349a4;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/*Date Text*/
+.review-date {
+    font-size: 18px;
+    font-weight: 500;
+    color: #676666;
+    margin: 0;
+}
+
+/*Filled Star*/
+.review-rating .filled {
+    color: #f1c40f;
+}
+
+/*Unfilled star*/
+.review-rating .unfilled {
+    color: #f1c40f;
+}
+
+/*Individual star*/
+.review-rating i {
+    color: #f1c40f;
+    font-size: 18px;
+}
+
+/*Feedback Text*/
+.review-text {
+    font-size: 18px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Mobile Support
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 @media screen and (max-width: 1200px) {
     main {min-height: calc(100vh - 114px);}
     .item-image{width:450px; height: 450px;}
+    .reviews-section {align-items: center;}
 }
 
 @media screen and (max-width: 1000px) {
@@ -167,7 +278,7 @@ main {
 }
 
 @media screen and (max-width: 400px) {
-    .item-section{gap: 35px;}
+    .item-section{gap: 35px; padding-top:50px;}
     .item-image{width:90vw; height: 90vw;}
     .right-container{width: 90%;display: flex;
         justify-content: center;
@@ -188,4 +299,8 @@ main {
         flex-direction: column;
     }
     .desc-text {text-align: center; margin-right: 0;}   
+    .reviews-heading {font-size: 34px;}
+    .review-username {font-size: 26px;}
+    .review-date {font-size: 16px;}
 }
+

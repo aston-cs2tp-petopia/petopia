@@ -94,6 +94,29 @@ $tempPID = $_GET["Product_ID"];
                                     echo max(0, $adjustedStock);//Ensures positive values
                                     ?></p>
                                 </div>
+                                <div class="item-rating-container">
+                                <p><?php 
+                                //Grab the rating data
+                                $avgRatingQuery = "SELECT AVG(rating) as averageRating FROM reviews WHERE Product_ID = ?";
+                                $stmt = $db->prepare($avgRatingQuery);
+                                $stmt->execute([$tempPID]);
+                                $avgRatingResult = $stmt->fetch(PDO::FETCH_ASSOC);
+                                $averageRating = round($avgRatingResult['averageRating'] * 2) / 2; //Round the number
+                                echo number_format($averageRating, 1); ?></p>
+                                <div class="item-rating-stars">
+                                        <?php
+                                        for ($i = 0; $i < 5; $i++) {
+                                            if ($averageRating >= ($i + 1)) {
+                                                echo '<i class="bx bxs-star" style="color: #f1c40f;"></i>'; //Full star
+                                            } elseif ($averageRating >= ($i + 0.5)) {
+                                                echo '<i class="bx bxs-star-half" style="color: #f1c40f;"></i>'; //Half star
+                                            } else {
+                                                echo '<i class="bx bx-star" style="color: #f1c40f;"></i>'; //Empty star
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
                                 <p class="desc-text"><?php echo $row[
                                     "Description"
                                 ]; ?></p>
@@ -101,7 +124,7 @@ $tempPID = $_GET["Product_ID"];
                                 <div class="item-bottom-container">
                                 <?php if ($b == true) {
                                     if ($adjustedStock > 0) {
-                                        // User is logged in and stock is available
+                                        //User is logged in and stock is available
                                         echo "<form method='post' action='products.php'>";
                                         echo '<input type="hidden" name="productID" value="' .
                                             $row["Product_ID"] .
@@ -110,11 +133,11 @@ $tempPID = $_GET["Product_ID"];
                                         echo '<button class="add-cart-btn" type="submit" name="add">Add to Cart<div class="bx bx-cart-add"></div></button>';
                                         echo "</form>";
                                     } else {
-                                        // User is logged in but no stock is available
+                                        //User is logged in but no stock is available
                                         echo '<button class="add-cart-btn" disabled>Out of Stock</button>';
                                     }
                                 } else {
-                                    // User is not logged in
+                                    //User is not logged in
                                     echo '<button class="add-cart-btn" onclick="location.href=\'login.php\'">Login to Add to Cart</button>';
                                 } ?>
                         <?php }
@@ -128,6 +151,14 @@ $tempPID = $_GET["Product_ID"];
                 ?>
             </div>
 
+        </section>
+
+        <!--Reviews Section-->
+        <section class="reviews-section">
+            <h2 class="reviews-heading">Reviews</h2>
+            <div class="reviews-template">
+                <?php require_once('php/reviews_template.php');?>
+            </div>
         </section>
 
     </main>
