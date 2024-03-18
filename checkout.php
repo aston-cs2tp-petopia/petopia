@@ -105,7 +105,7 @@ if (empty($basketItems)) {
                     <h2 class="checkout-subheading">Payment Information</h2>
                     <div class="form-group">
                         <label for="card-number">Card Number *</label>
-                        <input type="text" id="card-number" name="card_number" pattern="\d{16}" title="Card number must be 16 digits" required>
+                        <input type="text" id="card-number" maxlength="16" name="card_number" pattern="\d{16}" title="Card number must be 16 digits" required>
                     </div>
                     <div class="form-group">
                         <label for="name-on-card">Name on Card *</label>
@@ -117,11 +117,11 @@ if (empty($basketItems)) {
                     </div>
                     <div class="form-group">
                         <label for="exp-year">Exp Year *</label>
-                        <input type="number" id="exp-year" name="exp_year" min="2024" pattern="\d{4}" title="Year must be 2024 or later" required>
+                        <input type="number" id="exp-year" name="exp_year" min="2024" max="2099" pattern="\d{4}" title="Year must be 2024 or later" required>
                     </div>
                     <div class="form-group">
                         <label for="security-code">Security Code *</label>
-                        <input type="number" id="security-code" name="security_code" pattern="\d{3}" title="Security code must be 3 digits" required>
+                        <input type="number" id="security-code" min="100" max="999" name="security_code" pattern="\d{3}" title="Security code must be 3 digits" required>
                     </div>
 
                     <button type="submit" class="place-order-btn">Place Order</button>

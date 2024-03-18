@@ -7,22 +7,9 @@ if (!$b) {
     exit;
 }
 
-$username = $_SESSION['username'] ?? '';
-$stmt = $db->prepare("SELECT Customer_ID FROM customer WHERE Username = ?");
-$stmt->execute([$username]);
-$userData = $stmt->fetch(PDO::FETCH_ASSOC);
-$userId = $userData['Customer_ID'] ?? 0;
+//Used for past_orders_template.php
+$username = $_SESSION['username'] ?? null;
 
-$orderId = isset($_GET['orderId']) ? intval($_GET['orderId']) : 0;
-
-$stmt = $db->prepare("SELECT Orders_ID, Total_Amount, 'Processing' AS Order_Status FROM orders WHERE Orders_ID = ? AND Customer_ID = ?");
-$stmt->execute([$orderId, $userId]);
-$orderExists = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (!$orderExists) {
-    header("Location: index.php");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +19,7 @@ if (!$orderExists) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petopia</title>
-    <link href="css/orderconfirm.css" rel="stylesheet" type="text/css">
+    <link href="css/orders.css" rel="stylesheet" type="text/css">
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
     <link href="css/footer.css" rel="stylesheet" type="text/css">
     <!--[Google Fonts]-->
@@ -76,22 +63,21 @@ if (!$orderExists) {
         <!--Hero Banner Image-->
         <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
 
+        <!--Hero Banner Text Container-->
         <div class="hero-banner-left">
+
             <div class="hero-banner-content">
-                <h2 class="order-number-text">Order Number: <?php echo htmlspecialchars($orderId); ?></h2>
-                <!-- Display dynamic order total and status -->
-                <h1 class="order-total-text">Order Total: £<?php echo htmlspecialchars($orderExists['Total_Amount']); ?></h1>
-                <p class="order-progress-text">Order Progress: <?php echo htmlspecialchars($orderExists['Order_Status']); ?></p>
-                <a href="orders.php" style="text-decoration: none;"><div class="hero-banner-button">Return to orders</div></a>
+                <h2>Orders</h2>
+                <p>Your orders; all in one place</p>
             </div>
         </div>
     </section>
     
     <!--Section for order content-->
     <section class="main-content">
-        <h2 class="order-summary-heading">Order Summary</h2>
+        <h2 class="order-summary-heading">Previous Orders</h2>
         <div class="order-template-container">
-            <?php require_once('php/order_content_template.php');?>
+            <?php require_once('php/past_orders_template.php');?>
         </div>
     </section>
 

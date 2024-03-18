@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     const itemsContainer = document.querySelector('.results-container');
     const searchInput = document.getElementById('contact-name');
-    const sortBySelect = document.getElementById('sortBy');
+    const sortByPriceSelect = document.getElementById('sortByPrice');
+    const sortByProductSelect = document.getElementById('sortByProduct');
     const showSelect = document.getElementById('show');
     let currentPage = 1;
     let itemsArray = [];
@@ -16,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
     \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     function applyFilterAndSort() {
         const searchTerm = searchInput.value.toLowerCase();
-        const sortValue = sortBySelect.value;
+        const sortPriceValue = sortByPriceSelect.value;
+        const sortProductValue = sortByProductSelect.value;
 
         //Filter
         let filteredItems = originalOrder.filter(item => {
@@ -24,12 +26,20 @@ document.addEventListener("DOMContentLoaded", function() {
             return itemName.includes(searchTerm);
         });
 
-        //Sort
-        if (sortValue === 'lowToHigh' || sortValue === 'highToLow') {
+        //Sort by price
+        if (sortPriceValue === 'lowToHigh' || sortPriceValue === 'highToLow') {
             filteredItems.sort((a, b) => {
                 const priceA = parseFloat(a.querySelector('.item-info h5').textContent.replace(/[^\d.]/g, ''));
                 const priceB = parseFloat(b.querySelector('.item-info h5').textContent.replace(/[^\d.]/g, ''));
-                return sortValue === 'lowToHigh' ? priceA - priceB : priceB - priceA;
+                return sortPriceValue === 'lowToHigh' ? priceA - priceB : priceB - priceA;
+            });
+        }
+
+        //Sort by product
+        if (sortProductValue !== 'select') {
+            filteredItems = filteredItems.filter(item => {
+                const categoryNames = item.querySelector('.item-info h6').textContent.toLowerCase();
+                return categoryNames.includes(sortProductValue);
             });
         }
 
@@ -45,10 +55,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const itemsPerPage = parseInt(showSelect.value, 10);
         const totalPages = Math.ceil(itemsArray.length / itemsPerPage);
 
-        //Clear the container and manage no items found scenario
+        //Clear the page n show if no products have been found
         itemsContainer.innerHTML = itemsArray.length ? '' : '<div>No products found.</div>';
 
-        //Append items for the current page
+        //Add items to current page
         itemsArray.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).forEach(item => {
             itemsContainer.appendChild(item);
         });
@@ -64,17 +74,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
 
-        //Directly set display style based on totalPages; no need to show buttons for a single page
+        //Shows the prev/next buttons and hides them if there is only one page
         const displayStyle = totalPages > 1 ? '' : 'none';
         prevPageButton.style.display = nextPageButton.style.display = displayStyle;
 
-        //Function to configure button states
+        //Checks the state of next/prev buttons
         const configureButton = (button, isDisabled) => {
             button.disabled = isDisabled;
-            button.style.backgroundColor = isDisabled ? 'rgb(22 55 65 / 50%)' : ''; //Set background color based on disabled state
+            button.style.backgroundColor = isDisabled ? 'rgb(22 55 65 / 50%)' : '';
         };
 
-        //Configure previous and next buttons based on currentPage and totalPages
+        //Changes configuration based on currentpage
         configureButton(prevPageButton, currentPage === 1);
         configureButton(nextPageButton, currentPage >= totalPages);
     }
@@ -83,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function() {
         @Event Listeners
     \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
     searchInput.addEventListener('input', applyFilterAndSort);
-    sortBySelect.addEventListener('change', applyFilterAndSort);
+    sortByPriceSelect.addEventListener('change', applyFilterAndSort);
+    sortByProductSelect.addEventListener('change', applyFilterAndSort);
     showSelect.addEventListener('change', applyFilterAndSort);
 
     document.getElementById('prev-page').addEventListener('click', () => {
@@ -102,5 +113,33 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     //Initial setup
-    applyFilterAndSort(); //For initial visability too
+    applyFilterAndSort();
+
+    const availableCategories = new Set();
+    
+    //Grab available categories
+    originalOrder.forEach(item => {
+        const categoryLine = item.querySelector('.item-info h6').textContent.toLowerCase().trim();
+        const categories = categoryLine.match(/\b\w+\b/g); // Match words
+        if (categories) {
+            categories.forEach(category => availableCategories.add(category));
+        }
+    });
+
+    //Add select option
+    const selectOption = document.createElement('option');
+    selectOption.value = 'select';
+    selectOption.textContent = 'Select';
+    sortByProductSelect.appendChild(selectOption);
+
+    //Add cateogory to options
+    availableCategories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize first letter
+        sortByProductSelect.appendChild(option);
+    });
+
+    //Hide sort product if there is only 1 product
+    document.querySelector('.hide-sortby-product').style.display = availableCategories.size > 1 ? '' : 'none';
 });

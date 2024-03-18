@@ -1,0 +1,131 @@
+body {
+    overflow: hidden; /* Hide overflow to prevent scroll bars */
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+  height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Order Confirm
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.main-content {
+  width: 100%;
+  padding-bottom: 20px;
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Text
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+.template-orderid-text {
+  color: #a349a4;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.template-date-text, .template-status-text, .tempalte-price-text {
+  color: #a349a4;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.order-item span {
+  color: #163741;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Order Content
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.order-summary-heading {
+  color: #163741;
+  font-weight: 800;
+  font-size: 40px;
+}
+
+.shopping-basket-items {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 50px;
+} 
+
+/*Order List (Plural [All])*/
+.order-template-container .orders-list {
+  margin: 0;
+  padding-right: 30px;
+}
+
+/*Order List Item (Singular)*/
+.order-template-container .orders-list .order-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  list-style-type: none;
+  border: 2px solid #a249a499;
+  border-radius: 10px;
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Buttons
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Receipt Link*/
+.view-receipt-btn {
+  line-height: 50px;
+  text-decoration: none;
+  transition: 0.25s;
+} .view-receipt-btn:hover {
+  transition: 0.25s;
+  transform: scale(1.03);
+} 
+
+.view-receipt-btn div {
+  /*Sizing*/
+  width: 150px;
+  height: 50px;
+  /*Styles*/
+  background-color: #a349a4;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  /*Text*/
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  /*Others*/
+  cursor: pointer;
+  transition: 0.3s;
+} .contact-btn:hover {
+  transition: 0.3s;
+  transform: scale(1.05);
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Mobile Support
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+@media screen and (max-width: 750px) {
+  .order-summary-heading {font-size: 34px;}
+}

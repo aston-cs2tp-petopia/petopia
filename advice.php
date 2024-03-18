@@ -142,9 +142,7 @@
     </header>
     <!--Hero Banner-->
         <section class="hero-banner">
-            <!--Hero Banner Image-->
-            <div class="hero-banner-image"><img src="assets/AdvicePage/vetwoman.jpg" alt=""></div>
-
+            <div class="hero-banner-image"><img src="assets/Homepage/hero-banner2.jpg" alt=""></div>
             <!--Hero Banner Text Container-->
             <div class="hero-banner-left">
 

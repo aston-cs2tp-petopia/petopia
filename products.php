@@ -157,11 +157,19 @@
 
                         <!--Sort By-->
                         <div class="sort-by-container">
-                            <form><label for="sortBy">Sort By</label>
-                                <select id="sortBy" class="selected">
+                            <form><label for="sortByPrice">Sort By Price</label>
+                                <select id="sortByPrice" class="selected">
                                     <option value="select">Select</option>
                                     <option value="lowToHigh">Low to high</option>
-                                    <option value="highToLow">High to low</option>
+                                    <option value="highToLow">High to low</option>\
+                                </select>
+                            </form>
+                        </div>
+                        
+
+                        <div class="sort-by-container">
+                            <form class="hide-sortby-product"><label for="sortByProduct">Filter By Category</label>
+                                <select id="sortByProduct" class="selected">
                                 </select>
                             </form>
                         </div>

@@ -57,6 +57,13 @@ body, html {
     color: #163741;
 }
 
+/*Button link*/
+.hero-banner-content a {
+    text-decoration: none;
+    display: block;
+    width: 160px;
+}
+
 /*Hero Banner Button*/
 .hero-banner-button {
     /*Button styles*/
