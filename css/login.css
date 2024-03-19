@@ -38,6 +38,7 @@ body, html {
 .login-container, .signup-container {
     /*Sizing*/
     width: 350px;
+    padding-top: 50px;
     /*Styles*/
     border-radius: 10px;
     background-color: white;
