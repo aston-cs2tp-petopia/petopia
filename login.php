@@ -144,7 +144,7 @@
                 <!--Mobile Number Input Container-->
                 <div class="input-container">
                     <!--Mobile Number Input-->
-                    <input type="text" id="signup-number" name="signup-number" class="number-input" placeholder="Phone Number"
+                    <input maxlength="11" type="text" id="signup-number" name="signup-number" class="number-input" placeholder="Phone Number"
                         required />
                     <i class='bx bxs-phone'></i>
                 </div>
