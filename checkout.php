@@ -1,37 +1,37 @@
 <?php
-require_once('php/mainLogCheck.php');
-require_once('php/connectdb.php');
-require_once('php/alerts.php');
+    require_once('php/mainLogCheck.php');
+    require_once('php/connectdb.php');
+    require_once('php/alerts.php');
 
-if (!$b) {
-    header("Location: login.php");
-    exit;
-}
+    if (!$b) {
+        header("Location: login.php");
+        exit;
+    }
 
-$username = $_SESSION['username'] ?? '';
-$userData = [];
+    $username = $_SESSION['username'] ?? '';
+    $userData = [];
 
-if ($username) {
-    $stmt = $db->prepare("SELECT First_Name, Last_Name, Home_Address, Postcode, Contact_Email FROM customer WHERE Username = ?");
+    if ($username) {
+        $stmt = $db->prepare("SELECT First_Name, Last_Name, Contact_Email, Phone_Number, Home_Address, Postcode FROM customer WHERE Username = ?");
+        $stmt->execute([$username]);
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    $basketItems = [];
+    $query = "SELECT product.Product_ID, product.Name, basket.Quantity, basket.Subtotal
+            FROM basket
+            JOIN product ON product.Product_ID = basket.Product_ID
+            JOIN customer ON basket.Customer_ID = customer.Customer_ID
+            WHERE customer.Username = ?";
+    $stmt = $db->prepare($query);
     $stmt->execute([$username]);
-    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    $basketItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$basketItems = [];
-$query = "SELECT product.Product_ID, product.Name, basket.Quantity, basket.Subtotal
-          FROM basket
-          JOIN product ON product.Product_ID = basket.Product_ID
-          JOIN customer ON basket.Customer_ID = customer.Customer_ID
-          WHERE customer.Username = ?";
-$stmt = $db->prepare($query);
-$stmt->execute([$username]);
-$basketItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Check if the basket is empty
-if (empty($basketItems)) {
-    header("Location: basket.php");
-    exit;
-}
+    // Check if the basket is empty
+    if (empty($basketItems)) {
+        header("Location: basket.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -93,15 +93,35 @@ if (empty($basketItems)) {
                 <form action="php/process_checkout.php" method="post" class="checkout-form">
                     <h2 class="checkout-heading">Checkout</h2>
                     <h2 class="checkout-subheading">Shipping Details</h2>
+
+                    <!--CUSTOMER INFORMATION-->
                     <div class="form-group">
                         <label for="full-name">Full Name *</label>
                         <input type="text" id="full-name" name="full_name" required value="<?= htmlspecialchars($userData['First_Name'] ?? '') . ' ' . htmlspecialchars($userData['Last_Name'] ?? '') ?>">
                     </div>
+
                     <div class="form-group">
-                        <label for="address">Full Address *</label>
+                        <label for="email">Email Address *</label>
+                        <input type="text" id="email" name="email" required value="<?= htmlspecialchars($userData['Contact_Email'] ?? '') ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pNumber">Phone Number *</label>
+                        <input type="text" id="pNumber" name="pNumber" required value="<?= htmlspecialchars($userData['Phone_Number'] ?? '') ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address Line*</label>
                         <input type="text" id="address" name="address" required value="<?= htmlspecialchars($userData['Home_Address'] ?? '') ?>">
                     </div>
 
+                    <div class="form-group">
+                        <label for="postcode">Postcode *</label>
+                        <input type="text" id="postcode" name="postcode" required value="<?= htmlspecialchars($userData['Postcode'] ?? '') ?>">
+                    </div>
+
+
+                    <!--PAYMENT INFORMATION-->
                     <h2 class="checkout-subheading">Payment Information</h2>
                     <div class="form-group">
                         <label for="card-number">Card Number *</label>
@@ -128,7 +148,7 @@ if (empty($basketItems)) {
                 </form>
             </div>
 
-
+            <!--ORDER SUMMARY-->
             <div class="order-summary-container">
                 <h2 class="template-header">Order Summary</h2>
                 <?php

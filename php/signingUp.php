@@ -7,6 +7,8 @@
         $lName = isset($_POST['signup-lastname']) ? $_POST['signup-lastname'] : false;
         $email = isset($_POST['signup-email']) ? $_POST['signup-email'] : false;
         $pNumber = isset($_POST['signup-number']) ? $_POST['signup-number'] : false;
+		$homeAddress = isset($_POST['signup-homeAddress']) ? $_POST['signup-homeAddress'] : false;
+		$postcode = isset($_POST['signup-postcode']) ? $_POST['signup-postcode'] : false;
         $username = isset($_POST['signup-username']) ? $_POST['signup-username'] : false;
         $password = isset($_POST['signup-password']) ? password_hash($_POST['signup-password'], PASSWORD_DEFAULT) : false;
 		
@@ -37,8 +39,8 @@
 		}
 
         // Insert new customer record
-		$stat = $db->prepare("INSERT INTO customer (First_Name, Last_Name, Contact_Email, Phone_Number, Username, Password) VALUES (?, ?, ?, ?, ?, ?)");
-		$stat->execute(array($fName, $lName, $email, $pNumber, $username, $password));
+		$stat = $db->prepare("INSERT INTO customer (First_Name, Last_Name, Contact_Email, Phone_Number, Home_Address, Postcode, Username, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+		$stat->execute(array($fName, $lName, $email, $pNumber, $homeAddress, $postcode, $username, $password));
 
 
         // Log the user in and redirect
