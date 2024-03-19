@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2024 at 12:22 PM
+-- Generation Time: Mar 18, 2024 at 03:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,24 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `petopia`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `Admin_ID` int(10) NOT NULL,
-  `First_Name` varchar(30) NOT NULL,
-  `Last_Name` varchar(30) NOT NULL,
-  `Contact_Email` varchar(60) NOT NULL,
-  `Phone_Number` varchar(30) NOT NULL,
-  `Home_Address` varchar(60) NOT NULL,
-  `Postcode` varchar(10) NOT NULL,
-  `Username` varchar(30) NOT NULL,
-  `Password` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -127,15 +109,16 @@ CREATE TABLE `customer` (
   `Home_Address` varchar(60) NOT NULL,
   `Postcode` varchar(10) NOT NULL,
   `Username` varchar(30) NOT NULL,
-  `Password` varchar(60) NOT NULL
+  `Password` varchar(60) NOT NULL,
+  `Is_Admin` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`Customer_ID`, `First_Name`, `Last_Name`, `Contact_Email`, `Phone_Number`, `Home_Address`, `Postcode`, `Username`, `Password`) VALUES
-(1, 'Beckie', 'Jones', 'Mcflurryorfruitbag@gmail.com', '07768527200', '14 Caughall road', 'CH12 1LE', 'BeckieJ30', 'Higuys300!');
+INSERT INTO `customer` (`Customer_ID`, `First_Name`, `Last_Name`, `Contact_Email`, `Phone_Number`, `Home_Address`, `Postcode`, `Username`, `Password`, `Is_Admin`) VALUES
+(1, 'Beckie', 'Jones', 'Mcflurryorfruitbag@gmail.com', '07768527200', '14 Caughall road', 'CH12 1LE', 'BeckieJ30', 'Higuys300!', 0);
 
 -- --------------------------------------------------------
 
@@ -147,6 +130,8 @@ CREATE TABLE `orders` (
   `Orders_ID` int(10) NOT NULL,
   `Customer_ID` int(10) NOT NULL,
   `Order_Date` date NOT NULL,
+  `Order_Status` varchar(60) NOT NULL,
+  `Delivery_Address` varchar(60) NOT NULL,
   `Total_Amount` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -172,7 +157,7 @@ CREATE TABLE `ordersdetails` (
 
 CREATE TABLE `product` (
   `Product_ID` int(10) NOT NULL,
-  `Name` varchar(20) NOT NULL,
+  `Name` varchar(60) NOT NULL,
   `Price` int(20) NOT NULL,
   `Num_In_Stock` int(10) UNSIGNED NOT NULL,
   `Description` varchar(500) NOT NULL,
@@ -199,13 +184,9 @@ INSERT INTO `product` (`Product_ID`, `Name`, `Price`, `Num_In_Stock`, `Descripti
 (13, 'Snoopy', 500, 1, 'Introducing Snoopy, a 4-year-old charming Beagle with a distinctive white coat and adorable black ears! With his classic beagle looks and heart-melting brown eyes, Snoopy is the epitome of cuteness and charm. He is a playful and affectionate companion, always ready for a fun adventure or a cuddle on the couch. Snoopy is the perfect addition to your family, bringing love, loyalty, and endless tail wags into your home. Do not miss out on the opportunity to make Snoopy your beloved furry friend!\r\n', NULL),
 (14, 'Garfield', 450, 1, '\r\nIntroducing Garfield, a 5-year-old lovably chubby tabby cat! With his iconic orange coat and a talent for leisure, Garfield embodies the art of relaxation. His laid-back demeanor and penchant for naps make him the ultimate expert in the fine art of coziness. Garfield is a delightful companion, adding a touch of charm and tranquility to any home. If you are seeking a furry friend who appreciates the joys of a lazy day, Garfield is the purrfect match for you!', NULL),
 (15, 'Sunny', 1050, 1, 'Meet Sunny, an adorable 3-month-old Golden Retriever puppy! With her fluffy golden coat and boundless enthusiasm, Sunny is the epitome of playful charm and friendliness. She is a bundle of joy, always ready to wag her tail and offer unconditional love. Sunny is an intelligent, affectionate companion ready to bring warmth and happiness into your life. Do not miss out on the chance to make Sunny a cherished member of your family!', NULL),
-(16, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Don not miss the opportunity to make Bailey the treasured furry member of your family!', NULL),
-(17, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Do not miss the opportunity to make Bailey the treasured furry member of your family!', NULL),
+(16, 'Bailey', 1000, 1, '\r\nIntroducing Bailey, a 4-month-old Golden Retriever puppy! With her shimmering coat and wagging tail, Bailey radiates boundless energy and affection. She is a playful sweetheart, ready to charm her way into your heart with her warm, loving nature. Bailey is more than a puppy; she is a devoted companion eager to bring joy and laughter into your home. Do not miss the opportunity to make Bailey the treasured furry member of your family!', NULL),
 (18, 'Herbert', 700, 1, '\r\nIntroducing Herbert, a wise and gentle 8-year-old Golden Retriever! With his distinguished golden coat and soulful eyes, Herbert exudes years of loyalty and companionship. He is a seasoned expert in love and affection, offering a heart full of warmth to those around him. Herbert is not just an older dog; he is a cherished friend ready to fill your days with love, comfort, and unwavering devotion. Do not miss out on the chance to welcome this wise and loving Golden Retriever into your home!', NULL),
 (19, 'Monkey', 350, 1, '\r\nIntroducing Monkey, a friendly and lively 3-year-old mixed-breed dog with a rich brown coat! With his playful nature and adorable antics, Monkey embodies joy and energy. His endearing personality and warm, expressive eyes make him an instant charmer. Monkey is a lovable companion ready to swing into your heart and become your trusted furry friend. Do not miss out on the opportunity to make Monkey a delightful addition to your family!', NULL),
-(20, 'Bow', 4, 12, 'A cute little bow, able to fit a pet of any size!', NULL),
-(21, 'Top Hat', 10, 8, 'A smart top hat perfect for a formal occasion, able to fit a pet of any size!', NULL),
-(22, 'Small coat', 32, 20, 'A cute waterproof coat to keep small pets warm in winter months.', NULL),
 (23, 'Flea Shampoo', 9, 41, 'Shampoo to keep pesky fleas at bay! available for any pet.', NULL),
 (24, 'Dog Shampoo', 6, 35, 'Shampoo to keep your dog`s coat in best condition! Suitable for dogs of any size and breed.', NULL),
 (25, 'Cat Shampoo', 6, 35, 'Shampoo to keep your cat`s coat in best condition! Suitable for cats of any size and breed.', NULL),
@@ -213,7 +194,16 @@ INSERT INTO `product` (`Product_ID`, `Name`, `Price`, `Num_In_Stock`, `Descripti
 (27, 'Cat conditioner', 6, 35, 'Conditioner to keep your cat`s coat soft! Suitable for cats of any size and breed.', NULL),
 (28, 'Monkey teddy', 7, 7, 'A soft toy monkey to be your pet`s best friend! Suitable for any pet, though may not be durable when playing with large dogs.', NULL),
 (29, 'rope toy', 5, 16, 'A durable rope toy designed for rough play. Can withstand tugs from even the largest dogs! Suitable for any pet, though ideal for dogs.', NULL),
-(30, 'Toy mouse', 4, 19, ' A small toy mouse for your pet to play with! Suitable for any pet, though ideal for cats.', NULL);
+(30, 'Toy mouse', 4, 19, ' A small toy mouse for your pet to play with! Suitable for any pet, though ideal for cats.', NULL),
+(31, 'Dog bone shaped treats', 4, 45, 'a bone shaped dog treat for your furry friend! Beef flavour', NULL),
+(32, 'cat fish shaped treats', 4, 45, 'a fish shaped cat treat for your furry friend! Fish flavour', NULL),
+(33, 'Organic cat treats', 8, 30, 'A tasty and healthy treat for your feline friend! All ingredients are natural, organic, and are beneficial to your pet`s health!', NULL),
+(34, 'Organic dog treats', 8, 30, 'A tasty and healthy treat for your canine friend! All ingredients are natural, organic, and are beneficial to your pet`s health!', NULL),
+(35, 'Dog dental treats', 6, 43, 'A tasty treat to keep your dog`s teeth in great condition! Keeps tartar and plaque at bay and keeps their breath fresh, while still being a tasty treat for your pet!', NULL),
+(36, 'Cat dental treats', 6, 43, 'A tasty treat to keep your cat`s teeth in great condition! Keeps tartar and plaque at bay and keeps their breath fresh, while still being a tasty treat for your pet!', NULL),
+(37, 'Cat scratching post', 28, 27, '\r\nOur premium Cat Scratching Post is designed to satisfy your cat`s natural scratching instincts while protecting your furniture. Crafted with durable materials and featuring an irresistible design, it`s the perfect solution for a happy and healthy cat.', NULL),
+(38, 'LED light pointer', 12, 40, '\r\nElevate playtime for your feline friend with our LED Laser Pointer! Watch as your cat pounces and chases the captivating laser beam, providing endless entertainment and exercise.', NULL),
+(39, 'Strong doggy ball', 10, 19, '\r\nAn extra strong ball for dogs, built to withstand even the toughest chewers. Made with durable materials and designed for long-lasting play, this ball is perfect for energetic pups who love to fetch and chew.', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,9 +274,6 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 (5, 13, 50),
 (7, 13, 51),
 (11, 13, 53),
-(19, 20, 54),
-(19, 21, 55),
-(19, 22, 56),
 (20, 23, 57),
 (20, 24, 58),
 (20, 25, 59),
@@ -294,7 +281,36 @@ INSERT INTO `productcategory` (`Category_ID`, `Product_ID`, `prodcat_ID`) VALUES
 (20, 27, 61),
 (21, 28, 62),
 (21, 29, 63),
-(21, 30, 64);
+(21, 30, 64),
+(19, 31, 65),
+(19, 32, 66),
+(19, 33, 67),
+(19, 34, 68),
+(19, 35, 69),
+(19, 36, 70),
+(21, 37, 71),
+(21, 38, 72),
+(21, 39, 73),
+(2, 14, 75),
+(6, 14, 76),
+(17, 14, 77),
+(7, 14, 78),
+(3, 15, 79),
+(5, 15, 80),
+(9, 15, 81),
+(8, 15, 82),
+(3, 16, 83),
+(5, 16, 84),
+(9, 16, 85),
+(7, 16, 86),
+(1, 18, 87),
+(5, 18, 88),
+(9, 18, 89),
+(7, 18, 90),
+(2, 19, 91),
+(5, 19, 92),
+(18, 19, 93),
+(7, 19, 94);
 
 -- --------------------------------------------------------
 
@@ -314,14 +330,6 @@ CREATE TABLE `reviews` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`Admin_ID`),
-  ADD UNIQUE KEY `Contact_Email` (`Contact_Email`),
-  ADD UNIQUE KEY `Username` (`Username`);
 
 --
 -- Indexes for table `basket`
@@ -394,16 +402,16 @@ ALTER TABLE `reviews`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `Admin_ID` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `Category_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `contactforms`
+--
+ALTER TABLE `contactforms`
+  MODIFY `Contact_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -427,13 +435,19 @@ ALTER TABLE `ordersdetails`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `Product_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `prodcat_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `prodcat_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `Review_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
