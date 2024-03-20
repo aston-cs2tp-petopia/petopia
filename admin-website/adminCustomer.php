@@ -1,7 +1,15 @@
 <?php
     session_start();
+    require_once('../php/connectdb.php');
 
-    require_once('php/connectdb.php');
+    $isAdmin=include('../php/isAdmin.php');
+    // echo "$isAdmin"
+
+    if(!$isAdmin){
+        header("Location: ../index.php");
+        exit();
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!--Nunito Font-->
+    
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
         rel="stylesheet">
@@ -36,7 +45,7 @@
     <section id="textholder1">
             <?php
                 try {
-                    $query = "select * from  customers";
+                    $query = "select * from  customer";
                     //run  the query
                     $rows =  $db->query($query);
 
@@ -52,7 +61,7 @@
                         </tr>
                 <?php
                     foreach ($rows as $row) {
-                        echo  "<td align='left'>" .$row['Customer_ID'] . "</td>";
+                        echo  "<td align='left'>" . $row['Customer_ID'] . "</td>";
                         echo "<td align='left'>" . $row['First_Name'] . "</td>";
                         echo "<td align='left'>" . $row['Last_Name'] . "</td>";
                         echo "<td align='left'>" . $row['Contact_Email'] . "</td>";
@@ -61,7 +70,7 @@
                         // echo "<td align='left'>" . $row['Postcode'] . "</td>";
                         // echo "<td align='left'>" . $row['Username'] . "</td>";
                         $customerID=$row['Customer_ID'];
-                        echo '<td align="left"><a href="projectdetails.php?pid=' . $customerID . '"><Button type="button">Further Details</Button></a></td></tr>';
+                        echo '<td align="left"><a href="editDetails.php?customerID=' . $customerID . '"><Button type="button">Edit Details</Button></a></td></tr>';
                     }
                     echo  '</table>';
                 } else {
@@ -76,12 +85,8 @@
 
         <br>
 
-        <a href="projectcreate.php">
-            <?php
-                if ($b==true) {
-                    echo '<Button type="button">Add Project</Button>';
-                }               
-            ?>
+        <a href="editDetails.php">
+            <Button type="button">Edit Infromation</Button>;
         </a>
 </body>
 

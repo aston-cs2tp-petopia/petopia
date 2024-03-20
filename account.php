@@ -94,7 +94,7 @@ if (isset($_POST['submit-update']) && !empty($_SESSION['username'])) {
         $postcode = filter_input(INPUT_POST, 'update-postcode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         //Checks if inputs are valid
-        $errors = validateSignupData($firstName, $lastName, $email, $phone, $username);
+        $errors = validateSignupData($firstName, $lastName, $email, $phone, $address, $postcode, $username);
 
         if (empty($errors)) {
             $updateStmt = $db->prepare("UPDATE customer SET First_Name = ?, Last_Name = ?, Contact_Email = ?, Phone_Number = ?, Home_Address = ?, Postcode = ? WHERE Username = ?");
