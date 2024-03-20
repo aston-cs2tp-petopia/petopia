@@ -1,122 +1,121 @@
 <?php
-require_once '../vendor/autoload.php';
+use PHPUnit\Framework\TestCase;
 
-class LoginTest extends \PHPUnit\Framework\TestCase {
-    
-    // Mock database connection
+class LoginTest extends TestCase
+{
     private $dbMock;
 
-    // Set up before each test method
-    protected function setUp(): void {
-        // Create a mock for the database connection
-        $this->dbMock = $this->getMockBuilder('PDO')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->dbMock = $this->createMock(PDO::class);
+        $_SESSION = [];
     }
 
-    // Test successful login
-    public function testSuccessfulLogin() {
-        // Set up mock behavior for successful login
-        $this->dbMock->expects($this->once())
-                     ->method('prepare')
-                     ->willReturn($this->getMockBuilder('PDOStatement')
-                                       ->getMock());
-        $this->dbMock->expects($this->once())
-                     ->method('execute')
-                     ->willReturn(true);
-        $this->dbMock->expects($this->once())
-                     ->method('rowCount')
-                     ->willReturn(1);
-        $this->dbMock->expects($this->once())
-                     ->method('fetch')
-                     ->willReturn(array('Password' => password_hash('correct_password', PASSWORD_DEFAULT)));
+    public function testSuccessfulLogin()
+    {
+        $stmtMock = $this->createMock(PDOStatement::class);
+        $stmtMock->method('execute')->willReturn(true);
+        $stmtMock->method('rowCount')->willReturn(1);
+        $stmtMock->method('fetch')->willReturn(['Password' => password_hash('validPassword', PASSWORD_DEFAULT)]);
 
-        // Simulate form submission data
-        $_POST['login-username'] = 'test_user';
-        $_POST['login-password'] = 'correct_password';
+        $this->dbMock->method('prepare')->willReturn($stmtMock);
 
-        // Call the login script function
-        include '../login.php';
+        global $db;
+        $db = $this->dbMock;
+        $_POST = [
+            'login-username' => 'sd',
+            'login-password' => 'sd',
+            'userType' => 'customer'
+        ];
 
-        // Instead of xdebug_get_headers(), use this function to capture headers
-function captureHeaders() {
-    $headers = [];
-    foreach (headers_list() as $header) {
-        $parts = explode(':', $header, 2);
-        if (count($parts) === 2) {
-            $headers[trim($parts[0])] = trim($parts[1]);
-        }
-    }
-    return $headers;
-}
+        ob_start();
+        include __DIR__ . '/../php/loggingIn.php';
+        ob_end_clean();
 
-// Within the test method
-$headers = captureHeaders();
-
-
-        // Assert that the user is redirected after successful login
-        if (!empty($headers)) {
-            $this->assertStringContainsString('Location: ./index.php', $headers[0]);
-        } else {
-            $this->fail('No headers found.');
-        }
+        $this->assertArrayHasKey('username', $_SESSION, "The 'username' key should be set in the session.");
+        $this->assertEquals('sd', $_SESSION['username'], "The session username should match the POST data.");
     }
 
-    // Test incorrect password
-    public function testIncorrectPassword() {
-        // Set up mock behavior for incorrect password
-        $this->dbMock->expects($this->once())
-                     ->method('prepare')
-                     ->willReturn($this->getMockBuilder('PDOStatement')
-                                       ->getMock());
-        $this->dbMock->expects($this->once())
-                     ->method('execute')
-                     ->willReturn(true);
-        $this->dbMock->expects($this->once())
-                     ->method('rowCount')
-                     ->willReturn(1);
-        $this->dbMock->expects($this->once())
-                     ->method('fetch')
-                     ->willReturn(array('Password' => password_hash('correct_password', PASSWORD_DEFAULT)));
+    public function testIncorrectPassword()
+    {
+        $stmtMock = $this->createMock(PDOStatement::class);
+        $stmtMock->method('execute')->willReturn(true);
+        $stmtMock->method('rowCount')->willReturn(1);
+        $stmtMock->method('fetch')->willReturn(['Password' => password_hash('validPassword', PASSWORD_DEFAULT)]);
+        $this->dbMock->method('prepare')->willReturn($stmtMock);
+        global $db;
+        $db = $this->dbMock;
 
-        // Simulate form submission data with incorrect password
-        $_POST['login-username'] = 'test_user';
-        $_POST['login-password'] = 'incorrect_password';
+        $_POST = [
+            'login-username' => 'sd',
+            'login-password' => 'incorrectPassword',
+            'userType' => 'customer'
+        ];
 
-        // Call the login script function
-        include '../login.php';
+        ob_start();
+        include __DIR__ . '/../php/loggingIn.php';
+        ob_end_clean();
 
-        // Assert that an error message is set
-        $this->assertEquals('Incorrect Password.', $_SESSION['error_message']);
+        $this->assertArrayHasKey('error_message', $_SESSION, "Session should have an error_message key.");
+        $this->assertEquals('Incorrect Password.', $_SESSION['error_message'], "The error message for an incorrect password does not match expected.");
     }
 
-    // Test signup data validation
+    protected function tearDown(): void
+    {
+        $_SESSION = []; // Cleanup session
+        parent::tearDown();
+    }
+
+
+    public function testLoginWithNonexistentUsername()
+    {
+        //Mock PDOStatement
+        $stmtMock = $this->createMock(PDOStatement::class);
+        $stmtMock->method('execute')->willReturn(true);
+        $stmtMock->method('rowCount')->willReturn(0);
+        $stmtMock->method('fetch')->willReturn(false);
+
+        $this->dbMock->method('prepare')->willReturn($stmtMock);
+
+        global $db;
+        $db = $this->dbMock;
+        $_POST = [
+            'login-username' => 'nonexistentUser',
+            'login-password' => 'anyPassword',
+            'userType' => 'customer'
+        ];
+
+        ob_start();
+        include __DIR__ . '/../php/loggingIn.php';
+        ob_end_clean();
+
+        $this->assertArrayHasKey('error_message', $_SESSION);
+        $this->assertEquals('Username does not exist.', $_SESSION['error_message']);
+    }
+
     public function testSignupDataValidation() {
         // Include the function to be tested
-        include '../php/validateSignup.php';
+        include __DIR__ . '/../php/validateSignup.php';
 
-        // Test data
+        //Test data
         $fName = 'John';
         $lName = 'Doe';
         $email = 'john@example.com';
-        $pNumber = '0123456789';
+        $pNumber = '07234356789';
         $username = 'johndoe';
         $validPassword = 'Valid@Password123';
         $invalidPassword = 'weak';
 
-        // Call the function with valid data
+        //Call the function with valid data
         $validErrors = validateSignupData($fName, $lName, $email, $pNumber, $username, $validPassword);
 
-        // Assert that no errors are returned for valid data
         $this->assertEmpty($validErrors);
 
-        // Call the function with invalid data
         $invalidErrors = validateSignupData('', '', 'invalidemail', 'notanumber', '', $invalidPassword);
 
-        // Assert that errors are returned for invalid data
-        var_dump($invalidErrors); // Debugging output
+        var_dump($invalidErrors);
         $this->assertNotEmpty($invalidErrors);
-        // Adjust assertions based on the actual content of $invalidErrors
     }
 }
 ?>

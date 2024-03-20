@@ -31,13 +31,12 @@
 
 
         //Validate phone number (numeric check)
-        if (empty($pNumber) || !is_numeric($pNumber)) {
-            $errors[] = "• Phone number is required and must be numeric.";
+        if (empty($pNumber)) {
+            $errors[] = "• Phone number is required.";
+        } elseif (!preg_match("/^07\d{9}$/", $pNumber)) {
+            // Checks if the phone number starts with '07' and is followed by 9 more digits, making it 11 digits in total
+            $errors[] = "• Phone number must start with '07' and be 11 digits long.";
         }
-        //Ensures that the phone number starts with 0 , followed by 9-10 digits 
-        //(This results in a total of 10-11 digits, which is the length of a typical uk phone number.)
-        else if (!preg_match("/^0[0-9]{9,10}$/", $pNumber))
-
 
         // Validate username
         if (empty($username)) {
