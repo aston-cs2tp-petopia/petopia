@@ -1,7 +1,7 @@
 <?php
 
 //This page is responsible for server side validation of data entered on the sign up page. Completed using php.
-    function validateSignupData($fName, $lName, $email, $pNumber, $username, $password = null) {
+    function validateSignupData($fName, $lName, $email, $pNumber, $homeAddress, $postcode, $username, $password = null) {
         $errors = [];
 
         //Validate first name (only letters)
@@ -38,6 +38,13 @@
         //(This results in a total of 10-11 digits, which is the length of a typical uk phone number.)
         else if (!preg_match("/^0[0-9]{9,10}$/", $pNumber))
 
+        if (empty($homeAddress)) {
+            $errors[] = "• Home Address is required";
+        }
+
+        if (empty($postcode)) {
+            $errors[] = "• Postcode is required";
+        }
 
         // Validate username
         if (empty($username)) {

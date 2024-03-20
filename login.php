@@ -153,7 +153,7 @@
                 <div class="input-container">
                     <!--Home Address Input-->
                     <input type="text" id="signup-homeAddress" name="signup-homeAddress" class="homeAddress-input" 
-                    placeholder="Home Address"required />
+                    placeholder="Home Address" required />
                     <i class='bx bxs-home'></i>
                 </div>
 
