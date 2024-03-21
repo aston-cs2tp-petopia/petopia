@@ -5,6 +5,7 @@ class LoginTest extends TestCase
 {
     private $dbMock;
 
+    // Set Up DB
     protected function setUp(): void
     {
         parent::setUp();
@@ -12,6 +13,7 @@ class LoginTest extends TestCase
         $_SESSION = [];
     }
 
+    // Test Successful login 
     public function testSuccessfulLogin()
     {
         $stmtMock = $this->createMock(PDOStatement::class);
@@ -37,6 +39,7 @@ class LoginTest extends TestCase
         $this->assertEquals('sd', $_SESSION['username'], "The session username should match the POST data.");
     }
 
+    //Test Incorrect Password
     public function testIncorrectPassword()
     {
         $stmtMock = $this->createMock(PDOStatement::class);
@@ -61,13 +64,15 @@ class LoginTest extends TestCase
         $this->assertEquals('Incorrect Password.', $_SESSION['error_message'], "The error message for an incorrect password does not match expected.");
     }
 
+    //Clean Session
     protected function tearDown(): void
     {
-        $_SESSION = []; // Cleanup session
+        $_SESSION = [];
         parent::tearDown();
     }
 
 
+    // Test non-existent username
     public function testLoginWithNonexistentUsername()
     {
         //Mock PDOStatement
@@ -94,8 +99,8 @@ class LoginTest extends TestCase
         $this->assertEquals('Username does not exist.', $_SESSION['error_message']);
     }
 
+    //Test Signup Validations
     public function testSignupDataValidation() {
-        // Include the function to be tested
         include __DIR__ . '/../php/validateSignup.php';
 
         //Test data
@@ -103,16 +108,18 @@ class LoginTest extends TestCase
         $lName = 'Doe';
         $email = 'john@example.com';
         $pNumber = '07234356789';
+        $homeAddress = "52 Mont Street";
+        $postcode = "B56 3GF";
         $username = 'johndoe';
         $validPassword = 'Valid@Password123';
         $invalidPassword = 'weak';
 
         //Call the function with valid data
-        $validErrors = validateSignupData($fName, $lName, $email, $pNumber, $username, $validPassword);
+        $validErrors = validateSignupData($fName, $lName, $email, $pNumber, $homeAddress, $postcode, $username, $validPassword);
 
         $this->assertEmpty($validErrors);
 
-        $invalidErrors = validateSignupData('', '', 'invalidemail', 'notanumber', '', $invalidPassword);
+        $invalidErrors = validateSignupData('', '', 'invalidemail', 'notanumber', "", "invalidpostcode", '', $invalidPassword);
 
         var_dump($invalidErrors);
         $this->assertNotEmpty($invalidErrors);
