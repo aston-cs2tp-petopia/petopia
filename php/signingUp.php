@@ -13,7 +13,7 @@
         $password = isset($_POST['signup-password']) ? password_hash($_POST['signup-password'], PASSWORD_DEFAULT) : false;
 		
 		// Call the validation function
-		$validationErrors = validateSignupData($fName, $lName, $email, $pNumber, $username, $password);
+		$validationErrors = validateSignupData($fName, $lName, $email, $pNumber, $homeAddress, $postcode, $username, $password);
 		echo ($validationErrors);
 
 		// Check for validation errors

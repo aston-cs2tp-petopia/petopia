@@ -23,7 +23,7 @@ function validateSignupData() {
     var lName = document.getElementById('signup-lastname').value;
     var email = document.getElementById('signup-email').value;
     var pNumber = document.getElementById('signup-number').value;
-    var homeAddress = document.getElementById('signup-homeAddress').value;
+    var hAddress = document.getElementById('signup-homeAddress').value;
     var postcode = document.getElementById('signup-postcode').value;
     var username = document.getElementById('signup-username').value;
     var password = document.getElementById('signup-password').value;
@@ -50,8 +50,8 @@ function validateSignupData() {
         errors.push("Phone number is required, must be 11 digits and start with 07.");
     }
 
-    if (!homeAddress || /[!@#$%^&*(),.?":{}|<>_]/g.test(password)) {
-        errors.push("Home Address is required, .");
+    if (!hAddress || /[!@#$%^&*().?":{}|<>_]]/.test(hAddress)) {
+        errors.push("Lollol.");
     }
 
     if (!postcode || !/^[A-Z]{1,2}[0-9]{1,2}[A-Z]{0,1} ? [0-9][A-Z]{2}$/i.test(postcode)) {

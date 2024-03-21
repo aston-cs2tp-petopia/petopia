@@ -1,6 +1,6 @@
 <?php
-require_once "php/mainLogCheck.php";
-$tempPID = $_GET["Product_ID"];
+    require_once "php/mainLogCheck.php";
+    $tempPID = $_GET["Product_ID"];
 ?>
 
 <!DOCTYPE html>

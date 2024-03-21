@@ -1,3 +1,18 @@
+<?php
+    session_start();
+    require_once('../php/connectdb.php');
+
+    $isAdmin=include('../php/isAdmin.php');
+    // echo "$isAdmin"
+
+    if(!$isAdmin){
+        // header("Location: ../index.php");
+        // exit();
+        echo'being redirected';
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!--Nunito Font-->
+    
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
         rel="stylesheet">
@@ -26,6 +42,10 @@
     <nav class="admin-nav">
 
     </nav>
+
+    <p><a href="adminCustomer.php">adminCustomer</a></p>
+    <p><a href="adminProducts.php">adminProduct</a></p>
+
 </body>
 
 </html>

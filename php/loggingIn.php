@@ -11,11 +11,13 @@
 
         // Prepare a statement to select the hashed password for the given username
         // This prevents SQL injection attacks
-        if ($_POST['userType']=="admin"){
-            $stat = $db->prepare('SELECT Password FROM admin WHERE Username = ?');
-        }else{
-            $stat = $db->prepare('SELECT Password FROM customer WHERE Username = ?');
-        }
+        // if ($_POST['userType']=="admin"){
+        //     $stat = $db->prepare('SELECT Password FROM admin WHERE Username = ?');
+        // }else{
+        //     $stat = $db->prepare('SELECT Password FROM customer WHERE Username = ?');
+        // }
+
+        $stat = $db->prepare('SELECT Password FROM customer WHERE Username = ?');
 
         // Execute the prepared statement with the provided username
         $stat->execute(array($_POST['login-username']));
