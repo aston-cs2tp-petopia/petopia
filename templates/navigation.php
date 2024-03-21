@@ -1,6 +1,8 @@
 <!--PRELOADS THE NAVIGATION-->
-<?php 
+<?php
+    require_once('../php/connectdb.php');
     require_once('../php/mainLogCheck.php');
+    $isAdmin=include('../php/isAdmin.php');
 ?>
 
 <div class="top-nav">
@@ -68,6 +70,9 @@
             if ($b==true) {
                 echo '<li><a href="orders.php">Orders</a></li>';
                 echo '<li><a href="account.php">Account</a></li>';
+                if ($isAdmin) {
+                    echo '<li><a href="admin-website/adminDashboard.php">Admin</a></li>';
+                }
             }
             ?>
             <div class="mobile-bottom-nav">
@@ -120,6 +125,9 @@
             if ($b==true) {
                 echo '<li><a href="orders.php">Orders</a></li>';
                 echo '<li><a href="account.php">Account</a></li>';
+                if ($isAdmin) {
+                    echo '<li><a href="admin-website/adminDashboard.php">Admin</a></li>';
+                }
             }       
             ?>
         </ul>
