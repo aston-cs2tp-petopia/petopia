@@ -3,14 +3,24 @@
     require_once('../php/connectdb.php');
 
     $isAdmin=include('../php/isAdmin.php');
-        // echo "$isAdmin"
+    // echo "$isAdmin"
 
-        if(!$isAdmin){
-            header("Location: ../index.php");
-            exit();
-        }
+    if(!$isAdmin || !isset($_SESSION['username'])){
+        header("Location: ../index.php");
+        exit();
+        echo'being redirected';
+    }
 
     $customerID = $_GET["customerID"];
+
+    if (isset($_POST['submit-reset'])) {
+        if (!isset($_POST['admin-passwordReset'])) {
+            echo 'new password not set';
+            exit('Please fill the password reset field');
+        }
+        echo 'requiring';
+        require_once("php/resetPassword.php?customerID=' . $customerID .'");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -58,9 +68,16 @@
                         echo "<td align='left'>" . $row['Postcode'] . "</td>";
                         echo "<td align='left'>" . $row['Username'] . "</td>";
                         echo "<td align='left'>" 
-                                . 
-                                '<input type="text" id="admin-passwordReset" name="admin-passwordReset" class="passwordReset-input" placeholder="Reset Password"
-                                required />'
+                                .
+                                '<form>'
+                                    . 
+                                    '<input type="password" id="admin-passwordReset" name="admin-passwordReset" class="passwordReset-input" placeholder="Reset Password"
+                                    required />'
+                                    .
+                                    '<button type="submit" class="reset-btn">Reset</button>
+                                    <input type="hidden" name="submit-reset" value="TRUE" />'
+                                    .
+                                '</form>'
                                 .
                               "</td>";
                     }
@@ -80,6 +97,8 @@
             <a href="adminCustomer.php">
                 <button type="button">Back</button>
             </a>
+
+            <a href="deleteRecord.php?customerID=' . $customerID .'"><Button type="button">Delete Record</Button></a>
         </div>
     </div>
 </body>
