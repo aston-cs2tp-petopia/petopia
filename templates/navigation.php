@@ -2,7 +2,7 @@
 <?php
     require_once('../php/connectdb.php');
     require_once('../php/mainLogCheck.php');
-    $isAdmin=include('../php/isAdmin.php');
+    require_once('../php/isAdmin.php');
 ?>
 
 <div class="top-nav">
@@ -70,7 +70,7 @@
             if ($b==true) {
                 echo '<li><a href="orders.php">Orders</a></li>';
                 echo '<li><a href="account.php">Account</a></li>';
-                if ($isAdmin) {
+                if ($isAdminCheck==true) {
                     echo '<li><a href="admin-website/adminDashboard.php">Admin</a></li>';
                 }
             }
@@ -125,7 +125,7 @@
             if ($b==true) {
                 echo '<li><a href="orders.php">Orders</a></li>';
                 echo '<li><a href="account.php">Account</a></li>';
-                if ($isAdmin) {
+                if ($isAdminCheck==true) {
                     echo '<li><a href="admin-website/adminDashboard.php">Admin</a></li>';
                 }
             }       
