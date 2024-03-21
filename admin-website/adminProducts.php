@@ -5,9 +5,10 @@
     $isAdmin=include('../php/isAdmin.php');
     // echo "$isAdmin"
 
-    if(!$isAdmin){
+    if(!$isAdmin || isset($_SESSION['username'])){
         header("Location: ../index.php");
         exit();
+        echo'being redirected';
     }
 
 ?>
