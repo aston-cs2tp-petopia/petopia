@@ -60,7 +60,7 @@ require_once "php/mainLogCheck.php"; ?>
 
             <div class="hero-banner-content">
                 <h2>About Us</h2>
-                <p>Learn a little about us</p>
+                <p>Learn a little about us!</p>
             </div>
         </div>
     </section>
@@ -68,20 +68,22 @@ require_once "php/mainLogCheck.php"; ?>
     <section class="main-content">
         <div class="about-content">
             <h3 class="content-h3">Petopia</h3>
-            <p> Petopia is a place where dreams of owning a pet come true. Our goal is to unite families and animals, in
+            <p id="about"> Petopia is a place where dreams of owning a pet come true. Our goal is to unite families and animals, in
                 a relationship full of love and care.
-                <br> Looking back on our adventure, we are ecstatic to have shared innumerable stories of delight and
+             Looking back on our adventure, we are ecstatic to have shared innumerable stories of delight and
                 excitement for families.
             </p>
-            <p>Petopia welcomes you to join in the fun. Discover our virtual shop, establish a connection with our
+            <p id="about">Petopia welcomes you to join in the fun. Discover our virtual shop, establish a connection with our
                 community,
                 and allow Petopia to serve as the starting point for your quest to find a new, four-legged family
-                member.
+                member. As we reminisce on our journey, we are overwhelmed with joy at the countless heartwarming stories we've been privileged to witness.
+                From the first tail wag to the gentle purr of contentment, each moment shared between pets and their families reaffirms our commitment to 
+                making a difference in the lives of both humans and animals.
             </p>
 
             <h3 class="content-h3">How we help</h3>
 
-            <p>
+            <p id="about">
                 We love celebrating the joy pets bring to our customers. As part of our dedication to the neighbourhood,
                 we
                 support and take part in
@@ -90,14 +92,32 @@ require_once "php/mainLogCheck.php"; ?>
                 to mingle, exchange stories,
                 and form lasting relationships.
             </p>
-            <p>
-                Through our adoption drives and foster programmes, we actively encourage pet adoption. In order to
+            <p id="about">
+                Within our adoption drives and foster programmes, we actively encourage pet adoption. In order to
                 showcase
                 pets in need of loving homes,
                 our business works with neighbourhood foster families and shelters. We help families locate the perfect
-                match by streamlining the adoption process.
+            match by streamlining the adoption process. And how do we do accomplish that? Through this website! From here you can navigate to our
+             <a href="products.php">shop</a> and see all the pets looking for a new home and are available to adopt.  
             </p>
+            <h3 class="content-h3">Our Vision</h3>
+            <p id="about">
+                At Petopia we believe that every pet deserves a home and every family deserves the joy that comes from sharing their lives with a
+                companion at their side at all times. We strive to create a world where every pet, regardless of its background or circumstances, finds a
+                nurturing and loving home. Our mission is to transform this vision into reality by cultivating a welcoming and supportive environment where 
+                families are able to adopt a pet of their choosing at the click of a button.
+
+            </p>
+            <p id="about">
+            We understand the profound impact that pets have on our lives, from providing companionship and emotional support to encouraging physical activity
+             and reducing stress. By ensuring that every pet receives the love, care, and attention they deserve, we aim to create a future where the wag of a 
+             tail or the gentle purr of contentment serves as a constant reminder of the love and happiness that pets bring into our lives. 
+            </p>
+             <h2 id="content-h2">
+             Join us as we strive to make a positive difference in the lives of pets and families, one paw print at a time.
+            </h2>
         </div>
+
     </section>
 
     <footer>
