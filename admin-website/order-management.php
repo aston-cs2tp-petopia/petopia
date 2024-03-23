@@ -49,6 +49,7 @@ try {
         <input type="text" name="search" placeholder="Search by Order ID, Customer ID, or Address" value="<?php echo htmlspecialchars($searchTerm); ?>">
         <button type="submit">Search</button>
     </form>
+    <a href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
 </div>
 
 <div class="order-list">
