@@ -51,7 +51,7 @@ function validateSignupData() {
     }
 
     if (!hAddress || /[!@#$%^&*().?":{}|<>_]]/.test(hAddress)) {
-        errors.push("Lollol.");
+        errors.push("Home Address is required.");
     }
 
     if (!postcode || !/^[A-Z]{1,2}[0-9]{1,2}[A-Z]{0,1} ? [0-9][A-Z]{2}$/i.test(postcode)) {

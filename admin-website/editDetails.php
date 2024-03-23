@@ -30,7 +30,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Thought Cabinet</title>
+    <title>Petopia</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" href="CSS/style.css" />
 </head>
 
@@ -97,8 +97,17 @@
             <a href="adminCustomer.php">
                 <button type="button">Back</button>
             </a>
-
-            <a href="deleteRecord.php?customerID=' . $customerID .'"><Button type="button">Delete Record</Button></a>
+            <form>                        
+                <button type="submit" class="delete-btn">Delete</button>
+                <input type="hidden" name="submit-delete" value="TRUE" />
+            </form>
+            
+            <?php
+                if (isset($_POST['submit-reset'])) {
+                    echo 'requiring';
+                    require_once("deleteRecord.php?customerID=' . $customerID .'");
+                }
+            ?>
         </div>
     </div>
 </body>
