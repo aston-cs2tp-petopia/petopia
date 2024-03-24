@@ -35,12 +35,12 @@
             $stmt = $db->prepare("UPDATE product SET Name = ?, Price = ?, Num_In_Stock = ?, Description = ?, Image = ? WHERE Product_ID = ?");
             $stmt->execute([$productName, $price, $numInStock, $description, $image, $productID]);
 
-            if (!$addCategoryName!="Select"){
+            if ($addCategoryName!="Select"){
                 $addCatNameIDSTMT = $db->prepare("SELECT Category_ID FROM category WHERE Name = ?");
                 $addCatNameIDSTMT->execute([$addCategoryName]);
                 $addCategoryID = $addCatNameIDSTMT->fetch(PDO::FETCH_ASSOC);
 
-                $addProdCatStmt = $db->prepare("INSERT INTO productcategory Category_ID = ?, Product_ID = ?");
+                $addProdCatStmt = $db->prepare("INSERT INTO productcategory (Category_ID, Product_ID) values(?, ?)");
                 $addProdCatStmt->execute([$addCategoryID['Category_ID'], $productID]);
             }
 
@@ -50,6 +50,7 @@
                 $delCategoryID = $delCatNameIDSTMT->fetch(PDO::FETCH_ASSOC);
 
                 $delProdCatStmt = $db->prepare("DELETE FROM productcategory WHERE Category_ID = ? AND Product_ID = ?");
+                echo'issue starts at deleted';
                 $delProdCatStmt->execute([$delCategoryID['Category_ID'], $productID]);
             }
 
