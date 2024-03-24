@@ -64,73 +64,115 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>Edit Product</title>
-        <!-- Add CSS links -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Petopia</title>
+
+        <!--[Google Fonts]-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+            rel="stylesheet">
+
+        <!--Box Icons-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--Flickity-->
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        <!--
+            [Navigation & Footer]
+        -->
+        <script src="../admin-website/jScript/navigationTemplate.js"></script>
+        <link href="../css/navigation.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/footer.css">
+
+
+        <!--CSS-->
+        <link href="css/admin-form-template.css" rel="stylesheet" type="text/css">
+
+        <!--CSS Templates-->
+        <link rel="stylesheet" href="../templates/hero-banner.css">
     </head>
 
     <body>
-        <h2>Edit Product</h2>
-        
-        <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post">
-            <label for="productName">Name:</label>
-            <input type="text" id="productName" name="productName" value="<?php echo htmlspecialchars($product['Name']); ?>" required>
+        <section class="admin-form-section admin-first-section">
+            <h2>Edit Product</h2>
+            <button><a href="productManagement.php">back</a></button>
+
             
-            <label for="price">Price: £</label>
-            <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
+            <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post">
+                <div class="input-container">
+                    <label for="productName">Name:</label>
+                    <input type="text" id="productName" name="productName" value="<?php echo htmlspecialchars($product['Name']); ?>" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="price">Price: £</label>
+                    <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
+                </div>
+                    
+                <div class="input-container">
+                    <label for="numInStock">Stock:</label>
+                    <input type="number" id="numInStock" name="numInStock" value="<?php echo htmlspecialchars($product['Num_In_Stock']); ?>" required>
+                </div>
                 
-            <label for="numInStock">Stock:</label>
-            <input type="number" id="numInStock" name="numInStock" value="<?php echo htmlspecialchars($product['Num_In_Stock']); ?>" required>
-            
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description" value="<?php echo htmlspecialchars($product['Description']); ?>" required>
+                <div class="input-container">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" value="<?php echo htmlspecialchars($product['Description']); ?>" required>
+                </div>
 
-            <label for="image">Image:</label>
-            <input type="text" id="image" name="image" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
+                <div class="input-container">
+                    <label for="image">Image:</label>
+                    <input type="text" id="image" name="image" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
+                </div>
 
-            <!-- Add a category to a product -->
-            <label for="addCategoryName">Add Category to product</label>
-            <select id="addCategoryName" name="addCategoryName">
-                <?php
-                    echo '<option>Select</option>';
+                <div class="input-container">
+                    <!-- Add a category to a product -->
+                    <label for="addCategoryName">Add Category to product</label>
+                    <select id="addCategoryName" name="addCategoryName">
+                        <?php
+                            echo '<option>Select</option>';
 
-                    $addCatStat = $db->prepare("SELECT * FROM category");
-                    $addCatStat->execute();
-                    $addCategories = $addCatStat->fetchAll(PDO::FETCH_ASSOC);
+                            $addCatStat = $db->prepare("SELECT * FROM category");
+                            $addCatStat->execute();
+                            $addCategories = $addCatStat->fetchAll(PDO::FETCH_ASSOC);
 
-                    foreach($addCategories as $addCategory){
-                        echo "<option>". $addCategory['Name'] ."</option>";
-                    }
+                            foreach($addCategories as $addCategory){
+                                echo "<option>". $addCategory['Name'] ."</option>";
+                            }
 
-                ?>
-            </select>
-            
-            <!-- Delete a category from a product -->
-            <label for="delCategoryName">Remove Category to product</label>
-            <select id="delCategoryName" name="delCategoryName">
-                <?php
-                    echo '<option>Select</option>';
+                        ?>
+                    </select>
+                </div>
+                
+                <div class="input-container">
+                    <!-- Delete a category from a product -->
+                    <label for="delCategoryName">Remove Category to product</label>
+                    <select id="delCategoryName" name="delCategoryName">
+                        <?php
+                            echo '<option>Select</option>';
 
-                    $delProdCatStat = $db->prepare("SELECT Category_ID FROM productcategory where Product_ID = ?");
-                    $delProdCatStat->execute([$product['Product_ID']]);
-                    $delProdCatArr=$delProdCatStat->fetchAll(PDO::FETCH_ASSOC);
+                            $delProdCatStat = $db->prepare("SELECT Category_ID FROM productcategory where Product_ID = ?");
+                            $delProdCatStat->execute([$product['Product_ID']]);
+                            $delProdCatArr=$delProdCatStat->fetchAll(PDO::FETCH_ASSOC);
 
-                    foreach($delProdCatArr as $delProdCat){
-                        echo "var_dump($delProdCatArr)";
-                        $delCatStat = $db->prepare("SELECT Name FROM category WHERE Category_ID = ?");
-                        $delCatStat->execute($delProdCat['Category_ID']);
-                        $delCategories = $delCatStat->fetch(PDO::FETCH_ASSOC);
-                        echo "<option>". $delCategory['Name'] ."</option>";
-                    }
+                            foreach($delProdCatArr as $delProdCat){
+                                $delCatStat = $db->prepare("SELECT Name FROM category WHERE Category_ID = ?");
+                                $delCatStat->execute([$delProdCat['Category_ID']]);
+                                $delCategories = $delCatStat->fetch(PDO::FETCH_ASSOC);
+                                echo "<option>". $delCategories['Name'] ."</option>";
+                            }
 
-                ?>
-            </select>
-            <br>
-            <button type="submit" name="updateProduct">Update Product</button>
-        </form>
+                        ?>
+                    </select>
+                </div>
+                <br>
+                <button class="submit-btn" type="submit" name="updateProduct">Update Customer</button>
+            </form>
+        </section>
 
-        <br>
-
-        <button><a href="productManagement.php">back</a></button>
     </body>
 </html>
