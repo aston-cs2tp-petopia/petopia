@@ -1,69 +1,65 @@
 <?php
-require_once('../php/connectdb.php');
-session_start();
-$isAdmin = include('../php/isAdmin.php');
+    session_start();
+    require_once('../php/connectdb.php');
+    $isAdmin = include('../php/isAdmin.php');
 
-// Redirect if not admin or not logged in
-if (!$isAdmin || !isset($_SESSION['username'])) {
-    header("Location: ../index.php");
-    exit;
-}
+    require_once('../admin-website\php\adminCheck.php');
 
-// Handle the POST request from the form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Extract form data
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $email = $_POST['email'];
-    $phoneNumber = $_POST['phoneNumber'];
-    $address = $_POST['address'];
-    $postcode = $_POST['postcode'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $isAdmin = $_POST['isAdmin'];
+    // Handle the POST request from the form submission
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Extract form data
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $email = $_POST['email'];
+        $phoneNumber = $_POST['phoneNumber'];
+        $address = $_POST['address'];
+        $postcode = $_POST['postcode'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $isAdmin = $_POST['isAdmin'];
 
-    // Check if username or email already exists
-    $usernameExists = false;
-    $emailExists = false;
+        // Check if username or email already exists
+        $usernameExists = false;
+        $emailExists = false;
 
-    $stmt = $db->prepare("SELECT COUNT(*) FROM customer WHERE Username = ?");
-    $stmt->execute([$username]);
-    $usernameCount = $stmt->fetchColumn();
-    if ($usernameCount > 0) {
-        $usernameExists = true;
-    }
-
-    $stmt = $db->prepare("SELECT COUNT(*) FROM customer WHERE Contact_Email = ?");
-    $stmt->execute([$email]);
-    $emailCount = $stmt->fetchColumn();
-    if ($emailCount > 0) {
-        $emailExists = true;
-    }
-
-    // If username or email already exists, display error message
-    if ($usernameExists || $emailExists) {
-        if ($usernameExists) {
-            echo "Username already exists. Please choose a different username.";
+        $stmt = $db->prepare("SELECT COUNT(*) FROM customer WHERE Username = ?");
+        $stmt->execute([$username]);
+        $usernameCount = $stmt->fetchColumn();
+        if ($usernameCount > 0) {
+            $usernameExists = true;
         }
-        if ($emailExists) {
-            echo "Email already exists. Please use a different email address.";
-        }
-    } else {
-        // Hash the password for storage
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // Add the customer to the database
-        try {
-            $stmt = $db->prepare("INSERT INTO customer (First_Name, Last_Name, Contact_Email, Phone_Number, Home_Address, Postcode, Username, Password, Is_Admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$firstName, $lastName, $email, $phoneNumber, $address, $postcode, $username, $hashedPassword, $isAdmin]);
-            // Redirect or inform of success
-            echo "Customer added successfully.";
-        } catch (PDOException $e) {
-            echo "Error adding customer: " . $e->getMessage();
-            // Handle error
+        $stmt = $db->prepare("SELECT COUNT(*) FROM customer WHERE Contact_Email = ?");
+        $stmt->execute([$email]);
+        $emailCount = $stmt->fetchColumn();
+        if ($emailCount > 0) {
+            $emailExists = true;
+        }
+
+        // If username or email already exists, display error message
+        if ($usernameExists || $emailExists) {
+            if ($usernameExists) {
+                echo "Username already exists. Please choose a different username.";
+            }
+            if ($emailExists) {
+                echo "Email already exists. Please use a different email address.";
+            }
+        } else {
+            // Hash the password for storage
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Add the customer to the database
+            try {
+                $stmt = $db->prepare("INSERT INTO customer (First_Name, Last_Name, Contact_Email, Phone_Number, Home_Address, Postcode, Username, Password, Is_Admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$firstName, $lastName, $email, $phoneNumber, $address, $postcode, $username, $hashedPassword, $isAdmin]);
+                // Redirect or inform of success
+                echo "Customer added successfully.";
+            } catch (PDOException $e) {
+                echo "Error adding customer: " . $e->getMessage();
+                // Handle error
+            }
         }
     }
-}
 ?>
 
 <!DOCTYPE html>

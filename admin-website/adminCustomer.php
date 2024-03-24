@@ -5,11 +5,7 @@
     $isAdmin=include('../php/isAdmin.php');
     // echo "$isAdmin"
 
-    if(!$isAdmin || !isset($_SESSION['username'])){
-        header("Location: ../index.php");
-        exit();
-        echo'being redirected';
-    }
+    require_once('/php/adminCheckRedirect.php');
 
 ?>
 
