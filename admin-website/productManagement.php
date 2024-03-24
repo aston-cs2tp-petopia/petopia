@@ -9,11 +9,11 @@
 
     $searchTerm = $_GET['search'] ?? '';
 
-    // Fetch customers based on search term if provided
+    // Fetch products based on search term if provided
     try {
         $query = "SELECT Product_ID, Name, Price, Num_In_Stock, Description, Image 
                 FROM product 
-                WHERE CONCAT(Name) LIKE :searchTerm OR Product_ID LIKE :searchTerm";
+                WHERE Name LIKE :searchTerm OR Product_ID LIKE :searchTerm";
         $stmt = $db->prepare($query);
         $stmt->execute(['searchTerm' => "%$searchTerm%"]);
         $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -68,7 +68,7 @@
 
         </nav>
 
-        <div class="customer-search">
+        <div class="product-search">
             <form action="productManagement.php" method="get">
                 <input type="text" name="search" placeholder="Search by Name or Product ID" value="<?php echo htmlspecialchars($searchTerm); ?>">
                 <button type="submit">Search</button>

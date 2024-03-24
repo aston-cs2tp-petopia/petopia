@@ -82,5 +82,10 @@
 
             <button type="submit" name="update_customer">Update Customer</button>
         </form>
+
+        <br>
+
+        <button><a href="customer-management.php">back</a></button>
+
     </body>
 </html>
