@@ -28,6 +28,7 @@
         $image = $_POST['Image'];
 
         try {
+            echo 'running try stat';
             $stmt = $db->prepare("UPDATE 'product' SET 'Name' = ?, 'Price' = ?, 'Num_In_Stock' = ?, 'Description' = ?, 'Image' = ? WHERE Product_ID = ?");
             $stmt->execute([$name, $price, $numInStock, $description, $image, $productId]);
             echo "Product information updated successfully.";

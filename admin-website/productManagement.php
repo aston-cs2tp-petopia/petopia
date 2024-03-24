@@ -96,7 +96,8 @@
                             </tr>
                     <?php
                         foreach ($rows as $row) {
-                            echo  "<td align='left'>" .$row['Image'] . "</td>";
+                            
+                            echo  "<td align='left'> <img src='../assets/ProductImages/ImageID_" . $row['Image'] . " .jpeg' alt='Product Image' style='width:50px;'>" . "</td>";
                             echo "<td align='left'>" . $row['Product_ID'] . "</td>";
                             echo "<td align='left'>" . $row['Name'] . "</td>";
                             if ($row['Num_In_Stock']>0){
