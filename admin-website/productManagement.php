@@ -106,7 +106,8 @@
                                 echo "out of stock";
                             }
                             $productID=$row['Product_ID'];
-                            echo '<td align="left"><a href="editProduct.php?productID=' . $productID . '"><Button type="button">Edit Details</Button></a></td></tr>';
+                            echo '<td align="left"><a href="editProduct.php?productID=' . $productID . '"><Button type="button">Edit Details</Button></a></td>';
+                            echo '<td align="left"><a href="productManagement.php?delete=' . $productID .'"><Button type="button">Delete</Button></a></td></tr>';
                         }
                         echo  '</table>';
                     } else {
