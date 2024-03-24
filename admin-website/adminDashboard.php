@@ -3,6 +3,7 @@
     require_once('../php/connectdb.php');
     $isAdmin=include('../php/isAdmin.php');
     require_once('../admin-website\php\adminCheckRedirect.php');
+    require_once('../php/alerts.php'); // Include alerts.php for displaying messages
 ?>
 
 <!DOCTYPE html>
@@ -50,17 +51,44 @@
 
         <!--Dashboard-->
         <section class="admin-dashboard-section">
-            <!--Title Etc...-->
-            <h2 class="update-account-h2">Admin Dashboard</h2>
-            <h3 class="update-account-h3">Manage your dashboard settings below:</h3>
-            <h4 class="update-account-h4">Modify your dashboard settings and access various management tools:</h4>
-            <div class="admin-dash-buttons">
-                <a href="../admin-website/order-management.php" class="admin-dash-button"><div>Order Management</div></a>
-                <a href="../admin-website/customer-management.php" class="admin-dash-button"><div>Customer Management</div></a>
-                <a href="../admin-website/productManagement.php" class="admin-dash-button"><div>Inventory Management System</div></a>
-                <a href="../admin-website/contactManagement.php" class="admin-dash-button"><div>Customer Contact Forms</div></a>
-                <a href="../admin-website/adminManagement.php" class="admin-dash-button"><div>Admin Management</div></a>
+            <div class="admin-left">
+                <!--Title-->
+                <h2 class="update-account-h2">Admin Dashboard</h2>
+                <h3 class="update-account-h3">Manage your dashboard settings below:</h3>
+                <h4 class="update-account-h4">Modify your dashboard settings and access various management tools:</h4>
+                <div class="admin-dash-buttons">
+                    <a href="../admin-website/order-management.php" class="admin-dash-button"><div>Order Management</div></a>
+                    <a href="../admin-website/customer-management.php" class="admin-dash-button"><div>Customer Management</div></a>
+                    <a href="../admin-website/productManagement.php" class="admin-dash-button"><div>Inventory Management System</div></a>
+                    <a href="../admin-website/contactManagement.php" class="admin-dash-button"><div>Customer Contact Forms</div></a>
+                    <a href="../admin-website/adminManagement.php" class="admin-dash-button"><div>Admin Requests</div></a>
+                    <a href="../admin-website/reportsManagement.php" class="admin-dash-button"><div>Reports</div></a>
+                </div>
             </div>
+
+            <div class="admin-right">
+                <?php
+                    // Fetch out-of-stock products
+                    $stmt = $db->prepare("SELECT * FROM product WHERE Num_In_Stock <= 0");
+                    $stmt->execute();
+                    $outOfStockProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                ?>
+                <!--Title-->
+                <h2 class="update-account-h2">Notifications</h2>
+                <h3 class="update-account-h3">Look below for urgent notifications:</h3>
+
+                <div class="notifications-container">
+                    <?php foreach ($outOfStockProducts as $product): ?>
+                        <a href="editProduct.php?productID=<?php echo $product['Product_ID']; ?>" class="admin-notification">
+                            <!-- Notification content -->
+                            <p><?php echo htmlspecialchars($product['Name']); ?> is out of stock!</p>
+                            <p>Click here to edit stock.</p>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+
         </section>
     </body>
 

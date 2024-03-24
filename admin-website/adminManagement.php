@@ -51,6 +51,7 @@ try {
 <body>
 
 <div class="user-list">
+    <a href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
     <h2>Users Requesting Admin Status</h2>
     <?php if (empty($users)): ?>
         <p>No admin requests at the moment.</p>

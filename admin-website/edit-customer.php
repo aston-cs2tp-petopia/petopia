@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_customer'])) {
 <head>
     <meta charset="UTF-8">
     <title>Edit Customer</title>
+    <a href="../admin-website/customer-management.php" class="back-button">Go Back to Customer Management</a>
     <!-- Add CSS links -->
 </head>
 

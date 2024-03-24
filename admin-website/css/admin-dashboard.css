@@ -45,19 +45,46 @@ body, html {
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Left/Right Containers
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Navigation & Notifications*/
+.admin-left, .admin-right {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*Navigation*/
+.admin-left {
+    padding-top: 84px;
+    max-width: 800px;
+}
+
+/*Notifications*/
+.admin-right {
+    padding: 0 20px;
+    padding-top: 84px;
+}
+
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Navigation
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 /*Dashboard Section*/
 .admin-dashboard-section {
-    padding-top: -84px;
-    height: calc(100vh - 84px);
     width: 100%;
+    min-height: calc(100vh - 84px);
+    overflow: hidden;
     /*Flex*/
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
 }
 
 /*Admin Buttons Container*/
@@ -97,13 +124,43 @@ body, html {
 }
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+    @Notifications
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.notifications-container {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-notification {
+    width: 100%;
+    background-color: #163741;
+    border-radius: 5px;
+    color: white;
+    transition: 0.3s;
+} .admin-notification:hover {
+    transition: 0.3s;
+    transform: scale(1.02)
+}
+
+.admin-right a {
+    text-decoration: none;
+    color: white;
+}
+
+.admin-notification p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
     @Mobile Support
 \*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
-@media screen and (max-width: 700px) {
-    .admin-dashboard-section {height: auto; padding-top: 100px; padding-bottom: 20px;}
-}
-
-@media screen and (max-height: 700px) {
-    .admin-dashboard-section {height: auto; padding-top: 100px; padding-bottom: 20px;}
+@media screen and (max-width: 1575px) {
+    .admin-dashboard-section {padding-top: 100px; padding-bottom: 20px;}
 }
