@@ -58,8 +58,8 @@
                 <a href="../admin-website/order-management.php" class="admin-dash-button"><div>Order Management</div></a>
                 <a href="../admin-website/customer-management.php" class="admin-dash-button"><div>Customer Management</div></a>
                 <a href="../admin-website/productManagement.php" class="admin-dash-button"><div>Inventory Management System</div></a>
-                <a href="#" class="admin-dash-button"><div>Customer Contact Forms</div></a>
-                <a href="#" class="admin-dash-button"><div>Admin Management</div></a>
+                <a href="../admin-website/contactManagement.php" class="admin-dash-button"><div>Customer Contact Forms</div></a>
+                <a href="../admin-website/adminManagement.php" class="admin-dash-button"><div>Admin Management</div></a>
             </div>
         </section>
     </body>
