@@ -99,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_order'], $_POS
     </style>
 </head>
 <body>
+<a href="../admin-website/order-management.php" class="back-button">Go Back to Order Management</a>
 <h2>Edit Order #<?php echo htmlspecialchars($orderId); ?></h2>
 <form action="edit-order.php?Orders_ID=<?php echo htmlspecialchars($orderId); ?>" method="post">
     <label for="status">Order Status:</label>

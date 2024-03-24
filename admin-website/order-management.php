@@ -103,5 +103,13 @@ try {
     <?php endif; ?>
 </div>
 
+<?php
+// Display success message if present
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    require_once('../php/alerts.php'); // Include alerts.php for displaying messages
+    jsAlert('Order has been successfully deleted.', true, 3000);
+}
+?>
+
 </body>
 </html>
