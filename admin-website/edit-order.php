@@ -1,12 +1,10 @@
 <?php
-require_once('../php/connectdb.php');
-session_start();
-$isAdmin = include('../php/isAdmin.php');
+    session_start();
+    require_once('../php/connectdb.php');
+    $isAdmin = include('../php/isAdmin.php');
 
-if(!$isAdmin) {
-    header("Location: ../index.php");
-    exit;
-}
+    require_once('../admin-website\php\adminCheckRedirect.php');
+
 
 $orderId = $_GET['Orders_ID'] ?? null;
 

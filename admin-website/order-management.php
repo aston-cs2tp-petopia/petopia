@@ -1,7 +1,7 @@
 <?php
 require_once('../php/connectdb.php');
 $isAdmin=include('../php/isAdmin.php');
-require_once('php/adminCheck.php');
+require_once('../admin-website/php/adminCheckRedirect.php');
 
 $searchTerm = $_GET['search'] ?? '';
 
