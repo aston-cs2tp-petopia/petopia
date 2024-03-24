@@ -42,17 +42,47 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Management</title>
-    <link rel="stylesheet" href="../css/admin.css"> <!-- Make sure you have this CSS for styling -->
-</head>
-<body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Petopia</title>
 
-<div class="user-list">
-    <a href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
-    <h2>Users Requesting Admin Status</h2>
+        <!--[Google Fonts]-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+            rel="stylesheet">
+
+        <!--Box Icons-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--Flickity-->
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        <!--
+            [Navigation & Footer]
+        -->
+        <script src="../admin-website/jScript/navigationTemplate.js"></script>
+        <link href="../css/navigation.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/footer.css">
+
+
+        <!--CSS-->
+        <link href="css/admin-table-template.css" rel="stylesheet" type="text/css">
+
+        <!--CSS Templates-->
+        <link rel="stylesheet" href="../templates/hero-banner.css">
+
+    </head>
+<body>
+    <header></header>
+
+<section class="admin-table-section admin-first-section">
+    <h2 class="">Admin Management</h2>
+    <h3 class="admin-heading">Users Requesting Admin Status</h3>
+    <a class="go-back-link" href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
     <?php if (empty($users)): ?>
         <p>No admin requests at the moment.</p>
     <?php else: ?>
@@ -74,8 +104,8 @@ try {
                         <td>
                             <form action="adminManagement.php" method="POST">
                                 <input type="hidden" name="Customer_ID" value="<?php echo $user['Customer_ID']; ?>">
-                                <button type="submit" name="approve">Approve</button>
-                                <button type="submit" name="disapprove">Disapprove</button>
+                                <button class="green-btn" type="submit" name="approve">Approve</button>
+                                <button class="red-btn" type="submit" name="disapprove">Disapprove</button>
                             </form>
                         </td>
                     </tr>
@@ -83,7 +113,7 @@ try {
             </tbody>
         </table>
     <?php endif; ?>
-</div>
+</section>
 
 </body>
 </html>

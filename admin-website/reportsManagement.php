@@ -83,97 +83,130 @@ if (isset($_POST['export_csv'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Reports Management</title>
-    <!-- Add Chart.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <!-- Add CSS links -->
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Petopia</title>
+        
+        <!--Charts.js Library-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
+        <!--[Google Fonts]-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+            rel="stylesheet">
 
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+        <!--Box Icons-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--Flickity-->
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        <!--
+            [Navigation & Footer]
+        -->
+        <script src="../admin-website/jScript/navigationTemplate.js"></script>
+        <link href="../css/navigation.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/footer.css">
+
+
+        <!--CSS-->
+        <link href="css/admin-reports-template.css" rel="stylesheet" type="text/css">
+
+        <!--CSS Templates-->
+        <link rel="stylesheet" href="../templates/hero-banner.css">
+
 </head>
+
 <body>
-    <a href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
-    <h2>Reports Management</h2>
+    <header></header>
 
-    <h3>Current Stock Levels</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Product Name</th>
-                <th>Current Stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($currentStock as $stock): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($stock['Product_ID']); ?></td>
-                    <td><?php echo htmlspecialchars($stock['Name']); ?></td>
-                    <td><?php echo htmlspecialchars($stock['Num_In_Stock']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <section class="admin-report-section admin-first-section">
+        <h2 class="">Reports Management</h2>
+        <h3 class="admin-heading">View and Export Different Reports</h3>
+        <a class="go-back-link" href="adminDashboard.php">Back to Admin Dashboard</a>
 
-    <h3>Incoming Orders</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Total Incoming</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($incomingOrders as $order): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($order['Product_ID']); ?></td>
-                    <td><?php echo htmlspecialchars($order['Total_Incoming']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <div class="charts-container">   
+            <!-- Data visualization with Chart.js -->
+            <div>
+                <h3>Weekly Order Tracking</h3>
+                <canvas id="orderChart" width="350" height="350"></canvas>
+            </div>
+            <!--Incoming Orders-->
+            <div class="">
+                <h3>Incoming Orders</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Total Incoming</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($incomingOrders as $order): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($order['Product_ID']); ?></td>
+                                <td><?php echo htmlspecialchars($order['Total_Incoming']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!--Outgoing Orders-->
+            <div class="">
+                <h3>Outgoing Orders</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Total Outgoing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($outgoingOrders as $order): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($order['Product_ID']); ?></td>
+                                <td><?php echo htmlspecialchars($order['Total_Outgoing']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <h3>Outgoing Orders</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Total Outgoing</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($outgoingOrders as $order): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($order['Product_ID']); ?></td>
-                    <td><?php echo htmlspecialchars($order['Total_Outgoing']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <!-- Add CSV export button -->
+        <form action="" method="post">
+            <button class="submit-btn" type="submit" name="export_csv">Export CSV</button>
+        </form>
 
-    <!-- Add CSV export button -->
-    <form action="" method="post">
-        <button type="submit" name="export_csv">Export CSV</button>
-    </form>
-    
-    <!-- Data visualization with Chart.js -->
-    <h3>Weekly Order Tracking</h3>
-    <canvas id="orderChart" width="400" height="200"></canvas>
+        <!--Stock Levels-->
+        <div clas="add-pd-top" style="padding-top: 50px;"> 
+            <h3>Current Stock Levels</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Current Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($currentStock as $stock): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($stock['Product_ID']); ?></td>
+                            <td><?php echo htmlspecialchars($stock['Name']); ?></td>
+                            <td><?php echo htmlspecialchars($stock['Num_In_Stock']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <script>
         const orderChartCanvas = document.getElementById('orderChart').getContext('2d');
@@ -196,9 +229,9 @@ if (isset($_POST['export_csv'])) {
             beginAtZero: true
             }
             }
-            }
-            });
-            </script>
+        }
+        });
+    </script>
 
             </body>
             </html>

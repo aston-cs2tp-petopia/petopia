@@ -1,0 +1,159 @@
+body, html {
+    overflow-x: hidden; /*Prevents horizontal scrolling*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Sections
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.admin-report-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-first-section {
+    padding-top: 84px;
+}
+
+.charts-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Headings
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Update Account Title (h2)*/
+.admin-report-section h2 {
+    color: #a349a4;
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+}
+
+/*Update Account Subheading (h3)*/
+.admin-report-section h3 {
+    color: #163741;
+    font-weight: 800;
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/*Update Account Caption (h4)*/
+.admin-report-section h4 {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #676666;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+.go-back-link {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #676666;
+    padding-bottom: 30px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Table
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.admin-report-section table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.admin-report-section thead tr {
+    background-color: #a349a4;
+    color: #ffffff;
+    text-align: left;
+}
+
+.admin-report-section th,
+.admin-report-section td {
+    padding: 12px 15px;
+}
+
+.admin-report-section td {
+    color:#163741;
+}
+
+.admin-report-section td a {
+    color: #a349a4;
+    text-decoration: none;
+}
+
+.admin-report-section tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.admin-report-section tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.admin-report-section tbody tr:last-of-type {
+    border-bottom: 2px solid #a349a4;
+}
+
+.admin-report-section tbody tr.active-row {
+    font-weight: bold;
+    color: #a349a4;
+}
+
+/*Export Button*/
+.submit-btn {
+    /*Sizing*/
+    width: 150px;
+    height: 50px;
+    /*Styles*/
+    background-color: #a349a4;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: none;
+    /*Text*/
+    text-align: center;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    /*Others*/
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    transition: 0.3s;
+    transform: scale(1.05);
+}
+
+/*Chart*/
+#orderChart {
+    width: 100%;
+    max-width: 500px;
+}

@@ -41,16 +41,53 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Management</title>
-    <link rel="stylesheet" href="../css/admin.css"> <!-- Make sure you have this CSS for styling -->
-</head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Petopia</title>
+
+        <!--[Google Fonts]-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+            rel="stylesheet">
+
+        <!--Box Icons-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--Flickity-->
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        <!--
+            [Navigation & Footer]
+        -->
+        <script src="../admin-website/jScript/navigationTemplate.js"></script>
+        <link href="../css/navigation.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/footer.css">
+
+
+        <!--CSS-->
+        <link href="css/admin-table-template.css" rel="stylesheet" type="text/css">
+
+        <!--CSS Templates-->
+        <link rel="stylesheet" href="../templates/hero-banner.css">
+
+    </head>
 <body>
 
-<div class="order-search">
+<header></header>
+
+<section class="admin-search-section admin-first-section">
+    <h2 class="">Order Management</h2>
+    <h3 class="admin-heading">Make Changes to Existing Orders</h3>
+    <a class="go-back-link" href="adminDashboard.php">Back to Admin Dashboard</a>
     <form action="order-management.php" method="get">
-        <input type="text" name="search" placeholder="Search by Order ID, Customer ID, or Address" value="<?php echo htmlspecialchars($searchTerm); ?>">
+        <div class="input-container">
+            <input type="text" name="search" placeholder="Search by Order ID, Customer ID, or Address" value="<?php echo htmlspecialchars($searchTerm); ?>">
+            <i class="bx bx-search"></i>
+        </div>
+
         <!-- Dropdown menu for status filter -->
         <select name="status">
             <option value="">All Status</option>
@@ -62,12 +99,11 @@ try {
             <option value="Returned" <?php if ($statusFilter == 'Returned') echo 'selected'; ?>>Returned</option>
         </select>
 
-        <button type="submit">Search</button>
+        <button class="search-button" type="submit">Search</button>
     </form>
-    <a href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
-</div>
+</section>
 
-<div class="order-list">
+<section class="admin-table-section">
     <?php if (!empty($orders)): ?>
         <table>
             <thead>
@@ -101,7 +137,7 @@ try {
     <?php else: ?>
         <p>No orders found.</p>
     <?php endif; ?>
-</div>
+</section>
 
 <?php
 // Display success message if present
