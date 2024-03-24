@@ -1,9 +1,8 @@
 <?php
     session_start();
     require_once('../php/connectdb.php');
-    $isAdmin = include('../php/isAdmin.php');
-
-    require_once('../admin-website\php\adminCheck.php');
+    $isAdmin=include('../php/isAdmin.php');
+    require_once('../admin-website\php\adminCheckRedirect.php');
 
     // Handle the POST request from the form submission
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

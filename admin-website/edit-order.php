@@ -1,10 +1,9 @@
 <?php
-    session_start();
-    require_once('../php/connectdb.php');
-    $isAdmin = include('../php/isAdmin.php');
-
-    require_once('../admin-website\php\adminCheckRedirect.php');
-
+session_start();
+require_once('../php/connectdb.php');
+$isAdmin = include('../php/isAdmin.php');
+require_once('../admin-website/php/adminCheckRedirect.php');
+require_once('../php/alerts.php'); // Include alerts.php for displaying messages
 
 $orderId = $_GET['Orders_ID'] ?? null;
 
@@ -18,60 +17,71 @@ $stmtDetails->execute([$orderId]);
 $orderDetails = $stmtDetails->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_order'], $_POST['status'], $_POST['orderDetails'])) {
-    $status = $_POST['status'];
-    $submittedOrderDetails = $_POST['orderDetails']; 
+    // Check if the order status is "Cancelled" or "Returned"
+    if ($order['Order_Status'] === 'Cancelled' || $order['Order_Status'] === 'Returned') {
+        jsAlert('This order cannot be edited as it is already cancelled or returned.', false, 3000); // Display error message
+    } else {
+        $status = $_POST['status'];
+        $submittedOrderDetails = $_POST['orderDetails']; 
 
-    $db->beginTransaction();
-    $totalAmount = 0;
-    try {
-        foreach ($submittedOrderDetails as $productId => $details) {
-            $newQuantity = (int)$details['quantity'];
-            $originalQuantity = 0;
+        $db->beginTransaction();
+        $totalAmount = 0;
+        try {
+            foreach ($submittedOrderDetails as $productId => $details) {
+                $newQuantity = (int)$details['quantity'];
+                $originalQuantity = 0;
 
-            // Find original quantity from previously fetched order details
-            foreach ($orderDetails as $detail) {
-                if ($detail['Product_ID'] == $productId) {
-                    $originalQuantity = $detail['Quantity'];
-                    break;
+                // Find original quantity from previously fetched order details
+                foreach ($orderDetails as $detail) {
+                    if ($detail['Product_ID'] == $productId) {
+                        $originalQuantity = $detail['Quantity'];
+                        break;
+                    }
+                }
+
+                // Calculate stock adjustment
+                $stockAdjustment = $newQuantity - $originalQuantity;
+
+                $productQuery = $db->prepare("SELECT Num_In_Stock, Price FROM product WHERE Product_ID = ?");
+                $productQuery->execute([$productId]);
+                $product = $productQuery->fetch(PDO::FETCH_ASSOC);
+
+                if ($product) {
+                    $subtotal = $newQuantity * $product['Price'];
+                    $totalAmount += $subtotal;
+
+                    // Update ordersdetails table
+                    $updateOrderDetail = $db->prepare("UPDATE ordersdetails SET Quantity = ?, Subtotal = ? WHERE Orders_ID = ? AND Product_ID = ?");
+                    $updateOrderDetail->execute([$newQuantity, $subtotal, $orderId, $productId]);
+
+                    // Adjust stock if the order status is cancelled or returned
+                    if ($status === 'Cancelled' || $status === 'Returned') {
+                        $newStock = $product['Num_In_Stock'] + $originalQuantity; // Add original quantity back to stock
+                    } else {
+                        // Adjust stock for other statuses
+                        $newStock = $product['Num_In_Stock'] - $stockAdjustment;
+                    }
+
+                    $updateStock = $db->prepare("UPDATE product SET Num_In_Stock = ? WHERE Product_ID = ?");
+                    $updateStock->execute([$newStock, $productId]);
                 }
             }
 
-            // Calculate stock adjustment
-            $stockAdjustment = $newQuantity - $originalQuantity;
+            // Update the order's total amount and status
+            $updateOrder = $db->prepare("UPDATE orders SET Total_Amount = ?, Order_Status = ? WHERE Orders_ID = ?");
+            $updateOrder->execute([$totalAmount, $status, $orderId]);
 
-            $productQuery = $db->prepare("SELECT Num_In_Stock, Price FROM product WHERE Product_ID = ?");
-            $productQuery->execute([$productId]);
-            $product = $productQuery->fetch(PDO::FETCH_ASSOC);
-
-            if ($product) {
-                $subtotal = $newQuantity * $product['Price'];
-                $totalAmount += $subtotal;
-
-                // Update ordersdetails table
-                $updateOrderDetail = $db->prepare("UPDATE ordersdetails SET Quantity = ?, Subtotal = ? WHERE Orders_ID = ? AND Product_ID = ?");
-                $updateOrderDetail->execute([$newQuantity, $subtotal, $orderId, $productId]);
-
-                // Adjust stock
-                $newStock = $product['Num_In_Stock'] - $stockAdjustment;
-                $updateStock = $db->prepare("UPDATE product SET Num_In_Stock = ? WHERE Product_ID = ?");
-                $updateStock->execute([$newStock, $productId]);
-            }
+            $db->commit();
+            jsAlert('Order updated successfully.', true, 3000); // Display success message
+        } catch (Exception $e) {
+            $db->rollBack();
+            jsAlert('Error updating order: ' . $e->getMessage(), false, 3000); // Display error message
         }
 
-        // Update the order's total amount and status
-        $updateOrder = $db->prepare("UPDATE orders SET Total_Amount = ?, Order_Status = ? WHERE Orders_ID = ?");
-        $updateOrder->execute([$totalAmount, $status, $orderId]);
-
-        $db->commit();
-        echo "Order updated successfully.";
-    } catch (Exception $e) {
-        $db->rollBack();
-        echo "Error updating order: " . $e->getMessage();
+        // Refresh order details after updates
+        $stmtDetails->execute([$orderId]);
+        $orderDetails = $stmtDetails->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // Refresh order details after updates
-    $stmtDetails->execute([$orderId]);
-    $orderDetails = $stmtDetails->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
 
@@ -100,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_order'], $_POS
         <option value="Returning" <?php if ($order['Order_Status'] == 'Returning') echo 'selected'; ?>>Returning</option>
         <option value="Returned" <?php if ($order['Order_Status'] == 'Returned') echo 'selected'; ?>>Returned</option>
     </select>
-    
     <div>
         <h3>Order Details:</h3>
         <?php foreach ($orderDetails as $detail): ?>
@@ -119,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_order'], $_POS
         </div>
         <?php endforeach; ?>
     </div>
-    
+
     <input type="submit" name="update_order" value="Update Order">
 </form>
 </body>
