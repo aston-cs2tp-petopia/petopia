@@ -21,16 +21,15 @@
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateProduct'])) {
-        $name = $_POST['Name'];
-        $price = $_POST['Price'];
-        $numInStock = $_POST['Num_In_Stock'];
-        $dexcription = $_POST['Description'];
-        $image = $_POST['Image'];
+        $productName = $_POST['productName'];
+        $price = $_POST['price'];
+        $numInStock = $_POST['numInStock'];
+        $description = $_POST['description'];
+        $image = $_POST['image'];
 
         try {
-            echo 'running try stat';
-            $stmt = $db->prepare("UPDATE 'product' SET 'Name' = ?, 'Price' = ?, 'Num_In_Stock' = ?, 'Description' = ?, 'Image' = ? WHERE Product_ID = ?");
-            $stmt->execute([$name, $price, $numInStock, $description, $image, $productId]);
+            $stmt = $db->prepare("UPDATE product SET Name = ?, Price = ?, Num_In_Stock = ?, Description = ?, Image = ? WHERE Product_ID = ?");
+            $stmt->execute([$productName, $price, $numInStock, $description, $image, $productID]);
             echo "Product information updated successfully.";
         } catch (PDOException $e) {
             die("Error updating product data: " . $e->getMessage());
@@ -49,21 +48,21 @@
     <body>
         <h2>Edit Product</h2>
         
-        <form action="editProduct.php?productID=<?php echo htmlspecialchars($productId); ?>" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="prodcutName" name="Product Name" value="<?php echo htmlspecialchars($product['Name']); ?>" required>
+        <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post">
+            <label for="productName">Name:</label>
+            <input type="text" id="productName" name="productName" value="<?php echo htmlspecialchars($product['Name']); ?>" required>
             
             <label for="price">Price: £</label>
-            <input type="text" id="price" name="Price" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
-            
+            <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
+                
             <label for="numInStock">Stock:</label>
-            <input type="numInstock" id="numInStock" name="Number In Stock" value="<?php echo htmlspecialchars($product['Num_In_Stock']); ?>" required>
+            <input type="number" id="numInStock" name="numInStock" value="<?php echo htmlspecialchars($product['Num_In_Stock']); ?>" required>
             
             <label for="description">Description:</label>
             <input type="text" id="description" name="description" rows="4" cols="35" value="<?php echo htmlspecialchars($product['Description']); ?>" required>
 
-            <label for="Image">Image:</label>
-            <input type="image" id="image" name="image" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
+            <label for="image">Image:</label>
+            <input type="text" id="image" name="image" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
 
             <button type="submit" name="updateProduct">Update Product</button>
         </form>
