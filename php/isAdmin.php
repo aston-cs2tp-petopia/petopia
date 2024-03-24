@@ -1,4 +1,5 @@
 <?php
+if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 
     $query=$db->prepare("SELECT `Is_Admin` FROM `customer` WHERE `Username` = '$username';");
@@ -12,4 +13,5 @@
     } else {
         return false;
     }
+}
 ?>
