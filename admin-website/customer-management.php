@@ -39,24 +39,60 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
+<head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Customer Management</title>
-        <!-- Add necessary CSS links -->
+        <title>Petopia</title>
+
+        <!--[Google Fonts]-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Work+Sans:wght@700;800&display=swap"
+            rel="stylesheet">
+
+        <!--Box Icons-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--Flickity-->
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        <!--
+            [Navigation & Footer]
+        -->
+        <script src="../admin-website/jScript/navigationTemplate.js"></script>
+        <link href="../css/navigation.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/footer.css">
+
+
+        <!--CSS-->
+        <link href="css/admin-table-template.css" rel="stylesheet" type="text/css">
+
+        <!--CSS Templates-->
+        <link rel="stylesheet" href="../templates/hero-banner.css">
+
     </head>
     <body>
-
-    <div class="customer-search">
+<header></header>
+    <section class="admin-search-section admin-first-section">
+    <h2 class="">Customer Management</h2>
+    <h3 class="admin-heading">Make Changes to Customer Profiles</h3>
+    <a class="go-back-link" href="adminDashboard.php">Back to Admin Dashboard</a>
         <form action="customer-management.php" method="get">
-            <input type="text" name="search" placeholder="Search by Name or Customer ID" value="<?php echo htmlspecialchars($searchTerm); ?>">
-            <button type="submit">Search</button>
+            <div class="input-container">
+                <input type="text" name="search" placeholder="Search by Name or Customer ID" value="<?php echo htmlspecialchars($searchTerm); ?>">
+                <i class="bx bx-search"></i>
+            </div>
+            <button class="search-button" type="submit">Search</button>
         </form>
-        <a href="add-customer.php">Add Customer</a> <!-- Add Customer Button -->
-        <a href="adminDashboard.php">Back to Admin Dashboard</a> <!-- Back to Admin Dashboard Button -->
-    </div>
 
-    <div class="customer-list">
+        <div class="other-links">
+            <a class="add-link" href="add-customer.php"><div>New Customer</div></a>
+        </div>
+</section>
+
+    <section class="admin-table-section">
         <table>
             <thead>
                 <tr>
@@ -84,7 +120,7 @@
                         <td><?php echo $customer['Is_Admin'] == 2 ? 'Admin' : ($customer['Is_Admin'] == 1 ? 'Requested Admin' : 'Customer'); ?></td>
                         <td>
                             <?php if ($customer['Username'] !== $loggedInUsername): // Prevent actions against self ?>
-                                <a href="edit-customer.php?Customer_ID=<?php echo $customer['Customer_ID']; ?>">Edit</a>
+                                <a href="edit-customer.php?Customer_ID=<?php echo $customer['Customer_ID']; ?>">Edit</a> |
                                 <!-- Include Delete link only if not the logged-in user -->
                                 <a href="customer-management.php?delete=<?php echo $customer['Customer_ID']; ?>" onclick="return confirm('Are you sure you want to delete this customer?')">Delete</a>
                             <?php endif; ?>
@@ -93,7 +129,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
+</section>
 
     </body>
 </html>

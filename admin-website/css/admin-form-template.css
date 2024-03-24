@@ -1,0 +1,274 @@
+body, html {
+    overflow-x: hidden; /*Prevents horizontal scrolling*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Hero Banner
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Hero Banner Container*/
+.hero-banner{
+    height: 500px !important; /*Set Height Here*/
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Sections
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.admin-form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-first-section {
+    padding-top: 84px;
+    padding-bottom: 20px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Headings
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Update Account Title (h2)*/
+.admin-form-section h2 {
+    color: #a349a4;
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+}
+
+/*Update Account Subheading (h3)*/
+.admin-form-section h3 {
+    color: #163741;
+    font-weight: 800;
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/*Update Account Caption (h4)*/
+.admin-form-section h4 {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #676666;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+/*Update Account Subheading (h3)*/
+.admin-form-section h5 {
+    color: #163741;
+    font-weight: 800;
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/*Update Account Subheading (h3)*/
+.admin-form-section p {
+    color: #163741;
+    margin: 0;
+}
+
+.go-back-link {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #676666;
+    padding-bottom: 30px;
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Form
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*Update Account Form*/
+.admin-form-section form {
+    /*Flex*/
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    max-width: 500px;
+    width: 500px;
+    height: 100%;
+}
+
+/*Input Container*/
+.admin-form-section form .input-container {
+    position: relative;
+    width: 90%;
+    height: 40px;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+/*Form Inputs*/
+.admin-form-section form input[type=text],
+.admin-form-section form input[type=email],
+.admin-form-section form input[type=tel],
+.admin-form-section form input[type=password]{
+    width: calc(100% - 20px);
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 10px;
+}
+
+.small-quantity-input{
+    width: auto;
+    height: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 10px;
+}
+
+.admin-form-section form select {
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    width: calc(100% + 5px);
+    height: 100%;
+    padding-left: 20px;
+    color:#a349a4;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+}
+
+.admin-form-section .input-container-big {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+/*Textarea Input*/
+.admin-form-section form textarea {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    height: 100px;
+    max-height: 100px;
+    min-height: 100px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-top: 10px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    background-color: white;
+    margin-top: 10px;
+}
+
+/*Input Placeholder*/
+.admin-form-section form input::placeholder {
+    color: #a249a498;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+/*All Labels for Update Account Form*/
+.input-container label, .input-container-textarea label {
+    color: #676666;
+    font-weight: 600;
+}
+
+/*Input Icons*/
+.input-container i {
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 26px);
+    transform: translateY(-50%);
+    font-size: 20px;
+    padding-top: 5px;
+    color: #a349a4;
+}
+
+/*Update Button*/
+.submit-btn {
+    /*Sizing*/
+    width: 150px;
+    height: 50px;
+    /*Styles*/
+    background-color: #a349a4;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: none;
+    /*Text*/
+    text-align: center;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    /*Others*/
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    transition: 0.3s;
+    transform: scale(1.05);
+}
+
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~*\
+  @Orders
+\*~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+.img-container {
+    width: 100px;
+    height: 100px;
+}
+
+.img-container img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.flex-column {
+    color: #676666;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    flex-direction: column;
+}
