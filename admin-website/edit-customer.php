@@ -33,7 +33,7 @@
         <!--CSS Templates-->
         <link rel="stylesheet" href="../templates/hero-banner.css">
 
-    </head>
+</head>
 
 <body>
 <header></header>
