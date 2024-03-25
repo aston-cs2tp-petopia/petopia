@@ -65,7 +65,7 @@
         $email = isset($_POST['contact-hide-email']) ? '' : $_POST['contact-email'];
         $message = $_POST['contact-message'];
         $contactDate = date('Y-m-d');
-        $adminRequest = ("contact-reqAdmin");
+        $adminRequest = isset($_POST['contact-reqAdmin']) ? 1 : 0;
     
         //Preparing the SQL statement
         $stmt = $db->prepare("INSERT INTO contactforms (`Name`, `Contact_Email`, `Contact_Date`, `Contact_Text`) VALUES (?, ?, ?, ?)");
@@ -74,7 +74,7 @@
         $stmt->bindValue(3, $contactDate);
         $stmt->bindValue(4, $message);
 
-        if ($adminRequest!=null){
+        if ($adminRequest == true){
             $adminRequest=1;
             $isAdminChange = $db->prepare("UPDATE customer SET Is_Admin= ? WHERE Contact_Email = ?");
             $isAdminChange->execute([$adminRequest, $email]);

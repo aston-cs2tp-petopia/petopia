@@ -2,20 +2,54 @@
 require_once "php/mainLogCheck.php";
 require_once "php/connectdb.php";
 
-if (!$b) {
+if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
 
-$username = $_SESSION['username'] ?? '';
+$username = $_SESSION['username'];
 $stmt = $db->prepare("SELECT Customer_ID FROM customer WHERE Username = ?");
 $stmt->execute([$username]);
 $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 $userId = $userData['Customer_ID'] ?? 0;
 
 $orderId = isset($_GET['orderId']) ? intval($_GET['orderId']) : 0;
+$feedbackMessage = ''; // For user feedback
 
-$stmt = $db->prepare("SELECT Orders_ID, Total_Amount, 'Processing' AS Order_Status FROM orders WHERE Orders_ID = ? AND Customer_ID = ?");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancelOrder'], $_POST['orderId'])) {
+    $orderId = intval($_POST['orderId']);
+
+    $db->beginTransaction();
+    try {
+        // Cancel the order if it's in 'Processing' state
+        $updateOrder = $db->prepare("UPDATE orders SET Order_Status = 'Cancelled' WHERE Orders_ID = ? AND Customer_ID = ? AND Order_Status = 'Processing'");
+        $updateOrder->execute([$orderId, $userId]);
+
+        if ($updateOrder->rowCount() > 0) {
+            // Order was successfully updated to 'Cancelled', now adjust the stock
+            $orderDetails = $db->prepare("SELECT Product_ID, Quantity FROM ordersdetails WHERE Orders_ID = ?");
+            $orderDetails->execute([$orderId]);
+
+            while ($product = $orderDetails->fetch(PDO::FETCH_ASSOC)) {
+                $updateStock = $db->prepare("UPDATE product SET Num_In_Stock = Num_In_Stock + ? WHERE Product_ID = ?");
+                $updateStock->execute([$product['Quantity'], $product['Product_ID']]);
+            }
+
+            $db->commit();
+            $feedbackMessage = "Order has been successfully cancelled.";
+        } else {
+            // Order status was not 'Processing' or order does not belong to user
+            $db->rollback();
+            $feedbackMessage = "Order could not be cancelled. It may have already been processed or does not exist.";
+        }
+    } catch (Exception $e) {
+        $db->rollback();
+        $feedbackMessage = "An error occurred: " . $e->getMessage();
+    }
+}
+
+// Re-fetch order details to reflect any changes or for initial page load
+$stmt = $db->prepare("SELECT Orders_ID, Total_Amount, Order_Status FROM orders WHERE Orders_ID = ? AND Customer_ID = ?");
 $stmt->execute([$orderId, $userId]);
 $orderExists = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -23,6 +57,7 @@ if (!$orderExists) {
     header("Location: index.php");
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -93,12 +128,20 @@ if (!$orderExists) {
         <div class="order-template-container">
             <?php require_once('php/order_content_template.php');?>
         </div>
+
+        <?php if (isset($orderExists) && $orderExists['Order_Status'] === 'Processing'): ?>
+            <form action="orderconfirm.php?orderId=<?php echo htmlspecialchars($orderId); ?>" method="post">
+                <input type="hidden" name="cancelOrder" value="1">
+                <input type="hidden" name="orderId" value="<?php echo htmlspecialchars($orderId); ?>">
+                <button id="cancel-btn" type="submit" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel Order</button>
+            </form>
+        <?php endif;?>
+
     </section>
 
 
-
     <script src="scripts/orderconfirm_review.js"></script>
-
+                
     <footer>
         &copy; 2023 Petopia
     </footer>
