@@ -1,103 +1,6 @@
-<?php
-    session_start();
-    require_once('../php/connectdb.php');
-    $isAdmin = include('../php/isAdmin.php');
-
-    require_once('../admin-website\php\adminCheckRedirect.php');
-
-    $productID = $_GET['productID'] ?? null;
-    if ($productID === null) {
-        die("Product ID is required.");
-    }
-
-    $product=[];
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($productID)) {
-        try {
-            $stmt = $db->prepare("SELECT * FROM product WHERE Product_ID = ?");
-            $stmt->execute([$productID]);
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            die("Error fetching product data: " . $e->getMessage());
-        }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateProduct'])) {
-        $productName = $_POST['productName'];
-        $price = $_POST['price'];
-        $numInStock = $_POST['numInStock'];
-        $description = $_POST['description'];
-        $imageID = $_POST['imageID'];
-        $addCategoryName = $_POST['addCategoryName'];
-        $delCategoryName = $_POST['delCategoryName'];
-
-        try {
-            $stmt = $db->prepare("UPDATE product SET Name = ?, Price = ?, Num_In_Stock = ?, Description = ?, Image = ? WHERE Product_ID = ?");
-            $stmt->execute([$productName, $price, $numInStock, $description, $imageID, $productID]);
-
-            $fileValid = true;
-            $assetsFolder = ("../assets/ProductImages/");
-            $fileImport = $assetsFolder . $_FILES["imageFile"]["name"];
-            $fileType = pathinfo($_FILES["imageFile"]["name"], PATHINFO_EXTENSION);
-            $acceptedTypes = array("jpg", "jpeg", "png");
-
-            if (!getimagesize($_FILES["imageFile"]["tmp_name"])){
-                echo 'File is not compatible';
-                $fileValid=false;
-            }
-            
-            // 300 kb max
-            if ($_FILES["imageFile"]["size"] > 307200) {
-                echo "File is too large. Upload a smaller file.";
-                $fileValid = false;
-            }
-
-            if (!in_array($fileType, $acceptedTypes)) {
-                echo "Only JPG, JPEG & PNG are valid.";
-                $fileValid = false;
-            }
-
-            if ($fileValid) {
-                // Move file to assets folder
-                if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $fileImport)) {
-                    // Upload complete
-                    echo "File: ". htmlspecialchars($_FILES["imageFile"]["name"]). " has been uploaded.";
-                } else {
-                    echo "An error occurred when uploading the file.";
-                }
-            } else {
-                echo "File is incompatible.";
-            }
-
-            if ($addCategoryName!="Select"){
-                $addCatNameIDSTMT = $db->prepare("SELECT Category_ID FROM category WHERE Name = ?");
-                $addCatNameIDSTMT->execute([$addCategoryName]);
-                $addCategoryID = $addCatNameIDSTMT->fetch(PDO::FETCH_ASSOC);
-
-                $addProdCatStmt = $db->prepare("INSERT INTO productcategory (Category_ID, Product_ID) values(?, ?)");
-                $addProdCatStmt->execute([$addCategoryID['Category_ID'], $productID]);
-            }
-
-            if ($delCategoryName!="Select"){
-                $delCatNameIDSTMT = $db->prepare("SELECT Category_ID FROM category WHERE Name = ?");
-                $delCatNameIDSTMT->execute([$delCategoryName]);
-                $delCategoryID = $delCatNameIDSTMT->fetch(PDO::FETCH_ASSOC);
-
-                $delProdCatStmt = $db->prepare("DELETE FROM productcategory WHERE Category_ID = ? AND Product_ID = ?");
-                echo'issue starts at deleted';
-                $delProdCatStmt->execute([$delCategoryID['Category_ID'], $productID]);
-            }
-
-            echo "Product information updated successfully.";
-        } catch (PDOException $e) {
-            die("Error updating product data: " . $e->getMessage());
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Petopia</title>
@@ -129,89 +32,187 @@
 
         <!--CSS Templates-->
         <link rel="stylesheet" href="../templates/hero-banner.css">
+
     </head>
 
-    <body>
-        <section class="admin-form-section admin-first-section">
-            <h2>Edit Product</h2>
-            <button><a href="productManagement.php">back</a></button>
+<body>
+<header></header>
 
-            
-            <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post" enctype="multipart/form-data">
-                <div class="input-container">
-                    <label for="productName">Name:</label>
-                    <input type="text" id="productName" name="productName" value="<?php echo htmlspecialchars($product['Name']); ?>" required>
-                </div>
+<?php
+session_start();
+require_once('../php/connectdb.php');
+$isAdmin = include('../php/isAdmin.php');
+require_once('../admin-website/php/adminCheckRedirect.php');
+require_once('../php/alerts.php');
 
-                <div class="input-container">
-                    <label for="price">Price: £</label>
-                    <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
-                </div>
-                    
-                <div class="input-container">
-                    <label for="numInStock">Stock:</label>
-                    <input type="number" id="numInStock" name="numInStock" value="<?php echo htmlspecialchars($product['Num_In_Stock']); ?>" required>
-                </div>
-                
-                <div class="input-container">
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" value="<?php echo htmlspecialchars($product['Description']); ?>" required>
-                </div>
+// Check if it's an edit request (requires product ID in the URL)
+$productID = isset($_GET['productID']) ? $_GET['productID'] : null;
 
-                <div class="input-container">
-                    <label for="imageID">Image ID:</label>
-                    <input type="text" id="imageID" name="imageID" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
-                </div>
+if ($productID) {
+  // Fetch product information for pre-filling the form
+  try {
+    $stmt = $db->prepare("SELECT * FROM product WHERE Product_ID = ?");
+    $stmt->execute([$productID]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+    jsAlert("Error fetching product data: " . $e->getMessage(), false, 3000); // Display alert
+    die();
+  }
 
-                <div class="input-container">
-                    <label for="imageFile">Image File:</label>
-                    <input type="file" id="imageFile" name="imageFile" title="Image Filename must start with ImageID_[IMAGEID]" required>
-                </div>
+  // If there's no product data, redirect or display an error
+  if (!$product) {
+    jsAlert("Product not found.", false, 3000);
+    // (Redirect to a suitable page)
+    die();
+  }
+} else {
+  // No product ID provided, handle error (or redirect)
+  jsAlert("Error: No product ID provided for edit.", false, 3000);
+  // (Redirect to a suitable page)
+  die();
+}
 
-                <div class="input-container">
-                    <!-- Add a category to a product -->
-                    <label for="addCategoryName">Add Category to product</label>
-                    <select id="addCategoryName" name="addCategoryName">
-                        <?php
-                            echo '<option>Select</option>';
+// Handle the POST request from the form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['productName'];
+  $price = $_POST['price'];
+  $numInStock = $_POST['numInStock'];
+  $description = $_POST['description'];
+  $addCategoryName = $_POST['addCategoryName'];
 
-                            $addCatStat = $db->prepare("SELECT * FROM category");
-                            $addCatStat->execute();
-                            $addCategories = $addCatStat->fetchAll(PDO::FETCH_ASSOC);
+  // Check if the uploaded file is a JPEG
+  $fileType = "";
+  if (isset($_FILES["imageFile"]["name"]) && $_FILES["imageFile"]["name"] !== "") {
+    $fileType = pathinfo($_FILES["imageFile"]["name"], PATHINFO_EXTENSION);
+  }
 
-                            foreach($addCategories as $addCategory){
-                                echo "<option>". $addCategory['Name'] ."</option>";
-                            }
+  // Edit product (update existing product with ID)
+  if ($fileType === '' || $fileType === 'jpeg') {
+    try {
+      $stmt = $db->prepare("UPDATE product SET Name = ?, Price = ?, Num_In_Stock = ?, Description = ? WHERE Product_ID = ?");
+      $stmt->execute([$name, $price, $numInStock, $description, $productID]);
 
-                        ?>
-                    </select>
-                </div>
-                
-                <div class="input-container">
-                    <!-- Delete a category from a product -->
-                    <label for="delCategoryName">Remove Category to product</label>
-                    <select id="delCategoryName" name="delCategoryName">
-                        <?php
-                            echo '<option>Select</option>';
+      // Handle optional image upload (if valid JPEG)
+      if ($fileType !== '') {
+        // Move file to assets folder with correct naming
+        $assetsFolder = ("../assets/ProductImages/");
+        $fileImport = $assetsFolder . "ImageID_" . $productID . ".jpeg";
+        if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $fileImport)) {
+          jsAlert("Product updated successfully. Image uploaded.", true, 3000);
+        } else {
+          jsAlert('An error occurred when uploading the file.', false, 3000);
+        }
+      } else {
+        jsAlert("Product updated successfully. No image changes.", true, 3000);
+      }
 
-                            $delProdCatStat = $db->prepare("SELECT Category_ID FROM productcategory where Product_ID = ?");
-                            $delProdCatStat->execute([$product['Product_ID']]);
-                            $delProdCatArr=$delProdCatStat->fetchAll(PDO::FETCH_ASSOC);
+      // Update category
+      if ($addCategoryName != "Select") {
 
-                            foreach($delProdCatArr as $delProdCat){
-                                $delCatStat = $db->prepare("SELECT Name FROM category WHERE Category_ID = ?");
-                                $delCatStat->execute([$delProdCat['Category_ID']]);
-                                $delCategories = $delCatStat->fetch(PDO::FETCH_ASSOC);
-                                echo "<option>". $delCategories['Name'] ."</option>";
-                            }
+        $deleteCatStmt = $db->prepare("DELETE FROM productcategory WHERE Product_ID = ?");
+        $deleteCatStmt->execute([$productID]);
+  
+        $addCatNameIDSTMT = $db->prepare("SELECT Category_ID FROM category WHERE Name = ?");
+        $addCatNameIDSTMT->execute([$addCategoryName]);
+        $addCategoryID = $addCatNameIDSTMT->fetch(PDO::FETCH_ASSOC);
+  
+        $addProdCatStmt = $db->prepare("INSERT INTO productcategory (Category_ID, Product_ID) VALUES (?, ?)");
+        $addProdCatStmt->execute([$addCategoryID['Category_ID'], $productID]);
+      }
+    } catch (PDOException $e) {
+      jsAlert("Error updating product: " . $e->getMessage(), false, 3000);
+    }
+  } else {
+    jsAlert('Only JPEG image file is valid. Product information not updated.', false, 3000);
+  }
+}
+?>
 
-                        ?>
-                    </select>
-                </div>
-                <br>
-                <button class="submit-btn" type="submit" name="updateProduct">Update Customer</button>
-            </form>
-        </section>
+<section class="admin-form-section admin-first-section">
+    <h2 class="">Edit Product</h2>
+    <h3 class="admin-heading">Fill the Form to Update Product</h3>
+    <a class="go-back-link" href="productManagement.php">Back to Inventory Management System</a>
 
-    </body>
+    <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post" enctype="multipart/form-data">
+
+    <div class="admin-form-center">
+    <div class="admin-form-image">
+          <img src="../assets/ProductImages/ImageID_<?php echo $product['Product_ID']; ?>.jpeg" alt="Current Product Image">
+        </div>
+
+    </div>
+    
+        <div class="input-container">
+            <label for="productName">Name:</label>
+            <input type="text" id="productName" name="productName" value="<?php echo isset($_POST['productName']) ? htmlspecialchars($_POST['productName']) : (isset($product['Name']) ? htmlspecialchars($product['Name']) : ''); ?>" required>
+        </div>
+
+        <div class="input-container">
+            <label for="price">Price: </label>
+            <input class="admin-input-number" min="0" type="number" id="price" name="price" value="<?php echo isset($_POST['price']) ? htmlspecialchars($_POST['price']) : (isset($product['Price']) ? htmlspecialchars($product['Price']) : ''); ?>" required>
+        </div>
+
+        <div class="input-container">
+            <label for="numInStock">Stock:</label>
+            <input class="admin-input-number" min="0" type="number" id="numInStock" name="numInStock" value="<?php echo isset($_POST['numInStock']) ? htmlspecialchars($_POST['numInStock']) : (isset($product['Num_In_Stock']) ? htmlspecialchars($product['Num_In_Stock']) : ''); ?>" required>
+        </div>
+
+        <div class="input-container">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" value="<?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : (isset($product['Description']) ? htmlspecialchars($product['Description']) : ''); ?>" required>
+        </div>
+
+        <div class="input-container">
+            <!-- Add a category to a product -->
+            <label for="addCategoryName">Add Category to product</label>
+            <select id="addCategoryName" name="addCategoryName">
+                <?php
+                // Fetch and display categories
+                $currentCategories = []; // Initialize empty array for category names
+
+                // Join productcategory and category tables to get ALL categories for the product
+                $query = "SELECT c.Name AS category_name
+                          FROM productcategory pc
+                          JOIN category c ON pc.Category_ID = c.Category_ID
+                          WHERE pc.Product_ID = ?";
+                $stmt = $db->prepare($query);
+                $stmt->execute([$productID]);
+
+                // Fetch all associated category names
+                while ($categoryRow = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $currentCategories[] = $categoryRow['category_name'];
+                }
+
+                // Define the allowed category IDs
+                $allowedCategoryIDs = [5, 6, 19, 20, 21];
+
+                // Fetch all categories (while filtered by allowed IDs)
+                $inClause = rtrim(str_repeat('?,', count($allowedCategoryIDs)), ',');
+                $query = "SELECT Name FROM category WHERE Category_ID IN ($inClause) ORDER BY Name";
+                $stmt = $db->prepare($query);
+                $stmt->execute($allowedCategoryIDs); // If using allowed IDs
+
+                $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Output options for categories
+                echo '<option value="">Select Category</option>';
+                foreach ($categories as $category) {
+                    $selected = (in_array($category['Name'], $currentCategories)) ? ' selected' : '';
+                    echo "<option value=\"" . htmlspecialchars($category['Name']) . "\"" . $selected . ">" . htmlspecialchars($category['Name']) . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <div class="label-colors image-padding-container">
+            <label for="imageFile">Image File:</label>
+            <input type="file" id="imageFile" name="imageFile" title="Image Filename must start with ImageID_[IMAGEID]">
+        </div>
+
+        <button class="submit-btn" type="submit" name="updateProduct">Update Product</button>
+    </form>
+</section>
+
+
+</body>
 </html>
