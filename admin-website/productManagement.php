@@ -8,36 +8,48 @@ require_once('../php/alerts.php');
 
 $searchTerm = $_GET['search'] ?? '';
 $sortFilter = $_GET['sort'] ?? 'Product_ID'; // Default sorting based on Product ID
+$categoryFilter = $_GET['categoryFilter'] ?? ''; // Selected category filter
 
 $loggedInUsername = $_SESSION['username'] ?? ''; // Initialize loggedInUsername
 
 try {
-    // Fetch products based on search term and sorting option
-    $query = "SELECT Product_ID, Name, Price, Num_In_Stock, Description, Image 
-            FROM product 
-            WHERE Name LIKE :searchTerm OR Product_ID LIKE :searchTerm
-            ORDER BY ";
-    
+    // Fetch products based on search term, category filter, and sorting option
+    $query = "SELECT DISTINCT p.Product_ID, p.Name, p.Price, p.Num_In_Stock, p.Description, p.Image 
+            FROM product p 
+            JOIN productcategory pc ON p.Product_ID = pc.Product_ID
+            WHERE (p.Name LIKE :searchTerm OR p.Product_ID LIKE :searchTerm)";
+
+    // Add category filter condition if a category is selected
+    if (!empty($categoryFilter)) {
+        $query .= " AND pc.Category_ID = :categoryFilter";
+    }
+
+    // Complete the query with sorting condition
     switch ($sortFilter) {
         case 'PriceHighToLow':
-            $query .= "Price DESC";
+            $query .= " ORDER BY p.Price DESC";
             break;
         case 'PriceLowToHigh':
-            $query .= "Price ASC";
+            $query .= " ORDER BY p.Price ASC";
             break;
         case 'NameAZ':
-            $query .= "Name ASC";
+            $query .= " ORDER BY p.Name ASC";
             break;
         case 'NameZA':
-            $query .= "Name DESC";
+            $query .= " ORDER BY p.Name DESC";
             break;
         default:
-            $query .= "Product_ID ASC"; // Default sorting by Product ID
+            $query .= " ORDER BY p.Product_ID ASC"; // Default sorting by Product ID
             break;
     }
-    
+
+    // Prepare and execute the query
     $stmt = $db->prepare($query);
-    $stmt->execute(['searchTerm' => "%$searchTerm%"]);
+    $stmt->bindValue(':searchTerm', "%$searchTerm%");
+    if (!empty($categoryFilter)) {
+        $stmt->bindValue(':categoryFilter', $categoryFilter);
+    }
+    $stmt->execute();
     $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     jsAlert('Error: ' . $e->getMessage(), false, 4000);
@@ -88,27 +100,54 @@ try {
         <header></header>
 
         <section class="admin-search-section admin-first-section">
-        <h2 class="">Inventory Management System</h2>
-        <h3 class="admin-heading">Make Changes to the Inventory</h3>
-        <a class="go-back-link" href="adminDashboard.php">Back to Admin Dashboard</a>
-            <form action="productManagement.php" method="get">
-                <!--Search-->
-                <div class="input-container">
-                    <input type="text" name="search" placeholder="Search by Name or Product ID" value="<?php echo htmlspecialchars($searchTerm); ?>">
-                    <i class="bx bx-search"></i>
-                </div>
+    <h2 class="">Inventory Management System</h2>
+    <h3 class="admin-heading">Make Changes to the Inventory</h3>
+    <a class="go-back-link" href="adminDashboard.php">Back to Admin Dashboard</a>
+    <form action="productManagement.php" method="get">
+        <!-- Search -->
+        <div class="input-container">
+            <input type="text" name="search" placeholder="Search by Name or Product ID" value="<?php echo htmlspecialchars($searchTerm); ?>">
+            <i class="bx bx-search"></i>
+        </div>
 
-                <select name="sort">
-                    <option value="Product_ID" <?php if ($sortFilter == 'Product_ID') echo 'selected'; ?>>Product ID</option>
-                    <option value="PriceHighToLow" <?php if ($sortFilter == 'PriceHighToLow') echo 'selected'; ?>>Price: High to Low</option>
-                    <option value="PriceLowToHigh" <?php if ($sortFilter == 'PriceLowToHigh') echo 'selected'; ?>>Price: Low to High</option>
-                    <option value="NameAZ" <?php if ($sortFilter == 'NameAZ') echo 'selected'; ?>>Name: A-Z</option>
-                    <option value="NameZA" <?php if ($sortFilter == 'NameZA') echo 'selected'; ?>>Name: Z-A</option>
-                </select>
-                <button class="search-button" type="submit">Search</button>
-            </form>
-            <a class="add-link" href="addProduct.php" style="padding-top: 10px;"><div>Add Product</div></a> <!-- Add Product Button -->
+        <div>
+        <select id="categoryFilter" name="categoryFilter">
+                <option value="">All Categories</option>
+                <?php
+                // Define allowed category IDs
+                $allowedCategoryIDs = [5, 6, 19, 20, 21];
+
+                // Fetch categories based on allowed IDs
+                $inClause = rtrim(str_repeat('?,', count($allowedCategoryIDs)), ',');
+                $query = "SELECT Category_ID, Name FROM category WHERE Category_ID IN ($inClause)";
+                $stmt = $db->prepare($query);
+                $stmt->execute($allowedCategoryIDs);
+                $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Output category options
+                foreach ($categories as $category) {
+                    echo "<option value=\"{$category['Category_ID']}\" ";
+                    echo isset($_GET['categoryFilter']) && $_GET['categoryFilter'] == $category['Category_ID'] ? 'selected' : '';
+                    echo ">{$category['Name']}</option>";
+                }
+                ?>
+            </select>
+
+        <!-- Sorting -->
+        <select name="sort">
+            <option value="Product_ID" <?php if ($sortFilter == 'Product_ID') echo 'selected'; ?>>Product ID</option>
+            <option value="PriceHighToLow" <?php if ($sortFilter == 'PriceHighToLow') echo 'selected'; ?>>Price: High to Low</option>
+            <option value="PriceLowToHigh" <?php if ($sortFilter == 'PriceLowToHigh') echo 'selected'; ?>>Price: Low to High</option>
+            <option value="NameAZ" <?php if ($sortFilter == 'NameAZ') echo 'selected'; ?>>Name: A-Z</option>
+            <option value="NameZA" <?php if ($sortFilter == 'NameZA') echo 'selected'; ?>>Name: Z-A</option>
+        </select>
+        </div>
+
+        <button class="search-button" type="submit">Search</button>
+    </form>
+    <a class="add-link" href="addProduct.php" style="padding-top: 10px;"><div>Add Product</div></a> <!-- Add Product Button -->
 </section>
+
 <section class="admin-table-section">
         <?php if (!empty($product)): ?>
         <table>
@@ -153,7 +192,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $error = $_GET['error'];
     if ($error == 2) {
         require_once('../php/alerts.php');
-        jsAlert('Error: Cannot delete since an order is attached to it.', false, 5000);
+        jsAlert('Cannot delete: Existing order uses product', false, 5000);
     } else if ($error == 3) {
         require_once('../php/alerts.php');
         jsAlert('Product ID not provided or empty.', false, 3000);

@@ -103,17 +103,52 @@ body, html {
 /*Input Container*/
 .admin-form-section form .input-container {
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 40px;
     margin-bottom: 50px;
     padding-bottom: 10px;
+}
+
+/*Input Container Selectors*/
+.admin-form-section form .input-container-select {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+.admin-form-section form .input-container-select label, .label-colors {
+    color:#676666;
+    font-weight: 600;
+}
+
+.image-padding-container {
+    padding-bottom: 40px;
 }
 
 /*Form Inputs*/
 .admin-form-section form input[type=text],
 .admin-form-section form input[type=email],
 .admin-form-section form input[type=tel],
-.admin-form-section form input[type=password]{
+.admin-form-section form input[type=password]
+{
+    width: calc(100% - 20px);
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #a249a499;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #a349a4;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 10px;
+}
+
+/*input Container Numbers*/
+.admin-form-section .admin-input-number {
     width: calc(100% - 20px);
     height: 100%;
     background: transparent;
@@ -187,6 +222,16 @@ body, html {
     font-family: 'Nunito', sans-serif;
     background-color: white;
     margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.input-container-textarea {
+    margin-bottom: 100px;
+}
+
+.admin-form-section form .label-textarea {
+    color: #676666;
+    font-weight: 600;
 }
 
 /*Input Placeholder*/
@@ -271,4 +316,24 @@ body, html {
     justify-content: space-evenly;
     align-items: start;
     flex-direction: column;
+}
+
+.admin-form-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.admin-form-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.admin-form-center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

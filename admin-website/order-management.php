@@ -1,43 +1,3 @@
-<?php
-session_start();
-require_once('../php/connectdb.php');
-$isAdmin = include('../php/isAdmin.php');
-require_once('../admin-website\php\adminCheckRedirect.php');
-require_once('../php/alerts.php'); // Include alerts.php for displaying messages
-
-$searchTerm = $_GET['search'] ?? '';
-$statusFilter = $_GET['status'] ?? ''; // Added status filter
-
-// Fetch orders based on search term and status filter if provided
-try {
-    if (!empty($searchTerm) || !empty($statusFilter)) {
-        // Search query to find orders based on Orders_ID, Customer_ID, or Delivery_Address, and optional status filter
-        $stmt = $db->prepare("
-            SELECT o.*, CONCAT(c.First_Name, ' ', c.Last_Name) AS Customer_Name 
-            FROM orders o
-            JOIN customer c ON o.Customer_ID = c.Customer_ID
-            WHERE (o.Orders_ID LIKE :searchTerm OR o.Customer_ID LIKE :searchTerm OR o.Delivery_Address LIKE :searchTerm)
-            AND (:statusFilter = '' OR o.Order_Status = :statusFilter)  -- Added status filter condition
-            ORDER BY Orders_ID DESC
-        ");
-        $stmt->execute(['searchTerm' => "%$searchTerm%", 'statusFilter' => $statusFilter]); // Added status filter parameter
-    } else {
-        // Default query to fetch all orders
-        $stmt = $db->prepare("
-            SELECT o.*, CONCAT(c.First_Name, ' ', c.Last_Name) AS Customer_Name 
-            FROM orders o
-            JOIN customer c ON o.Customer_ID = c.Customer_ID
-            ORDER BY Orders_ID DESC
-        ");
-        $stmt->execute();
-    }
-    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +37,46 @@ try {
 <body>
 
 <header></header>
+
+<?php
+session_start();
+require_once('../php/connectdb.php');
+$isAdmin = include('../php/isAdmin.php');
+require_once('../admin-website\php\adminCheckRedirect.php');
+require_once('../php/alerts.php'); // Include alerts.php for displaying messages
+
+$searchTerm = $_GET['search'] ?? '';
+$statusFilter = $_GET['status'] ?? ''; // Added status filter
+
+// Fetch orders based on search term and status filter if provided
+try {
+    if (!empty($searchTerm) || !empty($statusFilter)) {
+        // Search query to find orders based on Orders_ID, Customer_ID, or Delivery_Address, and optional status filter
+        $stmt = $db->prepare("
+            SELECT o.*, CONCAT(c.First_Name, ' ', c.Last_Name) AS Customer_Name 
+            FROM orders o
+            JOIN customer c ON o.Customer_ID = c.Customer_ID
+            WHERE (o.Orders_ID LIKE :searchTerm OR o.Customer_ID LIKE :searchTerm OR o.Delivery_Address LIKE :searchTerm)
+            AND (:statusFilter = '' OR o.Order_Status = :statusFilter)  -- Added status filter condition
+            ORDER BY Orders_ID DESC
+        ");
+        $stmt->execute(['searchTerm' => "%$searchTerm%", 'statusFilter' => $statusFilter]); // Added status filter parameter
+    } else {
+        // Default query to fetch all orders
+        $stmt = $db->prepare("
+            SELECT o.*, CONCAT(c.First_Name, ' ', c.Last_Name) AS Customer_Name 
+            FROM orders o
+            JOIN customer c ON o.Customer_ID = c.Customer_ID
+            ORDER BY Orders_ID DESC
+        ");
+        $stmt->execute();
+    }
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    exit;
+}
+?>
 
 <section class="admin-search-section admin-first-section">
     <h2 class="">Order Management</h2>
