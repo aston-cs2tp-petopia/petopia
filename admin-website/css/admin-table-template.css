@@ -166,6 +166,13 @@ body, html {
     color:#163741;
 }
 
+.description-text {
+    white-space: nowrap;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .admin-table-section td a {
     color: #a349a4;
     text-decoration: none;
