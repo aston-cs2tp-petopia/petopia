@@ -221,8 +221,7 @@
 
     <!--Footer-->
     <footer>
-        <p>Copyright © Petopia 2023</p>
-        <br></br>
+        <p>© 2023 Petopia</p>
     </footer>
 
     <!--Flickity-->
