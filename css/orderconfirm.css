@@ -375,3 +375,26 @@ body {
   .item-price-info {width: 100%;}
   .basket-item-template {gap: 20px}
 }
+
+/*Cancel Button*/
+#cancel-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #b63c3c;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}  #cancel-btn:hover {
+  transition: 0.3s;
+  transform: scale(1.03);
+}
+
+
