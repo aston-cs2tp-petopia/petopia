@@ -1,40 +1,44 @@
 <?php
-    require_once('../php/connectdb.php');
-    session_start();
-    $isAdmin = include('../php/isAdmin.php');
-    $loggedInUsername = $_SESSION['username'] ?? ''; // Assuming session username is stored upon login
+require_once('../php/connectdb.php');
+session_start();
+$isAdmin = include('../php/isAdmin.php');
+$loggedInUsername = $_SESSION['username'] ?? '';
 
-    require_once('../admin-website\php\adminCheckRedirect.php');
+require_once('../admin-website\php\adminCheckRedirect.php');
+require_once('../php/alerts.php');
 
-    $searchTerm = $_GET['search'] ?? '';
+$searchTerm = $_GET['search'] ?? '';
 
-    // Fetch customers based on search term if provided
+// Fetch customers based on search term if provided
+try {
+    $query = "SELECT Customer_ID, First_Name, Last_Name, Contact_Email, Phone_Number, Home_Address, Postcode, Username, Is_Admin 
+            FROM customer 
+            WHERE CONCAT(First_Name, ' ', Last_Name) LIKE :searchTerm OR Customer_ID LIKE :searchTerm";
+    $stmt = $db->prepare($query);
+    $stmt->execute(['searchTerm' => "%$searchTerm%"]);
+    $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    jsAlert('Error: ' . $e->getMessage(), false, 4000);
+    exit;
+}
+
+// Handle delete operation
+if (isset($_GET['delete']) && $_GET['delete'] !== $loggedInUsername) {
+    $customerIdToDelete = $_GET['delete'];
     try {
-        $query = "SELECT Customer_ID, First_Name, Last_Name, Contact_Email, Phone_Number, Home_Address, Postcode, Username, Is_Admin 
-                FROM customer 
-                WHERE CONCAT(First_Name, ' ', Last_Name) LIKE :searchTerm OR Customer_ID LIKE :searchTerm";
-        $stmt = $db->prepare($query);
-        $stmt->execute(['searchTerm' => "%$searchTerm%"]);
-        $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $deleteQuery = "DELETE FROM customer WHERE Customer_ID = ?";
+        $stmt = $db->prepare($deleteQuery);
+        $stmt->execute([$customerIdToDelete]);
+        
+        // Redirect back to the same page after deletion with success parameter
+        header("Location: customer-management.php?success=1");
+        exit;
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        jsAlert('Error deleting customer: ' . $e->getMessage(), true, 3000);
         exit;
     }
+}
 
-    // Handle delete operation
-    if (isset($_GET['delete']) && $_GET['delete'] !== $loggedInUsername) {
-        $customerIdToDelete = $_GET['delete'];
-        try {
-            $deleteQuery = "DELETE FROM customer WHERE Customer_ID = ?";
-            $stmt = $db->prepare($deleteQuery);
-            $stmt->execute([$customerIdToDelete]);
-            header("Location: customer-management.php"); // Redirect after successful deletion
-            exit;
-        } catch (PDOException $e) {
-            echo "Error deleting customer: " . $e->getMessage();
-            exit;
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -130,6 +134,13 @@
             </tbody>
         </table>
 </section>
+<?php
+// Display success message if present
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    require_once('../php/alerts.php');
+    jsAlert('Customer has been successfully deleted.', true, 3000);
+}
+?>
 
     </body>
 </html>
