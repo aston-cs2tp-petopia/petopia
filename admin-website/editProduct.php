@@ -27,13 +27,47 @@
         $price = $_POST['price'];
         $numInStock = $_POST['numInStock'];
         $description = $_POST['description'];
-        $image = $_POST['image'];
+        $imageID = $_POST['imageID'];
         $addCategoryName = $_POST['addCategoryName'];
         $delCategoryName = $_POST['delCategoryName'];
 
         try {
             $stmt = $db->prepare("UPDATE product SET Name = ?, Price = ?, Num_In_Stock = ?, Description = ?, Image = ? WHERE Product_ID = ?");
-            $stmt->execute([$productName, $price, $numInStock, $description, $image, $productID]);
+            $stmt->execute([$productName, $price, $numInStock, $description, $imageID, $productID]);
+
+            $fileValid = true;
+            $assetsFolder = ("../assets/ProductImages/");
+            $fileImport = $assetsFolder . $_FILES["imageFile"]["name"];
+            $fileType = pathinfo($_FILES["imageFile"]["name"], PATHINFO_EXTENSION);
+            $acceptedTypes = array("jpg", "jpeg", "png");
+
+            if (!getimagesize($_FILES["imageFile"]["tmp_name"])){
+                echo 'File is not compatible';
+                $fileValid=false;
+            }
+            
+            // 300 kb max
+            if ($_FILES["imageFile"]["size"] > 307200) {
+                echo "File is too large. Upload a smaller file.";
+                $fileValid = false;
+            }
+
+            if (!in_array($fileType, $acceptedTypes)) {
+                echo "Only JPG, JPEG & PNG are valid.";
+                $fileValid = false;
+            }
+
+            if ($fileValid) {
+                // Move file to assets folder
+                if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $fileImport)) {
+                    // Upload complete
+                    echo "File: ". htmlspecialchars($_FILES["imageFile"]["name"]). " has been uploaded.";
+                } else {
+                    echo "An error occurred when uploading the file.";
+                }
+            } else {
+                echo "File is incompatible.";
+            }
 
             if ($addCategoryName!="Select"){
                 $addCatNameIDSTMT = $db->prepare("SELECT Category_ID FROM category WHERE Name = ?");
@@ -103,7 +137,7 @@
             <button><a href="productManagement.php">back</a></button>
 
             
-            <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post">
+            <form action="editProduct.php?productID=<?php echo htmlspecialchars($productID); ?>" method="post" enctype="multipart/form-data">
                 <div class="input-container">
                     <label for="productName">Name:</label>
                     <input type="text" id="productName" name="productName" value="<?php echo htmlspecialchars($product['Name']); ?>" required>
@@ -125,8 +159,13 @@
                 </div>
 
                 <div class="input-container">
-                    <label for="image">Image:</label>
-                    <input type="text" id="image" name="image" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
+                    <label for="imageID">Image ID:</label>
+                    <input type="text" id="imageID" name="imageID" value="<?php echo htmlspecialchars($product['Image']); ?>" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="imageFile">Image File:</label>
+                    <input type="file" id="imageFile" name="imageFile" title="Image Filename must start with ImageID_[IMAGEID]" required>
                 </div>
 
                 <div class="input-container">

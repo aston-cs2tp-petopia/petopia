@@ -65,6 +65,7 @@
         $email = isset($_POST['contact-hide-email']) ? '' : $_POST['contact-email'];
         $message = $_POST['contact-message'];
         $contactDate = date('Y-m-d');
+        $adminRequest = ("contact-reqAdmin");
     
         //Preparing the SQL statement
         $stmt = $db->prepare("INSERT INTO contactforms (`Name`, `Contact_Email`, `Contact_Date`, `Contact_Text`) VALUES (?, ?, ?, ?)");
@@ -72,6 +73,12 @@
         $stmt->bindValue(2, $email);
         $stmt->bindValue(3, $contactDate);
         $stmt->bindValue(4, $message);
+
+        if ($adminRequest!=null){
+            $adminRequest=1;
+            $isAdminChange = $db->prepare("UPDATE customer SET Is_Admin= ? WHERE Contact_Email = ?");
+            $isAdminChange->execute([$adminRequest, $email]);
+        }
     
         //Executes the form
         require_once('php/alerts.php');
@@ -135,8 +142,8 @@
 
                         <!--Checkbox Input Container-->
                         <div class="input-container-checkbox">
-                            <input type="checkbox" id="contact-agree" name="contact-hide-email">
-                            <label for="contact-agree">Don't show your email address</label>
+                            <input type="checkbox" id="contact-reqAdmin" name="contact-reqAdmin">
+                            <label for="contact-reqadmin">Is this an Admin Request</label>
                         </div>
 
                         <!--Contact Button-->
